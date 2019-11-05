@@ -15,21 +15,17 @@
 
 RED='\033[0;41;30m'
 STD='\033[0;0;39m'
-
 Mega_dir=~/Mega
 Mega_cmd='rclone mount Sherlockes_Mega: $Mega_dir --daemon'
-
 Sherloflix_dir=~/Sherloflix
 Sherloflix_cmd='rclone mount Sherloflix_en: $Sherloflix_dir --allow-other --daemon'
-
 VideoNas_dir=~/VideoNas
 VideoNas_cmd='sshfs sherlockes@192.168.1.200:../../video/ $VideoNas_dir'
-
 Gphotos_dir=~/gphotos-sync
 Gphotos_cmd='rclone mount Sherlockes_Gphotos:/media/all Fotos'
 
 # -------------------------------------------------------
-# Función de montaje y desmontaje de unicades
+# Función de montaje y desmontaje de unidades
 # -------------------------------------------------------
 des_montar(){
     local carpeta="$1_dir"
@@ -75,7 +71,6 @@ Google_Photos(){
 # -------------------------------------------------------
 montado (){
     local carpeta="$1_dir"
-    
     if test -d ${!carpeta};
     then
 	if mountpoint -q ${!carpeta}; then
@@ -93,11 +88,11 @@ montado (){
 # Función para mostrar las diferentes opciones en pantalla
 # -------------------------------------------------------
 show_menus() {
-	clear
-	echo "------------------------------------"	
-	echo "--------  www.sherblog.pro  --------"
-	echo "------------------------------------"
-	montado "Sherloflix" && echo "-- 1. Sherloflix (Desmontar)      --" || echo "-- 1. Sherloflix                  --"
+    clear
+    echo "------------------------------------"	
+    echo "--------  www.sherblog.pro  --------"
+    echo "------------------------------------"
+    montado "Sherloflix" && echo "-- 1. Sherloflix (Desmontar)      --" || echo "-- 1. Sherloflix                  --"
     montado "Mega" && echo "-- 2. Mega (Desmontar)            --" || echo "-- 2. Mega                        --"
     montado "VideoNas" && echo "-- 3. Videos en Nas (Desmontar)   --" || echo "-- 3. Videos en Ds216+ II         --"
     echo "-- 4. Backup de Google Photos     --"
@@ -133,6 +128,6 @@ trap '' SIGINT SIGQUIT SIGTSTP
 while true
 do
     sleep 2
-	show_menus
-	read_options
+    show_menus
+    read_options
 done
