@@ -13,8 +13,6 @@
 # Definición de variables
 # ----------------------------------
 
-RED='\033[0;41;30m'
-STD='\033[0;0;39m'
 Mega_dir=~/Mega
 Mega_cmd='rclone mount Sherlockes_Mega: $Mega_dir --daemon'
 Sherloflix_dir=~/Sherloflix
@@ -113,7 +111,7 @@ read_options(){
         3) des_montar "VideoNas" ;;
         4) Google_Photos ;;      
 		5) exit 0;;
-		*) echo -e "${RED}Error...${STD}" && sleep 2
+		*) echo -e "...Error..." && sleep 2
 	esac
 }
  
