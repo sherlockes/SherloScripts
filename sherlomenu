@@ -44,6 +44,17 @@ des_montar(){
 }
 
 # -------------------------------------------------------
+# Subir a Github los cambios en SherloSripts
+# -------------------------------------------------------
+SherloScripts(){
+    cd ~/'Mis Documentos'/SherloScripts
+    git add --all
+    git commit -m "Update"
+    git push -u origin master
+}
+
+
+# -------------------------------------------------------
 # Copia de seguridad de Google Photos
 # -------------------------------------------------------
 Google_Photos(){
@@ -94,7 +105,8 @@ show_menus() {
     montado "Mega" && echo "-- 2. Mega (Desmontar)            --" || echo "-- 2. Mega                        --"
     montado "VideoNas" && echo "-- 3. Videos en Nas (Desmontar)   --" || echo "-- 3. Videos en Ds216+ II         --"
     echo "-- 4. Backup de Google Photos     --"
-    echo "-- 5. Salir                       --"
+    echo "-- 5. SherloScripts a Github      --"
+    echo "-- 6. Salir                       --"
     echo "------------------------------------"
 }
 
@@ -108,9 +120,10 @@ read_options(){
     case $choice in
 	1) des_montar "Sherloflix" ;;
 	2) des_montar "Mega" ;;
-        3) des_montar "VideoNas" ;;
-        4) Google_Photos ;;      
-	5) exit 0;;
+	3) des_montar "VideoNas" ;;
+	4) Google_Photos ;;
+	5) SherloScripts ;;
+	6) exit 0;;
 	*) echo -e "...Error..." && sleep 2
     esac
 }
