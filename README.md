@@ -1,7 +1,7 @@
 # SherloScripts #
 Una cajón desastre para mis scripts en bash, python, elisp...
 
-## Sherlomenu (Bash) ##
+## [Sherlomenu](https://github.com/sherlockes/SherloScripts/blob/master/sherlomenu) (Bash) ##
 Un pequeño lanzador para montar el local las distintas nubes que uso a diario tanto en Google Drive como en Mega gracias a Rclone. Tambien está incluido un apartado para realizar la copia de seguridad de Google Photos y el Push automático de este repositorio.
 
 * Uso básico de Rclone (mount)
