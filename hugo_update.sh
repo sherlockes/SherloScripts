@@ -42,7 +42,7 @@ else
 	| cut -d ":" -f 2,3 \
 	| tr -d \" \
 	| wget -qi -
-    installer="$(find . -name "*Linux-64bit.deb")"
+    installer="$(find . -name "*Linux-${bits}bit.deb")"
     sudo dpkg -i $installer
     rm $installer
 fi
