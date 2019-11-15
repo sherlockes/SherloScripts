@@ -12,7 +12,7 @@ En este archivo en formato org-mode voy escribiendo lo que día a día aprendo y
 * Python
 * Y lo que vaya utilizando...
 
-## [hugo_update.sh](https://github.com/sherlockes/SherloScripts/blob/master/hugo_update.sh) (Bash) ##
+## [hugo_update.sh](https://github.com/sherlockes/SherloScripts/blob/master/bash/hugo_update.sh) (Bash) ##
 Para la creación y mantenimiento de [Sherblog)(www.sherblog.pro) utilizo [Hugo](https://gohugo.io) sobre mi equipo local con linux mint o la Raspberry Pi 3B+. Este script, que tengo programado para ejecutarse a diario, se encarga de realizar una actualización de versión de Hugo en caso de que sea necesario.
 
 Entre otras cosas, lo que he utilizado para su desarrollo es:
@@ -23,7 +23,7 @@ Entre otras cosas, lo que he utilizado para su desarrollo es:
 * Extracción de cadenas con "grep", "cut" y "tr"
 * Instalación de paquetes con "dpkg"
 
-## [Sherlomenu](https://github.com/sherlockes/SherloScripts/blob/master/sherlomenu) (Bash) ##
+## [Sherlomenu](https://github.com/sherlockes/SherloScripts/blob/master/bash/sherlomenu) (Bash) ##
 Un pequeño lanzador para montar el local las distintas nubes que uso a diario tanto en Google Drive como en Mega gracias a Rclone. Tambien está incluido un apartado para realizar la copia de seguridad de Google Photos y el Push automático de este repositorio.
 
 * Uso básico de Rclone (mount)
@@ -34,7 +34,7 @@ Un pequeño lanzador para montar el local las distintas nubes que uso a diario t
 * Uso de variables indirectas en Bash
 * Uso del comando "case"
 
-## [Radares.sh](https://github.com/sherlockes/SherloScripts/blob/master/radares.sh) (Bash) ##
+## [Radares.sh](https://github.com/sherlockes/SherloScripts/blob/master/bash/radares.sh) (Bash) ##
 Por que estar pendiente de cuando se actualiza la base de datos de radares de tráfico de www.laradiobbs.net, descomprimirla combinarla y renombrarla es un poco latoso he creado este pequeño script en Bash que lo hace de forma completamente desatendida.  Inluido en el crontab de la Raspberry Pi, ella sola se encarga de "acondicionar" los ficheros y guardarlos en una nube de Google Drive (Mediante Rclone) para poder acceder con cualquier terminal.
 
 * Descarga de archivos con "curl"
@@ -44,7 +44,7 @@ Por que estar pendiente de cuando se actualiza la base de datos de radares de tr
 * Sincronización con una carpeta de Google Drime mediante Rclone
 * Fusión de archivos con el comando "cat"
 
-## [Publish.sh](https://github.com/sherlockes/SherloScripts/blob/master/publish.sh) (Bash) ##
+## [Publish.sh](https://github.com/sherlockes/SherloScripts/blob/master/bash/publish.sh) (Bash) ##
 Al usar un generador de páginas estáticas como es Hugo para la administración de www.sherblog.pro, guardar los archivos fuente en Google Drive y usar como alojamiento a Github la publicación de un nuevo artículo se vuelve en algo laborioso. Por esto he creado este script que realiza los siguientes pasos
 
 * Actualiza Hugo
