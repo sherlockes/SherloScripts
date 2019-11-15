@@ -44,3 +44,20 @@ Por que estar pendiente de cuando se actualiza la base de datos de radares de tr
 * Sincronización con una carpeta de Google Drime mediante Rclone
 * Fusión de archivos con el comando "cat"
 
+## [Publish.sh](https://github.com/sherlockes/SherloScripts/blob/master/publish.sh) (Bash) ##
+Al usar un generador de páginas estáticas como es Hugo para la administración de www.sherblog.pro, guardar los archivos fuente en Google Drive y usar como alojamiento a Github la publicación de un nuevo artículo se vuelve en algo laborioso. Por esto he creado este script que realiza los siguientes pasos
+
+* Actualiza Hugo
+* Sincroniza Google Drive con las carpetas locales
+* Añade una cabecera a los archivos que no la tienen
+* Actualiza los archivos de la nube a los nuevos con cabecera
+* Genera la web estática
+* Sube la web a GitHub
+
+Para ello he utilizado, entre otros, los siguientes conceptos
+* Uso de "rclone" para sincronizar carpetas
+* Uso de "fname" para extraer nombres de archivos
+* Uso de la propiedad "date" para calculos del tiempo de modificación
+* Uso de "cat" para añadir texto a archivos existentes
+* Uso de "git push"
+
