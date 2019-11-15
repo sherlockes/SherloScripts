@@ -1,10 +1,11 @@
 #!/bin/bash
+# -*- encoding: utf-8 -*-
 
 ###################################################################
 #Script Name: Sherlomenu
 #Description: Menu de acceso para el montaje de las distintas nubes
 #Args: N/A
-#Creation/Update: 20191022/20191108
+#Creation/Update: 20191022/20191115
 #Author: www.sherblog.pro                                                
 #Email: sherlockes@gmail.com                                           
 ###################################################################
@@ -116,7 +117,7 @@ show_menus() {
 # -------------------------------------------------------
 read_options(){
     local choice
-    read -p "Selecciona una opción [ 1 - 5] " choice
+    read -p "Selecciona una opción [ 1 - 6] " choice
     case $choice in
 	1) des_montar "Sherloflix" ;;
 	2) des_montar "Mega" ;;
