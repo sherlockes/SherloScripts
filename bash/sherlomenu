@@ -54,6 +54,14 @@ SherloScripts(){
     git push -u origin master
 }
 
+# -------------------------------------------
+# Propagación del archivo de config de rclone
+# -------------------------------------------
+copy_rclone_config(){
+    scp ~/.config/rclone/rclone.conf sherlockes@192.168.1.200:~/.config/rclone/
+    scp ~/.config/rclone/rclone.conf pi@192.168.1.203:~/.config/rclone/
+    cp ~/.config/rclone/rclone.conf ~/'Mis Documentos'/'Mis cosas'/
+}
 
 # -------------------------------------------------------
 # Copia de seguridad de Google Photos
@@ -107,7 +115,8 @@ show_menus() {
     montado "VideoNas" && echo "-- 3. Videos en Nas (Desmontar)   --" || echo "-- 3. Videos en Ds216+ II         --"
     echo "-- 4. Backup de Google Photos     --"
     echo "-- 5. SherloScripts a Github      --"
-    echo "-- 6. Salir                       --"
+    echo "-- 6. Propagar rclone config      --"
+    echo "-- 7. Salir                       --"
     echo "------------------------------------"
 }
 
@@ -117,14 +126,15 @@ show_menus() {
 # -------------------------------------------------------
 read_options(){
     local choice
-    read -p "Selecciona una opción [ 1 - 6] " choice
+    read -p "Selecciona una opción [ 1 - 7] " choice
     case $choice in
 	1) des_montar "Sherloflix" ;;
 	2) des_montar "Mega" ;;
 	3) des_montar "VideoNas" ;;
 	4) Google_Photos ;;
 	5) SherloScripts ;;
-	6) exit 0;;
+	6) copy_rclone_config ;;
+	7) exit 0;;
 	*) echo -e "...Error..." && sleep 2
     esac
 }
@@ -143,3 +153,6 @@ do
     show_menus
     read_options
 done
+
+
+
