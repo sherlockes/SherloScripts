@@ -73,6 +73,13 @@
 ** Apuntes sobre Hugo
 *** Crear un enlace interno > [Titulo]({{<relref"archivo.md">}})
 ** Apuntes sobre python
+*** Enlaces pendientes de revisar
+Tutorial automate the boring stuff
+https://automatetheboringstuff.com/chapter1/
+Programación orientada a objetos https://towardsdatascience.com/python-oop-corey-schafer-datacamp-be6b0b3cafc6
+Programación funcional
+https://morioh.com/p/8a40c3345286
+
 *** Python en Emacs
 **** Guardar y ejecutar  >   C-c C-c
 **** Limpiar el shell    >   C-c M-o
