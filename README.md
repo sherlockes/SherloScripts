@@ -12,6 +12,11 @@ En este archivo en formato org-mode voy escribiendo lo que día a día aprendo y
 * Python
 * Y lo que vaya utilizando...
 
+## [mover_archivos.gs](https://github.com/sherlockes/SherloScripts/blob/master/google%20scripts/20191219_mover_archivos.gs) (Google Scripts) ##
+En mi lucha por descargar los archivos de Telegram al NAS he necesitado un pequeño script que corre dentro de la nube de google y cuya finalidad es mover los archivos que hay en la raiz de la unidad y meterlos dentro de una carpeta compartida que sincronizo con ni Synology. Todos los días esta utilidad vacía la carpeta y borra la papelera para poder mover más archivos.
+
+Este script y el resto de utilidades necesarias para mover los archivos de Telegram al NAS lo puedes encontrar en [Sherblog](https://sherblog.pro/archivos-de-telegram-al-nas/)
+
 ## [hugo_update.sh](https://github.com/sherlockes/SherloScripts/blob/master/bash/hugo_update.sh) (Bash) ##
 Para la creación y mantenimiento de [Sherblog)(www.sherblog.pro) utilizo [Hugo](https://gohugo.io) sobre mi equipo local con linux mint o la Raspberry Pi 3B+. Este script, que tengo programado para ejecutarse a diario, se encarga de realizar una actualización de versión de Hugo en caso de que sea necesario.
 
