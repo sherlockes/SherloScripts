@@ -15,6 +15,14 @@ En este archivo en formato org-mode voy escribiendo lo que día a día aprendo y
 ## [mover_archivos.gs](https://github.com/sherlockes/SherloScripts/blob/master/google%20scripts/20191219_mover_archivos.gs) (Google Scripts) ##
 En mi lucha por descargar los archivos de Telegram al NAS he necesitado un pequeño script que corre dentro de la nube de google y cuya finalidad es mover los archivos que hay en la raiz de la unidad y meterlos dentro de una carpeta compartida que sincronizo con ni Synology. Todos los días esta utilidad vacía la carpeta y borra la papelera para poder mover más archivos.
 
+Entre otras cosas, lo que he utilizado para su desarrollo es:
+* Listar los archivos de un directorio - Método "getFiles()
+* Seleccionar un directorio por "Id" - Método "getFolderById(id)"
+* Añadir un nuevo archivo - Método "addFile(file)"
+* Eliminar un archivo - Método "removeFile(file)"
+* Seleccionar archivos por fecha de modificación - Método "getLastUpdated()"
+* Vaciar la papelera de reciclaje
+
 Este script y el resto de utilidades necesarias para mover los archivos de Telegram al NAS lo puedes encontrar en [Sherblog](https://sherblog.pro/archivos-de-telegram-al-nas/)
 
 ## [hugo_update.sh](https://github.com/sherlockes/SherloScripts/blob/master/bash/hugo_update.sh) (Bash) ##
