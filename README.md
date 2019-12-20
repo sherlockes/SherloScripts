@@ -74,3 +74,18 @@ Para ello he utilizado, entre otros, los siguientes conceptos
 * Uso de "cat" para añadir texto a archivos existentes
 * Uso de "git push"
 
+## [sherblog_db_backup](https://github.com/sherlockes/SherloScripts/blob/master/google%20scripts/20171210_sherblog_db_backup.gs) (Google Scripts) ##
+
+Cuando la web estaba en WordPress, este es el script que utilizaba para realizar una copia de seguriadd versionada de la base de datos de forma manual.  El script busca todos los archivos de una carpeta determinada y sólo guarda un número determinado en función de su antigüedad.
+
+Toda la información la puedes encontrar en [Sherblog](https://sherblog.pro/copia-de-seguridad-de-la-base-de-datos-de-wordpress/)
+
+Entre otras cosas, los métodos que utiizo con los siguientes:
+
+* Creación de fechas con el método "Date()"
+* Creación de matrices con el método "Array()"
+* Listar los archivos de una carpeta con el método "getFiles()"
+* Comparación de antigüedad de los archivos mediante "getLastUpdated()"
+* Eliminación de elementos de una matriz mediante "splice()"
+
+
