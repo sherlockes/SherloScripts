@@ -20,6 +20,9 @@
 **** Marcar línea al anillo (Ir de un punto a otro del archivo)
 - Marcar linea C-c % (org-mark-ring-push)
 - Ir a línea C-c & (org-mark-ring-goto)
+**** Dired
+***** [[https://www.gnu.org/software/emacs/refcards/pdf/dired-ref.pdf][Dired Reference Card]]
+***** Nueva subcarpeta -> +
 *** Shell
 **** Abrir la consola de comandos -> M-x shell
 **** Comando anterior -> M-p
@@ -35,6 +38,7 @@
 - Añadir la línea "(global-set-key (kbd "M-o") 'ace-window)" al archivo de configuración.
 - Cambiar de ventana mediante M-o y el número que se dese
 ** Apuntes sobre ORG-mode
+*** Insertar un enlace -> C-c C-l
 ** Apuntes sobre Debian
 *** Instalar la compatibilidad para impresión a PDF
 #+begin_src sh
