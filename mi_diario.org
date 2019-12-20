@@ -23,6 +23,7 @@
 **** Dired
 ***** [[https://www.gnu.org/software/emacs/refcards/pdf/dired-ref.pdf][Dired Reference Card]]
 ***** Nueva subcarpeta -> +
+***** Refrescar -> g
 *** Shell
 **** Abrir la consola de comandos -> M-x shell
 **** Comando anterior -> M-p
@@ -76,7 +77,7 @@
 *** Cheatsheet de MarkDown para Hugo > https://sourceforge.net/p/hugo-generator/wiki/markdown_syntax/#md_ex_lists
 ** Apuntes sobre Hugo
 *** Crear un enlace interno > [Titulo]({{<relref"archivo.md">}})
-** Apuntes sobre python
+** Apuntes sobre Python
 *** Enlaces pendientes de revisar
 Tutorial automate the boring stuff
 https://automatetheboringstuff.com/chapter1/
@@ -87,6 +88,15 @@ https://morioh.com/p/8a40c3345286
 *** Python en Emacs
 **** Guardar y ejecutar  >   C-c C-c
 **** Limpiar el shell    >   C-c M-o
+** Apuntes sobre Linux
+*** Capturas de pantalla (Atajos de teclado)
+- Ctrl (Portapapeles) Alt (Ventana) Mays (area)
+- Escritorio al portapapeles - Ctrl+ImprPant
+- Area al portapapeles - Ctrl+Mays+ImprPant
+- Ventana al portapepeles - Ctrl+Alt+ImprPant
+- Guardar escritorio en directorio - ImprPant
+- Guardar Area en directorio - Mays+ImprPant
+- Guardar ventana en directorio - Alt+ImprPant
 * Temp
 https://www.linuxquestions.org/questions/blog/lumak-426618/having-fun-with-bash-varaibles-indirect-variable-references-2450/
 
