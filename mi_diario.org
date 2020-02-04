@@ -40,6 +40,7 @@
 - Cambiar de ventana mediante M-o y el número que se dese
 ** Apuntes sobre ORG-mode
 *** Insertar un enlace -> C-c C-l
+*** Insertar un nuevo nodo -> C-Ret
 ** Apuntes sobre Debian
 *** Instalar la compatibilidad para impresión a PDF
 #+begin_src sh
@@ -77,7 +78,7 @@
 *** Cheatsheet de MarkDown para Hugo > https://sourceforge.net/p/hugo-generator/wiki/markdown_syntax/#md_ex_lists
 ** Apuntes sobre Hugo
 *** Crear un enlace interno > [Titulo]({{<relref"archivo.md">}})
-** Apuntes sobre Python
+** Python
 *** Enlaces pendientes de revisar
 Tutorial automate the boring stuff
 https://automatetheboringstuff.com/chapter1/
@@ -88,7 +89,11 @@ https://morioh.com/p/8a40c3345286
 *** Python en Emacs
 **** Guardar y ejecutar  >   C-c C-c
 **** Limpiar el shell    >   C-c M-o
+** Inkscape
+*** Resetear las preferencias
+Borrar el archivo "~/.config/inkscape/preferences.xml"
 ** Apuntes sobre Linux
+*** Buscar packetes instalados -> apt list --installed nombre
 *** Capturas de pantalla (Atajos de teclado)
 - Ctrl (Portapapeles) Alt (Ventana) Mays (area)
 - Escritorio al portapapeles - Ctrl+ImprPant
@@ -98,6 +103,19 @@ https://morioh.com/p/8a40c3345286
 - Guardar Area en directorio - Mays+ImprPant
 - Guardar ventana en directorio - Alt+ImprPant
 * Temp
+** Añadir una red social a hugo
+- Buscar el identificador de la red y añadirlo en [Params.widget.social] -> strava = "11156844"
+- Modificar el archivo config.toml
+#+BEGIN_SRC
+  [[Params.widgets.social.custom]]
+  title = "Youtube"
+  url = "https://www.youtube.com/channel/UCkx4Zgs1ujSuVsxcOFuGCoQ"
+  icon = "svg/youtube_logo.svg" # Optional. Path relative to "layouts/partials"
+#+END_SRC
+
+https://www.svgminify.com/es.html
+
+** Links
 https://www.linuxquestions.org/questions/blog/lumak-426618/having-fun-with-bash-varaibles-indirect-variable-references-2450/
 
 http://mywiki.wooledge.org/BashFAQ/006#How_can_I_use_variable_variables_.28indirect_variables.2C_pointers.2C_references.29_or_associative_arrays.3F
