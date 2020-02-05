@@ -22,6 +22,8 @@ VideoNas_dir=~/VideoNas
 VideoNas_cmd='sshfs sherlockes@192.168.1.200:../../video/ $VideoNas_dir'
 Gphotos_dir=~/gphotos-sync
 Gphotos_cmd='rclone mount Sherlockes_Gphotos:/media/all Fotos'
+Tejelonsos_dir=~/Tejelonsos
+Tejelonsos_cmd='rclone mount Tejelonsos_GD: $Tejelonsos_dir --allow-other --daemon'
 
 # -------------------------------------------------------
 # Función de montaje y desmontaje de unidades
@@ -112,11 +114,12 @@ show_menus() {
     echo "------------------------------------"
     montado "Sherloflix" && echo "-- 1. Sherloflix (Desmontar)      --" || echo "-- 1. Sherloflix                  --"
     montado "Mega" && echo "-- 2. Mega (Desmontar)            --" || echo "-- 2. Mega                        --"
-    montado "VideoNas" && echo "-- 3. Videos en Nas (Desmontar)   --" || echo "-- 3. Videos en Ds216+ II         --"
-    echo "-- 4. Backup de Google Photos     --"
-    echo "-- 5. SherloScripts a Github      --"
-    echo "-- 6. Propagar rclone config      --"
-    echo "-- 7. Salir                       --"
+    montado "Tejelonsos" && echo "-- 3. Tejelonsos (Desmontar)      --" || echo "-- 3. Tejelonsos                  --"
+    montado "VideoNas" && echo "-- 4. Videos en Nas (Desmontar)   --" || echo "-- 4. Videos en Ds216+ II         --"
+    echo "-- 5. Backup de Google Photos     --"
+    echo "-- 6. SherloScripts a Github      --"
+    echo "-- 7. Propagar rclone config      --"
+    echo "-- 8. Salir                       --"
     echo "------------------------------------"
 }
 
@@ -126,15 +129,16 @@ show_menus() {
 # -------------------------------------------------------
 read_options(){
     local choice
-    read -p "Selecciona una opción [ 1 - 7] " choice
+    read -p "Selecciona una opción [ 1 - 8] " choice
     case $choice in
 	1) des_montar "Sherloflix" ;;
 	2) des_montar "Mega" ;;
-	3) des_montar "VideoNas" ;;
-	4) Google_Photos ;;
-	5) SherloScripts ;;
-	6) copy_rclone_config ;;
-	7) exit 0;;
+	3) des_montar "Tejelonsos" ;;
+	4) des_montar "VideoNas" ;;
+	5) Google_Photos ;;
+	6) SherloScripts ;;
+	7) copy_rclone_config ;;
+	8) exit 0;;
 	*) echo -e "...Error..." && sleep 2
     esac
 }
