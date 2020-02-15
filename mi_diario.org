@@ -4,7 +4,40 @@
 :properties:
 :visibility: children
 :end:
-** Apuntes sobre emacs
+** Bash
+*** Uso de variables indirectas
+#+begin_src sh
+    var=x; val=foo
+    eval "$var=\$val"
+
+    var=x;x=foo
+    echo ${!var}
+#+end_src
+*** Rclone
+**** Montar una carpeta > rclone mount ruta_remota: ruta_local --daemon
+*** Grabar imagen en pendrive o sd
+#+BEGIN_SRC sh
+    # localizar la imagen y descomprimirla
+    unzip loquesea.zip
+    # localizar la unidad del pendrive
+    df -h
+    # desmontar la unidad (o varias...)
+    umount /dev/sdb1
+    umount /dev/sdb2
+    # grabar el pendrive
+    sudo dd bs=1M if=loquesea.img of=dev/sdb status=progress
+#+END_SRC
+*** Curl
+**** Descargar un archivo > curl 'dirección' -o archivo
+*** Regex
+**** Uso de variable en una expresión regular -> ${var}
+** Debian
+*** Instalar la compatibilidad para impresión a PDF
+#+begin_src sh
+    apt-get -y install cups
+    apt-get -y install printer-driver-cups-pdf
+#+end_src
+** Emacs
 *** Buffers
 **** Recargar archivo (revert-buffer) -> C-x C-v Ret
 **** Seleccionar el buffer completo -> C-x h
@@ -38,46 +71,34 @@
 - Instalar "ace-window" desde el repositorio de Melpa.
 - Añadir la línea "(global-set-key (kbd "M-o") 'ace-window)" al archivo de configuración.
 - Cambiar de ventana mediante M-o y el número que se dese
-** Apuntes sobre ORG-mode
+** Hugo
+*** Crear un enlace interno > [Titulo]({{<relref"archivo.md">}})
+** Inkscape
+*** Resetear las preferencias
+Borrar el archivo "~/.config/inkscape/preferences.xml"
+** Linux
+*** Buscar packetes instalados -> apt list --installed nombre
+*** Capturas de pantalla (Atajos de teclado)
+- Ctrl (Portapapeles) Alt (Ventana) Mays (area)
+- Escritorio al portapapeles - Ctrl+ImprPant
+- Area al portapapeles - Ctrl+Mays+ImprPant
+- Ventana al portapepeles - Ctrl+Alt+ImprPant
+- Guardar escritorio en directorio - ImprPant
+- Guardar Area en directorio - Mays+ImprPant
+- Guardar ventana en directorio - Alt+ImprPant
+** Linux Mint
+*** Cambio entre áreas de trabajo -> Ctrl+Alt+⬆️
+*** Cambio entre aplicaciones utilizando el efecto de exposición -> Ctrl+Alt+⬇️
+*** Siguiente area de trabajo -> Ctrl+Alt+➡️
+*** Anterior area de trabajo -> Ctrl+Alt+⬅
+*** Mueve la aplicación al siguiente area de trabajo -> Ctrl+Alt+Mayusc+➡️
+*** Mueve la aplicación al antgerior area de trabajo -> Ctrl+Alt+Mayusc+⬅️
+*** Alt+espacio -> Abre el menú ventana
+** MarkDown
+*** Cheatsheet de MarkDown para Hugo > https://sourceforge.net/p/hugo-generator/wiki/markdown_syntax/#md_ex_lists
+** ORG-mode
 *** Insertar un enlace -> C-c C-l
 *** Insertar un nuevo nodo -> C-Ret
-** Apuntes sobre Debian
-*** Instalar la compatibilidad para impresión a PDF
-#+begin_src sh
-    apt-get -y install cups
-    apt-get -y install printer-driver-cups-pdf
-#+end_src
-** Apuntes sobre Bash
-*** Uso de variables indirectas
-#+begin_src sh
-    var=x; val=foo
-    eval "$var=\$val"
-
-    var=x;x=foo
-    echo ${!var}
-#+end_src
-*** Rclone
-**** Montar una carpeta > rclone mount ruta_remota: ruta_local --daemon
-*** Grabar imagen en pendrive o sd
-#+BEGIN_SRC sh
-    # localizar la imagen y descomprimirla
-    unzip loquesea.zip
-    # localizar la unidad del pendrive
-    df -h
-    # desmontar la unidad (o varias...)
-    umount /dev/sdb1
-    umount /dev/sdb2
-    # grabar el pendrive
-    sudo dd bs=1M if=loquesea.img of=dev/sdb status=progress
-#+END_SRC
-*** Curl
-**** Descargar un archivo > curl 'dirección' -o archivo
-*** Regex
-**** Uso de variable en una expresión regular -> ${var}
-** Apuntes sobre MarkDown
-*** Cheatsheet de MarkDown para Hugo > https://sourceforge.net/p/hugo-generator/wiki/markdown_syntax/#md_ex_lists
-** Apuntes sobre Hugo
-*** Crear un enlace interno > [Titulo]({{<relref"archivo.md">}})
 ** Python
 *** Enlaces pendientes de revisar
 Tutorial automate the boring stuff
@@ -89,19 +110,9 @@ https://morioh.com/p/8a40c3345286
 *** Python en Emacs
 **** Guardar y ejecutar  >   C-c C-c
 **** Limpiar el shell    >   C-c M-o
-** Inkscape
-*** Resetear las preferencias
-Borrar el archivo "~/.config/inkscape/preferences.xml"
-** Apuntes sobre Linux
-*** Buscar packetes instalados -> apt list --installed nombre
-*** Capturas de pantalla (Atajos de teclado)
-- Ctrl (Portapapeles) Alt (Ventana) Mays (area)
-- Escritorio al portapapeles - Ctrl+ImprPant
-- Area al portapapeles - Ctrl+Mays+ImprPant
-- Ventana al portapepeles - Ctrl+Alt+ImprPant
-- Guardar escritorio en directorio - ImprPant
-- Guardar Area en directorio - Mays+ImprPant
-- Guardar ventana en directorio - Alt+ImprPant
+** MoodleBox
+*** Acceder a través de ssh -> [[https://moodlebox.net/en/help/command-line-connection/][Enlace]]
+*** Acceder desde internet -> [[https://moodlebox.net/en/help/access-from-internet/][Enlace]]
 * Temp
 ** Añadir una red social a hugo
 - Buscar el identificador de la red y añadirlo en [Params.widget.social] -> strava = "11156844"
@@ -114,6 +125,14 @@ Borrar el archivo "~/.config/inkscape/preferences.xml"
 #+END_SRC
 
 https://www.svgminify.com/es.html
+** Moodle en la raspberry
+Recientemente he probado [Moodle] como plataforma para publicar cursos y me ha parecido una plataforma extremadamente potente. Aquí no voy a desgranar las posibilidades del mismo sino más bien el proceso de como he montado la plataforma sobre una [Raspberry Pi 3 Model B] gracias a [MoodleBox].
+
+[internet]: https://moodlebox.net/en/help/access-from-internet/
+[ethernet]: https://moodlebox.net/en/help/how-to-access-the-moodlebox-via-ethernet/
+[Moodle]: https://moodle.org/?lang=es
+[MoodleBox]: https://moodlebox.net/en/
+[Raspberry Pi 3 Model B]: https://www.raspberrypi.org/products/raspberry-pi-3-model-b/
 
 ** Links
 https://www.linuxquestions.org/questions/blog/lumak-426618/having-fun-with-bash-varaibles-indirect-variable-references-2450/
