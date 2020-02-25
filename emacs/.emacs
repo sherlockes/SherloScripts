@@ -7,8 +7,6 @@
 ;; Email: sherlockes@gmail.com                     ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(setq config_ver "0.0.1")
-
 ;; Añadir repositorios
 (require 'package)
 (package-initialize)
@@ -21,6 +19,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(desktop-save-mode t)
+ '(dired-dwim-target t)
  '(inhibit-startup-echo-area-message (user-login-name))
  '(inhibit-startup-screen t)
  '(menu-bar-mode nil)
@@ -39,7 +38,7 @@
 
 (put 'dired-find-alternate-file 'disabled nil)    ;; Habilita la "a" en Dired
 (put 'erase-buffer 'disabled nil)                 ;; Habilita el comando de borrado del buffer
-
+(global-visual-line-mode t)                       ;; Ajuste de línea
 
 ;; Python
 (elpy-enable)
@@ -47,6 +46,3 @@
 
 ;; Accesos directos
 (global-set-key (kbd "M-o") 'ace-window)
-
-;; Mostrar mensaje
-;;(message-box (concat "Estas con la versión " config_ver " del archivo de configuración"))
