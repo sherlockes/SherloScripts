@@ -46,8 +46,7 @@
 **** Mostrar los números de línea -> linum-mode
 *** Edición
 **** Sangrar varias líneas 8 > C-u 8 C-x Tab
-**** Reemplazar ^M por un salto de línea > M-x replace-string C-q C-m RET RET
-
+**** Reemplazar ^M por un salto de línea > M-x replace-string C-q C-m RET RETo
 *** Navegación
 **** Abrir un directorio remoto ssh C-x d /user@host:folder
 **** Marcar línea al anillo (Ir de un punto a otro del archivo)
@@ -71,6 +70,8 @@
 - Instalar "ace-window" desde el repositorio de Melpa.
 - Añadir la línea "(global-set-key (kbd "M-o") 'ace-window)" al archivo de configuración.
 - Cambiar de ventana mediante M-o y el número que se dese
+*** Paquetes
+**** Instalar paquete desde archivo -> package-install-file
 ** Hugo
 *** Crear un enlace interno > [Titulo]({{<relref"archivo.md">}})
 ** Inkscape
@@ -125,15 +126,6 @@ https://morioh.com/p/8a40c3345286
 #+END_SRC
 
 https://www.svgminify.com/es.html
-** Moodle en la raspberry
-Recientemente he probado [Moodle] como plataforma para publicar cursos y me ha parecido una plataforma extremadamente potente. Aquí no voy a desgranar las posibilidades del mismo sino más bien el proceso de como he montado la plataforma sobre una [Raspberry Pi 3 Model B] gracias a [MoodleBox].
-
-[internet]: https://moodlebox.net/en/help/access-from-internet/
-[ethernet]: https://moodlebox.net/en/help/how-to-access-the-moodlebox-via-ethernet/
-[Moodle]: https://moodle.org/?lang=es
-[MoodleBox]: https://moodlebox.net/en/
-[Raspberry Pi 3 Model B]: https://www.raspberrypi.org/products/raspberry-pi-3-model-b/
-
 ** Links
 https://www.linuxquestions.org/questions/blog/lumak-426618/having-fun-with-bash-varaibles-indirect-variable-references-2450/
 
