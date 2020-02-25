@@ -1,0 +1,67 @@
+;; -*- mode: emacs-lisp; coding: emacs-mule; -*-
+;; --------------------------------------------------------------------------
+;; Desktop File for Emacs
+;; --------------------------------------------------------------------------
+;; Created Tue Feb 25 12:00:04 2020
+;; Desktop file format version 208
+;; Emacs version 25.2.2
+
+;; Global section:
+(setq desktop-saved-frameset [frameset 1 (24148 65076 712118 414000) (desktop . "208") "sherlockes@sobremesa" nil nil ((((font-backend xft x) (font . "-PfEd-DejaVu Sans Mono-normal-normal-normal-*-13-*-*-*-m-0-iso10646-1") (font-parameter . "Monospace 10") (border-width . 0) (internal-border-width . 0) (right-divider-width . 0) (bottom-divider-width . 0) (vertical-scroll-bars . right) (horizontal-scroll-bars) (foreground-color . "black") (background-color . "white") (mouse-color . "black") (border-color . "black") (screen-gamma) (line-spacing) (left-fringe . 8) (right-fringe . 8) (scroll-bar-foreground) (scroll-bar-background) (menu-bar-lines . 0) (tool-bar-lines . 0) (title) (wait-for-wm . t) (tool-bar-position . top) (icon-type . t) (auto-raise) (auto-lower) (cursor-type . box) (scroll-bar-width . 16) (scroll-bar-height . 0) (alpha) (fullscreen . maximized) (display-type . color) (background-mode . light) (cursor-color . "black") (sticky) (environment) (frameset--id . "777E-6542-CCF4-FE1C") (frameset--mini t . t) (modeline . t) (minibuffer . t) (unsplittable) (icon-name) (display . ":0") (explicit-name) (visibility . t) (height . 58) (width . 206) (left . 0) (top . 0)) ((min-height . 8) (min-width . 20) (min-height-ignore . 4) (min-width-ignore . 12) (min-height-safe . 2) (min-width-safe . 4) (min-pixel-height . 136) (min-pixel-width . 160) (min-pixel-height-ignore . 68) (min-pixel-width-ignore . 96) (min-pixel-height-safe . 34) (min-pixel-width-safe . 32)) hc (pixel-width . 1680) (pixel-height . 978) (total-width . 210) (total-height . 58) (normal-height . 1.0) (normal-width . 1.0) (combination-limit) (vc (pixel-width . 840) (pixel-height . 978) (total-width . 105) (total-height . 58) (normal-height . 1.0) (normal-width . 0.5) (combination-limit) (leaf (pixel-width . 840) (pixel-height . 502) (total-width . 105) (total-height . 30) (normal-height . 0.5142857142857142) (normal-width . 1.0) (buffer "mi_diario.org" (selected) (hscroll . 0) (fringes 8 8 nil) (margins nil) (scroll-bars nil 2 t nil 0 t) (vscroll . 0) (dedicated) (point . 4946) (start . 1))) (leaf (last . t) (pixel-width . 840) (pixel-height . 476) (total-width . 105) (total-height . 28) (normal-height . 0.4857142857142857) (normal-width . 1.0) (buffer "post" (selected . t) (hscroll . 0) (fringes 8 8 nil) (margins nil) (scroll-bars nil 2 t nil 0 t) (vscroll . 0) (dedicated) (point . 220) (start . 1)))) (leaf (last . t) (pixel-width . 840) (pixel-height . 978) (total-width . 105) (total-height . 58) (normal-height . 1.0) (normal-width . 0.5) (buffer ".emacs<sherlockes>" (selected) (hscroll . 0) (fringes 8 8 nil) (margins nil) (scroll-bars nil 2 t nil 0 t) (vscroll . 0) (dedicated) (point . 1793) (start . 1)))))])
+(setq desktop-missing-file-warning nil)
+(setq tags-file-name nil)
+(setq tags-table-list nil)
+(setq search-ring nil)
+(setq regexp-search-ring nil)
+(setq register-alist nil)
+(setq file-name-history '("~/" "~/Mis Documentos/SherloScripts/" "~/Downloads/" "~/Downloads/gnu-elpa-keyring-update-2019.3.tar" "~/"))
+
+;; Buffer section -- buffers listed in same order as in buffer list:
+(desktop-create-buffer 208
+  nil
+  "post"
+  'dired-mode
+  nil
+  220
+  '(nil nil)
+  t
+  '("/home/sherlockes/Mis Documentos/Sherblog/content/post/")
+  nil
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/home/sherlockes/.emacs"
+  ".emacs"
+  'emacs-lisp-mode
+  nil
+  1793
+  '(1003 nil)
+  nil
+  nil
+  '((buffer-file-coding-system . utf-8-unix))
+  '((mark-ring (1002 1 697 697 1641 1641 697 697 1730 697 697 697 546 697 697 1791))))
+
+(desktop-create-buffer 208
+  "/home/sherlockes/Mis Documentos/SherloScripts/mi_diario.org"
+  "mi_diario.org"
+  'org-mode
+  '(org-indent-mode)
+  4946
+  '(1887 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . utf-8-unix) (truncate-lines . t))
+  '((mark-ring (4946 4946 3386 91 943 4946 4946))))
+
+(desktop-create-buffer 208
+  "/home/sherlockes/Downloads/.emacs"
+  ".emacs"
+  'emacs-lisp-mode
+  nil
+  2882
+  '(2922 nil)
+  nil
+  nil
+  '((buffer-file-coding-system . utf-8-unix))
+  '((mark-ring (1480 1480 1480 2701 2670 2775 2777 2668 2819 1884 1302 1302 1884 2819 2668 2777))))
+
