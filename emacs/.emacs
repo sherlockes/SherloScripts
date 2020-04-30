@@ -2,7 +2,7 @@
 ;; Script Name: .emacs                             ;;
 ;; Description: Archivo de configuración de Emacs  ;;
 ;; Args: N/A                                       ;;
-;; Creation/Update: 20200225/20200225              ;; 
+;; Creation/Update: 20200225/20200309              ;; 
 ;; Author: www.sherblog.pro                        ;;                      
 ;; Email: sherlockes@gmail.com                     ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -20,12 +20,14 @@
  ;; If there is more than one, they won't work right.
  '(desktop-save-mode t)
  '(dired-dwim-target t)
+ '(dired-listing-switches "-laGh1v --group-directories-first")
  '(inhibit-startup-echo-area-message (user-login-name))
  '(inhibit-startup-screen t)
  '(menu-bar-mode nil)
  '(package-selected-packages
    (quote
     (markdown-mode htmlize gnu-elpa-keyring-update elpy ace-window)))
+ '(safe-local-variable-values (quote ((ENCODING . UTF-8) (encoding . utf-8))))
  '(tool-bar-mode nil)
  '(tooltip-mode nil))
 
@@ -46,3 +48,6 @@
 
 ;; Accesos directos
 (global-set-key (kbd "M-o") 'ace-window)
+
+;; Crear la copia de seguridad en la papelera en lugar de en la carpeta del archivo.
+(setq backup-directory-alist '((".*" . "~/.emacs_backup")))

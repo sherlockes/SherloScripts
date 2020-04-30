@@ -1,5 +1,4 @@
 #+STARTUP: indent
-
 * Mi diario en ORG-mode
 :properties:
 :visibility: children
@@ -13,6 +12,22 @@
     var=x;x=foo
     echo ${!var}
 #+end_src
+*** Comando sed
+**** Imprimir una línea -> sed '2p' file
+*** Encabezado
+#+BEGIN_SRC 
+#!/bin/bash
+# -*- encoding: utf-8 -*-
+
+###################################################################
+#Script Name: Nombre
+#Description: Descripción
+#Args: N/A
+#Creation/Update: 20191022/20191129
+#Author: www.sherblog.pro                                                
+#Email: sherlockes@gmail.com                                           
+###################################################################
+#+END_SRC
 *** Rclone
 **** Montar una carpeta > rclone mount ruta_remota: ruta_local --daemon
 *** Grabar imagen en pendrive o sd
@@ -41,24 +56,34 @@
 *** Buffers
 **** Recargar archivo (revert-buffer) -> C-x C-v Ret
 **** Seleccionar el buffer completo -> C-x h
-**** Guardar como... -> C-x h M-x write-region
+**** Guardar como (todo el texto) -> C-x h M-x write-region
+**** Cuardar como (buffer) -> C-x C-w [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Save-Commands.html][Link]]
 **** Borrar el buffer completo -> erase-buffer (Sin tecla por defecto)
 **** Mostrar los números de línea -> linum-mode
+*** Selección
+**** Activar la marca de posición -> C-spc
 *** Edición
-**** Sangrar varias líneas 8 > C-u 8 C-x Tab
-**** Reemplazar ^M por un salto de línea > M-x replace-string C-q C-m RET RETo
+**** Sangrar varias líneas 8 -> C-u 8 C-x Tab
+**** Reemplazar ^M por un salto de línea > M-x replace-string C-q C-m RET RET
+**** Seleccionar todo -> C-x h
+**** Editar archivos svg en modo texto > C-c C-c (auto-image-file-mode 1)
+**** Borrar una línea -> C-S-Backspace
 *** Navegación
-**** Abrir un directorio remoto ssh C-x d /user@host:folder
+**** Abrir un directorio remoto ssh Cx-x d /user@host:folder
+**** Ir al principio/final del Buffer -> M-</>
 **** Marcar línea al anillo (Ir de un punto a otro del archivo)
 - Marcar linea C-c % (org-mark-ring-push)
 - Ir a línea C-c & (org-mark-ring-goto)
 **** Dired
 ***** [[https://www.gnu.org/software/emacs/refcards/pdf/dired-ref.pdf][Dired Reference Card]]
+***** Ocultar detalles de archivos (dired-hide-details-mode) -> (
 ***** Nueva subcarpeta -> +
 ***** Refrescar -> g
+***** Grep en DIRED -> find-grep-dired
 *** Shell
 **** Abrir la consola de comandos -> M-x shell
 **** Comando anterior -> M-p
+**** Ejecutar un archivo -> C-c C-x
 *** MarkDown Mode
 **** Insertar encabezado -> C-c C-s
 *** Ventanas
@@ -72,8 +97,15 @@
 - Cambiar de ventana mediante M-o y el número que se dese
 *** Paquetes
 **** Instalar paquete desde archivo -> package-install-file
+** Elisp
+*** Variable global -> (setq variable valor)
+*** Escribir a un archivo -> (write-region "loquesea" nil "~/archivo")
+*** Añadir a un archivo -> (append-to-file "loquesea" nil "~/archivo")
 ** Hugo
-*** Crear un enlace interno > [Titulo]({{<relref"archivo.md">}})
+*** Crear un enlace interno 
+- En el mismo directorio > [Titulo]({{<relref"archivo.md">}})
+- En un directorio absoluto > [Titulo]({{<ref"/dir/archivo.md">}})
+*** [[https://sourceforge.net/p/hugo-generator/wiki/markdown_syntax/][Markdown Cheatsheet]]
 ** Inkscape
 *** Resetear las preferencias
 Borrar el archivo "~/.config/inkscape/preferences.xml"
@@ -95,11 +127,18 @@ Borrar el archivo "~/.config/inkscape/preferences.xml"
 *** Mueve la aplicación al siguiente area de trabajo -> Ctrl+Alt+Mayusc+➡️
 *** Mueve la aplicación al antgerior area de trabajo -> Ctrl+Alt+Mayusc+⬅️
 *** Alt+espacio -> Abre el menú ventana
+*** Instalar Emacs 26.3
+[[https://ubunlog.com/llega-la-tercera-version-de-la-rama-26-de-emacs-gnu-emacs-26-3/#Como_instalar_Gnu_Emacs_263_en_Ubuntu_y_derivados][Enlace]]
+sudo add-apt-repository ppa:kelleyk/emacs -y
+sudo apt-get update
+sudo apt-get install emacs26
 ** MarkDown
 *** Cheatsheet de MarkDown para Hugo > https://sourceforge.net/p/hugo-generator/wiki/markdown_syntax/#md_ex_lists
 ** ORG-mode
 *** Insertar un enlace -> C-c C-l
 *** Insertar un nuevo nodo -> C-Ret
+*** Easy templates (plantillas sencillas) <s Tab [[https://www.gnu.org/software/emacs/manual/html_node/org/Easy-templates.html][Link]]
+**** Modificar las plantillas editando org-structure-template-alist
 ** Python
 *** Enlaces pendientes de revisar
 Tutorial automate the boring stuff
@@ -115,17 +154,6 @@ https://morioh.com/p/8a40c3345286
 *** Acceder a través de ssh -> [[https://moodlebox.net/en/help/command-line-connection/][Enlace]]
 *** Acceder desde internet -> [[https://moodlebox.net/en/help/access-from-internet/][Enlace]]
 * Temp
-** Añadir una red social a hugo
-- Buscar el identificador de la red y añadirlo en [Params.widget.social] -> strava = "11156844"
-- Modificar el archivo config.toml
-#+BEGIN_SRC
-  [[Params.widgets.social.custom]]
-  title = "Youtube"
-  url = "https://www.youtube.com/channel/UCkx4Zgs1ujSuVsxcOFuGCoQ"
-  icon = "svg/youtube_logo.svg" # Optional. Path relative to "layouts/partials"
-#+END_SRC
-
-https://www.svgminify.com/es.html
 ** Links
 https://www.linuxquestions.org/questions/blog/lumak-426618/having-fun-with-bash-varaibles-indirect-variable-references-2450/
 

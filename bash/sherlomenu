@@ -10,7 +10,7 @@
 #Email: sherlockes@gmail.com                                           
 ###################################################################
 
-## ----------------------------------
+# ----------------------------------
 # Definición de variables
 # ----------------------------------
 
@@ -24,6 +24,39 @@ Gphotos_dir=~/gphotos-sync
 Gphotos_cmd='rclone mount Sherlockes_Gphotos:/media/all Fotos'
 Tejelonsos_dir=~/Tejelonsos
 Tejelonsos_cmd='rclone mount Tejelonsos_GD: $Tejelonsos_dir --allow-other --daemon'
+
+bits=$(getconf LONG_BIT)
+if [ $bits == '64' ]
+then
+    bits='amd64'
+else
+    bits='arm'
+fi
+
+# --------------------------------------------
+# Comprobar la instalación y versión de Rclone
+# --------------------------------------------
+rclone_check(){
+    if which rclone >/dev/null; then
+	echo 'Rclone está instalado'
+    else
+	echo 'Rclone no está instalado'
+
+	### Installing Rclone
+	curl -s https://api.github.com/repos/ncw/rclone/releases/latest \
+	    | grep "browser_download_url.*rclone-[^extended].*-linux-${bits}\.deb" \
+	    | cut -d ":" -f 2,3 \
+	    | tr -d \" \
+	    | wget -qi -
+	installer="$(find . -name "*linux-${bits}.deb")"
+	sudo dpkg -i $installer
+	rm $installer
+    fi
+
+
+
+}
+
 
 # -------------------------------------------------------
 # Función de montaje y desmontaje de unidades
@@ -50,7 +83,7 @@ des_montar(){
 # Subir a Github los cambios en SherloSripts
 # -------------------------------------------------------
 SherloScripts(){
-    cd ~/'Mis Documentos'/SherloScripts
+    cd ~/Google_Drive6/SherloScripts
     git add --all
     git commit -m "Update"
     git push -u origin master
@@ -151,6 +184,8 @@ trap '' SIGINT SIGQUIT SIGTSTP
 # -----------------------------------
 # Bucle Principal
 # ------------------------------------
+rclone_check
+
 while true
 do
     sleep 2

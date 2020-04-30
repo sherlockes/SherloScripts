@@ -1,0 +1,31 @@
+;; -*- emacs-lisp -*- <20/02/26 14:50:33 /home/sherlockes/Mis Documentos/SherloScripts/emacs/.emacs.d/tramp>
+;; Tramp connection history.  Don't change this file.
+;; You can delete it, forcing Tramp to reapply the checks.
+
+((["scp" "pi" "192.168.1.203" nil nil]
+  ("uname" "Linux 4.19.97-v7+")
+  ("locale" "LC_ALL=C")
+  ("test" "test")
+  ("remote-path"
+   ("/bin" "/usr/bin" "/sbin" "/usr/sbin" "/usr/local/bin" "/usr/local/sbin"))
+  ("remote-shell" "/bin/sh")
+  ("~" "/home/pi")
+  ("ls" "/bin/ls --color=never")
+  ("ls-dired" t)
+  ("stat" nil)
+  ("perl-file-spec" t)
+  ("perl-cwd-realpath" t)
+  ("perl" "\\perl")
+  ("id" "/usr/bin/id")
+  ("gid-integer" 1000)
+  ("file-exists" "test -e")
+  ("readlink" "\\readlink")
+  ("gid-string" "pi")
+  ("git" "\\git")
+  ("env-u-option" t)
+  ("uid-integer" 1000)
+  ("tmpdir" "/tmp")
+  ("touch-t" t)
+  ("touch" "\\touch"))
+ (["scp" "pi" "locasporlaquimica.ddns.net" nil nil]
+  nil))
