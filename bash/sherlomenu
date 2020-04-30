@@ -57,7 +57,7 @@ des_montar(){
 # Subir a Github los cambios en SherloSripts
 # -------------------------------------------------------
 SherloScripts(){
-    cd ~/Google_Drive6/SherloScripts
+    cd ~/Google_Drive/SherloScripts
     git add --all
     git commit -m "Update"
     git push -u origin master
