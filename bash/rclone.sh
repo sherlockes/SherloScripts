@@ -38,7 +38,6 @@ rclone_check(){
 	    sudo dpkg -P hugo
 	    rclone_install
 	fi
-
 	
     else
 	rclone_install
@@ -59,6 +58,3 @@ rclone_install(){
 	sudo dpkg -i $installer
 	rm $installer
 }
-
-
-rclone_check
