@@ -26,7 +26,7 @@
  '(menu-bar-mode nil)
  '(package-selected-packages
    (quote
-    (markdown-mode htmlize gnu-elpa-keyring-update elpy ace-window)))
+    (dired+ ## markdown-mode htmlize gnu-elpa-keyring-update elpy ace-window)))
  '(safe-local-variable-values (quote ((ENCODING . UTF-8) (encoding . utf-8))))
  '(tool-bar-mode nil)
  '(tooltip-mode nil))

@@ -60,6 +60,7 @@
 **** Cuardar como (buffer) -> C-x C-w [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Save-Commands.html][Link]]
 **** Borrar el buffer completo -> erase-buffer (Sin tecla por defecto)
 **** Mostrar los números de línea -> linum-mode
+**** Instalar paquete -> install-package-from-buffer
 *** Selección
 **** Activar la marca de posición -> C-spc
 *** Edición
@@ -140,6 +141,7 @@ sudo apt-get install emacs26
 *** Insertar un nuevo nodo -> C-Ret
 *** Easy templates (plantillas sencillas) <s Tab [[https://www.gnu.org/software/emacs/manual/html_node/org/Easy-templates.html][Link]]
 **** Modificar las plantillas editando org-structure-template-alist
+*** Visualización inicial --> C-u C-u TAB
 ** Python
 *** Enlaces pendientes de revisar
 Tutorial automate the boring stuff
