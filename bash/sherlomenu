@@ -26,7 +26,16 @@ Gphotos_cmd='rclone mount Sherlockes_Gphotos:/media/all Fotos'
 Tejelonsos_dir=~/Tejelonsos
 Tejelonsos_cmd='rclone mount Tejelonsos_GD: $Tejelonsos_dir --allow-other --daemon'
 
-###### Comprobar sshfs
+
+# --------------------------------------------
+# Comprobar la instalación de sshfs
+# --------------------------------------------
+if which sshfs >/dev/null; then
+    echo 'sshfs está instalado...'
+else
+    echo 'sshfs no está instalado, se procede a hacerlo...'
+    sudo apt install sshfs
+fi
 
 
 # --------------------------------------------
@@ -162,6 +171,7 @@ trap '' SIGINT SIGQUIT SIGTSTP
 # Bucle Principal
 # ------------------------------------
 rclone_check
+sleep 2
 clear
 
 while true
