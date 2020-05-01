@@ -5,7 +5,7 @@
 #Script Name: Sherlomenu
 #Description: Menu de acceso para el montaje de las distintas nubes
 #Args: N/A
-#Creation/Update: 20191022/20191129
+#Creation/Update: 20191022/20200430
 #Author: www.sherblog.pro                                                
 #Email: sherlockes@gmail.com                                           
 ###################################################################
@@ -14,22 +14,27 @@
 # Definición de variables
 # ----------------------------------
 
-Mega_dir=~/Mega
-Mega_cmd='rclone mount Sherlockes_Mega: $Mega_dir --daemon'
-Sherloflix_dir=~/Sherloflix
-Sherloflix_cmd='rclone mount Sherloflix_en: $Sherloflix_dir --allow-other --daemon'
+Mega_dir=$HOME/Mega
+Mega_cmd="rclone mount Sherlockes_Mega: $Mega_dir --daemon"
+Sherloflix_dir=$HOME/Sherloflix
+Sherloflix_cmd="rclone mount Sherloflix_en: $Sherloflix_dir --allow-other --daemon"
 VideoNas_dir=~/VideoNas
-VideoNas_cmd='sshfs sherlockes@192.168.1.200:../../video/ $VideoNas_dir'
+#VideoNas_cmd='sshfs sherlockes@192.168.1.200:../../video/ $VideoNas_dir'
+VideoNas_cmd='sshfs sherlockes@192.168.191.200:../../video/ $VideoNas_dir'
 Gphotos_dir=~/gphotos-sync
 Gphotos_cmd='rclone mount Sherlockes_Gphotos:/media/all Fotos'
 Tejelonsos_dir=~/Tejelonsos
 Tejelonsos_cmd='rclone mount Tejelonsos_GD: $Tejelonsos_dir --allow-other --daemon'
 
+###### Comprobar sshfs
+
 
 # --------------------------------------------
-# Comprobar la instalación y versión de Rclone
+# Función de instalación y versión de Rclone
 # --------------------------------------------
-source rclone.sh
+# La primera parrafada es por el tema de la ruta relativa...
+
+source "$( dirname "${BASH_SOURCE[0]}" )/rclone.sh"
 
 
 # -------------------------------------------------------
@@ -43,12 +48,9 @@ des_montar(){
     then
         echo "Desmontando $1..."
         fusermount -u ${!carpeta}
-        echo "Se va a eliminar la carpeta contenedora..."
         rm -rf ${!carpeta}
     else
-        echo "Montando $1..."
         mkdir ${!carpeta}
-
 	eval ${!comando}
     fi
 }
@@ -98,6 +100,7 @@ Google_Photos(){
 # -------------------------------------------------------
 montado (){
     local carpeta="$1_dir"
+
     if test -d ${!carpeta};
     then
 	if mountpoint -q ${!carpeta}; then
@@ -159,7 +162,6 @@ trap '' SIGINT SIGQUIT SIGTSTP
 # Bucle Principal
 # ------------------------------------
 rclone_check
-sleep 2
 clear
 
 while true
@@ -168,6 +170,3 @@ do
     show_menus
     read_options
 done
-
-
-
