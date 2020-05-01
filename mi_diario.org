@@ -80,6 +80,7 @@
 ***** Nueva subcarpeta -> +
 ***** Refrescar -> g
 ***** Grep en DIRED -> find-grep-dired
+***** Ordenar -> dired-listing-switches [[https://oremacs.com/2015/01/13/dired-options/][Oremacs]]
 *** Shell
 **** Abrir la consola de comandos -> M-x shell
 **** Comando anterior -> M-p
