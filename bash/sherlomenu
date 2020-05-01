@@ -19,8 +19,8 @@ Mega_cmd="rclone mount Sherlockes_Mega: $Mega_dir --daemon"
 Sherloflix_dir=$HOME/Sherloflix
 Sherloflix_cmd="rclone mount Sherloflix_en: $Sherloflix_dir --allow-other --daemon"
 VideoNas_dir=~/VideoNas
-#VideoNas_cmd='sshfs sherlockes@192.168.1.200:../../video/ $VideoNas_dir'
-VideoNas_cmd='sshfs sherlockes@192.168.191.200:../../video/ $VideoNas_dir'
+VideoNas_lan_cmd='sshfs sherlockes@192.168.1.200:../../video/ $VideoNas_dir'
+VideoNas_zer_cmd='sshfs sherlockes@192.168.191.200:../../video/ $VideoNas_dir'
 Gphotos_dir=~/gphotos-sync
 Gphotos_cmd='rclone mount Sherlockes_Gphotos:/media/all Fotos'
 Tejelonsos_dir=~/Tejelonsos
@@ -29,12 +29,28 @@ Tejelonsos_cmd='rclone mount Tejelonsos_GD: $Tejelonsos_dir --allow-other --daem
 
 # --------------------------------------------
 # Comprobar la instalación de sshfs
+# (Montar carpetas remotas)
 # --------------------------------------------
 if which sshfs >/dev/null; then
     echo 'sshfs está instalado...'
 else
-    echo 'sshfs no está instalado, se procede a hacerlo...'
+    echo 'instalando sshfs...'
     sudo apt install sshfs
+fi
+
+# Commprobar si es posible el acceso al NAS desde la LAN o hay que
+# hacerlo a través de la IP de Zerotier
+status=$(ssh -o BatchMode=yes -o ConnectTimeout=5 sherlockes@192.168.1.200 echo ok 2>&1)
+
+if [[ $status == ok ]] ; then
+    echo 'Acceso al NAS autorizado...'
+    VideoNas_cmd=$VideoNas_lan_cmd
+elif [[ $status == "Permission denied"* ]] ; then
+    echo 'Acceso al NAS no autorizado...'
+    VideoNas_cmd=$VideoNas_zer_cmd
+else
+    echo 'El NAS no está en Lan, se intentará a través de Zerotier...'
+    VideoNas_cmd=$VideoNas_zer_cmd
 fi
 
 
