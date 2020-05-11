@@ -5,7 +5,7 @@
 #Script Name: Sherlomenu
 #Description: Menu de acceso para el montaje de las distintas nubes
 #Args: N/A
-#Creation/Update: 20191022/20200430
+#Creation/Update: 20191022/20200501
 #Author: www.sherblog.pro                                                
 #Email: sherlockes@gmail.com                                           
 ###################################################################
@@ -38,12 +38,12 @@ else
     sudo apt install sshfs
 fi
 
-# Commprobar si es posible el acceso al NAS desde la LAN o hay que
+# Comprobar si es posible el acceso al NAS desde la LAN o hay que
 # hacerlo a través de la IP de Zerotier
 status=$(ssh -o BatchMode=yes -o ConnectTimeout=5 sherlockes@192.168.1.200 echo ok 2>&1)
 
 if [[ $status == ok ]] ; then
-    echo 'Acceso al NAS autorizado...'
+    echo 'Acceso al NAS en Lan autorizado...'
     VideoNas_cmd=$VideoNas_lan_cmd
 elif [[ $status == "Permission denied"* ]] ; then
     echo 'Acceso al NAS no autorizado...'

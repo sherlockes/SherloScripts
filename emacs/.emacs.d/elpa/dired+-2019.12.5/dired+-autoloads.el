@@ -3,7 +3,7 @@
 ;;; Code:
 (add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
-;;;### (autoloads nil "dired+" "dired+.el" (24236 14784 251967 358000))
+;;;### (autoloads nil "dired+" "dired+.el" (24236 37726 666240 232000))
 ;;; Generated autoloads from dired+.el
 
 (defvar diff-switches "-c" "\
@@ -2560,6 +2560,10 @@ If it was already shown there, and if it and Dired are the only
 windows there, then delete its window (toggle : show/hide the file).
 
 \(fn)" t nil)
+
+;;;***
+
+;;;### (autoloads nil nil ("dired+-pkg.el") (24236 14784 471975 795000))
 
 ;;;***
 

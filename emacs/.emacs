@@ -12,12 +12,14 @@
 (package-initialize)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
+(require 'dired+)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(custom-enabled-themes (quote (tango-dark)))
  '(desktop-save-mode t)
  '(dired-dwim-target t)
  '(dired-listing-switches "-laGh1v --group-directories-first")

@@ -31,7 +31,7 @@ rclone_check(){
 	    echo "rclone instalado y actualizado..."
 	else
 	    echo 'actualizando a rclone '$rclone_web_ver
-	    sudo dpkg -P hugo
+	    sudo dpkg -P rclone
 	    rclone_install
 	fi
 	
@@ -39,6 +39,22 @@ rclone_check(){
 	echo 'instalando rclone...'
 	rclone_install
     fi
+}
+
+rclone_list(){
+    rclone_remotes=($(rclone listremotes | cut -d ":" -f 1))
+    echo "Que nube quieres montar como unidad remota?"
+    local x=1
+    for i in "${rclone_remotes[@]}"
+    do
+	echo "$x.- ${i}"
+	((x+=1))
+    done
+    echo "$x.- Salir"
+    
+    read -p "Selecciona una opción [ 1 - $((${#rclone_remotes[@]} + 1))] " choice
+    echo ${rclone_remotes[choice-1]}
+    
 }
 
 rclone_install(){
@@ -53,3 +69,4 @@ rclone_install(){
 	sudo dpkg -i $installer
 	rm $installer
 }
+rclone_list
