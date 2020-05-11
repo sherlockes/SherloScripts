@@ -1,5 +1,5 @@
 #!/bin/bash
-# -*- ENCODING: UTF-8 -*-
+# -*- encoding: utf-8 -*-
 
 ###########################################################################
 # Script Name: Actualización de www.sherblog.pro
@@ -56,8 +56,9 @@ done
 #Sincroniza los archivos de la nube con los modificados en local
 rclone sync -v /home/pi/sherblog/content/ Sherlockes_GD:/Sherblog/content/
 
-#Genera la web estática en Hugo
+# Parsea los vertices para generar un gpx y genera la web estática en Hugo
 cd ~/sherblog
+./parse_gpx.sh
 /usr/local/bin/hugo
 
 #Sube los cambios generados en la web a GitHub

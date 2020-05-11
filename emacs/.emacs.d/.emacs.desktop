@@ -2,30 +2,30 @@
 ;; --------------------------------------------------------------------------
 ;; Desktop File for Emacs
 ;; --------------------------------------------------------------------------
-;; Created Tue May 12 01:11:24 2020
+;; Created Tue May 12 01:32:34 2020
 ;; Desktop file format version 208
 ;; Emacs version 25.2.2
 
 ;; Global section:
-(setq desktop-saved-frameset [frameset 1 (24249 56220 324577 840000) (desktop . "208") "sherlockes@X240" nil nil ((((font-backend xft x) (font . "-PfEd-DejaVu Sans Mono-normal-normal-normal-*-13-*-*-*-m-0-iso10646-1") (font-parameter . "Monospace 10") (border-width . 0) (internal-border-width . 0) (right-divider-width . 0) (bottom-divider-width . 0) (vertical-scroll-bars . right) (horizontal-scroll-bars) (foreground-color . "#eeeeec") (background-color . "#2e3436") (mouse-color . "black") (border-color . "black") (screen-gamma) (line-spacing) (left-fringe . 8) (right-fringe . 8) (scroll-bar-foreground) (scroll-bar-background) (menu-bar-lines . 0) (tool-bar-lines . 0) (title) (wait-for-wm . t) (tool-bar-position . top) (icon-type . t) (auto-raise) (auto-lower) (cursor-type . box) (scroll-bar-width . 16) (scroll-bar-height . 0) (alpha) (fullscreen . maximized) (display-type . color) (background-mode . dark) (cursor-color . "#fce94f") (sticky) (environment) (frameset--id . "9518-83E6-2240-3A5F") (frameset--mini t . t) (modeline . t) (minibuffer . t) (unsplittable) (icon-name) (display . ":0") (explicit-name) (visibility . icon) (height . 41) (width . 166)) ((min-height . 8) (min-width . 20) (min-height-ignore . 4) (min-width-ignore . 12) (min-height-safe . 2) (min-width-safe . 4) (min-pixel-height . 136) (min-pixel-width . 160) (min-pixel-height-ignore . 68) (min-pixel-width-ignore . 96) (min-pixel-height-safe . 34) (min-pixel-width-safe . 32)) hc (pixel-width . 1366) (pixel-height . 686) (total-width . 171) (total-height . 40) (normal-height . 1.0) (normal-width . 1.0) (combination-limit) (vc (pixel-width . 680) (pixel-height . 686) (total-width . 85) (total-height . 40) (normal-height . 1.0) (normal-width . 0.5) (combination-limit) (leaf (pixel-width . 680) (pixel-height . 340) (total-width . 85) (total-height . 20) (normal-height . 0.5) (normal-width . 1.0) (buffer "mi_diario.org" (selected) (hscroll . 0) (fringes 8 8 nil) (margins nil) (scroll-bars nil 2 t nil 0 t) (vscroll . 0) (dedicated) (point . 19) (start . 1))) (leaf (last . t) (pixel-width . 680) (pixel-height . 346) (total-width . 85) (total-height . 20) (normal-height . 0.5) (normal-width . 1.0) (buffer "shortcodes<layouts>" (selected . t) (hscroll . 0) (fringes 8 8 nil) (margins nil) (scroll-bars nil 2 t nil 0 t) (vscroll . 0) (dedicated) (point . 251) (start . 1)))) (leaf (last . t) (pixel-width . 686) (pixel-height . 686) (total-width . 86) (total-height . 40) (normal-height . 1.0) (normal-width . 0.5) (buffer "shortcodes<hugo>" (selected) (hscroll . 0) (fringes 8 8 nil) (margins nil) (scroll-bars nil 2 t nil 0 t) (vscroll . 0) (dedicated) (point . 208) (start . 1)))))])
+(setq desktop-saved-frameset [frameset 1 (24249 57490 345895 78000) (desktop . "208") "sherlockes@X240" nil nil ((((font-backend xft x) (font . "-PfEd-DejaVu Sans Mono-normal-normal-normal-*-13-*-*-*-m-0-iso10646-1") (font-parameter . "Monospace 10") (border-width . 0) (internal-border-width . 0) (right-divider-width . 0) (bottom-divider-width . 0) (vertical-scroll-bars . right) (horizontal-scroll-bars) (foreground-color . "#eeeeec") (background-color . "#2e3436") (mouse-color . "black") (border-color . "black") (screen-gamma) (line-spacing) (left-fringe . 8) (right-fringe . 8) (scroll-bar-foreground) (scroll-bar-background) (menu-bar-lines . 0) (tool-bar-lines . 0) (title) (wait-for-wm . t) (tool-bar-position . top) (icon-type . t) (auto-raise) (auto-lower) (cursor-type . box) (scroll-bar-width . 16) (scroll-bar-height . 0) (alpha) (fullscreen . maximized) (display-type . color) (background-mode . dark) (cursor-color . "#fce94f") (sticky) (environment) (frameset--id . "9518-83E6-2240-3A5F") (frameset--mini t . t) (modeline . t) (minibuffer . t) (unsplittable) (icon-name) (display . ":0") (explicit-name) (visibility . icon) (height . 41) (width . 166)) ((min-height . 8) (min-width . 20) (min-height-ignore . 4) (min-width-ignore . 12) (min-height-safe . 2) (min-width-safe . 4) (min-pixel-height . 136) (min-pixel-width . 160) (min-pixel-height-ignore . 68) (min-pixel-width-ignore . 96) (min-pixel-height-safe . 34) (min-pixel-width-safe . 32)) hc (pixel-width . 1366) (pixel-height . 686) (total-width . 171) (total-height . 40) (normal-height . 1.0) (normal-width . 1.0) (combination-limit) (vc (pixel-width . 680) (pixel-height . 686) (total-width . 85) (total-height . 40) (normal-height . 1.0) (normal-width . 0.5) (combination-limit) (leaf (pixel-width . 680) (pixel-height . 340) (total-width . 85) (total-height . 20) (normal-height . 0.5) (normal-width . 1.0) (buffer "mi_diario.org" (selected) (hscroll . 0) (fringes 8 8 nil) (margins nil) (scroll-bars nil 2 t nil 0 t) (vscroll . 0) (dedicated) (point . 19) (start . 1))) (leaf (last . t) (pixel-width . 680) (pixel-height . 346) (total-width . 85) (total-height . 20) (normal-height . 0.5) (normal-width . 1.0) (buffer "bash" (selected . t) (hscroll . 0) (fringes 8 8 nil) (margins nil) (scroll-bars nil 2 t nil 0 t) (vscroll . 0) (dedicated) (point . 518) (start . 1)))) (leaf (last . t) (pixel-width . 686) (pixel-height . 686) (total-width . 86) (total-height . 40) (normal-height . 1.0) (normal-width . 0.5) (buffer "20200512_mis_vertices.md" (selected) (hscroll . 0) (fringes 8 8 nil) (margins nil) (scroll-bars nil 2 t nil 0 t) (vscroll . 0) (dedicated) (point . 3047) (start . 2027)))))])
 (setq desktop-missing-file-warning nil)
 (setq tags-file-name nil)
 (setq tags-table-list nil)
 (setq search-ring '("require" "rm" "sherloscrip" "sherlos" "Drive"))
 (setq regexp-search-ring nil)
 (setq register-alist nil)
-(setq file-name-history '("~/Google_Drive/SherloScripts/hugo/shortcodes/mapa_vertice.html" "~/Google_Drive/SherloScripts/hugo/mapa_vertice.html" "~/Google_Drive/SherloScripts/hugo/shortcodes" "~/Google_Drive/SherloScripts/hugo" "/scp:pi@192.168.191.203:/home/pi/sherblog/parse_gpx.sh" "/pi@192.168.191.203:sherblog" "~/Google_Drive/Sherblog/static/gpx" "~/Google_Drive/Sherblog/parse.sh" "~/Google_Drive/Sherblog/content/post/20200512_mis_vertices.md" "~/Google_Drive/Sherblog/content/vertices/picones.md" "~/Google_Drive/Sherblog/blog-old/posts/vertices/picones.md" "~/Google_Drive/Sherblog/" "~/Google_Drive/Sherblog/content/vertices" "~/Google_Drive" "/scp:pi@192.168.191.203:/home/pi/sherblog/layouts/_default/baseof.html" "/scp:pi@192.168.191.203:/home/pi/sherblog/layouts/shortcodes/mapa_vertice.html" "/pi@192.168.191.203:sherblog" "~/Documentos/sherblog_dev/content/vertices/" "~/Documentos/sherblog_dev/" "~/Documentos/sherblog_dev/parse.sh" "~/Documentos/sherblog_dev/content/parse.sh" "~/Documentos/sherblog_dev/content/vertices/parse.sh" "~/Documentos/sherblog_dev/content/vertices/2008-05-29-vertice-geodesico-purburell.md" "~/" "~/Documentos/sherblog_dev/content/vertices" "~/Documentos/sherblog_dev/static/gpx/" "~/Documentos/sherblog_dev/static/gpx/prueba.html" "~/Documentos/sherblog_dev/static/js/mapa.js" "~/Documentos/sherblog_dev/static/js" "~/Documentos/sherblog_dev/" "~/Documentos/sherblog_dev/layouts/shortcodes/" "~/Documentos/mapa.js" "~/Documentos/mapa.html" "~/Documentos/sherblog_dev/" "~/Documentos/sherblog_dev/mapa.html" "~/Documentos/mapa.html" "~/Documentos/sherblog_dev/layouts/_default/baseof.html" "~/Documentos/sherblog_dev/layouts/_default" "~/Documentos/sherblog_dev/layouts/" "~/Documentos/sherblog_dev/layouts/partials/" "~/Documentos/sherblog_dev/layouts/partials/header.html" "~/Documentos/sherblog_dev/layouts/partials" "~/Documentos/sherblog_dev/" "~/Documentos/sherblog_dev/themes/mainroad/layouts/_default/" "~/Documentos/sherblog_dev/content/" "~/Documentos/sherblog_dev/content/20200506_vertices.md" "~/Documentos/sherblog_dev/layouts/shortcodes/openstreetmap.html" "~/Documentos/sherblog_dev/layouts/shortcodes/mapa.html" "~/Documentos/sherblog_dev/layouts/shortcodes" "~/Documentos/sherblog_dev/content/20200424_hugo_mathjax.md" "~/" "~/Google_Drive/SherloScripts/" "~/Google_Drive/SherloScripts/bash/hugo.sh" "~/Google_Drive/Sherblog/blog-old/posts/vertices/" "~/Google_Drive/Sherblog/content/post/android/tasker" "~/Google_Drive/Sherblog/content/post/computing/hugo" "~/Google_Drive/Sherblog/content/post/computing/wordpress" "~/Google_Drive/SherloScripts/" "/raw.githubusercontent.com/emacsmirror/emacswiki.org/master/dired%2B.el" "~/Google_Drive/Sherblog/" "~/Google_Drive/SherloScripts/bash/" "~/Google_Drive/Sherblog/content/post/computing/" "~/Google_Drive/Sherblog/content/post/computing" "~/Google_Drive/Sherblog/content/post/design/" "~/Google_Drive/Sherblog/content/post/computing" "~/Google_Drive/SherloScripts/" "~/Google_Drive/" "~/Google_Drive/Sherblog/content/post/" "~/Google_Drive/Sherblog/content/post/20200425_mint_post_install.md" "~/" "~/Downloads/Temp/" "~/Downloads/Temp/20200405_prueba.md" "~/Downloads/Temp/post.sh" "~/Downloads/Temp/pp.sh" "~/Mis Documentos/Sherblog/static/images/" "~/Downloads" "~/Downloads/dragÅÛn.svg" "~/Downloads" "~/Downloads/prueba.svg" "~" "~/Mis Documentos/Sherblog/content/post/hugo/20200226_hugo_custom_social.md" "/pi@192.168.1.203:sherblog" "~/pi@192.168.1.203:sherblog" "~/Mis Documentos/Sherblog/content/post/20200226_hugo_custom_social.md" "~/Mis Documentos/Sherblog/content/post/cabecera.md" "/pi@locasporlaquimica.ddns.net:sherblog" "/github.com/sherlockes/SherloScripts/blob/master/mi_diario.org" "/raw.githubusercontent.com/sherlockes/SherloScripts/master/mi_diario.org" "/github.com/sherlockes/SherloScripts/blob/master/mi_diario.org" "~/" "/pi@192.168.1.203:sherblog" "/pi@192.168.1.203" "~/Mis Documentos/Sherblog" "/pi@192.168.1.203:sherblog" "~/Mis Documentos/" "~/" "~/Mis Documentos/SherloScripts/" "~/Downloads/" "~/Downloads/gnu-elpa-keyring-update-2019.3.tar" "~/"))
+(setq file-name-history '("~/Google_Drive/SherloScripts/bash/parse_gpx.sh" "~/Google_Drive/SherloScripts/hugo/shortcodes/mapa_vertice.html" "~/Google_Drive/SherloScripts/hugo/mapa_vertice.html" "~/Google_Drive/SherloScripts/hugo/shortcodes" "~/Google_Drive/SherloScripts/hugo" "/scp:pi@192.168.191.203:/home/pi/sherblog/parse_gpx.sh" "/pi@192.168.191.203:sherblog" "~/Google_Drive/Sherblog/static/gpx" "~/Google_Drive/Sherblog/parse.sh" "~/Google_Drive/Sherblog/content/post/20200512_mis_vertices.md" "~/Google_Drive/Sherblog/content/vertices/picones.md" "~/Google_Drive/Sherblog/blog-old/posts/vertices/picones.md" "~/Google_Drive/Sherblog/" "~/Google_Drive/Sherblog/content/vertices" "~/Google_Drive" "/scp:pi@192.168.191.203:/home/pi/sherblog/layouts/_default/baseof.html" "/scp:pi@192.168.191.203:/home/pi/sherblog/layouts/shortcodes/mapa_vertice.html" "/pi@192.168.191.203:sherblog" "~/Documentos/sherblog_dev/content/vertices/" "~/Documentos/sherblog_dev/" "~/Documentos/sherblog_dev/parse.sh" "~/Documentos/sherblog_dev/content/parse.sh" "~/Documentos/sherblog_dev/content/vertices/parse.sh" "~/Documentos/sherblog_dev/content/vertices/2008-05-29-vertice-geodesico-purburell.md" "~/" "~/Documentos/sherblog_dev/content/vertices" "~/Documentos/sherblog_dev/static/gpx/" "~/Documentos/sherblog_dev/static/gpx/prueba.html" "~/Documentos/sherblog_dev/static/js/mapa.js" "~/Documentos/sherblog_dev/static/js" "~/Documentos/sherblog_dev/" "~/Documentos/sherblog_dev/layouts/shortcodes/" "~/Documentos/mapa.js" "~/Documentos/mapa.html" "~/Documentos/sherblog_dev/" "~/Documentos/sherblog_dev/mapa.html" "~/Documentos/mapa.html" "~/Documentos/sherblog_dev/layouts/_default/baseof.html" "~/Documentos/sherblog_dev/layouts/_default" "~/Documentos/sherblog_dev/layouts/" "~/Documentos/sherblog_dev/layouts/partials/" "~/Documentos/sherblog_dev/layouts/partials/header.html" "~/Documentos/sherblog_dev/layouts/partials" "~/Documentos/sherblog_dev/" "~/Documentos/sherblog_dev/themes/mainroad/layouts/_default/" "~/Documentos/sherblog_dev/content/" "~/Documentos/sherblog_dev/content/20200506_vertices.md" "~/Documentos/sherblog_dev/layouts/shortcodes/openstreetmap.html" "~/Documentos/sherblog_dev/layouts/shortcodes/mapa.html" "~/Documentos/sherblog_dev/layouts/shortcodes" "~/Documentos/sherblog_dev/content/20200424_hugo_mathjax.md" "~/" "~/Google_Drive/SherloScripts/" "~/Google_Drive/SherloScripts/bash/hugo.sh" "~/Google_Drive/Sherblog/blog-old/posts/vertices/" "~/Google_Drive/Sherblog/content/post/android/tasker" "~/Google_Drive/Sherblog/content/post/computing/hugo" "~/Google_Drive/Sherblog/content/post/computing/wordpress" "~/Google_Drive/SherloScripts/" "/raw.githubusercontent.com/emacsmirror/emacswiki.org/master/dired%2B.el" "~/Google_Drive/Sherblog/" "~/Google_Drive/SherloScripts/bash/" "~/Google_Drive/Sherblog/content/post/computing/" "~/Google_Drive/Sherblog/content/post/computing" "~/Google_Drive/Sherblog/content/post/design/" "~/Google_Drive/Sherblog/content/post/computing" "~/Google_Drive/SherloScripts/" "~/Google_Drive/" "~/Google_Drive/Sherblog/content/post/" "~/Google_Drive/Sherblog/content/post/20200425_mint_post_install.md" "~/" "~/Downloads/Temp/" "~/Downloads/Temp/20200405_prueba.md" "~/Downloads/Temp/post.sh" "~/Downloads/Temp/pp.sh" "~/Mis Documentos/Sherblog/static/images/" "~/Downloads" "~/Downloads/dragÅÛn.svg" "~/Downloads" "~/Downloads/prueba.svg" "~" "~/Mis Documentos/Sherblog/content/post/hugo/20200226_hugo_custom_social.md" "/pi@192.168.1.203:sherblog" "~/pi@192.168.1.203:sherblog" "~/Mis Documentos/Sherblog/content/post/20200226_hugo_custom_social.md" "~/Mis Documentos/Sherblog/content/post/cabecera.md" "/pi@locasporlaquimica.ddns.net:sherblog" "/github.com/sherlockes/SherloScripts/blob/master/mi_diario.org" "/raw.githubusercontent.com/sherlockes/SherloScripts/master/mi_diario.org" "/github.com/sherlockes/SherloScripts/blob/master/mi_diario.org" "~/" "/pi@192.168.1.203:sherblog" "/pi@192.168.1.203" "~/Mis Documentos/Sherblog" "/pi@192.168.1.203:sherblog" "~/Mis Documentos/" "~/" "~/Mis Documentos/SherloScripts/" "~/Downloads/" "~/Downloads/gnu-elpa-keyring-update-2019.3.tar"))
 
 ;; Buffer section -- buffers listed in same order as in buffer list:
 (desktop-create-buffer 208
   nil
-  "shortcodes"
+  "bash"
   'dired-mode
   '(visual-line-mode)
-  251
+  518
   '(nil nil)
   t
-  '("/home/sherlockes/Documentos/sherblog_dev/layouts/shortcodes/")
+  '("/home/sherlockes/Google_Drive/SherloScripts/bash/")
   '((truncate-lines))
   '((mark-ring nil)))
 
@@ -42,28 +42,16 @@
   '((mark-ring (2538 6759 4066 4066 6216 3847 2696 2673 6758 2637 2696 2695 2697 2673 2637 6421))))
 
 (desktop-create-buffer 208
-  nil
-  "shortcodes"
-  'dired-mode
-  '(visual-line-mode)
-  252
-  '(nil nil)
-  t
-  '("/home/sherlockes/Google_Drive/SherloScripts/hugo/shortcodes/")
-  '((truncate-lines))
-  '((mark-ring nil)))
-
-(desktop-create-buffer 208
   "/home/sherlockes/Google_Drive/Sherblog/content/post/20200512_mis_vertices.md"
   "20200512_mis_vertices.md"
   'markdown-mode
   '(visual-line-mode)
-  2737
-  '(1678 nil)
+  3047
+  '(3271 nil)
   nil
   nil
   '((tab-width . 4) (buffer-file-coding-system . utf-8-unix) (truncate-lines))
-  '((mark-ring (2891 2940 601 403 2940 1073))))
+  '((mark-ring (1678 3201 3362 601 403 3362 1073 2875 2930 3048))))
 
 (desktop-create-buffer 208
   "/home/sherlockes/Google_Drive/Sherblog/content/vertices/purburell.md"
@@ -90,18 +78,6 @@
   '((mark-ring (4180 4180 4184 4184 4179 1890 3638 4179 4179))))
 
 (desktop-create-buffer 208
-  "/home/sherlockes/Google_Drive/SherloScripts/bash/publish.sh"
-  "publish.sh"
-  'sh-mode
-  '(visual-line-mode)
-  1356
-  '(1399 nil)
-  nil
-  nil
-  '((buffer-file-coding-system . utf-8-unix) (truncate-lines))
-  '((mark-ring (1399))))
-
-(desktop-create-buffer 208
   "/home/sherlockes/Documentos/sherblog_dev/layouts/_default/baseof.html"
   "baseof.html"
   'html-mode
@@ -124,18 +100,6 @@
   nil
   '((buffer-file-coding-system . undecided-unix) (truncate-lines))
   '((mark-ring (24 24 24 24 252 23 23 23 23 23 213 23 252))))
-
-(desktop-create-buffer 208
-  "/home/sherlockes/Google_Drive/SherloScripts/bash/rclone.sh"
-  "rclone.sh"
-  'sh-mode
-  '(visual-line-mode)
-  1447
-  '(1490 nil)
-  nil
-  nil
-  '((buffer-file-coding-system . utf-8-unix) (truncate-lines))
-  '((mark-ring (1490 1447 1447 1489 1489 1448 1489 1489 1489 1326 1421 1489 1489 1489 1489 1448))))
 
 (desktop-create-buffer 208
   "/home/sherlockes/Documentos/sherblog_dev/config.toml"
