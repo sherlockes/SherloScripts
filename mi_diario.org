@@ -70,7 +70,7 @@
 **** Editar archivos svg en modo texto > C-c C-c (auto-image-file-mode 1)
 **** Borrar una línea -> C-S-Backspace
 *** Navegación
-**** Abrir un directorio remoto ssh Cx-x d /user@host:folder
+**** Abrir un directorio remoto ssh -x d /user@host:folder
 **** Ir al principio/final del Buffer -> M-</>
 **** Marcar línea al anillo (Ir de un punto a otro del archivo)
 - Marcar linea C-c % (org-mark-ring-push)
@@ -82,6 +82,7 @@
 ***** Refrescar -> g
 ***** Grep en DIRED -> find-grep-dired
 ***** Ordenar -> dired-listing-switches [[https://oremacs.com/2015/01/13/dired-options/][Oremacs]]
+***** Renombrar -> C-x C-q (C-c C-c para terminar)
 *** Shell
 **** Abrir la consola de comandos -> M-x shell
 **** Comando anterior -> M-p
@@ -97,6 +98,8 @@
 - Instalar "ace-window" desde el repositorio de Melpa.
 - Añadir la línea "(global-set-key (kbd "M-o") 'ace-window)" al archivo de configuración.
 - Cambiar de ventana mediante M-o y el número que se dese
+*** Temas
+**** Cambiar el tema -> M-x customize-themes
 *** Paquetes
 **** Instalar paquete desde archivo -> package-install-file
 ** Elisp
@@ -107,6 +110,7 @@
 *** Crear un enlace interno 
 - En el mismo directorio > [Titulo]({{<relref"archivo.md">}})
 - En un directorio absoluto > [Titulo]({{<ref"/dir/archivo.md">}})
+- A un apartado del post >[Foo]({{<ref "#foo" >}}) 
 *** [[https://sourceforge.net/p/hugo-generator/wiki/markdown_syntax/][Markdown Cheatsheet]]
 ** Inkscape
 *** Resetear las preferencias
