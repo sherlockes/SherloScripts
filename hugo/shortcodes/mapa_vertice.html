@@ -1,16 +1,29 @@
+{{/* ----------------------------------------------------------------- */}}
+{{/* ----- Cálculo del nº de vértices que he posteado e intro ------- */}}
+{{/* ----------------------------------------------------------------- */}}
+
 {{ $posts := (where .Site.RegularPages "Section" "==" "vertices") }}
 {{ $postCount := len $posts }}
 
-<div>
+<p>
 Una nueva ruta y un nuevo mojón alcanzado (y con este ya van {{ $postCount }}), en este caso se trata del vértice geodésico {{ .Page.Params.vertice_nom }} está situado en el término municipal de {{ .Page.Params.vertice_loc }}  a una altura de {{ .Page.Params.vertice_alt }} metros. 
-</div>
-<br>
+</p>
+
+{{/* ----------------------------------------------------------------- */}}
+{{/* ----- Introducir la fotografía del vértice si hay parámetro ----- */}}
+{{/* ----------------------------------------------------------------- */}}
+
+{{ if .Page.Params.vertice_img }}
 <center><a href="https://i.imgur.com/{{ .Page.Params.vertice_img }}.jpg"><img src="https://i.imgur.com/{{ .Page.Params.vertice_img }}l.jpg" title="Vista del vertice" target="_blank"/></a></center>
 <br>
-<div>
-<br> En el centro del siguiente mapa se puede ver la ubicación del vértice junto con todos los demás que hasta ahora he "conquistado". Puedes ver más información oficial en la web del <a href="ftp://ftp.geodesia.ign.es/Red_Geodesica/Hoja{{ .Page.Params.vertice_hoja }}/{{ .Page.Params.vertice_hoja }}{{ .Page.Params.vertice_id }}.pdf" target="_blank">Instituto Geográfico Nacional</a>.
-</div>
-<br>
+{{ end }}
+
+{{/* ----------------------------------------------------------------- */}}
+{{/* ---------- Creación e inclusión del mapa con Openlayers --------- */}}
+{{/* ----------------------------------------------------------------- */}}
+
+<p>En el centro del siguiente mapa se puede ver la ubicación del vértice junto con todos los demás que hasta ahora he "conquistado". Puedes ver más información oficial en la web del <a href="ftp://ftp.geodesia.ign.es/Red_Geodesica/Hoja{{ .Page.Params.vertice_hoja }}/{{ .Page.Params.vertice_hoja }}{{ .Page.Params.vertice_id }}.pdf" target="_blank">Instituto Geográfico Nacional</a>.</p>
+
 <div id="map" class="map"></div>
 <script type="text/javascript">
 
@@ -49,30 +62,6 @@ mysvg.src = 'data:image/svg+xml,' + encodeURIComponent(svg);
       }),
       offsetY: 25
     })  
-  });
-
-  ///////////////////////////
-  // Estilo para el "over" //
-  ///////////////////////////
-
-  var highlightStyle = new ol.style.Style({
-    stroke: new ol.style.Stroke({
-      color: '#f00',
-      width: 1
-    }),
-    fill: new ol.style.Fill({
-      color: 'rgba(255,0,0,0.1)'
-    }),
-    text: new ol.style.Text({
-      font: '12px Calibri,sans-serif',
-      fill: new ol.style.Fill({
-        color: '#000'
-      }),
-      stroke: new ol.style.Stroke({
-        color: '#f00',
-        width: 3
-      })
-    })
   });
 
   ///////////////////////////////////
@@ -120,9 +109,6 @@ var displayFeatureInfo = function(pixel) {
 
 };
 
-
-
-
   ///////////////////////
   // Creacion del mapa //
   ///////////////////////
@@ -134,7 +120,7 @@ var displayFeatureInfo = function(pixel) {
 
     view: new ol.View({
       center: centro,
-      zoom: 12
+      zoom: 10
     })
   });
 
@@ -149,16 +135,31 @@ var displayFeatureInfo = function(pixel) {
   map.on('click', function(evt) {
     displayFeatureInfo(evt.pixel);
   });
-
-
-
 </script>
 <br>
-<div>
-Aquí una vista panorámica desde el mismo vértice...
-</div>
-<br>
+
+{{/* ----------------------------------------------------------------- */}}
+{{/* ----- Introducir la fotografía panorámica si hay parámetro ------ */}}
+{{/* ----------------------------------------------------------------- */}}
+
+{{ if .Page.Params.vertice_pan }}
+
+<p>Aquí una vista panorámica desde el mismo vértice...</p>
 
 <center><a href="https://i.imgur.com/{{ .Page.Params.vertice_pan }}.jpg"><img src="https://i.imgur.com/{{ .Page.Params.vertice_pan }}h.jpg" title="Vista panorámica desde el vértice" target="_blank"/></a></center>
-
 <br>
+{{ end}}
+
+{{/* -------------------------------------------------------------------- */}}
+{{/* -- Introducir la ruta para Garmin si el parámetro está disponible -- */}}
+{{/* -------------------------------------------------------------------- */}}
+
+{{ if .Page.Params.vertice_gps_gar }}
+
+<p>Puedes ver la ruta que he seguido desde <a href="http://conect.garmin.com/modern/activity/{{ .Page.Params.vertice_gps_gar }}">Garmin Connect</a>.</p>
+
+<center>
+  <iframe src='https://connect.garmin.com/modern/activity/embed/{{ .Page.Params.vertice_gps_gar }}' width='465' height='500' frameborder='0'></iframe>
+</center>
+<br>
+{{ end }}

@@ -12,6 +12,11 @@ En este archivo en formato org-mode voy escribiendo lo que día a día aprendo y
 * Python
 * Y lo que vaya utilizando...
 
+
+## [parse_gpx.sh](https://github.com/sherlockes/SherloScripts/blob/master/bash/parse_gpx.sh) ##
+Este sencillo script recorre todos los archivos de la web de la carpeta donde ubico los vértices geodésicos para extraer de ellos los parámetros suficientes para generar una archivo *.gpx con el que poder representarlos en un mapa.
+
+
 ## [rclone.sh](https://github.com/sherlockes/SherloScripts/blob/master/bash/rclone.sh) (Bash)
 Por el método de instalación que tiene, [Rclone](https://rclone.org/) no se actualiza automáticamente, por esto he creado este pequeño script que instala la utilidad para conectar con nubes en caso de que no la tengamos instalada o comprueba (e instala) las posibles actualizaciones que haya de la misma.
 
