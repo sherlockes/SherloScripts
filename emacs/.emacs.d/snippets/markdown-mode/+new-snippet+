@@ -1,0 +1,36 @@
+# -*- mode: snippet -*-
+# name: vertice
+# key: vertice
+# --
+---
+title: "Vértice geodésico ${10:`(capitalize (file-name-nondirectory (file-name-sans-extension (buffer-file-name))))`}"
+date: "`(format-time-string "%Y-%m-%d")`"
+creation: "${1:2008-06-15}"
+description: "Vértice geodésico $10"
+thumbnail: "images/vertice.jpg"
+disable_comments: true
+authorbox: false
+toc: false
+mathjax: false
+categories:
+  - "vertices"
+draft: true
+weight: 5
+
+js: https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.3.1/build/ol.js
+css: https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.3.1/css/ol.css
+
+mapa_alto: 400
+
+vertice_nom: "$10"
+vertice_loc: "$2"
+vertice_lon: "${3:-0.3565367}"
+vertice_lat: "${4:41.3790035}"
+vertice_alt: "${5:354}"
+vertice_hoja: "${6:0413}"
+vertice_id: "${7:42}"
+vertice_img: "${8:tZbCy46}"
+vertice_pan: "${9:VY8ieZb}"
+---
+{{< mapa_vertice >}}
+

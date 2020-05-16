@@ -61,14 +61,14 @@
 **** Borrar el buffer completo -> erase-buffer (Sin tecla por defecto)
 **** Mostrar los números de línea -> linum-mode
 **** Instalar paquete -> install-package-from-buffer
-*** Selección
-**** Activar la marca de posición -> C-spc
 *** Edición
 **** Sangrar varias líneas 8 -> C-u 8 C-x Tab
 **** Reemplazar ^M por un salto de línea > M-x replace-string C-q C-m RET RET
 **** Seleccionar todo -> C-x h
 **** Editar archivos svg en modo texto > C-c C-c (auto-image-file-mode 1)
 **** Borrar una línea -> C-S-Backspace
+*** MarkDown Mode
+**** Insertar encabezado -> C-c C-s
 *** Navegación
 **** Abrir un directorio remoto ssh -x d /user@host:folder
 **** Ir al principio/final del Buffer -> M-</>
@@ -83,12 +83,19 @@
 ***** Grep en DIRED -> find-grep-dired
 ***** Ordenar -> dired-listing-switches [[https://oremacs.com/2015/01/13/dired-options/][Oremacs]]
 ***** Renombrar -> C-x C-q (C-c C-c para terminar)
+*** Paquetes
+**** Instalar paquete desde archivo -> package-install-file
+**** Yasnippet
+***** Nuevo Snippet -> yas-new-snippet
+***** Editar Snippet -> yas-visit-snippet-file
+*** Selección
+**** Activar la marca de posición -> C-spc
 *** Shell
 **** Abrir la consola de comandos -> M-x shell
 **** Comando anterior -> M-p
 **** Ejecutar un archivo -> C-c C-x
-*** MarkDown Mode
-**** Insertar encabezado -> C-c C-s
+*** Temas
+**** Cambiar el tema -> M-x customize-themes
 *** Ventanas
 **** Eliminar la ventana actual -> C-x 0
 **** Eliminar el resto de ventanas -> C-x 1
@@ -98,10 +105,6 @@
 - Instalar "ace-window" desde el repositorio de Melpa.
 - Añadir la línea "(global-set-key (kbd "M-o") 'ace-window)" al archivo de configuración.
 - Cambiar de ventana mediante M-o y el número que se dese
-*** Temas
-**** Cambiar el tema -> M-x customize-themes
-*** Paquetes
-**** Instalar paquete desde archivo -> package-install-file
 ** Elisp
 *** Variable global -> (setq variable valor)
 *** Escribir a un archivo -> (write-region "loquesea" nil "~/archivo")
@@ -124,7 +127,7 @@ Borrar el archivo "~/.config/inkscape/preferences.xml"
 - Ventana al portapepeles - Ctrl+Alt+ImprPant
 - Guardar escritorio en directorio - ImprPant
 - Guardar Area en directorio - Mays+ImprPant
-- Guardar ventana en directorio - Alt+ImprPant
+- Guardar ventana en directorio - Alt+ImprPant.
 ** Linux Mint
 *** Cambio entre áreas de trabajo -> Ctrl+Alt+⬆️
 *** Cambio entre aplicaciones utilizando el efecto de exposición -> Ctrl+Alt+⬇️

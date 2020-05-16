@@ -13,6 +13,7 @@
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
 (require 'dired+)
+(require 'yasnippet)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -28,7 +29,7 @@
  '(menu-bar-mode nil)
  '(package-selected-packages
    (quote
-    (dired+ ## markdown-mode htmlize gnu-elpa-keyring-update elpy ace-window)))
+    (yasnippet-snippets dired+ ## markdown-mode htmlize gnu-elpa-keyring-update elpy ace-window)))
  '(safe-local-variable-values (quote ((ENCODING . UTF-8) (encoding . utf-8))))
  '(tool-bar-mode nil)
  '(tooltip-mode nil))
