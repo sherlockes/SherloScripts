@@ -1,4 +1,4 @@
-;; -*- emacs-lisp -*- <20/05/12 01:37:38 /home/sherlockes/Google_Drive/SherloScripts/emacs/.emacs.d/tramp>
+;; -*- emacs-lisp -*- <20/05/18 18:05:44 /home/sherlockes/Google_Drive/SherloScripts/emacs/.emacs.d/tramp>
 ;; Tramp connection history.  Don't change this file.
 ;; You can delete it, forcing Tramp to reapply the checks.
 
@@ -28,27 +28,4 @@
   ("touch-t" t)
   ("touch" "\\touch"))
  (["scp" "pi" "192.168.191.203" nil nil]
-  ("uname" "Linux 4.19.97-v7+")
-  ("locale" "LC_ALL=C")
-  ("test" "test")
-  ("remote-path"
-   ("/bin" "/usr/bin" "/sbin" "/usr/sbin" "/usr/local/bin" "/usr/local/sbin"))
-  ("remote-shell" "/bin/sh")
-  ("~" "/home/pi")
-  ("file-exists" "test -e")
-  ("ls" "/bin/ls --color=never")
-  ("ls-dired" t)
-  ("stat" nil)
-  ("perl-file-spec" t)
-  ("perl-cwd-realpath" t)
-  ("perl" "\\perl")
-  ("id" "/usr/bin/id")
-  ("gid-integer" 1000)
-  ("uid-integer" 1000)
-  ("readlink" "\\readlink")
-  ("gid-string" "pi")
-  ("tmpdir" "/tmp")
-  ("touch-t" t)
-  ("touch" "\\touch")
-  ("git" "\\git")
-  ("env-u-option" t)))
+  nil))

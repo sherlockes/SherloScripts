@@ -29,6 +29,7 @@
 #Sincroniza el contenido de la nube de Google Drive con las carpetas locales
 rclone sync -v Sherlockes_GD:/Sherblog/content/ /home/pi/sherblog/content/
 rclone sync -v Sherlockes_GD:/Sherblog/static/ /home/pi/sherblog/static/
+rclone sync -v Sherlockes_GD:/Sherblog/layouts/ /home/pi/sherblog/layouts/
 
 #Cambio al directorio de contenidos
 cd ~/sherblog/content/post
