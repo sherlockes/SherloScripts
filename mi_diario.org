@@ -70,7 +70,7 @@
 *** MarkDown Mode
 **** Insertar encabezado -> C-c C-s
 *** Navegación
-**** Abrir un directorio remoto ssh -x d /user@host:folder
+**** Abrir un directorio remoto ssh C-x d /user@host:folder
 **** Ir al principio/final del Buffer -> M-</>
 **** Marcar línea al anillo (Ir de un punto a otro del archivo)
 - Marcar linea C-c % (org-mark-ring-push)
@@ -80,6 +80,7 @@
 ***** Ocultar detalles de archivos (dired-hide-details-mode) -> (
 ***** Nueva subcarpeta -> +
 ***** Refrescar -> g
+***** Crear enlace simbólico -> S
 ***** Grep en DIRED -> find-grep-dired
 ***** Ordenar -> dired-listing-switches [[https://oremacs.com/2015/01/13/dired-options/][Oremacs]]
 ***** Renombrar -> C-x C-q (C-c C-c para terminar)
