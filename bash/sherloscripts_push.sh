@@ -1,5 +1,5 @@
 #Sube los cambios generados en la web a GitHub
-rclone sync -v Sherlockes_GD:/SherloScripts/ /home/pi/SherloScripts/
+rclone sync -v Sherlockes_GD:/SherloScripts/bash/ /home/pi/SherloScripts/bash
 
 cd ~/SherloScripts
 git add --all
