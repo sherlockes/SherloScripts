@@ -42,19 +42,37 @@ rclone_check(){
 }
 
 rclone_list(){
+    clear
+    echo "------------------------------------------------"	
+    echo "--------------  www.sherblog.pro  --------------"
+    echo "------------------------------------------------"
+
     rclone_remotes=($(rclone listremotes | cut -d ":" -f 1))
-    echo "Que nube quieres montar como unidad remota?"
+    
     local x=1
     for i in "${rclone_remotes[@]}"
     do
-	echo "$x.- ${i}"
+	if rclone_montado ${i};
+	then
+	    estado="\e[32m(Montar)\e[0m"
+	else
+	    estado="\e[31m(Desmontar)\e[0m"
+	fi
+	
+	echo -e "-- $x. ${i} $estado"
 	((x+=1))
     done
-    echo "$x.- Salir"
-    
+    echo "-- $x. Volver"
+    echo "------------------------------------------------"
+}
+
+rclone_list_ask(){
+    clear
+    rclone_list
     read -p "Selecciona una opción [ 1 - $((${#rclone_remotes[@]} + 1))] " choice
-    echo ${rclone_remotes[choice-1]}
-    
+    if (($choice < $((${#rclone_remotes[@]} + 1))));then
+	rclone_des_montar "${rclone_remotes[$((choice - 1))]}"
+    fi
 }
 
 rclone_install(){
@@ -69,4 +87,46 @@ rclone_install(){
 	sudo dpkg -i $installer
 	rm $installer
 }
-rclone_list
+
+# -------------------------------------------------------
+# Función para comprobar si la unidad está montada
+# -------------------------------------------------------
+rclone_montado (){
+    local carpeta=$HOME"/clouds/$1"
+    if [ ! -x $carpeta ]
+    then
+	# La carpeta no existe
+	return 0
+    else
+	# La carpeta existe
+	if mount | grep $carpeta > /dev/null; then
+	    # La carpeta está montada
+	    return 1
+	else
+	    # La carpeta no está montada
+	    return 0
+	fi
+    fi
+}
+
+# -------------------------------------------------------
+# Función de montaje y desmontaje de unidades
+# -------------------------------------------------------
+rclone_des_montar(){
+    local carpeta=$HOME"/clouds/$1"
+    
+    if rclone_montado $1;
+    then
+	# Acción si la carpeta está desmontada
+        echo "Montando $1..."
+        mkdir $carpeta
+	eval "rclone mount $1: $carpeta --allow-other --daemon"
+    else
+        echo "Desmontando $1..."
+	fusermount -u $carpeta
+        rm -rf $carpeta
+    fi
+    sleep 2
+    rclone_list
+    sleep 1
+}
