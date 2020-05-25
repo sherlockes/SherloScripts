@@ -14,18 +14,13 @@
 # Definición de variables
 # ----------------------------------
 
-Mega_dir=$HOME/clouds/Mega
-Mega_cmd="rclone mount Sherlockes_Mega: $Mega_dir --daemon"
-Sherloflix_dir=$HOME/clouds/Sherloflix_en
-Sherloflix_cmd="rclone mount Sherloflix_en: $Sherloflix_dir --allow-other --daemon"
 VideoNas_dir=~/VideoNas
 VideoNas_lan_cmd='sshfs sherlockes@192.168.1.200:../../video/ $VideoNas_dir'
 VideoNas_zer_cmd='sshfs sherlockes@192.168.191.200:../../video/ $VideoNas_dir'
+Pi_lan_ip='192.168.1.203'
+Pi_zer_ip='192.168.191.203'
 Gphotos_dir=~/gphotos-sync
 Gphotos_cmd='rclone mount Sherlockes_Gphotos:/media/all Fotos'
-Tejelonsos_dir=~/clouds/Tejelonsos
-Tejelonsos_cmd='rclone mount Tejelonsos_GD: $Tejelonsos_dir --allow-other --daemon'
-
 
 # --------------------------------------------
 # Comprobar la instalación de sshfs
@@ -38,8 +33,10 @@ else
     sudo apt install sshfs
 fi
 
+# --------------------------------------------
 # Comprobar si es posible el acceso al NAS desde la LAN o hay que
 # hacerlo a través de la IP de Zerotier
+# --------------------------------------------
 status=$(ssh -o BatchMode=yes -o ConnectTimeout=5 sherlockes@192.168.1.200 echo ok 2>&1)
 
 if [[ $status == ok ]] ; then
@@ -55,7 +52,7 @@ fi
 
 
 # --------------------------------------------
-# Función de instalación y versión de Rclone
+# Funciones de Rclone
 # --------------------------------------------
 # La primera parrafada es por el tema de la ruta relativa...
 
@@ -84,10 +81,23 @@ des_montar(){
 # Subir a Github los cambios en SherloSripts
 # -------------------------------------------------------
 SherloScripts(){
-    cd ~/Google_Drive/SherloScripts
-    git add --all
-    git commit -m "Update"
-    git push -u origin master
+
+    #Comprobar el acceso a la Raspberry
+    status=$(ssh -o BatchMode=yes -o ConnectTimeout=5 pi@192.168.1.203 echo ok 2>&1)
+
+    if [[ $status == ok ]] ; then
+	echo 'Acceso a la Raspberry en Lan autorizado...'
+	Pi_ip=$Pi_lan_ip
+    elif [[ $status == "Permission denied"* ]] ; then
+	echo 'Acceso a la Raspberry no autorizado...'
+	return
+    else
+	echo 'La Raspberry no está en Lan, se intentará a través de Zerotier...'
+	Pi_ip=$Pi_zer_ip
+    fi
+
+
+    ssh pi@$Pi_ip '~/SherloScripts/bash/sherloscripts_push.sh'
 }
 
 # -------------------------------------------
@@ -164,7 +174,7 @@ read_options(){
     local choice
     read -p "Selecciona una opción [ 1 - 8] " choice
     case $choice in
-	1) rclone_list_ask ;;
+	1) rclone_list ;;
 	2) des_montar "VideoNas" ;;
 	3) Google_Photos ;;
 	4) SherloScripts ;;
