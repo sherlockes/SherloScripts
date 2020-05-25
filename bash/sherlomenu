@@ -50,7 +50,6 @@ else
     VideoNas_cmd=$VideoNas_zer_cmd
 fi
 
-
 # --------------------------------------------
 # Funciones de Rclone
 # --------------------------------------------
@@ -96,7 +95,7 @@ SherloScripts(){
 	Pi_ip=$Pi_zer_ip
     fi
 
-
+    # Lanza el Script en la Raspberry para sincronizar el repositorio
     ssh pi@$Pi_ip '~/SherloScripts/bash/sherloscripts_push.sh'
 }
 
