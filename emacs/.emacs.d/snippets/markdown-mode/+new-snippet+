@@ -33,6 +33,7 @@ vertice_img: "${8:tZbCy46}"
 vertice_pan: "${9:VY8ieZb}"
 
 vertice_gps_gar: "${10:85111891}"
+vertice_gps_wik: "${11:5111891}"
 ---
 {{< mapa_vertice >}}
 
