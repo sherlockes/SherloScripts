@@ -9,23 +9,34 @@
 # Email: sherlockes@gmail.com                                           
 ###################################################################
 
-bits=$(getconf LONG_BIT)
-if [ $bits == '64' ]
-then
-    bits='amd64'
-else
-    bits='arm'
-fi
 
+# -------------------------------------------------------
+# Comprueba la instalación de Rclone
+# -------------------------------------------------------
 rclone_check(){
+
+    # Arquitectura del procesador
+    bits=$(getconf LONG_BIT)
+    if [ $bits == '64' ];
+    then
+	bits='amd64'
+    else
+	bits='arm'
+    fi
+
+    # Comprueba si Rclone está instalado
     if which rclone >/dev/null; then
+	# Versión de Rclone instalada
 	rclone_local_ver=$(rclone version | head -1 | perl -pe '($_)=/([0-9]+([.][0-9]+)+)/')
+
+	# Versión de Rclone disponble
 	rclone_web_ver=$(curl -s https://api.github.com/repositories/17803236/releases/latest \
 	    | grep "browser_download_url.*rclone-[^extended].*-linux-${bits}\.deb" \
     | cut -d ":" -f 2,3 \
     | tr -d \" \
     | perl -pe '($_)=/([0-9]+([.][0-9]+)+)/')
 
+	# Versión instalada VS Versión disponible
 	if [ $rclone_local_ver == $rclone_web_ver ]
 	then
 	    echo "rclone instalado y actualizado..."
@@ -36,10 +47,33 @@ rclone_check(){
 	fi
 	
     else
+	# Instala Rclone si no está instalado
 	echo 'instalando rclone...'
 	rclone_install
     fi
 }
+
+
+# -------------------------------------------------------
+# Realiza la instalación de Rclone
+# -------------------------------------------------------
+
+rclone_install(){
+    echo 'Descargando la última versión de Rclone'
+	curl -s https://api.github.com/repositories/17803236/releases/latest \
+	    | grep "browser_download_url.*rclone-[^extended].*-linux-${bits}\.deb" \
+	    | cut -d ":" -f 2,3 \
+	    | tr -d \" \
+	    | wget -qi -
+	
+	installer="$(find . -name "*linux-${bits}.deb")"
+	sudo dpkg -i $installer
+	rm $installer
+}
+
+# -------------------------------------------------------
+# Lista las nubes de /.config/rclone/rclone.conf
+# -------------------------------------------------------
 
 rclone_list(){
     clear
@@ -64,29 +98,13 @@ rclone_list(){
     done
     echo "-- $x. Volver"
     echo "------------------------------------------------"
-}
 
-rclone_list_ask(){
-    clear
-    rclone_list
     read -p "Selecciona una opción [ 1 - $((${#rclone_remotes[@]} + 1))] " choice
     if (($choice < $((${#rclone_remotes[@]} + 1))));then
 	rclone_des_montar "${rclone_remotes[$((choice - 1))]}"
     fi
 }
 
-rclone_install(){
-    echo 'Descargando la última versión de Rclone'
-	curl -s https://api.github.com/repositories/17803236/releases/latest \
-	    | grep "browser_download_url.*rclone-[^extended].*-linux-${bits}\.deb" \
-	    | cut -d ":" -f 2,3 \
-	    | tr -d \" \
-	    | wget -qi -
-	
-	installer="$(find . -name "*linux-${bits}.deb")"
-	sudo dpkg -i $installer
-	rm $installer
-}
 
 # -------------------------------------------------------
 # Función para comprobar si la unidad está montada
@@ -128,5 +146,4 @@ rclone_des_montar(){
     fi
     sleep 2
     rclone_list
-    sleep 1
 }
