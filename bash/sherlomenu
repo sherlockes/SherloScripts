@@ -130,6 +130,15 @@ Google_Photos(){
 }
 
 # -------------------------------------------------------
+# Actualiza el entorno de desarrollo de Sherblog
+# -------------------------------------------------------
+update_sheblog_dev(){
+    rclone sync -v Sherlockes_GD:/Sherblog/layouts/ ~/Documentos/sherblog_dev/layouts/
+    rclone sync -v Sherlockes_GD:/Sherblog/static/ ~/Documentos/sherblog_dev/static/
+}
+
+
+# -------------------------------------------------------
 # Función para comprobar si la unidad está montada
 # -------------------------------------------------------
 montado (){
@@ -161,7 +170,8 @@ show_menus() {
     echo "-- 3. Backup de Google Photos"
     echo "-- 4. SherloScripts a Github"
     echo "-- 5. Propagar rclone config"
-    echo "-- 6. Salir"
+    echo "-- 6. Actualizar entorno desarrollo Sherblogs"
+    echo "-- 7. Salir"
     echo "------------------------------------------------"
 }
 
