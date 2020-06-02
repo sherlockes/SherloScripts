@@ -67,6 +67,7 @@
 **** Seleccionar todo -> C-x h
 **** Editar archivos svg en modo texto > C-c C-c (auto-image-file-mode 1)
 **** Borrar una línea -> C-S-Backspace
+**** insertar un trozo de código -> <sTAB
 *** MarkDown Mode
 **** Insertar encabezado -> C-c C-s
 *** Navegación
@@ -116,6 +117,12 @@
 - En un directorio absoluto > [Titulo]({{<ref"/dir/archivo.md">}})
 - A un apartado del post >[Foo]({{<ref "#foo" >}}) 
 *** [[https://sourceforge.net/p/hugo-generator/wiki/markdown_syntax/][Markdown Cheatsheet]]
+*** Crear un trozo en borrador
+#+BEGIN_SRC 
+{{< borrador >}}
+Aquí iremos añadiendo el contenido con el que queremos actualizar la entrada...
+{{< / borrador >}}
+#+END_SRC
 ** Inkscape
 *** Resetear las preferencias
 Borrar el archivo "~/.config/inkscape/preferences.xml"

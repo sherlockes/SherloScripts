@@ -33,7 +33,8 @@
  '(safe-local-variable-values (quote ((ENCODING . UTF-8) (encoding . utf-8))))
  '(tool-bar-mode nil)
  '(tooltip-mode nil)
- '(yas-global-mode 1))
+ '(yas-global-mode 1)
+)
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -55,3 +56,6 @@
 
 ;; Crear la copia de seguridad en la papelera en lugar de en la carpeta del archivo.
 (setq backup-directory-alist '((".*" . "~/.emacs_backup")))
+
+(set-register ?a '(file . "~/Google_Drive/SherloScripts/mi_diario.org"))
+(set-register ?i '(file . "~/.emacs"))
