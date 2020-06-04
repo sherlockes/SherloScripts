@@ -9,3 +9,5 @@
 # Email: sherlockes@gmail.com                                           
 ###################################################################
 
+feedmyride='https://feedmyride.net/activities/11156844'
+wget ${feedmyride} | echo
