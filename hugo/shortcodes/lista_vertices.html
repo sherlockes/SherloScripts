@@ -1,0 +1,29 @@
+{{/* ----------------------------------------------------------------- */}}
+{{/* ------ Generación del listado de vertices en la categoría ------- */}}
+{{/* ----------------------------------------------------------------- */}}
+
+{{ $vertices := (where .Site.RegularPages "Section" "==" "vertices") }}
+{{ range $vertices }}
+<li><a href="{{.Permalink}}">{{.Params.vertice_nom}} ({{.Params.creation}})</a>
+
+{{ if .Params.vertice_img }}
+ - <a href="https://i.imgur.com/{{.Params.vertice_img}}.jpg" target="_blank">Foto</a>
+{{ end }}
+
+{{ if .Params.vertice_pan }}
+ - <a href="https://i.imgur.com/{{.Params.vertice_pan}}.jpg" target="_blank">Pano</a>
+{{ end }}
+
+{{ if .Params.vertice_gps_gar }}
+ - <a href="http://connect.garmin.com/modern/activity/{{.Params.vertice_gps_gar}}" target="_blank">Ruta</a>
+{{ end }}
+
+{{ if .Params.vertice_gps_wik }}
+ - <a href="http://es.wikiloc.com/wikiloc/view.do?id={{.Params.vertice_gps_wik}}" target="_blank">Ruta</a>
+{{ end }}
+  
+<br>
+  
+</li>
+{{ end }}
+<br>
