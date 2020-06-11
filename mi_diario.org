@@ -44,6 +44,8 @@
 #+END_SRC
 *** Curl
 **** Descargar un archivo > curl 'dirección' -o archivo
+*** Comentarios
+**** Multilínea -> : '  -------- '
 *** Regex
 **** Uso de variable en una expresión regular -> ${var}
 ** Debian
