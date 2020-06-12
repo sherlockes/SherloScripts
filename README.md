@@ -35,7 +35,13 @@ Este sencillo script recorre todos los archivos de la web de la carpeta donde ub
 
 
 ## [rclone.sh](https://github.com/sherlockes/SherloScripts/blob/master/bash/rclone.sh) (Bash)
-Por el método de instalación que tiene, [Rclone](https://rclone.org/) no se actualiza automáticamente, por esto he creado este pequeño script que instala la utilidad para conectar con nubes en caso de que no la tengamos instalada o comprueba (e instala) las posibles actualizaciones que haya de la misma.
+Por el método de instalación que tiene, [Rclone](https://rclone.org/) no se actualiza automáticamente. Este script comenzó siendo una pequeña utilidad para actualizarlo automáticamente pero poco a poco ha ido ganando funcionalidades:
+
+* Comprueba la arquitectura del procesador
+* Comprueba la instalación de Rclone
+* Comprueba la actualización de Rclone
+* Lista las nubes disponibles en .config
+* Monta y desmonta cualquiera de las nubes
 
 ## [mover_archivos.gs](https://github.com/sherlockes/SherloScripts/blob/master/google%20scripts/20191219_mover_archivos.gs) (Google Scripts) ##
 En mi lucha por descargar los archivos de Telegram al NAS he necesitado un pequeño script que corre dentro de la nube de google y cuya finalidad es mover los archivos que hay en la raiz de la unidad y meterlos dentro de una carpeta compartida que sincronizo con ni Synology. Todos los días esta utilidad vacía la carpeta y borra la papelera para poder mover más archivos.

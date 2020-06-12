@@ -19,7 +19,9 @@ VideoNas_lan_cmd='sshfs sherlockes@192.168.1.200:../../video/ $VideoNas_dir'
 VideoNas_zer_cmd='sshfs sherlockes@192.168.191.200:../../video/ $VideoNas_dir'
 Pi_lan_ip='192.168.1.203'
 Pi_zer_ip='192.168.191.203'
-Gphotos_dir=~/gphotos-sync
+Nas_lan_ip='192.168.1.200'
+Nas_zer_ip='192.168.191.200'
+Gphotos_dir=~/clouds/gphotos-sync
 Gphotos_cmd='rclone mount Sherlockes_Gphotos:/media/all Fotos'
 
 # --------------------------------------------
@@ -37,17 +39,28 @@ fi
 # Comprobar si es posible el acceso al NAS desde la LAN o hay que
 # hacerlo a través de la IP de Zerotier
 # --------------------------------------------
-status=$(ssh -o BatchMode=yes -o ConnectTimeout=5 sherlockes@192.168.1.200 echo ok 2>&1)
+status=$(ssh -o BatchMode=yes -o ConnectTimeout=5 sherlockes@$Nas_lan_ip echo ok 2>&1)
 
 if [[ $status == ok ]] ; then
     echo 'Acceso al NAS en Lan autorizado...'
     VideoNas_cmd=$VideoNas_lan_cmd
 elif [[ $status == "Permission denied"* ]] ; then
     echo 'Acceso al NAS no autorizado...'
-    VideoNas_cmd=$VideoNas_zer_cmd
+    sleep 2
 else
     echo 'El NAS no está en Lan, se intentará a través de Zerotier...'
-    VideoNas_cmd=$VideoNas_zer_cmd
+    status=$(ssh -o BatchMode=yes -o ConnectTimeout=5 sherlockes@$Nas_zer_ip echo ok 2>&1)
+
+    if [[ $status == ok ]] ; then
+	echo 'Acceso al Nas autorizado a través de Zerotier'
+	VideoNas_cmd=$VideoNas_zer_cmd
+    elif [[ $status == "Permission denied"* ]] ; then
+	echo 'Acceso al NAS no autorizado...'
+    else
+	echo 'El NAS no está conectado...'
+	sleep 2
+    fi
+    
 fi
 
 # --------------------------------------------
@@ -117,14 +130,16 @@ Google_Photos(){
     echo "Montando la carpeta contenedora $GPhotos_dir mediante sshfs ..."
     # Monta la carpeta del nas "gphotos-sync" como una unidad en la carpeta local "gphotos-sync"
     sshfs sherlockes@192.168.1.200:../../home/gphotos-sync $Gphotos_dir
+    cd $Gphotos_dir
     # Ejecuta el script en python gphotos-sync
     echo "Ejecutando el script gphotos-sync mediante pipenv ..."
     pipenv run gphotos-sync $Gphotos_dir
+    sleep 2
     echo "Desmontando Google Photos ..."
     fusermount -u $Gphotos_dir
-    sleep 1
+    sleep 2
     echo "Borrando la carpeta $Gphotos_dir ..."
-    rm -rf $Gphotos_dir
+    # rm -rf $Gphotos_dir
     echo "Terminado !!!"
     sleep 2
 }
@@ -170,7 +185,7 @@ show_menus() {
     echo "-- 3. Backup de Google Photos"
     echo "-- 4. SherloScripts a Github"
     echo "-- 5. Propagar rclone config"
-    echo "-- 6. Actualizar entorno desarrollo Sherblogs"
+    echo "-- 6. Actualizar entorno desarrollo Sherblog"
     echo "-- 7. Salir"
     echo "------------------------------------------------"
 }
@@ -189,6 +204,7 @@ read_options(){
 	4) SherloScripts ;;
 	5) copy_rclone_config ;;
 	6) exit 0;;
+	7) exit 0;;
 	*) echo -e "...Error..." && sleep 2
     esac
 }
