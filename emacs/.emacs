@@ -54,8 +54,8 @@
 ;; Accesos directos
 (global-set-key (kbd "M-o") 'ace-window)
 
+(global-set-key (kbd "<f1>") (lambda() (interactive)(load-file user-init-file)))
+(global-set-key (kbd "<f2>") (lambda() (interactive)(find-file "~/Google_Drive/SherloScripts/mi_diario.org")))
+
 ;; Crear la copia de seguridad en la papelera en lugar de en la carpeta del archivo.
 (setq backup-directory-alist '((".*" . "~/.emacs_backup")))
-
-(set-register ?a '(file . "~/Google_Drive/SherloScripts/mi_diario.org"))
-(set-register ?i '(file . "~/.emacs"))

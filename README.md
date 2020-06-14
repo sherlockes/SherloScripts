@@ -13,14 +13,14 @@ En este archivo en formato org-mode voy escribiendo lo que día a día aprendo y
 * Y lo que vaya utilizando...
 
 
-## [lista_vertices.html](https://github.com/sherlockes/SherloScripts/blob/master/hugo/shortcodes/lista_vertices.html) ##
+## [lista_vertices.html](https://github.com/sherlockes/SherloScripts/blob/master/hugo/shortcodes/lista_vertices.html) (Hugo Shortcodes)##
 Gracias a este [Shortcode](https://gohugo.io/content-management/shortcodes/) que utilizo en mi blog desarrollado en [Hugo](https://gohugo.io/) consigo de una forma sencilla incluir una lista con todos los enlaces a las distintas páginas de una determinada categoría. En mi aso lo utilizo para listar todos los Vértices geodésicos que estan inluidos en la categoría "vertices". Su uso es tan sencillo como copiarlo dentro de la carpeta "layouts/shortcodes/" y llamarlo desde donde queramos incluri la lista con "{{< lista_vertices >}}". Hace uso de:
 * Filtrado de páginas por el contenido de una "section" (Carpeta)
 * Uso de la función "Range"
 * Acceso a parámetros de las páginas
 * Determinación de la existencia de un parámetro.
 
-## [mapa_vertice.html](https://github.com/sherlockes/SherloScripts/blob/master/hugo/shortcodes/mapa_vertice.html) ##
+## [mapa_vertice.html](https://github.com/sherlockes/SherloScripts/blob/master/hugo/shortcodes/mapa_vertice.html) (Hugo Shortcodes)##
 Con este [Shortcode](https://gohugo.io/content-management/shortcodes/) que utilizo en mi blog desarrollado en [Hugo](https://gohugo.io/) introducto en cada página de la sección "vertices" toda la información relativa al mismo estrayendola de los parámetros de la propia página:
 * Cálculo del total de vértices
 * Introducir la información del vértice
@@ -30,7 +30,7 @@ Con este [Shortcode](https://gohugo.io/content-management/shortcodes/) que utili
 * Inclusión de la ruta para gps
 
 
-## [parse_gpx.sh](https://github.com/sherlockes/SherloScripts/blob/master/bash/parse_gpx.sh) ##
+## [parse_gpx.sh](https://github.com/sherlockes/SherloScripts/blob/master/bash/parse_gpx.sh) (Bash)##
 Este sencillo script recorre todos los archivos de la web de la carpeta donde ubico los vértices geodésicos para extraer de ellos los parámetros suficientes para generar una archivo *.gpx con el que poder representarlos en un mapa.
 
 
