@@ -27,10 +27,12 @@ cd ~/SherloScripts
 git add --all
 git commit -m "Update"
 git push
-exit 0
+
 
 # --------------------------------------------------------------
 # Sincroniza Sherloflix con la unidad compartida de Sherlockes78
 # --------------------------------------------------------------
 rclone sync Sherloflix_en: Sherlockes78_UN_en: --transfers 2 --tpslimit 8 --bwlimit 5M
 
+
+exit 0
