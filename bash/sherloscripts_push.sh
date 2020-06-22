@@ -3,7 +3,8 @@
 
 ###################################################################
 #Script Name: sherloscripts_push.sh
-#Description: Sube los cambios en Sherloscript al repositorio
+#Description: Sube los cambios en Sherloscript al repositorio y 
+#             sincroniza nubes 
 #Args: N/A
 #Creation/Update: 20200521/20200522
 #Author: www.sherblog.pro                                                
@@ -27,3 +28,9 @@ git add --all
 git commit -m "Update"
 git push
 exit 0
+
+# --------------------------------------------------------------
+# Sincroniza Sherloflix con la unidad compartida de Sherlockes78
+# --------------------------------------------------------------
+rclone sync Sherloflix_en: Sherlockes78_UN_en: --transfers 2 --tpslimit 8 --bwlimit 5M
+
