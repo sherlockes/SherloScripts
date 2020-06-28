@@ -31,9 +31,10 @@ vertice_hoja: "${6:0413}"
 vertice_id: "${7:42}"
 vertice_img: "${8:tZbCy46}"
 vertice_pan: "${9:VY8ieZb}"
+vertice_videopan: "${10:wLdya1MCFb8}"
 
-vertice_gps_gar: "${10:85111891}"
-vertice_gps_wik: "${11:5111891}"
+vertice_gps_gar: "${11:85111891}"
+vertice_gps_wik: "${12:5111891}"
 ---
 {{< mapa_vertice >}}
 
