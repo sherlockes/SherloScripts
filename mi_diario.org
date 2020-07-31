@@ -63,7 +63,7 @@
 **** Borrar el buffer completo -> erase-buffer (Sin tecla por defecto)
 **** Mostrar los números de línea -> linum-mode
 **** Instalar paquete -> install-package-from-buffer
-*** Corrección Ortográfica y xDiccionario
+*** Corrección Ortográfica y Diccionario
 **** Cambiar diccionario -> M-x ispell-change dictionary "castellano"
 **** Instalar diccionario -> [[https://ondahostil.wordpress.com/2017/01/17/lo-que-he-aprendido-configurando-aspell-para-emacs/][Onda Hostil]]
 - Descargarlo de [[ftp://ftp.gnu.org/gnu/aspell/dict/][GNU-Aspell]]
@@ -100,7 +100,7 @@ make clean
 ***** Nueva subcarpeta -> +
 ***** Refrescar -> g
 ***** Crear enlace simbólico -> S
-***** Grep en DIRED -> find-grep-dired
+***** Grep en DIRED (buscar en archivos) -> find-grep-dired
 ***** Ordenar -> dired-listing-switches [[https://oremacs.com/2015/01/13/dired-options/][Oremacs]]
 ***** Renombrar -> C-x C-q (C-c C-c para terminar)
 *** Paquetes
