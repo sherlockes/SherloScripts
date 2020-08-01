@@ -4,7 +4,7 @@
 ###########################################################################
 # Script Name: Actualización de www.sherblog.pro
 # Description:
-#	- Actualiza Hugo
+#	- Actualiza Hugo (
 #	- Sincroniza Google Drive con las carpetas locales
 #	- Añade una cabecera a los archivos que no la tienen
 #	- Actualiza los archivos de la nube a los nuevos con cabecera
@@ -25,6 +25,17 @@
 #installer="$(find . -name "*Linux-ARM.deb")"
 #sudo dpkg -i $installer
 #rm $installer
+
+# Comprueba si hay contenido para actualizar
+
+if rclone check --one-way Sherlockes_GD:/Sherblog/content/ /home/pi/sherblog/content/; then
+    echo command returned true
+else
+    echo command returned some error
+fi
+
+
+
 
 #Sincroniza el contenido de la nube de Google Drive con las carpetas locales
 rclone sync -v Sherlockes_GD:/Sherblog/content/ /home/pi/sherblog/content/
