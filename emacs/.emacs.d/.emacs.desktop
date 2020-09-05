@@ -2,54 +2,30 @@
 ;; --------------------------------------------------------------------------
 ;; Desktop File for Emacs
 ;; --------------------------------------------------------------------------
-;; Created Sat Aug  1 18:33:36 2020
+;; Created Sat Sep  5 20:29:07 2020
 ;; Desktop file format version 208
-;; Emacs version 25.2.2
+;; Emacs version 26.3
 
 ;; Global section:
-(setq desktop-saved-frameset [frameset 1 (24357 39264 346673 91000) (desktop . "208") "sherlockes@X240" nil nil ((((font-backend xft x) (font . "-PfEd-DejaVu Sans Mono-normal-normal-normal-*-13-*-*-*-m-0-iso10646-1") (font-parameter . "Monospace 10") (border-width . 0) (internal-border-width . 0) (right-divider-width . 0) (bottom-divider-width . 0) (vertical-scroll-bars . right) (horizontal-scroll-bars) (foreground-color . "#eeeeec") (background-color . "#2e3436") (mouse-color . "black") (border-color . "black") (screen-gamma) (line-spacing) (left-fringe . 8) (right-fringe . 8) (scroll-bar-foreground) (scroll-bar-background) (menu-bar-lines . 0) (tool-bar-lines . 0) (title) (wait-for-wm . t) (tool-bar-position . top) (icon-type . t) (auto-raise) (auto-lower) (cursor-type . box) (scroll-bar-width . 16) (scroll-bar-height . 0) (alpha) (fullscreen . maximized) (display-type . color) (background-mode . dark) (cursor-color . "#fce94f") (sticky) (environment) (frameset--id . "972B-EB66-0950-E429") (frameset--mini t . t) (modeline . t) (minibuffer . t) (unsplittable) (icon-name) (display . ":0") (explicit-name) (visibility . t) (height . 41) (width . 166) (left . 0) (top . 0)) ((min-height . 8) (min-width . 20) (min-height-ignore . 4) (min-width-ignore . 12) (min-height-safe . 2) (min-width-safe . 4) (min-pixel-height . 136) (min-pixel-width . 160) (min-pixel-height-ignore . 68) (min-pixel-width-ignore . 96) (min-pixel-height-safe . 34) (min-pixel-width-safe . 32)) hc (pixel-width . 1366) (pixel-height . 686) (total-width . 171) (total-height . 40) (normal-height . 1.0) (normal-width . 1.0) (combination-limit) (vc (pixel-width . 680) (pixel-height . 686) (total-width . 85) (total-height . 40) (normal-height . 1.0) (normal-width . 0.5) (combination-limit) (leaf (pixel-width . 680) (pixel-height . 340) (total-width . 85) (total-height . 20) (normal-height . 0.5) (normal-width . 1.0) (buffer "vertices" (selected) (hscroll . 0) (fringes 8 8 nil) (margins nil) (scroll-bars nil 2 t nil 0 t) (vscroll . 0) (dedicated) (point . 247) (start . 1))) (leaf (last . t) (pixel-width . 680) (pixel-height . 346) (total-width . 85) (total-height . 20) (normal-height . 0.5) (normal-width . 1.0) (buffer "berninches.md" (selected) (hscroll . 0) (fringes 8 8 nil) (margins nil) (scroll-bars nil 2 t nil 0 t) (vscroll . 0) (dedicated) (point . 786) (start . 583)))) (leaf (last . t) (pixel-width . 686) (pixel-height . 686) (total-width . 86) (total-height . 40) (normal-height . 1.0) (normal-width . 0.5) (buffer "publish.sh" (selected . t) (hscroll . 0) (fringes 8 8 nil) (margins nil) (scroll-bars nil 2 t nil 0 t) (vscroll . 0) (dedicated) (point . 2420) (start . 1560)))))])
+(setq desktop-saved-frameset [frameset 1 (24403 55539 697039 396000) (desktop . "208") "sherlockes@sobremesa" nil nil ((((minibuffer . t) (undecorated) (override-redirect) (font-backend xft x) (font . "-PfEd-DejaVu Sans Mono-normal-normal-normal-*-13-*-*-*-m-0-iso10646-1") (font-parameter . "Monospace 10") (border-width . 0) (internal-border-width . 0) (right-divider-width . 0) (bottom-divider-width . 0) (vertical-scroll-bars . right) (horizontal-scroll-bars) (foreground-color . "#eeeeec") (background-color . "#2e3436") (mouse-color . "black") (border-color . "black") (screen-gamma) (line-spacing) (left-fringe . 8) (right-fringe . 8) (no-special-glyphs) (scroll-bar-foreground) (scroll-bar-background) (menu-bar-lines . 0) (tool-bar-lines . 0) (title) (wait-for-wm . t) (tool-bar-position . top) (inhibit-double-buffering) (icon-type . t) (auto-raise) (auto-lower) (cursor-type . box) (scroll-bar-width . 16) (scroll-bar-height . 0) (alpha) (no-focus-on-map) (no-accept-focus) (fullscreen . maximized) (visibility . t) (skip-taskbar) (z-group) (display-type . color) (background-mode . dark) (cursor-color . "#fce94f") (sticky) (environment) (frameset--id . "972B-EB66-0950-E429") (frameset--mini t . t) (modeline . t) (unsplittable) (icon-name) (display . ":0") (explicit-name) (height . 58) (width . 206) (left . 0) (top . 0)) ((min-height . 8) (min-width . 20) (min-height-ignore . 4) (min-width-ignore . 12) (min-height-safe . 2) (min-width-safe . 4) (min-pixel-height . 136) (min-pixel-width . 160) (min-pixel-height-ignore . 68) (min-pixel-width-ignore . 96) (min-pixel-height-safe . 34) (min-pixel-width-safe . 32)) hc (pixel-width . 1680) (pixel-height . 978) (total-width . 210) (total-height . 58) (normal-height . 1.0) (normal-width . 1.0) (combination-limit) (vc (pixel-width . 840) (pixel-height . 978) (total-width . 105) (total-height . 58) (normal-height . 1.0) (normal-width . 0.5) (combination-limit) (leaf (pixel-width . 840) (pixel-height . 485) (total-width . 105) (total-height . 29) (normal-height . 0.5) (normal-width . 1.0) (buffer "raspberry" (selected) (hscroll . 0) (fringes 8 8 nil) (margins nil) (scroll-bars nil 2 t nil 0 t) (vscroll . 0) (dedicated) (point . 909) (start . 1))) (leaf (last . t) (pixel-width . 840) (pixel-height . 493) (total-width . 105) (total-height . 29) (normal-height . 0.5) (normal-width . 1.0) (buffer "*scratch*" (selected) (hscroll . 0) (fringes 8 8 nil) (margins nil) (scroll-bars nil 2 t nil 0 t) (vscroll . 0) (dedicated) (point . 146) (start . 1)))) (leaf (last . t) (pixel-width . 840) (pixel-height . 978) (total-width . 105) (total-height . 58) (normal-height . 1.0) (normal-width . 0.5) (buffer "*scratch*" (selected . t) (hscroll . 0) (fringes 8 8 nil) (margins nil) (scroll-bars nil 2 t nil 0 t) (vscroll . 0) (dedicated) (point . 1) (start . 1)))))])
 (setq desktop-missing-file-warning nil)
 (setq tags-file-name nil)
 (setq tags-table-list nil)
 (setq search-ring '("wik" "you" "wiki" "y" "youtu" "garmin" "youtu" "buscar" "you" "garmin" "yout" "frand"))
 (setq regexp-search-ring nil)
 (setq register-alist nil)
-(setq file-name-history '("~/Google_Drive/Sherblog/content/vertices/laguna.md" "~/Google_Drive/Sherblog/content/vertices/berninches.md" "~/Google_Drive/Sherblog/content/vertices/varillo_de_belchite.md" "~/Google_Drive/Sherblog/content/vertices/pilonas.md" "~/Google_Drive/Sherblog/content/vertices/" "~/" "~/Google_Drive/" "~/Google_Drive/Sherblog/content/vertices/puig_aguila.md" "~/Google_Drive/Sherblog/content/vertices/pedregosa.md" "~/" "/pi@192.168.191:sherblog" "/pi@192.168.191.203:sherblog" "/pi@192.168.191.203" "~/Google_Drive/Sherblog/content/vertices/salinas.md" "~/Google_Drive/Sherblog/content/vertices/corona_del_fraile.md" "~/Google_Drive/Sherblog/content/vertices/valdejimeno.md" "~/Google_Drive/Sherblog/content/vertices/pino.md" "~/" "~/Google_Drive/Sherblog/content/vertices/" "~/Google_Drive/SherloScripts/emacs/.emacs.d/snippets/markdown-mode/hugolink" "~/Google_Drive/SherloScripts/emacs/.emacs.d/snippets/markdown-mode/+new-snippet+" "~/Google_Drive/Sherblog/content/vertices/el_castellano.md" "~/"))
+(setq file-name-history '("~" "~/Google_Drive/Sherblog/content/vertices/laguna.md" "~/Google_Drive/Sherblog/content/vertices/berninches.md" "~/Google_Drive/Sherblog/content/vertices/varillo_de_belchite.md" "~/Google_Drive/Sherblog/content/vertices/pilonas.md" "~/Google_Drive/Sherblog/content/vertices/" "~/" "~/Google_Drive/" "~/Google_Drive/Sherblog/content/vertices/puig_aguila.md" "~/Google_Drive/Sherblog/content/vertices/pedregosa.md" "~/" "/pi@192.168.191:sherblog" "/pi@192.168.191.203:sherblog" "/pi@192.168.191.203" "~/Google_Drive/Sherblog/content/vertices/salinas.md" "~/Google_Drive/Sherblog/content/vertices/corona_del_fraile.md" "~/Google_Drive/Sherblog/content/vertices/valdejimeno.md" "~/Google_Drive/Sherblog/content/vertices/pino.md" "~/" "~/Google_Drive/Sherblog/content/vertices/" "~/Google_Drive/SherloScripts/emacs/.emacs.d/snippets/markdown-mode/hugolink" "~/Google_Drive/SherloScripts/emacs/.emacs.d/snippets/markdown-mode/+new-snippet+" "~/Google_Drive/Sherblog/content/vertices/el_castellano.md" "~/"))
 
 ;; Buffer section -- buffers listed in same order as in buffer list:
 (desktop-create-buffer 208
-  "/home/sherlockes/Google_Drive/SherloScripts/bash/publish.sh"
-  "publish.sh"
-  'sh-mode
-  '(visual-line-mode yas-minor-mode)
-  2420
-  '(1595 nil)
   nil
-  nil
-  '((buffer-file-coding-system . utf-8-unix) (truncate-lines))
-  '((mark-ring (1662 1595 2268 1287 969 922 922 922 2428 922 1595 741 791 1594 788 742))))
-
-(desktop-create-buffer 208
-  "/home/sherlockes/Google_Drive/Sherblog/content/vertices/berninches.md"
-  "berninches.md"
-  'markdown-mode
-  '(visual-line-mode yas-minor-mode)
-  786
-  '(nil nil)
-  nil
-  nil
-  '((tab-width . 4) (buffer-file-coding-system . utf-8-unix) (truncate-lines))
-  '((mark-ring nil)))
-
-(desktop-create-buffer 208
-  nil
-  "vertices"
+  "raspberry"
   'dired-mode
   '(visual-line-mode yas-minor-mode)
-  247
+  909
   '(nil nil)
   t
-  '("/home/sherlockes/Google_Drive/Sherblog/content/vertices/")
-  '((truncate-lines))
+  '("/home/sherlockes/Google_Drive/Sherblog/content/post/computing/raspberry/")
+  '((buffer-display-time 24403 52549 359119 627000) (truncate-lines))
   '((mark-ring nil)))
 
