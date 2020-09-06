@@ -157,6 +157,8 @@ Borrar el archivo "~/.config/inkscape/preferences.xml"
 - Guardar escritorio en directorio - ImprPant
 - Guardar Area en directorio - Mays+ImprPant
 - Guardar ventana en directorio - Alt+ImprPant.
+*** nmap
+**** MAC a partir de IP -> sudo nmap -sP -n 192.168.1.200
 ** Linux Mint
 *** Cambio entre áreas de trabajo -> Ctrl+Alt+⬆️
 *** Cambio entre aplicaciones utilizando el efecto de exposición -> Ctrl+Alt+⬇️
