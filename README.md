@@ -12,6 +12,15 @@ En este archivo en formato org-mode voy escribiendo lo que día a día aprendo y
 * Python
 * Y lo que vaya utilizando...
 
+## [Post.sh](https://github.com/sherlockes/SherloScripts/blob/master/hugo/shortcodes/post.sh)(bash) ##
+Con este script doy de más funcionalidad a [Publish.sh](https://github.com/sherlockes/SherloScripts/blob/master/bash/publish.sh) para que los Post en Hugo sean automáticamente formateados con la correspondiente cabecera haciendo uso de varias funciones de Bash. Está obsoleto por haber introducido las funciones dentro del archivo "Publish.sh"
+* Cálculo de líneas con `wc`
+* Extracción de la 1ª linea con `head`
+* Extracción de la segunda línea con `sed`
+* Extracción de las últimas líneas con `tail`
+* Separación de líneas en compos con `cut`
+* Cálculo del tiemo desde la última modificación con `date`
+* Buscar arcivos sin cabecera con `grep`
 
 ## [lista_vertices.html](https://github.com/sherlockes/SherloScripts/blob/master/hugo/shortcodes/lista_vertices.html) (Hugo Shortcodes)##
 Gracias a este [Shortcode](https://gohugo.io/content-management/shortcodes/) que utilizo en mi blog desarrollado en [Hugo](https://gohugo.io/) consigo de una forma sencilla incluir una lista con todos los enlaces a las distintas páginas de una determinada categoría. En mi aso lo utilizo para listar todos los Vértices geodésicos que estan inluidos en la categoría "vertices". Su uso es tan sencillo como copiarlo dentro de la carpeta "layouts/shortcodes/" y llamarlo desde donde queramos incluri la lista con "{{< lista_vertices >}}". Hace uso de:
