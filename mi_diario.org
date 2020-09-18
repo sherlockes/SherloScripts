@@ -153,7 +153,7 @@ Borrar el archivo "~/.config/inkscape/preferences.xml"
 - Ctrl (Portapapeles) Alt (Ventana) Mays (area)
 - Escritorio al portapapeles - Ctrl+ImprPant
 - Area al portapapeles - Ctrl+Mays+ImprPant
-- Ventana al portapepeles - Ctrl+Alt+ImprPant
+- Ventana al portapapeles - Ctrl+Alt+ImprPant
 - Guardar escritorio en directorio - ImprPant
 - Guardar Area en directorio - Mays+ImprPant
 - Guardar ventana en directorio - Alt+ImprPant.
@@ -194,6 +194,15 @@ https://morioh.com/p/8a40c3345286
 ** MoodleBox
 *** Acceder a través de ssh -> [[https://moodlebox.net/en/help/command-line-connection/][Enlace]]
 *** Acceder desde internet -> [[https://moodlebox.net/en/help/access-from-internet/][Enlace]]
+** Atajos
+*** Navegador
+**** Mandar el foco a la barra de direcciones > C-l
+**** Mover a la pestaña anterior (Temporal) > C-Shift-Tab
+**** Mover a la pestaña posterior (Temporal) > C-Tab
+**** Mover a la pestaña anterior (Izquierda) > C-RePag
+**** Mover a la pestaña posterior (Derecha) > C-AvPag
+*** General
+**** Seleccionar todo > C-a
 * Temp
 ** Links
 https://www.linuxquestions.org/questions/blog/lumak-426618/having-fun-with-bash-varaibles-indirect-variable-references-2450/

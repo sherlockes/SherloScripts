@@ -40,7 +40,7 @@ add_header(){
     echo "title: \"$long_title\"" >> $file_name
     echo "date: \"$(date +%Y-%m-%d)\"" >> $file_name
     echo "creation: \"$(date +%Y-%m-%d)\"" >> $file_name
-    echo "descrption: \"$long_title\"" >> $file_name
+    echo "description: \"$long_title\"" >> $file_name
     echo "thumbnail: \"$(date +%Y%m%d)_"$short_title"_00.jpg\"" >> $file_name
     echo "disable_comments: true" >> $file_name
     echo "authorbox: false" >> $file_name
