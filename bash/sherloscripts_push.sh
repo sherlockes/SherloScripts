@@ -27,20 +27,18 @@ rclone sync -v Sherlockes_GD:/SherloScripts/hugo/ /home/pi/SherloScripts/hugo/
 rclone sync -v Sherlockes_GD:/SherloScripts/'google scripts'/ /home/pi/SherloScripts/'google scripts'/
 
 # ---------------------------------------------------------
-# Actualiza el repositorio SherloScripts de GitHub
+# Actualiza los repositorios de GitHub
 # ---------------------------------------------------------
-cd ~/SherloScripts
-git add --all
-git commit -m "Update"
-git push
+repo=(SherloScripts sherblog)
+for i in "${repo[@]}"
+do
+    echo "Actualizando el repositorio $i"
+    cd ~/$repo
 
-# ---------------------------------------------------------
-# Actualiza el repositorio Sherblog de GitHub
-# ---------------------------------------------------------
-cd ~/sherblog
-git add --all
-git commit -m "Update"
-git push
+    git add --all
+    git commit -m "Update"
+    git push
+done
 
 
 # --------------------------------------------------------------
