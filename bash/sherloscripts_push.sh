@@ -6,7 +6,7 @@
 #Description: Sube los cambios en Sherloscript al repositorio y 
 #             sincroniza nubes 
 #Args: N/A
-#Creation/Update: 20200521/20200926
+#Creation/Update: 20200521/20200927
 #Author: www.sherblog.pro                                                
 #Email: sherlockes@gmail.com                                           
 ###################################################################
