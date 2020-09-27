@@ -118,10 +118,10 @@ else
     /usr/local/bin/hugo
 
     # Sube los cambios generados en la web a GitHub
-    cd ~/sherblog/sherlockes.github.io
+    cd ~/sherlockes.github.io
     git add --all
     git commit -m "Update"
-    git push -u origin master
+    git push #-u origin master
 fi
 
 scan_posts

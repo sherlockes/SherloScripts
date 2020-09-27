@@ -6,10 +6,16 @@
 #Description: Sube los cambios en Sherloscript al repositorio y 
 #             sincroniza nubes 
 #Args: N/A
-#Creation/Update: 20200521/20200522
+#Creation/Update: 20200521/20200926
 #Author: www.sherblog.pro                                                
 #Email: sherlockes@gmail.com                                           
 ###################################################################
+
+# ---------------------------------------------------------
+# Actualiza hugo si es necesario
+# ---------------------------------------------------------
+./hugo.sh
+
 
 # ---------------------------------------------------------
 # Copia la carpeta de Google Drive a /home/pi/SherloScripts
