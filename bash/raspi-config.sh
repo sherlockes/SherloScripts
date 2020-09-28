@@ -2,7 +2,7 @@
 # -*- ENCODING: UTF-8 -*-
 
 ###################################################################
-# Script Name: raspi-confgi.sh
+# Script Name: raspi-config.sh
 # Description: Init Raspberry after OS install
 # Args: N/A
 # Creation/Update: 20181106/20200928
@@ -13,7 +13,7 @@
 
 # Change Pi password
 cfg_pass=false
-new_password="morta.ras.23"
+new_password="contraseña"
 # Firmware & Packages update
 cfg_update=false
 # Configure local network
@@ -36,9 +36,8 @@ cfg_rclone=true
 rclone_config_path=sherlockes@192.168.1.22:/home/sherlockes/.config/rclone/rclone.conf
 # Install Pivpn server
 cfg_pivpn=false
-
-#   - Installing pivpn server
-#	- Install Pi-Hole
+# Install Pi-Hole
+cfg_pihole=false
 
 
 # -------------------------------------------------------
@@ -188,11 +187,13 @@ if [ "$cfg_pivpn" = true ]; then
     curl -L https://install.pivpn.io | bash
 fi
 
-### Installing Pi-hole Web interface http://ip/admin
-#curl -sSL https://install.pi-hole.net | bash
-#sudo echo -e "$password1\n$password1" | pihole -a -p
-
-
+# ---------------------------------------------------------
+# Installing Pi-hole
+# ---------------------------------------------------------
+if [ "$cfg_pivpn" = true ]; then
+    # Web interface http://ip/admin
+    curl -sSL https://install.pi-hole.net | bash
+fi
 
 
 ### Raspberry Reboot
