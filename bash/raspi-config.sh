@@ -1,15 +1,19 @@
 #!/bin/bash
 # -*- ENCODING: UTF-8 -*-
 
-# Raspberry custom init config script
-# Updated on 20200926
-# Created on 20181106
-# Developed by Sherlockes
-# www.sherblog.pro/files/raspiconfig.sh
-# Description & config parameters
+###################################################################
+# Script Name: raspi-confgi.sh
+# Description: Init Raspberry after OS install
+# Args: N/A
+# Creation/Update: 20181106/20200928
+# Author: www.sherblog.pro
+# Email: sherlockes@gmail.com
+# Location: github.com/sherlockes/SherloScripts/blob/master/bash/
+###################################################################
+
 # Change Pi password
 cfg_pass=false
-new_password="tu_contraseña"
+new_password="morta.ras.23"
 # Firmware & Packages update
 cfg_update=false
 # Configure local network
@@ -22,41 +26,41 @@ cfg_timezone=false
 cfg_git=false
 cfg_git_email='sherlockes@yahoo.es'
 cfg_git_name='sherlockes'
-# Clone & configure SherloScripts repo
-cfg_sherloscripts=false
-cfg_sherloscripts_url='git+ssh://git@github.com/sherlockes/SherloScripts.git'
-# Clone & configure Sherblog repo
-cfg_sherblog=true
-cfg_sherblog_url='git+ssh://git@github.com/sherlockes/sherlockes.github.io.git'
+cfg_git_repos_names=('SherloScripts' 'sherlockes.github.io' 'sherblog')
+# Configure Crontabs Jobs
+cfg_cron=true
 # Install Hugo
 cfg_hugo=false
 # Install Rclone
-cfg_rclone=false
-rclone_config_host=sherlockes@192.168.1.22
+cfg_rclone=true
 rclone_config_path=sherlockes@192.168.1.22:/home/sherlockes/.config/rclone/rclone.conf
-# Schedule daily restart
-cfg_restart=false
+# Install Pivpn server
+cfg_pivpn=false
+
 #   - Installing pivpn server
 #	- Install Pi-Hole
 
 
-
-# Modificamos el password para el usuario pi
+# -------------------------------------------------------
+# Change user Pi Password
+# -------------------------------------------------------
 if [ "$cfg_pass" = true ]; then
     echo "Cambiando la contraseña del usuario Pi..."
-    #sudo echo -e "raspberry\n$new_password\n$new_password" | passwd pi
+    sudo echo -e "raspberry\n$new_password\n$new_password" | passwd pi
 fi
 
-### Actualización del sistema
+# -------------------------------------------------------
+# Updating system
+# -------------------------------------------------------
 if [ "$cfg_update" = true ]; then
     echo "Actualizando el sistema..."
-    #sudo apt-get update
-    #sudo apt-get upgrade -y
-    #sudo apt-get install rpi-update
-    #sudo rpi-update
+    sudo apt-get update
+    sudo apt-get upgrade -y
 fi
 
-### Network Config
+# -------------------------------------------------------
+# Network Config
+# -------------------------------------------------------
 if [ "$cfg_network" = true ]; then
     echo "Configurando la conexión de red..."
     sudo echo "interface eth0" >> /etc/dhcpcd.conf
@@ -65,7 +69,9 @@ if [ "$cfg_network" = true ]; then
     sudo echo "static domain_name_servers=$gateway 8.8.8.8" >> /etc/dhcpcd.conf
 fi
 
-### Change Timezone & Locale
+# -------------------------------------------------------
+# Change Timezone & Locale
+# -------------------------------------------------------
 if [ "$cfg_timezone" = true ]; then
     echo "Configurando la zona horaria..."
     #sudo dpkg-reconfigure tzdata
@@ -77,71 +83,69 @@ if [ "$cfg_timezone" = true ]; then
     sudo update-locale
 fi
 
-### Installing Git & GitHub
+# ---------------------------------------------------------
+# Installing Git & GitHub Repos (also Public key)
+# ---------------------------------------------------------
 if [ "$cfg_git" = true ]; then
-    echo "Instalando Git..."
+    echo "Installing Git..."
     sudo apt-get install git -y
     sudo apt-get install jq -y
 
     git config --global user.email $cfg_git_email
     git config --global user.name $cfg_git_name
 
-    echo 'Generando la llava publico-privada...'
+    echo 'Generando la llave publico-privada...'
     ssh-keygen -t rsa -b 4096 -C $cfg_git_email
     eval "$(ssh-agent -s)"
     ssh-add ~/.ssh/id_rsa
 
-    # copiar la llave pública
+    # Copy Public key to GitHub.com
     clear
     cat ~/.ssh/id_rsa.pub
     read -p "Ves a https://github.com/settings/keys y copia la llave de arriba. Pulsa una tecla pra continuar"
 
+    # Clone & configure Github repos
+    for i in "${cfg_git_repos_names[@]}"
+    do
+        echo "Instalando el repositorio $i"
+        cd ~    
+        url="git+ssh://git@github.com/$cfg_git_name/$i.git"
+        git clone $url
+        cd ~/$i
+        git init
+
+    done
 fi
 
-### Clone SherloScripts repo
-if [ "$cfg_sherloscripts" = true ]; then
-    repo=$(echo $cfg_sherloscripts_url | rev | cut -d'/' -f 1 | cut -c 5- | rev)
-    echo "Instalando el repositorio $repo"
-    git clone $cfg_sherloscripts_url
-    cd ~/$repo
-    git init
-
-    # Inicializa el repositorio
-    git add --all
-    git commit -m "Inicializando..."
-    git push
-
-    # Programando la actualización diaria
-    echo "@daily /SherloScripts/bash/sherloscripts_push.sh" | cat > cron
-    sudo crontab -u pi cron
-    rm cron
-
+# ---------------------------------------------------------
+# Configuring Crontab Jobs
+# ---------------------------------------------------------
+if [ "$cfg_cron" = true ]; then
     # Haciendo ejecutables los archivos de la carpeta bash
     cd ~/SherloScripts/bash
     sudo chmod +x *.sh
-fi
 
-### Clone Sherblog repo
-if [ "$cfg_sherblog" = true ]; then
-    repo=$(echo $cfg_sherblog_url | rev | cut -d'/' -f 1 | cut -c 5- | rev)
-    echo "Instalando el repositorio $repo"
-    git clone $cfg_sherblog_url
-    cd ~/$repo
-    git init
-
-    # Inicializa el repositorio
-    git add --all
-    git commit -m "Inicializando..."
-    git push
-
-    # Programando la actualización horaria
-    echo "@hourly /SherloScripts/bash/publish.sh" | cat > cron
+    # Programando la actualización diaria
+    echo "@daily ~/SherloScripts/bash/sherloscripts_push.sh" | cat > cron
+    echo "@daily ~/SherloScripts/bash/radares.sh" | cat >> cron
+    echo "@daily ~/SherloScripts/bash/hugo.sh" | cat >> cron
+    echo "@hourly ~/SherloScripts/bash/publish.sh" | cat >> cron
     sudo crontab -u pi cron
+    rm cron
+
+    echo "00 04 * * * /sbin/reboot" | cat > cron
+    sudo crontab cron
+    rm cron
+    
+    # Daily reboot al 4:00 AM
+    echo "00 04 * * * /sbin/reboot" | cat > cron
+    sudo crontab cron
     rm cron
 fi
 
-
-### Installing latest version of Hugo
+# ---------------------------------------------------------
+# Installing latest version of Hugo
+# ---------------------------------------------------------
 if [ "$cfg_hugo" = true ]; then
     echo "Instalando Hugo..."
     curl -s https://api.github.com/repos/gohugoio/hugo/releases/latest \
@@ -154,8 +158,9 @@ if [ "$cfg_hugo" = true ]; then
     rm $installer
 fi
 
-
-### Installing Rclone
+# ---------------------------------------------------------
+# Installing Rclone
+# ---------------------------------------------------------
 if [ "$cfg_rclone" = true ]; then
     echo "Instalando Rclone..."
     curl -s https://api.github.com/repositories/17803236/releases/latest \
@@ -164,30 +169,24 @@ if [ "$cfg_rclone" = true ]; then
 	| tr -d \" \
 	| wget -qi -
 	installer="$(find . -name "*linux-arm.deb")"
-	#sudo dpkg -i $installer
+	sudo dpkg -i $installer
 	rm $installer
     
     # Copia el archivo de configuración si hay un path
     if [ -z "$rclone_config_path" ]; then 
         echo "No se ha especificado la ruta de configuración"
-    else 
-        ssh $rclone_config_host        
+    else       
         scp $rclone_config_path /home/pi/.config/rclone/rclone.conf
     fi
 fi
 
-### Schedule Raspberry reboot at 4 A.M.
-if [ "$cfg_restart" = true ]; then
-    echo "00 04 * * * /sbin/reboot" | cat > cron
-    sudo crontab cron
-    rm cron
+# ---------------------------------------------------------
+# Installing vpn server
+# ---------------------------------------------------------
+if [ "$cfg_pivpn" = true ]; then
+    # Para WireGuard abrir el puerto 51820 udp
+    curl -L https://install.pivpn.io | bash
 fi
-
-
-
-
-### Installing vpn server
-#curl -L https://install.pivpn.io | bash
 
 ### Installing Pi-hole Web interface http://ip/admin
 #curl -sSL https://install.pi-hole.net | bash
