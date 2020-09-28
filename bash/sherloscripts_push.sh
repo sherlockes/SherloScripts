@@ -33,7 +33,7 @@ repo=(SherloScripts sherblog)
 for i in "${repo[@]}"
 do
     echo "Actualizando el repositorio $i"
-    cd ~/$repo
+    cd ~/$i
 
     git add --all
     git commit -m "Update"
