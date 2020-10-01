@@ -1,0 +1,5 @@
+(setq user-init-file "/home/sherlockes/Google_Drive/SherloScripts/emacs/.emacs")
+(setq user-emacs-directory "/home/sherlockes/Google_Drive/SherloScripts/emacs/.emacs.d/")
+(setq default-directory "/home/sherlockes")
+(setenv "HOME" "/home/sherlockes")
+(load user-init-file)
