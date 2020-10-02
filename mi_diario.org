@@ -144,6 +144,7 @@ make clean
 Aquí iremos añadiendo el contenido con el que queremos actualizar la entrada...
 {{< / borrador >}}
 #+END_SRC
+*** Insertar tag "more" -> <!--more-->
 ** Inkscape
 *** Resetear las preferencias
 Borrar el archivo "~/.config/inkscape/preferences.xml"
