@@ -29,12 +29,11 @@
  '(menu-bar-mode nil)
  '(package-selected-packages
    (quote
-    (dired+ ## markdown-mode htmlize gnu-elpa-keyring-update elpy ace-window)))
+    (dired-sort-menu dired+ ## markdown-mode htmlize gnu-elpa-keyring-update elpy ace-window)))
  '(safe-local-variable-values (quote ((ENCODING . UTF-8) (encoding . utf-8))))
  '(tool-bar-mode nil)
  '(tooltip-mode nil)
- '(yas-global-mode 1)
-)
+ '(yas-global-mode 1))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
