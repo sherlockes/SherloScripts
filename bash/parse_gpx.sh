@@ -24,7 +24,7 @@ rm $vertices_gpx
 echo "$cabecera" >> $vertices_gpx
 
 # Cambia al directorio en el que están los archivos con los vértices
-cd ./content/vertices/
+cd ~/sherblog/content/vertices/
 
 # Busca en todos los archivos *.md del directorio
 for I in `ls *.md`

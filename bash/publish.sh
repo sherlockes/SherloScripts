@@ -10,7 +10,7 @@
 #	- Genera la web estática
 #	- Sube la web a GitHub
 # Args: N/A
-# Creation/Update: 20180901/20200921
+# Creation/Update: 20180901/20201007
 # Author: www.sherblog.pro                                                
 # Email: sherlockes@gmail.com                                           
 ############################################################################
@@ -20,29 +20,35 @@ dir_post=~/sherblog/content/post
 mins_mod=15
 
 add_header(){ 
+    # Calculo de lineas del archivo y líneas de contenido
     lines_total=$(wc -l $1 | awk '{print $1}')
     lines_content=$(expr $lines_total - 2)
     echo $1 tiene $lines_total líneas con un contenido de $lines_content líneas.
     echo Colocando la cabecera a $1
+
     # Asigna la primera línea a "short_title", elimina los espacios y los convierte en guión bajo.
     short_title=$(head -n 1 $1 | sed 's/ /_/g') 
-    # Elimina los espacios y los convierte en guión bajo
-    #short_title="$(echo $short_title | sed 's/ /_/g')"
-
     echo El título será: $short_title
-    long_title=$(sed '2q;d' $1) # Asigna la segunda línea a "long_title"
+
+    # Asigna la segunda línea a "long_title"
+    long_title=$(sed '2q;d' $1)
     echo El título largo será: $long_title
+
+    # Asigna el resto a todo el contenido y divide en resumen y contenido
     all_content=$(tail -$lines_content $1)
     summary=$(echo $all_content| cut -d'.' -f 1)"."
     echo El resumen será: $summary
     content=$(echo $all_content| cut -d'.' -f2-)
     echo El contenido será: $content
 
+    # Establece el nombre para el nuevo archivo
     file_name="$(date +%Y%m%d)_$short_title.md"
-    thumbnail="images/$(date +%Y%m%d)_$short_title_00.jpg"
-    echo $thumbnail
     echo El nombre del archivo será: $file_name
 
+    #thumbnail="images/$(date +%Y%m%d)_$short_title_00.jpg"
+    #echo $thumbnail
+
+    # Creación del archivo definitivo
     echo "---" >> $file_name
     echo "title: \"$long_title\"" >> $file_name
     echo "date: \"$(date +%Y-%m-%d)\"" >> $file_name
@@ -63,7 +69,7 @@ add_header(){
     echo $summary >> $file_name
     echo "<!--more-->" >> $file_name
     echo $content >> $file_name
-    echo "[Image_01]: /images/$(date +%Y%m%d)_"$short_title"_01.jpg"
+    echo "[Image_01]: /images/$(date +%Y%m%d)_"$short_title"_01.jpg" >> $file_name
 }
 
 min_time(){
@@ -94,7 +100,7 @@ scan_posts(){
         if min_time "$fname"
         then
 	    add_header "$fname"
-        rm $fname
+            rm $fname
         else
 	    echo No ha pasado el tiempo suficiente para "$fname"
         fi
