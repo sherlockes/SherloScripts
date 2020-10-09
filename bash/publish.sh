@@ -10,7 +10,7 @@
 #	- Genera la web estática
 #	- Sube la web a GitHub
 # Args: N/A
-# Creation/Update: 20180901/20201007
+# Creation/Update: 20180901/20201009
 # Author: www.sherblog.pro                                                
 # Email: sherlockes@gmail.com                                           
 ############################################################################
@@ -57,7 +57,7 @@ add_header(){
     echo "thumbnail: \"/images/$(date +%Y%m%d)_"$short_title"_00.jpg\"" >> $file_name
     echo "disable_comments: true" >> $file_name
     echo "authorbox: false" >> $file_name
-    echo "toc: true" >> $file_name
+    echo "toc: false" >> $file_name
     echo "mathjax: false" >> $file_name
     echo "categories:" >> $file_name
     echo "  - \"uncategorized\"" >> $file_name
@@ -119,8 +119,8 @@ else
     rclone sync -v Sherlockes_GD:/Sherblog/layouts/ /home/pi/sherblog/layouts/
 
     # Parsea los vertices para generar un gpx y genera la web estática en Hugo
-    cd ~/sherblog
-    ./parse_gpx.sh
+    cd ~
+    /SherloScripts/bash/parse_gpx.sh
     /usr/local/bin/hugo
 
     # Sube los cambios generados en la web a GitHub
