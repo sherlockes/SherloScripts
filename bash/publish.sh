@@ -115,13 +115,28 @@ else
 
     # Sincroniza el contenido de la nube de Google Drive con las carpetas locales
     rclone sync -v Sherlockes_GD:/Sherblog/content/ /home/pi/sherblog/content/
+    echo $?
     rclone sync -v Sherlockes_GD:/Sherblog/static/ /home/pi/sherblog/static/
+    echo $?
     rclone sync -v Sherlockes_GD:/Sherblog/layouts/ /home/pi/sherblog/layouts/
+    echo $?
 
     # Parsea los vertices para generar un gpx y genera la web estática en Hugo
-    cd ~
-    /SherloScripts/bash/parse_gpx.sh
+    ~/SherloScripts/bash/parse_gpx.sh
+    if [ $? -eq 0 ]; then
+       echo "El archivo gpx generado corrctamente"
+    else
+       echo "Ha habido un fallo en la generación del archivo gpx"
+    fi
+
+    cd ~/sherblog
     /usr/local/bin/hugo
+
+    if [ $? -eq 0 ]; then
+       echo "La web se ha generado corrctamente"
+    else
+       echo "Ha habido un fallo en la generación de la web"
+    fi
 
     # Sube los cambios generados en la web a GitHub
     cd ~/sherlockes.github.io
