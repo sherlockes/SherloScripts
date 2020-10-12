@@ -1,8 +1,8 @@
 #!/bin/bash
 from time import sleep
 
-TOKEN="931043591:AAGzY_sw2Ucadmqn0nfKQPDYzc5mQEAOqvA"
-CHAT_ID="-1001306695790"
+TOKEN="931043591:AAGzY_sw45cadmqn0nhGSPDYzc5mQEAOqvA"
+CHAT_ID="-1001306537890"
 MESSAGE="Hello World"
 URL="https://api.telegram.org/bot$TOKEN/sendMessage"
 
