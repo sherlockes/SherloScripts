@@ -10,7 +10,7 @@
 #	- Genera la web estática
 #	- Sube la web a GitHub
 # Args: N/A
-# Creation/Update: 20180901/20201009
+# Creation/Update: 20180901/20201015
 # Author: www.sherblog.pro                                                
 # Email: sherlockes@gmail.com                                           
 ############################################################################
@@ -18,6 +18,7 @@
 
 dir_post=~/sherblog/content/post
 mins_mod=15
+notificacion=~/SherloScripts/bash/telegram.sh
 
 add_header(){ 
     # Calculo de lineas del archivo y líneas de contenido
@@ -112,6 +113,7 @@ if rclone check --one-way Sherlockes_GD:/Sherblog/content/ /home/pi/sherblog/con
     echo No hay cambios que actualizar...
 else
     echo Actualizando los cambios...
+    $notificacion "Actualizando los archivos de la web"
 
     # Sincroniza el contenido de la nube de Google Drive con las carpetas locales
     rclone sync -v Sherlockes_GD:/Sherblog/content/ /home/pi/sherblog/content/
@@ -124,18 +126,22 @@ else
     # Parsea los vertices para generar un gpx y genera la web estática en Hugo
     ~/SherloScripts/bash/parse_gpx.sh
     if [ $? -eq 0 ]; then
-       echo "El archivo gpx generado corrctamente"
+	echo "El archivo gpx generado corrctamente"
+	~/SherloScripts/bash/telegram.sh "El archivo gpx generado corrctamente"
     else
-       echo "Ha habido un fallo en la generación del archivo gpx"
+	echo "Ha habido un fallo en la generación del archivo gpx"
+	~/SherloScripts/bash/telegram.sh "Ha habido un fallo en la generación del archivo gpx"
     fi
 
     cd ~/sherblog
     /usr/local/bin/hugo
 
     if [ $? -eq 0 ]; then
-       echo "La web se ha generado corrctamente"
+	echo "La web se ha generado correctamente"
+	~/SherloScripts/bash/telegram.sh "La web se ha generado correctamente"
     else
-       echo "Ha habido un fallo en la generación de la web"
+	echo "Ha habido un fallo en la generación de la web"
+	~/SherloScripts/bash/telegram.sh "Ha habido un fallo en la generación de la web"
     fi
 
     # Sube los cambios generados en la web a GitHub
