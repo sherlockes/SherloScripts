@@ -33,6 +33,7 @@
  '(safe-local-variable-values (quote ((ENCODING . UTF-8) (encoding . utf-8))))
  '(tool-bar-mode nil)
  '(tooltip-mode nil)
+ '(tramp-default-method "ssh")
  '(yas-global-mode 1))
 
 (custom-set-faces
