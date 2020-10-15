@@ -1,33 +1,28 @@
-;; -*- emacs-lisp -*- <20/07/30 23:34:21 /home/sherlockes/Google_Drive/SherloScripts/emacs/.emacs.d/tramp>
+;; -*- emacs-lisp -*- <20/10/15 15:04:42 /home/sherlockes/Google_Drive/SherloScripts/emacs/.emacs.d/tramp>
 ;; Tramp connection history.  Don't change this file.
 ;; You can delete it, forcing Tramp to reapply the checks.
 
-((["scp" "pi" "192.168.1.203" nil nil]
-  ("uname" "Linux 4.19.97-v7+")
-  ("locale" "LC_ALL=C")
+(((tramp-file-name "ssh" "pi" nil "192.168.1.203" nil nil nil)
+  ("uname" "Linux 5.4.51-v7+")
+  ("locale" "LC_ALL=C.UTF-8")
   ("test" "test")
   ("remote-path"
    ("/bin" "/usr/bin" "/sbin" "/usr/sbin" "/usr/local/bin" "/usr/local/sbin"))
   ("remote-shell" "/bin/sh")
-  ("~" "/home/pi")
   ("ls" "/bin/ls --color=never")
+  ("ls-quoting-style" t)
+  ("~" "/home/pi")
+  ("file-exists" "test -e")
+  ("stat" "env QUOTING_STYLE=locale \\stat")
+  ("id" "/usr/bin/id")
+  ("gid-string" "pi")
+  ("tmpdir" "/ssh:pi@192.168.1.203:/tmp")
+  ("uid-integer" 1000)
+  ("gid-integer" 1000)
+  ("readlink" "\\readlink")
+  ("case-insensitive" nil)
   ("ls-dired" t)
-  ("stat" nil)
   ("perl-file-spec" t)
   ("perl-cwd-realpath" t)
   ("perl" "\\perl")
-  ("id" "/usr/bin/id")
-  ("gid-integer" 1000)
-  ("file-exists" "test -e")
-  ("readlink" "\\readlink")
-  ("gid-string" "pi")
-  ("git" "\\git")
-  ("env-u-option" t)
-  ("uid-integer" 1000)
-  ("tmpdir" "/tmp")
-  ("touch-t" t)
-  ("touch" "\\touch"))
- (["scp" "pi" "192.168.191.203" nil nil]
-  nil)
- (["scp" "pi" "192.168.191" nil nil]
-  nil))
+  ("git" "\\git")))
