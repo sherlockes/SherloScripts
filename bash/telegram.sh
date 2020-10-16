@@ -20,16 +20,15 @@
 . ~/config.conf
 
 # Ajusta el mensaje al parámetro que se le ha pasado al script
-MESSAGE=$1
+MESSAGE="$1"
 
 # Si no hay parámetros se coge el mensaje por defecto del archivo de configuración.
 if [ $# -eq 0 ]; then
     MESSAGE=$Mensaje
 fi
 
-URL="https://api.telegram.org/bot$TOKEN/sendMessage"
+URL="https://api.telegram.org/bot$TOKEN/sendMessage?parse_mode=HTML"
 
 curl -s -X POST $URL -d chat_id=$CHAT_ID -d text="$MESSAGE"
 
-
-
+#curl --data chat_id="$CHAT_ID" --data-urlencode "text=${$1}" "https://api.telegram.org/bot$TOKEN/sendMessage?parse_mode=HTML"
