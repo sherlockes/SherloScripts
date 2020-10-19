@@ -10,7 +10,7 @@
 #	- Genera la web estática
 #	- Sube la web a GitHub
 # Args: N/A
-# Creation/Update: 20180901/20201016
+# Creation/Update: 20180901/20201019
 # Author: www.sherblog.pro                                                
 # Email: sherlockes@gmail.com                                           
 ############################################################################
@@ -128,25 +128,31 @@ else
     mensaje+=$'Actualizando los archivos de la web...\n'
 
     # Sincroniza el contenido de la nube de Google Drive con las carpetas locales
+
+    mensaje+='Sincronizando el directorio Content.....'
     rclone sync -v Sherlockes_GD:/Sherblog/content/ /home/pi/sherblog/content/
-    echo $?
+    comprobar $?
+
+    mensaje+='Sincronizando el directorio Static.....'
     rclone sync -v Sherlockes_GD:/Sherblog/static/ /home/pi/sherblog/static/
-    echo $?
+    comprobar $?
+
+    mensaje+='Sincronizando el directorio Layouts....'
     rclone sync -v Sherlockes_GD:/Sherblog/layouts/ /home/pi/sherblog/layouts/
-    echo $?
+    comprobar $?
 
     # Parsea los vertices para generar un gpx y genera la web estática en Hugo
-    mensaje+='Generación del archivo GPX........................'
+    mensaje+='Generación del archivo GPX.....................'
     ~/SherloScripts/bash/parse_gpx.sh
     comprobar $?
 
-    mensaje+='Publicación de la web en Hugo....................'
+    mensaje+='Publicación de la web en Hugo................'
     cd ~/sherblog
     /usr/local/bin/hugo
     comprobar $?
 
     # Sube los cambios generados en la web a GitHub
-    mensaje+='Actualización de la web en Github.com.........'
+    mensaje+='Actualización de la web en Github.com....'
     cd ~/sherlockes.github.io
     git add --all
     git commit -m "Update"
