@@ -144,8 +144,8 @@ make clean
 Aquí iremos añadiendo el contenido con el que queremos actualizar la entrada...
 {{< / borrador >}}
 #+END_SRC
-*** Insertar tag "more" -> <!--mor-->
-*** 
+*** Insertar tag "more" -> <!--more-->
+*** Insertar un video de youtube -> {{< youtube w7Ft2ymGmfc >}} 
 ** Inkscape
 *** Resetear las preferencias
 Borrar el archivo "~/.config/inkscape/preferences.xml"
