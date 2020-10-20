@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: youtube
+# key: youtube
+# --
+{{< youtube ${1:hU8Iok78UjH} >}}
