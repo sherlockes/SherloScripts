@@ -7,23 +7,34 @@
 # Email: sherlockes@gmail.com                                           
 ##################################################################
 import requests
+import time
 
-url_aeropuerto="http://www.aemet.es/es/eltiempo/observacion/ultimosdatos_9434_datos-horarios.csv?k=arn&l=9434&datos=det&w=0&f=temperatura&x=h24"
-url_zgz='http://www.aemet.es/es/eltiempo/observacion/ultimosdatos_9434P_datos-horarios.csv?k=arn&l=9434P&datos=det&w=0&f=temperatura&x='
+estaciones = [["Zaragoza","9434P"],["Aeropuerto","9434"],["Quinto","9510"],["Valmadrid","9501"]]
 
-myfile = requests.get(url_aeropuerto, allow_redirects=True)
+for i in estaciones:
 
-open('./datos.csv', 'wb').write(myfile.content)
+    url="http://www.aemet.es/es/eltiempo/observacion/ultimosdatos_"+i[1]+"_datos-horarios.csv?k=arn&l=9434&datos=det&w=0&f=temperatura&x=h24"
+    lectura = requests.get(url, allow_redirects=True)
+    print(lectura.url)
+    print(lectura.text)
 
-with open(r'./datos.csv',encoding="ISO-8859-1") as f:
-    data = f.readlines()[4]
+    """open('./datos'+i[0]+'.csv', 'wb').write(lectura.content)
+    del(lectura)
 
-data = data.replace('"', "")
-datos = data.split(",")
-dia=datos[0].split(" ")[0]
-hora = datos[0].split(" ")[1]
+    with open(r'./datos'+i[0]+'.csv',encoding="ISO-8859-1") as f:
+        data = f.readlines()[4]
 
-print(f"Los datos son del {dia} a las {hora}")
-print("Temperatura:",datos[1])
-print("Velocidad:",datos[2])
-print("Dirección:", datos[3])
+        data = data.replace('"', "")
+        datos = data.split(",")
+        dia=datos[0].split(" ")[0]
+        hora = datos[0].split(" ")[1]
+
+        
+
+        print(f"Los datos de {i[0]} del {dia} a las {hora}")
+        print("Temperatura:",datos[1])
+        print("Velocidad:",datos[2])
+        print("Dirección:", datos[3])
+
+    f.close()
+    #time.sleep(65)"""
