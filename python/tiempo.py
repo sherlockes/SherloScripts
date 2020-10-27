@@ -9,32 +9,50 @@
 import requests
 import time
 
-estaciones = [["Zaragoza","9434P"],["Aeropuerto","9434"],["Quinto","9510"],["Valmadrid","9501"]]
 
-for i in estaciones:
+from urllib.request import urlopen
+from xml.etree.ElementTree import parse
 
-    url="http://www.aemet.es/es/eltiempo/observacion/ultimosdatos_"+i[1]+"_datos-horarios.csv?k=arn&l=9434&datos=det&w=0&f=temperatura&x=h24"
-    lectura = requests.get(url, allow_redirects=True)
-    print(lectura.url)
-    print(lectura.text)
+estaciones = [["Zaragoza","9434P"],["Aeropuerto","9434"],["Quinto","9510X"],["Valmadrid","9501X"]]
 
-    """open('./datos'+i[0]+'.csv', 'wb').write(lectura.content)
-    del(lectura)
+for est in estaciones:
+    # Creación de la url a partir de la identificación de la estación
+    url="http://www.aemet.es/es/eltiempo/observacion/ultimosdatos_"+est[1]+"_datos-horarios.csv?k=arn&l="+est[1]+"&datos=det&w=0&f=temperatura&x=h24"
+    
+    # Llamada a url - convertir a texto - eliminar las " - dividir horas por líneas
+    datos = requests.get(url, allow_redirects=True).text.replace('"', "").splitlines()
+    
+    ubicacion=datos[0]
 
-    with open(r'./datos'+i[0]+'.csv',encoding="ISO-8859-1") as f:
-        data = f.readlines()[4]
+    i=4
+    while i < 14:
+        # Extracción de datos pra la ultima hora
+        valores=datos[i].split(",")
+        dia=valores[0].split(" ")[0]
+        hora=valores[0].split(" ")[1]
+        temperatura=valores[1]
+        velocidad=valores[2]
+        direccion=valores[3]
 
-        data = data.replace('"', "")
-        datos = data.split(",")
-        dia=datos[0].split(" ")[0]
-        hora = datos[0].split(" ")[1]
+        # Si no hay datos para esta hora busca en la anterior
+        if temperatura == "":
+            i += 1
+        else:
+            break
 
-        
+    print(f"{dia} a las {hora} en {ubicacion}: Tª {temperatura}, Viento de {velocidad} m/s de dirección {direccion}")
 
-        print(f"Los datos de {i[0]} del {dia} a las {hora}")
-        print("Temperatura:",datos[1])
-        print("Velocidad:",datos[2])
-        print("Dirección:", datos[3])
+url2="http://www.aemet.es/xml/municipios_h/localidad_h_50222.xml"
 
-    f.close()
-    #time.sleep(65)"""
+#datos2 = requests.get(url2, allow_redirects=True).text
+
+var_url = urlopen(url2)
+xmldoc = parse(var_url)
+
+for item in xmldoc.iterfind('prediccion'):
+    print(item)
+    title = item.findtext('dia')
+
+    print(title.values)
+
+
