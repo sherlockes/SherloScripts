@@ -118,6 +118,7 @@ for est in estaciones:
     bot_mensaje += "Viento > Actual " + str(velactual) + "m/s de " + dirviento[hora] + " - Media " + str(velmedia) + "m/s (" + str(velmin) + "-" + str(velmax) + ")\n"
     bot_mensaje += "----------------------------------------------------------------\n"
 
+
 #####################################################################
 ############            Enviando por telegram            ############
 #####################################################################

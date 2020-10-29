@@ -5,12 +5,26 @@ Una cajón desastre para mis scripts en bash, python, elisp...
 En este archivo en formato org-mode voy escribiendo lo que día a día aprendo y utilizo en cualquiera de las plataformas que empleo. Un cuaderno de bitácora que consultar cuando no me acuerdo de como en su día hice algo
 
 * emacs
+* Hugo
 * Org-Mode
 * Debian y Linux
 * Bash
 * Markdown
 * Python
 * Y lo que vaya utilizando...
+
+## [Tiempo.py](https://github.com/sherlockes/SherloScripts/blob/master/python/tiempo.py)(python)
+Mi primer Script en Python. Este realiza un pequeño resumen de las condiciones meteorológicas diarias extrayendo la información de la web de AEMET, no a través de su API sino que a través de su "*.csv" y "*.xml" públicos. Toca unos cuantos palos entre los que podemos encontar:
+
+* Manejo de listas (Creación, lectura, añadir elementos, trasposición, reemplazar valores...)
+* Manejo de fechas y horas
+* Elementos matemáticos. Conversión a entero y flotante, redondeo, máximos, minimos, medio
+* Uso de condicionales "IF" y bucles "FOR" y "WHILE"
+* Extracción de datos de un archivo "*.csv" externo
+* Extracción de información de un archivo "*.xml" ubicado en la red
+* Manejo de cadenas (Definir, añadir, reemplazar...)
+* Almacenamiento de variables en un archivo de configuración externo
+* Envío de mensajes de Telegram a través de un bot
 
 ## [Post.sh](https://github.com/sherlockes/SherloScripts/blob/master/hugo/shortcodes/post.sh)(bash) ##
 Con este script doy de más funcionalidad a [Publish.sh](https://github.com/sherlockes/SherloScripts/blob/master/bash/publish.sh) para que los Post en Hugo sean automáticamente formateados con la correspondiente cabecera haciendo uso de varias funciones de Bash. Está obsoleto por haber introducido las funciones dentro del archivo "Publish.sh"
