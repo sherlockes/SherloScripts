@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 ##################################################################
 # Script Name: tiempo.py
 # Description: Obsención del tiempo en zaragoza a través de AEMET
@@ -11,12 +12,16 @@ import time
 from datetime import date
 import datetime
 from statistics import mean
+from pathlib import Path
+import configparser
+
  
 from urllib.request import urlopen
 from xml.etree.ElementTree import parse
 
 estaciones = [["Zaragoza","9434P","50297"],["Aeropuerto","9434","50272"],["Quinto","9510X","50222"],["Valmadrid","9501X","50275"]]
-
+bot_mensaje="Resumen del tiempo de hoy\n"
+bot_mensaje += "----------------------------------------------------------------\n"
 
 for est in estaciones:
 
@@ -107,7 +112,26 @@ for est in estaciones:
     velmax=round(max(velviento))
     velmin=round(min(velviento))
 
-    print(f"{est[0]} - {hoy} a las {hora}")
-    print(f"Temperatura > Actual {tempactual}ºC - Media {tempmedia}ºC ({tempmin}-{tempmax})")
-    print(f"Viento > Actual {velactual}m/s de {dirviento[hora]} - Media {velmedia}m/s ({velmin}-{velmax})")
-    print("----------------------------------------------------------------")
+    
+    bot_mensaje += est[0] + " - " + hoy + " a las " + str(hora) + "\n"
+    bot_mensaje += "Temperatura > Actual " + str(tempactual) + "ºC - Media " + str(tempmedia) + "ºC (" + str(tempmin) + "-" + str(tempmax) + ")\n"
+    bot_mensaje += "Viento > Actual " + str(velactual) + "m/s de " + dirviento[hora] + " - Media " + str(velmedia) + "m/s (" + str(velmin) + "-" + str(velmax) + ")\n"
+    bot_mensaje += "----------------------------------------------------------------\n"
+
+#####################################################################
+############            Enviando por telegram            ############
+#####################################################################
+
+# Carga el archivo de configuración "config.ini" ubicado en el directorio de usuario
+config_file=str(Path.home())+"/config.ini"
+config = configparser.ConfigParser()
+config.read(config_file)
+bot_token = config['telegram']['token']
+bot_chatID = config['telegram']['chat_id']
+
+# Envia el mensaje de Telegram
+send_text = 'https://api.telegram.org/bot' + bot_token + '/sendMessage?chat_id=' + bot_chatID + '&parse_mode=Markdown&text=' + bot_mensaje
+
+response = requests.get(send_text)
+
+#print(response.json())
