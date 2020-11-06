@@ -2,12 +2,12 @@
 ;; --------------------------------------------------------------------------
 ;; Desktop File for Emacs
 ;; --------------------------------------------------------------------------
-;; Created Wed Nov  4 18:47:20 2020
+;; Created Fri Nov  6 13:00:49 2020
 ;; Desktop file format version 208
 ;; Emacs version 26.3
 
 ;; Global section:
-(setq desktop-saved-frameset [frameset 1 (24482 59688 456966 406000) (desktop . "208") "sherlockes@imedia" nil nil ((((minibuffer . t) (undecorated) (override-redirect) (font-backend xft x) (font . "-PfEd-DejaVu Sans Mono-normal-normal-normal-*-13-*-*-*-m-0-iso10646-1") (font-parameter . "Monospace 10") (border-width . 0) (internal-border-width . 0) (right-divider-width . 0) (bottom-divider-width . 0) (vertical-scroll-bars . right) (horizontal-scroll-bars) (foreground-color . "#eeeeec") (background-color . "#2e3436") (mouse-color . "black") (border-color . "black") (screen-gamma) (line-spacing) (left-fringe . 8) (right-fringe . 8) (no-special-glyphs) (scroll-bar-foreground) (scroll-bar-background) (menu-bar-lines . 0) (tool-bar-lines . 0) (title) (wait-for-wm . t) (tool-bar-position . top) (inhibit-double-buffering) (icon-type . t) (auto-raise) (auto-lower) (cursor-type . box) (scroll-bar-width . 16) (scroll-bar-height . 0) (alpha) (no-focus-on-map) (no-accept-focus) (fullscreen . maximized) (visibility . t) (skip-taskbar) (z-group) (display-type . color) (background-mode . dark) (cursor-color . "#fce94f") (sticky) (environment) (modeline . t) (unsplittable) (frameset--id . "3AB3-C3EE-0A56-0BA5") (frameset--mini t . t) (display . ":0") (icon-name) (explicit-name) (height . 58) (width . 206) (left . 0) (top . 0)) ((min-height . 4) (min-width . 10) (min-height-ignore . 2) (min-width-ignore . 6) (min-height-safe . 1) (min-width-safe . 2) (min-pixel-height . 68) (min-pixel-width . 80) (min-pixel-height-ignore . 34) (min-pixel-width-ignore . 48) (min-pixel-height-safe . 17) (min-pixel-width-safe . 16)) leaf (pixel-width . 1680) (pixel-height . 969) (total-width . 210) (total-height . 57) (normal-height . 1.0) (normal-width . 1.0) (buffer "tiempo.py" (selected . t) (hscroll . 0) (fringes 8 8 nil) (margins nil) (scroll-bars nil 2 t nil 0 t) (vscroll . 0) (dedicated) (point . 759) (start . 1))))])
+(setq desktop-saved-frameset [frameset 1 (24485 15089 531196 880000) (desktop . "208") "sherlockes@imedia" nil nil ((((minibuffer . t) (undecorated) (override-redirect) (font-backend xft x) (font . "-PfEd-DejaVu Sans Mono-normal-normal-normal-*-13-*-*-*-m-0-iso10646-1") (font-parameter . "Monospace 10") (border-width . 0) (internal-border-width . 0) (right-divider-width . 0) (bottom-divider-width . 0) (vertical-scroll-bars . right) (horizontal-scroll-bars) (foreground-color . "#eeeeec") (background-color . "#2e3436") (mouse-color . "black") (border-color . "black") (screen-gamma) (line-spacing) (left-fringe . 8) (right-fringe . 8) (no-special-glyphs) (scroll-bar-foreground) (scroll-bar-background) (menu-bar-lines . 0) (tool-bar-lines . 0) (title) (wait-for-wm . t) (tool-bar-position . top) (inhibit-double-buffering) (icon-type . t) (auto-raise) (auto-lower) (cursor-type . box) (scroll-bar-width . 16) (scroll-bar-height . 0) (alpha) (no-focus-on-map) (no-accept-focus) (fullscreen . maximized) (visibility . t) (skip-taskbar) (z-group) (display-type . color) (background-mode . dark) (cursor-color . "#fce94f") (sticky) (environment) (modeline . t) (unsplittable) (frameset--id . "3AB3-C3EE-0A56-0BA5") (frameset--mini t . t) (display . ":0") (icon-name) (explicit-name) (height . 58) (width . 206) (left . 0) (top . 0)) ((min-height . 4) (min-width . 10) (min-height-ignore . 2) (min-width-ignore . 6) (min-height-safe . 1) (min-width-safe . 2) (min-pixel-height . 68) (min-pixel-width . 80) (min-pixel-height-ignore . 34) (min-pixel-width-ignore . 48) (min-pixel-height-safe . 17) (min-pixel-width-safe . 16)) leaf (pixel-width . 1680) (pixel-height . 969) (total-width . 210) (total-height . 57) (normal-height . 1.0) (normal-width . 1.0) (buffer "tiempo.py" (selected . t) (hscroll . 0) (fringes 8 8 nil) (margins nil) (scroll-bars nil 2 t nil 0 t) (vscroll . 0) (dedicated) (point . 24) (start . 1))))])
 (setq desktop-missing-file-warning nil)
 (setq tags-file-name nil)
 (setq tags-table-list nil)
@@ -22,12 +22,12 @@
   "tiempo.py"
   'python-mode
   '(visual-line-mode eldoc-mode yas-minor-mode elpy-mode company-mode flymake-mode highlight-indentation-mode)
-  759
-  '(456 nil)
+  24
+  '(445 nil)
   nil
   nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 24482 59687 232664 509000) (buffer-file-coding-system . utf-8-unix) (truncate-lines))
-  '((mark-ring (166 108 107 83 1 1 438 1 83 83 107 166 166 196 92 749))))
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 24485 9484 741655 585000) (buffer-file-coding-system . utf-8-unix) (truncate-lines))
+  '((mark-ring (456 166 108 107 83 1 1 438 1 83 83 107 166 166 196 92))))
 
 (desktop-create-buffer 208
   nil
@@ -38,7 +38,7 @@
   '(nil nil)
   t
   '("/home/sherlockes/Google_Drive/SherloScripts/bash/")
-  '((buffer-display-time 24482 59070 110955 500000) (truncate-lines))
+  '((buffer-display-time 24485 8866 267823 715000) (truncate-lines))
   '((mark-ring nil)))
 
 (desktop-create-buffer 208
@@ -50,7 +50,7 @@
   '(nil nil)
   t
   '("/home/sherlockes/Descargas/")
-  '((buffer-display-time 24482 58846 247425 622000) (truncate-lines))
+  '((buffer-display-time 24485 8642 411719 595000) (truncate-lines))
   '((mark-ring nil)))
 
 (desktop-create-buffer 208
@@ -62,6 +62,6 @@
   '(1271 nil)
   nil
   nil
-  '((tab-width . 4) (buffer-display-time 24482 59687 193587 318000) (buffer-file-coding-system . utf-8-unix) (truncate-lines))
+  '((tab-width . 4) (buffer-display-time 24485 9484 739816 117000) (buffer-file-coding-system . utf-8-unix) (truncate-lines))
   '((mark-ring (1713 1152))))
 
