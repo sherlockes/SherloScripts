@@ -8,48 +8,61 @@
 # Author: www.sherblog.pro                                                
 # Email: sherlockes@gmail.com                                           
 ##################################################################
-import json
+import Adafruit_DHT as dht
+import gspread
+import requests
+import ast
 from datetime import datetime
 from datetime import timedelta
+from datetime import date
+import json
+import telegram
+import os
+import time
 
-archivo_config='config.json'
+class Aemet:
 
-""" config = {"consigna":21,"horas":[ "8:00", "10:00", "15:15",  "18:30", "22:30"], "temperaturas":[21.5,20.5,21.5,22,21]}
-
-
-
-with open(archivo_config, 'w') as f:
-    json.dump(config, f)
- """
-
-with open(archivo_config, 'r') as f:
-    config = json.load(f)
-
-#edit the data
-ahora = datetime.now()
-
-
-for i in config["horas"]:
-    hora = datetime.strptime(i, '%H:%M')
-    paso = ahora.replace( hour=hora.hour, minute=hora.minute, second=0 )
-    if paso > ahora:
-        break
-    hora = datetime.strptime(config["horas"][0], '%H:%M')
-    paso = ahora + timedelta(days=1)
-    paso = paso.replace( hour=hora.hour, minute=hora.minute, second=0)
-
-
-print((paso - ahora).seconds)
+    def __init__(self,estacion):
+        self.estacion = estacion
+        self.url = "http://www.aemet.es/es/eltiempo/observacion/ultimosdatos_" + str(self.estacion) + "_datos-horarios.csv?k=arn&l=" + str(self.estacion) + "&datos=det&w=0&f=temperatura&x=h24"
+        self.datos = requests.get(self.url, allow_redirects=True).text.replace('"', "").splitlines()
     
+    def temperatura(self):
+        # Ultima temperatura en la estación de la web de la AEMET
+        return float(self.datos[4].split(",")[1])
 
+class Sensor:
+    def __init__(self,sensor,pin):
+        self.sensor = sensor
+        self.pin = pin
 
+    def valores(self):
+        humidity, temperature = dht.read_retry(self.sensor,self.pin)
 
+        while humidity > 100:
+            time.sleep(5)
+            humidity, temperature = dht.read_retry(self.sensor,self.pin)
+        
+        return round(temperature,2), round(humidity,2)
 
+captura_aemet = Aemet("9434P")
+print(captura_aemet.temperatura())
 
-# Tiempo restante hasta el siguiente intervalo (en segundos)
-tiempo_restante = (paso - ahora).seconds
+class Gsheet:
+    def __init__(self,archivo):
+        self.con = gspread.service_account()
+        self.archivo = self.con.open(archivo)
+    
+    def leer_celda(self,hoja,celda):
+        self.hoja = self.archivo.worksheet(hoja)
+        return float(self.hoja.acell(celda).value.replace(",", "."))
 
-# write it back to the file
-with open(archivo_config, 'w') as f:
-    json.dump(config, f)
+datos = Gsheet("shermostat")
+print(datos.leer_celda("consigna","A1"))
 
+# Coje la consigna de Temperatura de Google sheets
+# del archivo "shermostat", la hoja "consigna" y la celda "A1"
+conexion = gspread.service_account()
+libro_gsheet = conexion.open("shermostat")
+hoja_consigna = libro_gsheet.worksheet("consigna")
+temp_consigna = float(hoja_consigna.acell('A1').value.replace(",", "."))
