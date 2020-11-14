@@ -4,7 +4,7 @@
 # Description: Termostato inteligente a partir de una sonda dh22
 #              Y de un relé sonoff integrado mediante google sheets
 # Args: N/A
-# Creation/Update: 20201104/20201113
+# Creation/Update: 20201104/20201114
 # Author: www.sherblog.pro                                                
 # Email: sherlockes@gmail.com                                           
 ##################################################################
@@ -20,8 +20,6 @@ import json
 import telegram
 import os
 import time
-
-
 
 ###################################################################################
 ##  Clase para capturar datos de la web de la AEMET a partir del nº de estación  ##
@@ -68,7 +66,11 @@ class Gsheet:
         self.hoja = self.archivo.worksheet(hoja)
         return float(self.hoja.acell(celda).value.replace(",", "."))
 
-    # Leer una ila entera
+    def escribir_celda(self,hoja,celda,valor):
+        self.hoja = self.archivo.worksheet(hoja)
+        self.hoja.update(celda, valor)
+
+    # Leer una fila entera
     def leer_fila(self,hoja,fila):
         self.hoja = self.archivo.worksheet(hoja)
         return self.hoja.row_values(2)
@@ -79,34 +81,28 @@ class Gsheet:
         self.hoja.append_row(datos)
         self.hoja.sort((1, 'des'), (2, 'des'), range='A2:AA106000')
 
+    # Calcula la Tº del cambio y los minutos restantes.
+    def programa(self):
+        print("Calculando el programa...")
+        horas = self.archivo.worksheet("config").row_values(2)
+        temperaturas = self.archivo.worksheet("config").row_values(3)
 
-####################################################################################
-####    Clase para calcular el tiempo restante hasta el siguiente programa    ####
-####################################################################################
-
-class Siguiente:
-    def __init__(self, archivo):
-        self.dirbase = os.path.dirname(__file__)
-        self.archivo = os.path.join(self.dirbase, archivo)
-        with open(self.archivo, 'r') as f:
-            self.config = json.load(f)
-
-    def calcular(self):
         ahora = datetime.now()
-
-        for i in self.config["horas"]:
-            self.temperatura = self.config["temperaturas"][self.config["horas"].index(i)]
+        for i in horas:
+            print(horas.index(i))
+            self.temp_cambio = temperaturas[horas.index(i)]
             hora = datetime.strptime(i, '%H:%M')
-            paso = ahora.replace( hour=hora.hour, minute=hora.minute, second=0 )
-            if paso > ahora:
+            hora = ahora.replace( hour=hora.hour, minute=hora.minute, second=0 )
+            if hora > ahora:
                 break
-            hora = datetime.strptime(self.config["horas"][0], '%H:%M')
-            paso = ahora + timedelta(days=1)
-            paso = paso.replace( hour=hora.hour, minute=hora.minute, second=0)
+            self.temp_cambio = temperaturas[0]
+            hora = datetime.strptime(horas[0], '%H:%M')
+            manana = ahora + timedelta(days=1)
+            hora = manana.replace( hour=hora.hour, minute=hora.minute, second=0)
 
-        self.minutos = round(((paso - ahora).seconds)/60)
-
-
+        self.minutos_cambio = round(((hora - ahora).seconds)/60)
+        print("Faltan " + str(self.minutos_cambio) + " minutos para cambiar de temperatura a " + str(self.temp_cambio) +"ºC.")
+        
 
 #####################################################
 ## Parámetros de configuración para el Sonoff Mini ##
@@ -197,16 +193,30 @@ def grabar_datos():
 ####    Programa Principal    ####
 ##################################
 
+inercia = 20
+
+# Coge la temperatura exterior de la web de la AEMET
 captura_aemet = Aemet("9434P")
+
+# Coge los datos de Tª y humedad del sensor de la Raspberry
 captura_sensor = Sensor(dht.DHT22,4)
 temp_real = captura_sensor.valores()[0]
 hum_real = captura_sensor.valores()[1]
+
+# Inicia la hoja de cálculo de google Sheets
 datos = Gsheet("shermostat")
+datos.programa()
 temp_consigna = datos.leer_celda("consigna","A1")
-sig_prog = Siguiente('config.json')
-sig_prog.calcular()
-print("Faltan " + str(sig_prog.minutos) + " minutos para cambiar de temperatura a " + str(sig_prog.temperatura) +"ºC.")
+
+
+if datos.minutos_cambio < inercia and temp_consigna != datos.temp_cambio:
+    temp_consigna = datos.temp_cambio
+    datos.escribir_celda("consigna","A1",datos.temp_cambio)
+    print("Se ha actualizado la temperatura.")
+    telegram.enviar("Se ha actualizado la temperatura")
+
 estado = calcular_estado_rele()
+
 grabar_datos()
 
 for i in range(1, 7):
