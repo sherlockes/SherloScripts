@@ -20,12 +20,14 @@ import json
 import telegram
 import os
 import time
+import json
 
 
 histeresis = 0.3
 inercia = 1200
 tiempoON = 0.0
 hora_on = datetime.now()
+
 
 ###################################################################################
 ##  Clase para capturar datos de la web de la AEMET a partir del nº de estación  ##
@@ -103,7 +105,7 @@ class Gsheet:
 
         ahora = datetime.now()
         for i in horas:
-            self.consigna_sig = temperaturas[horas.index(i)]
+            self.consigna_sig = float(temperaturas[horas.index(i)])
             hora = datetime.strptime(i, '%H:%M')
             hora = ahora.replace( hour=hora.hour, minute=hora.minute, second=0 )
             if hora > ahora:
@@ -155,23 +157,11 @@ def calcular_estado_rele():
         print("ATENCIÓN!!! El relé no está conectado a la red")
         telegram.enviar("ATENCIÓN!!! El relé de la calefacción no está conectado a la red.")
 
-    # Tª que va a ganar por la inercia de la calefacción
-    if tiempoON > inercia:
-        gan_temp = inercia * 0.03
-    elif tiempoON > inercia + 300:
-        gan_temp = inercia * 0.06
-    elif tiempoON > inercia + 600:
-        gan_temp = inercia * 0.09
-    else:
-        gan_temp = inercia * 0.01
-
-    if (temp_real + gan_temp) < temp_consigna - histeresis and rele_estado == "off":
+    if temp_real < (temp_consigna - histeresis) and rele_estado == "off":
         print("Se va a encerder el relé")
         consulta = requests.post(url, json = rele_on )
         if consulta.json()["error"] == 0:
             estado = "on"
-            hora_on = datetime.now()
-            tiempoON = 0
         else:
             estado = "ERROR en relé"
             telegram.enviar("No ha sido posible encender el rele de la calefacción")
@@ -185,12 +175,7 @@ def calcular_estado_rele():
             estado = "ERROR en relé"
             telegram.enviar("No ha sido posible apagar el rele de la calefacción")
     else:
-        if rele_estado == "on":
-            tiempoON = datetime.now()-hora_on
-
         estado = rele_estado
-
-
     
     return estado
 
@@ -216,7 +201,7 @@ def grabar_datos():
     if var_temp  < 0.1 and estado == temp_ant_estado:
         print("Nada ha cambiado (La humedad no cuenta...)")
     else:
-        datos.escribir_fila("datos",[tiempo,captura_aemet.temperatura(),temp_consigna,temp_real,hum_real,estado,var_temp_tiempo,tiempoON])
+        datos.escribir_fila("datos",[tiempo,captura_aemet.temperatura(),temp_consigna,temp_real,hum_real,estado,var_temp_tiempo])
         print("Se ha guardado el dato.")
 
     
@@ -224,40 +209,43 @@ def grabar_datos():
 ####    Programa Principal    ####
 ##################################
 
-time.sleep(30)
+# Abre el archivo "config.json" de configuración.
+with open('config.json', 'r') as archivo_json:
+    data=archivo_json.read()
+
+datos_json = json.loads(data)
+
+
+datos_json["consigna"] = 23
+datos_json["hora_temp_ext"] = datetime.now().strftime('%Y/%m/%d %H:%M:%S')
+
+# Excribir el archivo "config.json"
+with open("config.json", "w") as archivo_json:
+    json.dump(datos_json, archivo_json, indent = 4)
 
 # Coge la temperatura exterior de la web de la AEMET
 captura_aemet = Aemet("9434P")
+captura_aemet.temperatura()
 
 # Inicia el sensor de humedad y Tª de la Raspberry
 captura_sensor = Sensor(dht.DHT22,4)
+captura_sensor.valores()
 
+temp_real = captura_sensor.temperatura
+hum_real = captura_sensor.humedad
 
 # Inicia la hoja de cálculo de google Sheets
 datos = Gsheet("shermostat")
+datos.actualizar()
+datos.programa()
+temp_consigna = datos.leer_celda("consigna","A1")
 
-while True:
+if datos.minutos_cambio < inercia/60 and abs(datos.consigna_act - datos.consigna_sig) > 0:
+    datos.consigna_act = datos.consigna_sig
+    datos.escribir_celda("consigna","A1",datos.consigna_sig)
+    print("Se ha actualizado la temperatura.")
+    telegram.enviar(f"Se ha cambiado la Tª de {datos.consigna_act}ºC a {datos.consigna_sig}ºC")
 
-    captura_aemet.temperatura()
-    captura_sensor.valores()
-    temp_real = captura_sensor.temperatura
-    hum_real = captura_sensor.humedad
-    datos.actualizar()
-    datos.programa()
-    temp_consigna = datos.leer_celda("consigna","A1")
+estado = calcular_estado_rele()
 
-    if datos.minutos_cambio < inercia/60 and abs(datos.consigna_act - datos.consigna_sig) > 0:
-        datos.consigna_act = datos.consigna_sig
-        datos.escribir_celda("consigna","A1",datos.consigna_sig)
-        print("Se ha actualizado la temperatura.")
-        telegram.enviar(f"Se ha cambiado la Tª de {datos.consigna_act}ºC a {datos.consigna_sig}ºC")
-
-    estado = calcular_estado_rele()
-
-    grabar_datos()
-
-    if estado == "on":
-        time.sleep(30)
-    else:
-        time.sleep(300)
-    print("--------------------------------")
+grabar_datos()
