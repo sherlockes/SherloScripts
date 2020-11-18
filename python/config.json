@@ -1,5 +1,7 @@
 {
-    "aemet_hora": "2020/11/17 23:30:16",
-    "aemet_temp": 9.3,
-    "histeresis": 0.3
+    "aemet_hora": "2020/11/18 12:30:49",
+    "aemet_temp": 13.8,
+    "histeresis": 0.3,
+    "rele_hora_on": "",
+    "inercia": 1000
 }
