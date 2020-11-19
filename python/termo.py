@@ -21,6 +21,7 @@ import os
 import time
 import json
 
+print(f"Ejecutado a las {datetime.now().hour}:{datetime.now().minute}")
 
 #######################################################
 ##  Carga el archivo "config.json" de configuración  ##
@@ -57,24 +58,23 @@ if int(tiempo_aemet.seconds/60) > 20 or not "aemet_temp" in datos_json:
     print(f"Se ha almacenado la temperatura exterior  ({aemet_temp}ºC)")
 else:
     aemet_temp = datos_json["aemet_temp"]
-    print(f"Se ha guardado la variable hace menos de 20' ({aemet_temp}ºC)")
+    print(f"Se ha guardado la variable hace menos de 20'({aemet_temp}ºC)")
 
 
 ##########################################################################
 ##  Capturar datos de Tª y humedad del sensor conectado a la raspberry  ##
 ##########################################################################
-hume, temp = dht.read_retry(dht.DHT22,4)
+datos_dht = dht.read_retry(dht.DHT22,4)
 
-while hume > 100:
+while datos_dht[0] > 100:
     time.sleep(5)
-    hume, temp = dht.read_retry(dht.DHT22,4)
+    datos_dht = dht.read_retry(dht.DHT22,4)
     
-real_hume = round(hume,2)
-real_temp = round(temp,2)
-
+real_hume = round(datos_dht[0],2)
+real_temp = round(datos_dht[1],2)
 
 ####################################################################
-##  Clase e eniciar el archivo de Gsheet  ##
+##  Clase e Reniciar el archivo de Gsheet  ##
 ####################################################################
 
 class Gsheet:
@@ -109,8 +109,6 @@ gsheet_datos = Gsheet("shermostat")
 consigna_temp_act = float(gsheet_datos.leer_celda("consigna","A1"))
 consigna_temp_ant = float(gsheet_datos.leer_celda("datos","C2"))
 consigna_temp_var = consigna_temp_act - consigna_temp_ant
-print(f"Consigna actual de Tª {consigna_temp_act}ºC, consigna anterior {consigna_temp_ant}ºC")
-
 
 print("Calculando el programa...")
 horas = gsheet_datos.leer_fila("config",2)
@@ -128,8 +126,16 @@ for i in horas:
     manana = ahora + timedelta(days=1)
     hora = manana.replace( hour=hora.hour, minute=hora.minute, second=0)
 
+# Cambio de consigna de Tª
 minutos_cambio = round(((hora - ahora).seconds)/60)
-print(f"Consigna actual de {str(consigna_temp_act)}, faltan {str(minutos_cambio)} minutos para cambiar a {str(consigna_temp_sig)}ºC.")
+if consigna_temp_act < consigna_temp_sig and minutos_cambio < datos_json["inercia"]/60:
+    print(f"Se cambia la consigna de Tª de {str(consigna_temp_act)} a {str(consigna_temp_sig)}ºC.")
+    consigna_temp_act = consigna_temp_sig
+elif consigna_temp_act > consigna_temp_sig and minutos_cambio < (datos_json["inercia"]/60)/3:
+    print(f"Se cambia la consigna de Tª de {str(consigna_temp_act)} a {str(consigna_temp_sig)}ºC.")
+    consigna_temp_act = consigna_temp_sig
+else:
+    print(f"Consigna actual de {consigna_temp_act}, faltan {str(minutos_cambio)} minutos para cambiar a {str(consigna_temp_sig)}ºC.")
 
 #####################################################
 ## Parámetros de configuración para el Sonoff Mini ##
@@ -181,8 +187,10 @@ elif real_temp > consigna_temp_act + datos_json["histeresis"] and rele_estado ==
     consulta = requests.post(url, json = rele_off)
     if consulta.json()["error"] == 0:
         estado = "off"
+        rele_hora_on = datetime.strptime(datos_json["rele_hora_on"], '%Y/%m/%d %H:%M:%S')
+        rele_tiempo_on = datetime.now()-rele_hora_on
         datos_json["rele_hora_on"] = ""
-        telegram.enviar(f"La calefacción ha estado X minutos en marcha")
+        telegram.enviar(f"La calefacción ha estado {round(rele_tiempo_on.segundos/60)} minutos en marcha")
     else:
         estado = "ERROR en relé"
         telegram.enviar("No ha sido posible apagar el rele de la calefacción")
@@ -212,6 +220,7 @@ print(f"Actual   -> Tª consigna: {consigna_temp_act} - Tª real:{real_temp}ºC 
 if var_temp  < 0.1 and estado == temp_ant_estado:
     print("Nada ha cambiado (La humedad no cuenta...)")
 else:
+    gsheet_datos.escribir_celda("consigna","A1",consigna_temp_act)
     gsheet_datos.escribir_fila("datos",[tiempo,aemet_temp,consigna_temp_act,real_temp,real_hume,estado,var_temp_tiempo])
     print("Se ha guardado el dato.")
 
