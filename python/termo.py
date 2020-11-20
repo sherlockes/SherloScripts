@@ -4,7 +4,7 @@
 # Description: Termostato inteligente a partir de una sonda dh22
 #              Y de un relé sonoff integrado mediante google sheets
 # Args: N/A
-# Creation/Update: 20201104/20201116
+# Creation/Update: 20201104/20201120
 # Author: www.sherblog.pro                                                
 # Email: sherlockes@gmail.com                                           
 ##################################################################
@@ -19,15 +19,14 @@ import json
 import telegram
 import os
 import time
-import json
 
-print(f"Ejecutado a las {datetime.now().hour}:{datetime.now().minute}")
+print(f"Inicio: Script ejecutado a las {datetime.now().hour}:{datetime.now().minute}")
 
 #######################################################
 ##  Carga el archivo "config.json" de configuración  ##
 #######################################################
 with open('/home/pi/config.json', 'r') as archivo_json:
-    data=archivo_json.read()
+    data = archivo_json.read()
 
 datos_json = json.loads(data)
 
@@ -37,28 +36,31 @@ datos_json = json.loads(data)
 estacion_aemet = "9434P"
 url_aemet = "http://www.aemet.es/es/eltiempo/observacion/ultimosdatos_" + estacion_aemet + "_datos-horarios.csv?k=arn&l=" + estacion_aemet + "&datos=det&w=0&f=temperatura&x=h24"
 
+
 # Inicia la variable aemet_hora
+print(f"Aemet: ", end="")
 if "aemet_hora" in datos_json:
-    print("Se ha recuperado la variable aemet_hora")
     aemet_hora = datetime.strptime(datos_json["aemet_hora"], '%Y/%m/%d %H:%M:%S')
+    print(f"Ultima toma a las {aemet_hora.hour}:{aemet_hora.minute}, ", end="")
 else:
-    print("No existe la variable aemet_hora, se asigna la actual")
     aemet_hora = datetime.now()
     datos_json["aemet_hora"] = aemet_hora.strftime('%Y/%m/%d %H:%M:%S')
-
-tiempo_aemet = datetime.now() - aemet_hora
+    print(f"Sin toma - {aemet_hora.strftime('%Y/%m/%d %H:%M:%S')}, ", end="")
 
 # Si han pasado 20' desde la ultima medida o no existe vuelve a coger la temperatura exterior
-if int(tiempo_aemet.seconds/60) > 20 or not "aemet_temp" in datos_json:
+
+tiempo_aemet = round((datetime.now() - aemet_hora).seconds/60)
+
+if tiempo_aemet > 20 or not "aemet_temp" in datos_json:
     aemet_datos = requests.get(url_aemet, allow_redirects=True).text.replace('"', "").splitlines()
     aemet_temp = float(aemet_datos[4].split(",")[1])
     datos_json["aemet_temp"] = aemet_temp
     aemet_hora = datetime.now()
     datos_json["aemet_hora"] = aemet_hora.strftime('%Y/%m/%d %H:%M:%S')
-    print(f"Se ha almacenado la temperatura exterior  ({aemet_temp}ºC)")
+    print(f"{aemet_hora} Se ha almacenado la temperatura exterior a{aemet_temp}ºC")
 else:
     aemet_temp = datos_json["aemet_temp"]
-    print(f"Se ha guardado la variable hace menos de 20'({aemet_temp}ºC)")
+    print(f"Tª captada hace menos de 20'({aemet_temp}ºC)")
 
 
 ##########################################################################
@@ -110,7 +112,7 @@ consigna_temp_act = float(gsheet_datos.leer_celda("consigna","A1"))
 consigna_temp_ant = float(gsheet_datos.leer_celda("datos","C2"))
 consigna_temp_var = consigna_temp_act - consigna_temp_ant
 
-print("Calculando el programa...")
+print("Programa: ", end="")
 horas = gsheet_datos.leer_fila("config",2)
 temperaturas = gsheet_datos.leer_fila("config",3)
 
@@ -130,9 +132,11 @@ for i in horas:
 minutos_cambio = round(((hora - ahora).seconds)/60)
 if consigna_temp_act < consigna_temp_sig and minutos_cambio < datos_json["inercia"]/60:
     print(f"Se cambia la consigna de Tª de {str(consigna_temp_act)} a {str(consigna_temp_sig)}ºC.")
+    telegram.enviar(f"Se cambia la consigna de Tª de {str(consigna_temp_act)} a {str(consigna_temp_sig)}ºC.")
     consigna_temp_act = consigna_temp_sig
 elif consigna_temp_act > consigna_temp_sig and minutos_cambio < (datos_json["inercia"]/60)/3:
     print(f"Se cambia la consigna de Tª de {str(consigna_temp_act)} a {str(consigna_temp_sig)}ºC.")
+    telegram.enviar(f"Se cambia la consigna de Tª de {str(consigna_temp_act)} a {str(consigna_temp_sig)}ºC.")
     consigna_temp_act = consigna_temp_sig
 else:
     print(f"Consigna actual de {consigna_temp_act}, faltan {str(minutos_cambio)} minutos para cambiar a {str(consigna_temp_sig)}ºC.")
@@ -145,20 +149,19 @@ sonoff_ip = "192.168.1.10"
 url = 'http://' + sonoff_ip + ':8081/zeroconf/switch'
 url_info = 'http://' + sonoff_ip + ':8081/zeroconf/info'
 rele_info = {"deviceid": "1000a501ef", "data": {}}
-url = 'http://192.168.1.10:8081/zeroconf/switch'
+
 rele_on = {"deviceid": "1000a501ef", "data": {"switch":"on"}}
 rele_off = {"deviceid": "1000a501ef", "data": {"switch":"off"}}
-
-
 
 #####################
 ## Lazo de control ##
 #####################
 
 # Comprobar si el relé está online y comprobar el estado
-response = os.system("ping -c 1 " + sonoff_ip)
+response = os.system("ping " + sonoff_ip + " -c 1 > /dev/null 2>&1")
+#response = os.system("ping -c 1 " + sonoff_ip)
 if response == 0:
-    print("El relé está conectado a la red")
+    print("Sonoff: El relé está conectado a la red. ", end="" )
 
     # Estado actual del rele
     consulta=requests.post(url_info, json = rele_info)
@@ -166,6 +169,7 @@ if response == 0:
 
     if consulta.json()["error"] == 0:
         print(f"Estado del relé - OK ({rele_estado})")
+        datos_json["rele_estado"] = rele_estado
     else:
         telegram.enviar("Algo falla en el relé de la calefacción")
         print(f"Estado del relé - KO")
@@ -173,30 +177,36 @@ else:
     print("ATENCIÓN!!! El relé no está conectado a la red")
     telegram.enviar("ATENCIÓN!!! El relé de la calefacción no está conectado a la red.")
 
+# Hora a la que se puso en marcha la calefacción y teimo que lleva encendida
+rele_hora_on = datetime.strptime(datos_json["rele_hora_on"], '%Y/%m/%d %H:%M:%S')
+rele_estado = datos_json["rele_estado"]
+if datos_json["rele_estado"] == "on":
+    rele_tiempo_on = round(((datetime.now()-rele_hora_on).seconds)/60)
+else:
+    rele_tiempo_on = 0
+
 if real_temp < (consigna_temp_act - datos_json["histeresis"]) and rele_estado == "off":
-    print("Se va a encerder el relé")
     consulta = requests.post(url, json = rele_on )
     if consulta.json()["error"] == 0:
         estado = "on"
+        datos_json["rele_estado"] = "on"
         datos_json["rele_hora_on"] = datetime.now().strftime('%Y/%m/%d %H:%M:%S')
+        print("Se ha encendido la calefacción")
     else:
         estado = "ERROR en relé"
         telegram.enviar("No ha sido posible encender el rele de la calefacción")
 elif real_temp > consigna_temp_act + datos_json["histeresis"] and rele_estado == "on":
-    print("Se va a apagar el relé")
     consulta = requests.post(url, json = rele_off)
     if consulta.json()["error"] == 0:
         estado = "off"
-        rele_hora_on = datetime.strptime(datos_json["rele_hora_on"], '%Y/%m/%d %H:%M:%S')
-        rele_tiempo_on = datetime.now()-rele_hora_on
-        datos_json["rele_hora_on"] = ""
-        telegram.enviar(f"La calefacción ha estado {round(rele_tiempo_on.segundos/60)} minutos en marcha")
+        datos_json["rele_estado"] = "off"
+        print("Se ha apagado la calefacción")
+        telegram.enviar(f"La calefacción ha estado {round(rele_tiempo_on.second/60)} minutos en marcha")
     else:
         estado = "ERROR en relé"
         telegram.enviar("No ha sido posible apagar el rele de la calefacción")
 else:
     estado = rele_estado
-
 
 #################################################################
 ## Graba los datos en una hoja de Google Sheets si han variado ##
@@ -214,19 +224,26 @@ var_temp_tiempo = round((60*(real_temp - real_temp_ant))/var_tiempo.seconds,2)
 if abs(var_temp_tiempo) < 0.01:
     var_temp_tiempo = 0
 
-print(f"Anterior -> Tª consigna: {consigna_temp_ant} - Tª real:{real_temp_ant}ºC - Calef:{temp_ant_estado} - Humedad:{hum_ant_real}%")
-print(f"Actual   -> Tª consigna: {consigna_temp_act} - Tª real:{real_temp}ºC - Calef:{estado} - Humedad:{real_hume}%")
+print(f"Dato ant: Tª consigna: {consigna_temp_ant} - Tª real:{real_temp_ant}ºC - Calef:{temp_ant_estado} - Humedad:{hum_ant_real}%")
+print(f"Dato act: Tª consigna: {consigna_temp_act} - Tª real:{real_temp}ºC - Calef:{estado} - Humedad:{real_hume}%")
 
+print("Datos GSheet: ", end="")
+# Guarda la consigna (Si ha variado)
+if consigna_temp_var != 0:
+    datos_json["consigna"] = consigna_temp_act
+    gsheet_datos.escribir_celda("consigna","A1",consigna_temp_act)
+    print(f"Nueva consigna a {consigna_temp_act}ºC, ", end="")
+
+# Guarda los datos (Si han variado o la calefacción está en marcha)
 if var_temp  < 0.1 and estado == temp_ant_estado:
     print("Nada ha cambiado (La humedad no cuenta...)")
-else:
+elif var_temp >= 0.1 or rele_estado == "on":
     gsheet_datos.escribir_celda("consigna","A1",consigna_temp_act)
-    gsheet_datos.escribir_fila("datos",[tiempo,aemet_temp,consigna_temp_act,real_temp,real_hume,estado,var_temp_tiempo])
-    print("Se ha guardado el dato.")
+    gsheet_datos.escribir_fila("datos",[tiempo,aemet_temp,consigna_temp_act,real_temp,real_hume,rele_estado,var_temp_tiempo,rele_tiempo_on])
+    print("Se han guardado los datos actuales.")
 
 #######################################################################
 ## Graba los parámetros de configuración en el archivo "config.json" ##
 #######################################################################
 with open("config.json", "w") as archivo_json:
     json.dump(datos_json, archivo_json, indent = 4)
-
