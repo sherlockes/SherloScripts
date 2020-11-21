@@ -1,7 +1,11 @@
 {
-    "aemet_hora": "2020/11/18 12:30:49",
-    "aemet_temp": 13.8,
-    "histeresis": 0.3,
-    "rele_hora_on": "",
-    "inercia": 1000
+    "aemet_hora": "2020/11/21 19:30:02",
+    "aemet_temp": 9.3,
+    "rele_hora_on": "2020/11/21 17:45:06",
+    "rele_tiempo_on": "",
+    "rele_estado": "off",
+    "histeresis": 0.2,
+    "inercia": 1000,
+    "inercia_rango": 0.013,
+    "consigna": 20.5
 }

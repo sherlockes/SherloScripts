@@ -4,7 +4,7 @@
 # Description: Termostato inteligente a partir de una sonda dh22
 #              Y de un relé sonoff integrado mediante google sheets
 # Args: N/A
-# Creation/Update: 20201104/20201120
+# Creation/Update: 20201104/20201121
 # Author: www.sherblog.pro                                                
 # Email: sherlockes@gmail.com                                           
 ##################################################################
@@ -57,7 +57,7 @@ if tiempo_aemet > 20 or not "aemet_temp" in datos_json:
     datos_json["aemet_temp"] = aemet_temp
     aemet_hora = datetime.now()
     datos_json["aemet_hora"] = aemet_hora.strftime('%Y/%m/%d %H:%M:%S')
-    print(f"{aemet_hora} Se ha almacenado la temperatura exterior a{aemet_temp}ºC")
+    print(f"Se guarda {aemet_temp}ºC a las {aemet_hora.hour}:{aemet_hora.minute}")
 else:
     aemet_temp = datos_json["aemet_temp"]
     print(f"Tª captada hace menos de 20'({aemet_temp}ºC)")
@@ -141,6 +141,28 @@ elif consigna_temp_act > consigna_temp_sig and minutos_cambio < (datos_json["ine
 else:
     print(f"Consigna actual de {consigna_temp_act}, faltan {str(minutos_cambio)} minutos para cambiar a {str(consigna_temp_sig)}ºC.")
 
+
+
+######################
+## Cálculo de datos ##
+######################
+
+tiempo = datetime.now().strftime('%Y/%m/%d %H:%M:%S')
+tiempo_ant = datetime.strptime(gsheet_datos.leer_fila("datos",2)[0], '%Y/%m/%d %H:%M:%S')
+temp_ant_consigna = float(gsheet_datos.leer_fila("datos",2)[2])
+real_temp_ant = float(gsheet_datos.leer_fila("datos",2)[3])
+hum_ant_real = float(gsheet_datos.leer_fila("datos",2)[4])
+temp_ant_estado = gsheet_datos.leer_fila("datos",2)[5]
+var_temp = abs(real_temp - real_temp_ant) + abs(consigna_temp_act - consigna_temp_ant)
+var_tiempo = datetime.now() - tiempo_ant
+var_temp_tiempo = round((60*(real_temp - real_temp_ant))/var_tiempo.seconds,2)
+if abs(var_temp_tiempo) < 0.01:
+    var_temp_tiempo = 0
+
+# Incrementa la inercia si la Tª super el rano de inercia con la caldera encendida
+if real_temp > datos_json["inercia_rango"] * (datos_json["consigna"] + datos_json["histeresis"]) and datos_json["rele_estado"] == "on":
+    datos_json["inercia"] += 100
+
 #####################################################
 ## Parámetros de configuración para el Sonoff Mini ##
 #####################################################
@@ -159,7 +181,6 @@ rele_off = {"deviceid": "1000a501ef", "data": {"switch":"off"}}
 
 # Comprobar si el relé está online y comprobar el estado
 response = os.system("ping " + sonoff_ip + " -c 1 > /dev/null 2>&1")
-#response = os.system("ping -c 1 " + sonoff_ip)
 if response == 0:
     print("Sonoff: El relé está conectado a la red. ", end="" )
 
@@ -177,14 +198,15 @@ else:
     print("ATENCIÓN!!! El relé no está conectado a la red")
     telegram.enviar("ATENCIÓN!!! El relé de la calefacción no está conectado a la red.")
 
-# Hora a la que se puso en marcha la calefacción y teimo que lleva encendida
+# Hora a la que se puso en marcha la calefacción y tiempo que lleva encendida
 rele_hora_on = datetime.strptime(datos_json["rele_hora_on"], '%Y/%m/%d %H:%M:%S')
 rele_estado = datos_json["rele_estado"]
+
 if datos_json["rele_estado"] == "on":
     rele_tiempo_on = round(((datetime.now()-rele_hora_on).seconds)/60)
 else:
     rele_tiempo_on = 0
-
+# Apaga enciende la calefacción si la temp real está por debajo de la histéresis
 if real_temp < (consigna_temp_act - datos_json["histeresis"]) and rele_estado == "off":
     consulta = requests.post(url, json = rele_on )
     if consulta.json()["error"] == 0:
@@ -194,14 +216,15 @@ if real_temp < (consigna_temp_act - datos_json["histeresis"]) and rele_estado ==
         print("Se ha encendido la calefacción")
     else:
         estado = "ERROR en relé"
-        telegram.enviar("No ha sido posible encender el rele de la calefacción")
-elif real_temp > consigna_temp_act + datos_json["histeresis"] and rele_estado == "on":
+        telegram.enviar("No ha sido posible encender el rele de la calefacción")     
+# Enciende la calefacción si la real mas la esperada por inercia está por encima
+elif real_temp + (var_temp_tiempo * (datos_json["inercia"]/60))> consigna_temp_act + datos_json["histeresis"] and rele_estado == "on":
     consulta = requests.post(url, json = rele_off)
     if consulta.json()["error"] == 0:
         estado = "off"
         datos_json["rele_estado"] = "off"
         print("Se ha apagado la calefacción")
-        telegram.enviar(f"La calefacción ha estado {round(rele_tiempo_on.second/60)} minutos en marcha")
+        telegram.enviar("La calefacción ha estado " + round(rele_tiempo_on.second/60) + " minutos en marcha")
     else:
         estado = "ERROR en relé"
         telegram.enviar("No ha sido posible apagar el rele de la calefacción")
@@ -211,18 +234,6 @@ else:
 #################################################################
 ## Graba los datos en una hoja de Google Sheets si han variado ##
 #################################################################
-
-tiempo = datetime.now().strftime('%Y/%m/%d %H:%M:%S')
-tiempo_ant = datetime.strptime(gsheet_datos.leer_fila("datos",2)[0], '%Y/%m/%d %H:%M:%S')
-temp_ant_consigna = float(gsheet_datos.leer_fila("datos",2)[2])
-real_temp_ant = float(gsheet_datos.leer_fila("datos",2)[3])
-hum_ant_real = float(gsheet_datos.leer_fila("datos",2)[4])
-temp_ant_estado = gsheet_datos.leer_fila("datos",2)[5]
-var_temp = abs(real_temp - real_temp_ant) + abs(consigna_temp_act - consigna_temp_ant)
-var_tiempo = datetime.now() - tiempo_ant
-var_temp_tiempo = round((60*(real_temp - real_temp_ant))/var_tiempo.seconds,2)
-if abs(var_temp_tiempo) < 0.01:
-    var_temp_tiempo = 0
 
 print(f"Dato ant: Tª consigna: {consigna_temp_ant} - Tª real:{real_temp_ant}ºC - Calef:{temp_ant_estado} - Humedad:{hum_ant_real}%")
 print(f"Dato act: Tª consigna: {consigna_temp_act} - Tª real:{real_temp}ºC - Calef:{estado} - Humedad:{real_hume}%")
