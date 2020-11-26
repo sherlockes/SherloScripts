@@ -188,7 +188,7 @@ var_temp_tiempo = round((60*(real_temp - real_temp_ant))/var_tiempo.seconds,2)
 if abs(var_temp_tiempo) < 0.01:
     var_temp_tiempo = 0
 
-# Incrementa la inercia si la Tª super el rango de inercia con la caldera encendida
+# Incrementa la inercia si la Tª supera el rango de inercia con la caldera encendida
 if real_temp > datos_json["inercia_rango"] * (datos_json["consigna"] + datos_json["histeresis"]) and datos_json["rele_estado"] == "on":
     if datos_json["inercia"] <= 1800:
         datos_json["inercia"] += 25
@@ -237,12 +237,8 @@ if real_temp < (consigna_temp_act - datos_json["histeresis"]) and rele_estado ==
     consulta = requests.post(url, json = rele_on )
     if consulta.json()["error"] == 0:
         estado = "on"
-        # Disminuye la inercia si ha estado poco tiempo apagada
-        if datos_json["rele_tiempo_off"] < 15:
-            if datos_json["inercia"] >= 300:
-                datos_json["inercia"] -= 25
-                print("Se ha disminuido la inercia")
-                telegram.enviar("Se ha disminuido la inercia")
+        print("Se ha encendido la calefacción")
+    else:
         estado = "ERROR en relé"
         telegram.enviar("No ha sido posible encender el rele de la calefacción")     
 # Apaga la calefacción si la real mas la esperada por inercia está por encima
@@ -258,16 +254,27 @@ else:
     estado = rele_estado
 
 # Calculo de la variable "rele_hora_cambio" y del tiempo de encendido
-
 rele_tiempo_on = 0
 
 if estado != datos_json["rele_estado"]:
+
+    if estado == "on":
+        rele_tiempo_off = datetime.now() - rele_hora_cambio
+        rele_tiempo_off = round((rele_tiempo_off.seconds)/60)
+        
+        # Disminuye la inercia si ha estado poco tiempo apagada
+        if rele_tiempo_off < 15 and datos_json["inercia"] >= 300:
+            datos_json["inercia"] -= 25
+            print("Se ha disminuido la inercia")
+            telegram.enviar("Se ha disminuido la inercia de la calefacción")
     
     if estado == "off":
-        rele_tiempo_on = round(((datetime.now()-rele_hora_cambio).seconds)/60)
+        rele_tiempo_on = datetime.now()-rele_hora_cambio
+        rele_tiempo_on = round((rele_tiempo_on.seconds)/60)
         telegram.enviar(f'La calefacción ha estado {rele_tiempo_on} minutos encendida.')
         datos_json["rele_total_on"] += rele_tiempo_on
     
+    #telegram.enviar(f'Ha cambiado el estado de la calefacción a {estado}')
     datos_json["rele_hora_cambio"] = datetime.now().strftime('%Y/%m/%d %H:%M:%S')
 
 datos_json["rele_estado"] = estado
@@ -277,6 +284,7 @@ if datetime.now().hour == 23 and datetime.now().minute >= 54:
     if estado == "on":
         datos_json["rele_total_on"] += 5
     telegram.enviar(f'Hoy la calefacción ha estado {datos_json["rele_total_on"]} minutos encendida con {aemet_media}ºC de media exterior.')
+    datos_json["rele_total_on"] = 0
 
 
 #################################################################
@@ -298,7 +306,7 @@ if var_temp  < 0.1 and estado == temp_ant_estado:
     print("Nada ha cambiado (La humedad no cuenta...)")
 elif var_temp >= 0.1 or rele_estado == "on":
     gsheet_datos.escribir_celda("consigna","A1",consigna_temp_act)
-    gsheet_datos.escribir_fila("datos",[tiempo,aemet_temp,consigna_temp_act,real_temp,real_hume,rele_estado,var_temp_tiempo,tiempo])
+    gsheet_datos.escribir_fila("datos",[tiempo,aemet_temp,consigna_temp_act,real_temp,real_hume,rele_estado,var_temp_tiempo,rele_tiempo_on])
     print("Se han guardado los datos actuales.")
 
 #######################################################################

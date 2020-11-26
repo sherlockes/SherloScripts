@@ -11,43 +11,40 @@
 import os
 from exif import Image
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-print(BASE_DIR)
+dir_base = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+dir_act = os.path.dirname(os.path.realpath(__file__))
 
-CURR_DIR = os.path.dirname(os.path.realpath(__file__))
-print(CURR_DIR)
-
-carpeta = CURR_DIR.split("/")
+carpeta = dir_act.split("/")
 carpeta.reverse()
-carpeta = carpeta[0]
+carpeta = str(carpeta[0])
+carpeta = carpeta.replace(" ", "_")
+print(carpeta)
 
-files = os.listdir(CURR_DIR)
+files = os.listdir(dir_act)
 
 for f in files:
     if f.endswith('.jpg'):
         with open(f, 'rb') as image_file:
-            my_image = Image(image_file)
-    if my_image.has_exif:
-        año = my_image.datetime_original.split(" ")[0].split(":")[0]
-        mes = my_image.datetime_original.split(" ")[0].split(":")[1]
-        dia = my_image.datetime_original.split(" ")[0].split(":")[2]
+            foto = Image(image_file)
         
-        num = 1
+        if foto.has_exif:
+            año = foto.datetime_original.split(" ")[0].split(":")[0]
+            mes = foto.datetime_original.split(" ")[0].split(":")[1]
+            dia = foto.datetime_original.split(" ")[0].split(":")[2]
+            
+            num = 1
         
-        
-        for n in range(999):
+            while True:
+                numero = '{0:03}'.format(num)
+                nombre = año + mes + dia + "_" + carpeta + "_" + numero +".jpg"
+                archivo = os.path.join(dir_act, nombre)
 
-            number = '{0:03}'.format(num)
-            nombre = año + mes + dia + "_" + carpeta + "_" + number +".jpg"
-            archivo = os.path.join(CURR_DIR, nombre)
-
-            if os.path.isfile(archivo):
-                num += 1
-            else:
-                break
-        
-        number = '{0:03}'.format(num)
-        nombre_nuevo = año + mes + dia + "_" + carpeta + "_" + number +".jpg"
-        archivo_viejo = os.path.join(CURR_DIR, f)
-
-        os.rename(archivo_viejo, nombre_nuevo)
+                if os.path.isfile(archivo):
+                    num += 1
+                else:
+                    break
+            
+            numero = '{0:03}'.format(num)
+            nombre_nuevo = año + mes + dia + "_" + carpeta + "_" + numero +".jpg"
+            archivo_viejo = os.path.join(dir_act, f)
+            os.rename(archivo_viejo, nombre_nuevo)
