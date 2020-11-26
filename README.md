@@ -13,6 +13,19 @@ En este archivo en formato org-mode voy escribiendo lo que día a día aprendo y
 * Python
 * Y lo que vaya utilizando...
 
+## [Renamer.py](https://github.com/sherlockes/SherloScripts/blob/master/python/renamer.py)(python) ##
+Fruto de una necesidad de un renombraro rápido de unos cuantos cientos de fotografías. Nada pretencioso ni complicado simplemente rápido y efectivo que toca los siguientes aspectos:
+
+* Chequeo de ruta y nombre de directorio actual
+* Sustitución de caracteres en cadenas con "replace"
+* Listar archivos de un directorio con "os.listdir"
+* Manejo de bucles for y while
+* Uso del condicional "if" para la comprobación de archivo
+* Uso del paquete "exif" para extracción de info de las fotos
+* Manejo del metodo "datetime"
+* Creación de rutas a aprtir de cadenas con "os.path.join"
+* Renombrado de archivos con "os.rename"
+
 ## [Tiempo.py](https://github.com/sherlockes/SherloScripts/blob/master/python/tiempo.py)(python)
 Mi primer Script en Python. Este realiza un pequeño resumen de las condiciones meteorológicas diarias extrayendo la información de la web de AEMET, no a través de su API sino que a través de su "*.csv" y "*.xml" públicos. Toca unos cuantos palos entre los que podemos encontar:
 
