@@ -13,6 +13,15 @@ En este archivo en formato org-mode voy escribiendo lo que día a día aprendo y
 * Python
 * Y lo que vaya utilizando...
 
+## [Limpieza_gmail.gs](https://github.com/sherlockes/SherloScripts/blob/master/python/limpieza_gmail.gs)(google scripts  ##
+Eliminar correos de publicidad e irrelevantes es una tarea que lleva su tiempo. Con este pequeño script que se ejecute cada hora consigo tener la bandeja de entrada mucho más limpia sin esfuerzo. Se tocan los siguientes aspectos:
+
+* Busqueda en Gmail por etiqueta, categoría y tiempo
+* Uso de bucle for con contador incremental
+* Eliminación de mensajes
+
+Toda la info sobre la creación y funcionamiento del script la puedes encontrar en este [artículo](https://sherblog.pro/automatizando-la-limpieza-de-gmail/) de mi blog.
+
 ## [Renamer.py](https://github.com/sherlockes/SherloScripts/blob/master/python/renamer.py)(python) ##
 Fruto de una necesidad de un renombraro rápido de unos cuantos cientos de fotografías. Nada pretencioso ni complicado simplemente rápido y efectivo que toca los siguientes aspectos:
 
