@@ -10,7 +10,7 @@
 #	- Genera la web estática
 #	- Sube la web a GitHub
 # Args: N/A
-# Creation/Update: 20180901/20201019
+# Creation/Update: 20180901/20201201
 # Author: www.sherblog.pro                                                
 # Email: sherlockes@gmail.com                                           
 ############################################################################
@@ -55,7 +55,7 @@ add_header(){
     echo "title: \"$long_title\"" >> $file_name
     echo "date: \"$(date +%Y-%m-%d)\"" >> $file_name
     echo "creation: \"$(date +%Y-%m-%d)\"" >> $file_name
-    echo "descrption: \"$long_title\"" >> $file_name
+    echo "description: \"$long_title\"" >> $file_name
     echo "thumbnail: \"/images/$(date +%Y%m%d)_"$short_title"_00.jpg\"" >> $file_name
     echo "disable_comments: true" >> $file_name
     echo "authorbox: false" >> $file_name
@@ -71,7 +71,9 @@ add_header(){
     echo $summary >> $file_name
     echo "<!--more-->" >> $file_name
     echo $content >> $file_name
-    echo "[Image_01]: /images/$(date +%Y%m%d)_"$short_title"_01.jpg" >> $file_name
+    echo "[Image-01]: /images/$(date +%Y%m%d)_"$short_title"_01.jpg" >> $file_name
+
+    mensaje+=$'Se ha generado un nuevo archivo de post...\n'
 }
 
 min_time(){
