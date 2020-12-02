@@ -1,5 +1,4 @@
 #!/bin/bash
-# -*- ENCODING: UTF-8 -*-
 
 ###################################################################
 # Script Name: raspi-config.sh
@@ -38,6 +37,11 @@ rclone_config_path=sherlockes@192.168.1.22:/home/sherlockes/.config/rclone/rclon
 cfg_pivpn=false
 # Install Pi-Hole
 cfg_pihole=false
+
+#### Lo que falta por poner
+# Instalar sshfs
+# pipenv
+# gphotos-sync
 
 
 # -------------------------------------------------------
