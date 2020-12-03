@@ -10,7 +10,7 @@
 #	- Genera la web estática
 #	- Sube la web a GitHub
 # Args: N/A
-# Creation/Update: 20180901/20201201
+# Creation/Update: 20180901/20201203
 # Author: www.sherblog.pro                                                
 # Email: sherlockes@gmail.com                                           
 ############################################################################
@@ -94,10 +94,11 @@ min_time(){
 scan_posts(){
 
     #Cambio al directorio de contenidos
+    echo Escaneando post para encabezar....
     cd $dir_post
 
     #Busca archivos sin cabecera para añadirle una genérica
-    grep -r -L "\-\-\-" * |
+    grep -LR -e "title: " -e "date: " $dir_post |
     while read fname
     do
         #Inserta la cabecera si ha pasado el tiempo mínimo y borra el original
