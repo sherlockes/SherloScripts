@@ -13,6 +13,16 @@ En este archivo en formato org-mode voy escribiendo lo que día a día aprendo y
 * Python
 * Y lo que vaya utilizando...
 
+## [ghotos-sync.sh](https://github.com/sherlockes/SherloScripts/blob/master/bash/gphotos-sync.sh)(bash) ##
+Tras un tiempo realizando la sincronización de mi galería de Google Photos a mi NAS de forma manual a través de un script que corría en el ordenador de sobremesa ahora he conseguido que el paquete ghotos-sync funcione en la raspberry de forma que cada día hace una sincronización. Los temas que toco en esta script son:
+
+* Comprobación de la instalación de paquetes
+* Comprobación de conexión a unidades remotas
+* Montaje de unidades remotas mediante sshfs
+* Ejecución de gphotos mediante pipenv
+
+Para que el cript funcione de forma autónoma es necesaria tener configurada el acceso ssh de un equipo a otro mediente llave público-privada (ssh-key-gen)
+
 ## [Limpieza_gmail.gs](https://github.com/sherlockes/SherloScripts/blob/master/python/limpieza_gmail.gs)(google scripts  ##
 Eliminar correos de publicidad e irrelevantes es una tarea que lleva su tiempo. Con este pequeño script que se ejecute cada hora consigo tener la bandeja de entrada mucho más limpia sin esfuerzo. Se tocan los siguientes aspectos:
 
