@@ -4,7 +4,7 @@
 # Description: Termostato inteligente a partir de una sonda dh22
 #              Y de un relé sonoff integrado mediante google sheets
 # Args: N/A
-# Creation/Update: 20201104/20201204
+# Creation/Update: 20201104/20201212
 # Author: www.sherblog.pro                                                
 # Email: sherlockes@gmail.com                                           
 ##################################################################
@@ -29,7 +29,6 @@ with open('/home/pi/config.json', 'r') as archivo_json:
     data = archivo_json.read()
 
 datos_json = json.loads(data)
-
 
 ##########################################
 ## Inicialización de variables general  ##
@@ -67,6 +66,12 @@ if "cons_fuera" in datos_json:
 else:
     datos_json["cons_fuera"] = 16
 
+# Variable para decrementar la Tª de la casa cuando no hay nadie
+if "dec_casa_vacia" in datos_json:
+    if datos_json["dec_casa_vacia"] == "":
+        datos_json["dec_casa_vacia"] = 1
+else:
+    datos_json["dec_casa_vacia"] = 1
 
 # aemet_hora (Ultima toma de Tª de la AEMET)
 print(f"Aemet: ", end="")
@@ -269,11 +274,12 @@ if not datos_json["modo_fuera"]:
     else:
         print(f"Consigna actual de {consigna_temp_act}, faltan {str(minutos_cambio)} minutos para cambiar a {str(consigna_temp_sig)}ºC.")
 
-    # Bajar 1ºC si no hay nadie en casa
+    # Bajar "dec_casa_vacia" si no hay nadie en casa
     print("Control de ausencia: ", end="")
     if casa_vacia():
-        consigna_temp_act -= 1
-        print(f"Casa vacía, se baja 1ºC, queda a {consigna_temp_act}ºC")
+        dec_casa_vacia = datos_json["dec_casa_vacia"]
+        consigna_temp_act -= dec_casa_vacia
+        print(f"Casa vacía, se baja {dec_casa_vacia}ºC, queda a {consigna_temp_act}ºC")
     else:
         print("La casa no está vacía, seguimos calentando...")
             
