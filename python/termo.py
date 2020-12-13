@@ -103,6 +103,12 @@ if tiempo_aemet > 20 or not "aemet_temp" in datos_json or (datetime.now().hour =
         print("no hay conexión con la web de la AEMET.")
 
     if aemet_online:
+        if aemet_datos[4].split(",")[1] == "":
+            print("error de medida en la web de la AEMET.")
+            aemet_online = False
+
+    if aemet_online:
+        
         aemet_temp = float(aemet_datos[4].split(",")[1])
         datos_json["aemet_temp"] = aemet_temp
         aemet_hora = datetime.now()
