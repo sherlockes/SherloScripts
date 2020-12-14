@@ -20,6 +20,8 @@ import telegram
 import os
 import time
 
+from aemet import Aemet
+
 print(f"Inicio: Script ejecutado a las {datetime.now().hour}:{datetime.now().minute}")
 
 #######################################################
@@ -73,61 +75,12 @@ if "dec_casa_vacia" in datos_json:
 else:
     datos_json["dec_casa_vacia"] = 1
 
-# aemet_hora (Ultima toma de Tª de la AEMET)
-print(f"Aemet: ", end="")
-if "aemet_hora" in datos_json:
-    aemet_hora = datetime.strptime(datos_json["aemet_hora"], '%Y/%m/%d %H:%M:%S')
-    print(f"Ultima toma a las {aemet_hora.hour}:{aemet_hora.minute}, ", end="")
-else:
-    aemet_hora = datetime.now()
-    datos_json["aemet_hora"] = aemet_hora.strftime('%Y/%m/%d %H:%M:%S')
-    print(f"Sin toma - {aemet_hora.strftime('%Y/%m/%d %H:%M:%S')}, ", end="")
 
-########################################################################
-##  Capturar datos de la web de la AEMET a partir del nº de estación  ##
-########################################################################
-estacion_aemet = "9434P"
-url_aemet = "http://www.aemet.es/es/eltiempo/observacion/ultimosdatos_" + estacion_aemet + "_datos-horarios.csv?k=arn&l=" + estacion_aemet + "&datos=det&w=0&f=temperatura&x=h24"
+##############################################################################################
+##  Capturar datos de la web de la AEMET a partir del nº de estación e intervalo de tiempo  ##
+##############################################################################################
 
-# Si han pasado 20' desde la ultima medida o no existe vuelve a coger la temperatura exterior o es la ultima toma del día
-tiempo_aemet = round((datetime.now() - aemet_hora).seconds/60)
-
-if tiempo_aemet > 20 or not "aemet_temp" in datos_json or (datetime.now().hour == 23 and datetime.now().minute >= 54):
-
-    # Intento de acceder a la web de la AEMET
-    try:
-        aemet_online = True
-        aemet_datos = requests.get(url_aemet, allow_redirects=True).text.replace('"', "").splitlines()
-    except:
-        aemet_online = False
-        print("no hay conexión con la web de la AEMET.")
-
-    if aemet_online:
-        if aemet_datos[4].split(",")[1] == "":
-            print("error de medida en la web de la AEMET.")
-            aemet_online = False
-
-    if aemet_online:
-        
-        aemet_temp = float(aemet_datos[4].split(",")[1])
-        datos_json["aemet_temp"] = aemet_temp
-        aemet_hora = datetime.now()
-        datos_json["aemet_hora"] = aemet_hora.strftime('%Y/%m/%d %H:%M:%S')
-        print(f"Se guarda {aemet_temp}ºC a las {aemet_hora.hour}:{aemet_hora.minute}")
-
-        # Calculo de la media diaria
-        temp = 0.0
-        num = 0
-        for i in range(4,len(aemet_datos)):
-            temp += float(aemet_datos[i].split(",")[1])
-            num += 1
-        aemet_media = round(temp / num,1)
-    else:
-        aemet_temp = "error"
-        datos_json["aemet_temp"] = "error"
-else:
-    aemet_temp = datos_json["aemet_temp"]
-    print(f"Tª captada hace menos de 20'({aemet_temp}ºC)")
+exterior = Aemet("9434P",20)
 
 ##########################################################################
 ##  Capturar datos de Tª y humedad del sensor conectado a la raspberry  ##
@@ -406,7 +359,7 @@ datos_json["rele_estado"] = estado
 if datetime.now().hour == 23 and datetime.now().minute >= 54:
     if estado == "on":
         datos_json["rele_total_on"] += 5
-    telegram.enviar(f'Hoy la calefacción ha estado {datos_json["rele_total_on"]} minutos encendida con {aemet_media}ºC de media exterior.')
+    telegram.enviar(f'Hoy la calefacción ha estado {datos_json["rele_total_on"]} minutos encendida con {exterior.temp_media}ºC de media exterior.')
     datos_json["rele_total_on"] = 0
 
 
@@ -429,7 +382,7 @@ if gsheet_online:
         print("Nada ha cambiado (La humedad no cuenta...)")
     elif var_temp >= 0.1 or rele_estado == "on":
         gsheet_datos.escribir_celda("consigna","A1",consigna_temp_act)
-        gsheet_datos.escribir_fila("datos",[tiempo,aemet_temp,consigna_temp_act,real_temp,real_hume,rele_estado,var_temp_tiempo,rele_tiempo_on])
+        gsheet_datos.escribir_fila("datos",[tiempo,exterior.temp_actual,consigna_temp_act,real_temp,real_hume,rele_estado,var_temp_tiempo,rele_tiempo_on])
         print("Se han guardado los datos actuales.")
 else:
     print(f"Dato act: Tª consigna: {consigna_temp_act} - Tª real:{real_temp}ºC - Calef:{estado} - Humedad:{real_hume}%")
