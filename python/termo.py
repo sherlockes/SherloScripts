@@ -1,10 +1,11 @@
 #!/usr/bin/python3
+
 ##################################################################
 # Script Name: termo.py
 # Description: Termostato inteligente a partir de una sonda dh22
 #              Y de un relé sonoff integrado mediante google sheets
 # Args: N/A
-# Creation/Update: 20201104/20201212
+# Creation/Update: 20201104/20201215
 # Author: www.sherblog.pro                                                
 # Email: sherlockes@gmail.com                                           
 ##################################################################
@@ -147,6 +148,7 @@ else:
     consigna_temp_ant = datos_json["consigna"]
 
 def consigna_programa():
+    salida = float(temperaturas[len(horas)-1])
     for i in horas:
         hora = datetime.strptime(i, '%H:%M')
         hora = ahora.replace( hour=hora.hour, minute=hora.minute, second=0 )
@@ -222,11 +224,11 @@ if not datos_json["modo_fuera"]:
     consigna_temp_sig = consigna_programa_siguiente()[0]
     minutos_cambio = consigna_programa_siguiente()[1]
 
-    if consigna_temp_act < consigna_temp_sig and minutos_cambio < datos_json["inercia"]/60:
+    if consigna_temp_act < consigna_temp_sig and minutos_cambio < datos_json["inercia"]/60 and not datos_json["consigna"] == consigna_temp_sig:
         print(f"Se cambia la consigna de Tª de {str(consigna_temp_act)} a {str(consigna_temp_sig)}ºC.")
         telegram.enviar(f"Se cambia la consigna de Tª de {str(consigna_temp_act)} a {str(consigna_temp_sig)}ºC.")
         consigna_temp_act = consigna_temp_sig
-    elif consigna_temp_act > consigna_temp_sig and minutos_cambio < (datos_json["inercia"]/60)/3:
+    elif consigna_temp_act > consigna_temp_sig and minutos_cambio < (datos_json["inercia"]/60)/3 and not datos_json["consigna"] == consigna_temp_sig:
         print(f"Se cambia la consigna de Tª de {str(consigna_temp_act)} a {str(consigna_temp_sig)}ºC.")
         telegram.enviar(f"Se cambia la consigna de Tª de {str(consigna_temp_act)} a {str(consigna_temp_sig)}ºC.")
         consigna_temp_act = consigna_temp_sig
