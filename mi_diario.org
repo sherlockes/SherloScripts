@@ -205,6 +205,9 @@ https://morioh.com/p/8a40c3345286
 **** Mover a la pestaña posterior (Derecha) > C-AvPag
 *** General
 **** Seleccionar todo > C-a
+*** Vscode
+**** Enfocar la pantalla de terminal - Ctrl +j
+**** Cambiar de pestaña - Ctrl + TAB
 * Temp
 ** Links
 https://www.linuxquestions.org/questions/blog/lumak-426618/having-fun-with-bash-varaibles-indirect-variable-references-2450/
