@@ -1,0 +1,116 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-size: 150%;
+    line-height: 1.5
+}
+
+h1, h2, h3, h4 {
+    margin: 1em 0 .5em;
+    line-height: 1.25
+}
+
+h1 {
+    font-size: 2em
+}
+
+h2 {
+    font-size: 1.5em
+}
+
+h3 {
+    font-size: 1.2em
+}
+
+ul, ol {
+    margin: 1em 0;
+    padding-left: 40px
+}
+
+p, figure {
+    margin: 1em 0
+}
+
+a img {
+    border: none
+}
+
+sup, sub {
+    line-height: 0
+}
+
+.range-slider{
+    padding: 10px 60px 15px 0;
+    margin: 20px 0 0 3%;
+    position: relative;
+}
+.range-slider input[type="range"]{
+    background: #dcdcdc;
+    width: 100%;
+    height: 100px;
+    border-radius: 20px;
+    outline: none;
+    -webkit-appearance: none;
+}
+
+.range-slider input[type="text"]{
+    border-top-style: hidden;
+    border-right-style: hidden;
+    border-left-style: hidden;
+    border-bottom-style: groove;
+    background: transparent;
+    font-size: 50px;
+    font-weight: 600;
+    text-align: center;
+    width: 100%;
+    height: 5%;
+    outline: none;
+    -webkit-appearance: none;
+}
+
+.range-slider input[type="range"]::-webkit-slider-thumb{
+    background: #0775c0;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    box-shadow: 0 0 2px #999 inset,0 0 0 13px #fff inset,0 0 0 1px #dcdcdc;
+    cursor: pointer;
+    transition: all 0.15s ease-in-out 0s;
+    -webkit-appearance: none;
+    appearance: none;
+}
+.range-slider input[type="range"]::-webkit-slider-thumb:hover,
+.range-slider input[type="range"]:active::-webkit-slider-thumb{
+    box-shadow: 0 0 2px #999 inset,0 0 0 13px #fff inset,0 0 3px 3px #dcdcdc;
+}
+.range-slider input[type="range"]::-moz-range-thumb{
+    background: #0775c0;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    border: none;
+    box-shadow: 0 0 2px #999 inset,0 0 0 13px #fff inset,0 0 0 1px #dcdcdc;
+    cursor: pointer;
+    transition: all 0.15s ease-in-out 0s;
+}
+.range-slider input[type="range"]::-moz-range-thumb:hover,
+.range-slider input[type="range"]:active::-moz-range-thumb{
+    box-shadow: 0 0 2px #999 inset,0 0 0 13px #fff inset,0 0 3px 3px #dcdcdc;
+}
+.range-slider .range-value{
+    color: #fff;
+    background-color: #0775c0;
+    font-size: 18px;
+    font-weight: 600;
+    text-align: center;
+    width: 50px;
+    padding: 5px 5px;
+    border-radius: 30% 0 30% 30%;
+    position: absolute;
+    bottom: 4px;
+    right: 0;
+}
+::-moz-range-track{
+    background: transparent;
+    border: 0;
+}

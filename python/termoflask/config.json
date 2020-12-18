@@ -1,0 +1,34 @@
+{
+    "aemet_hora": "2020/12/12 12:25:02",
+    "aemet_temp": 10.8,
+    "rele_hora_cambio": "2020/12/12 10:55:12",
+    "rele_estado": "off",
+    "histeresis": 0.2,
+    "inercia": 1025,
+    "inercia_rango": 1.013,
+    "consigna": 21.5,
+    "rele_total_on": 65,
+    "modo_fuera": false,
+    "cons_fuera": 16,
+    "cons_manual": "17",
+    "hora_manual": "2020/12/12 10:35:03",
+    "personas": [
+        "192.168.1.21",
+        "192.168.1.22"
+    ],
+    "horas": [
+        "7:45",
+        "9:00",
+        "12:30",
+        "18:00",
+        "22:30"
+    ],
+    "temperaturas": [
+        "22",
+        "20.5",
+        "21.5",
+        "22.5",
+        "20.5"
+    ],
+    "dec_casa_vacia": 0.5
+}
