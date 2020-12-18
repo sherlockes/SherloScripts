@@ -12,8 +12,9 @@
 
 import Adafruit_DHT as dht
 import time
-import telegram
 import logging
+
+from etc.telegram import Telegram
 
 class Dht22:
     def __init__(self,pin):
@@ -24,7 +25,7 @@ class Dht22:
         except:
             self.online = False
             logging.warning("Ha fallado la sonda de temperatura¡¡¡¡")
-            telegram.enviar("Ha fallado la sonda de temperatura¡¡¡¡")
+            Telegram("Ha fallado la sonda de temperatura¡¡¡¡")
 
         while self.datos_dht[0] > 100:
             time.sleep(5)

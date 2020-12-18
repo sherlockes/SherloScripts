@@ -5,25 +5,30 @@
 # Description: Termostato inteligente a partir de una sonda dh22
 #              Y de un relé sonoff integrado mediante google sheets
 # Args: N/A
-# Creation/Update: 20201104/20201215
+# Creation/Update: 20201104/20201218
 # Author: www.sherblog.pro                                                
 # Email: sherlockes@gmail.com                                           
 ##################################################################
-import Adafruit_DHT as dht
-import gspread
+
 import requests
 import ast
 from datetime import datetime
 from datetime import timedelta
 from datetime import date
 import json
-import telegram
+
 import os
 import time
 
-from aemet import Aemet
+from etc.aemet import Aemet
+from etc.dht22 import Dht22
+from etc.gsheet import Gsheet
+from etc.telegram import Telegram
 
-print(f"Inicio: Script ejecutado a las {datetime.now().hour}:{datetime.now().minute}")
+import logging
+logging.basicConfig(format='%(asctime)s %(message)s', datefmt='%Y%m%d %H:%M', level=logging.INFO)
+
+logging.info(f"Inicio - Ejecutando {os.path.realpath(__file__)}")
 
 #######################################################
 ##  Carga el archivo "config.json" de configuración  ##
@@ -82,61 +87,28 @@ else:
 ##############################################################################################
 
 exterior = Aemet("9434P",20)
+datos_json["aemet_hora"] = exterior.hora
+datos_json["aemet_temp"] = exterior.temp_actual
+datos_json["aemet_media"] = exterior.temp_media
 
 ##########################################################################
 ##  Capturar datos de Tª y humedad del sensor conectado a la raspberry  ##
 ##########################################################################
-datos_dht = dht.read_retry(dht.DHT22,4)
 
-while datos_dht[0] > 100:
-    time.sleep(5)
-    datos_dht = dht.read_retry(dht.DHT22,4)
-    
-real_hume = round(datos_dht[0],2)
-real_temp = round(datos_dht[1],2)
+interior = Dht22(4)
 
 ####################################################################
 ##  Clase e Reniciar el archivo de Gsheet  ##
 ####################################################################
 
-class Gsheet:
-    def __init__(self,archivo):
-        self.con = gspread.service_account()
-        self.archivo = self.con.open(archivo)
-    
-    # Leer una celda numérica y pasar el valor en float
-    def leer_celda(self,hoja,celda):
-        self.hoja = self.archivo.worksheet(hoja)
-        return float(self.hoja.acell(celda).value.replace(",", "."))
-
-    def escribir_celda(self,hoja,celda,valor):
-        self.hoja = self.archivo.worksheet(hoja)
-        self.hoja.update(celda, valor)
-
-    # Leer una fila entera
-    def leer_fila(self,hoja,fila):
-        self.hoja = self.archivo.worksheet(hoja)
-        return self.hoja.row_values(fila)
-
-    # Escribir y ordenar una fila
-    def escribir_fila(self,hoja,datos):
-        self.hoja = self.archivo.worksheet(hoja)
-        self.hoja.append_row(datos)
-        self.hoja.sort((1, 'des'), (2, 'des'), range='A2:AA106000')
-
-# Intento de conexión a la hoja de cálculo
-gsheet_online = True
-try:
-    gsheet_datos = Gsheet("shermostat")
-except:
-    gsheet_online = False
+gsheet_datos = Gsheet("shermostat")
 
 #################################################################
 ##  Establece las consignas de Temperatura actual y posterior  ##
 #################################################################
 ahora = datetime.now()
 
-if gsheet_online:
+if gsheet_datos.online:
     horas = gsheet_datos.leer_fila("config",2)
     datos_json["horas"] = horas
     temperaturas = gsheet_datos.leer_fila("config",3)
@@ -177,14 +149,10 @@ def consigna_programa_siguiente():
     return salida
 
 def consigna_manual():
-    if gsheet_online:
-        if not datos_json["consigna"] == float(gsheet_datos.leer_celda("consigna","A1")):
-            datos_json["hora_manual"] = ahora.strftime('%Y/%m/%d %H:%M:%S')
-
-        hora_manual = datetime.strptime(datos_json["hora_manual"], '%Y/%m/%d %H:%M:%S')
-        if round((ahora - hora_manual).seconds/60) < 60:
-            print(f"Establecida consigna manual hasta dentro de {60 - round((ahora - hora_manual).seconds/60)} minutos.")
-            return True
+    hora_manual = datetime.strptime(datos_json["hora_manual"], '%Y/%m/%d %H:%M:%S')
+    if round((ahora - hora_manual).seconds/60) < 60:
+        print(f"Establecida consigna manual hasta dentro de {60 - round((ahora - hora_manual).seconds/60)} minutos.")
+        return True
     else:
         return False
 
@@ -211,10 +179,10 @@ elif not datos_json["modo_fuera"] and datos_json["consigna"] == datos_json["cons
     # Recupera la consigna al volver del modo fuera de casa
     consigna_temp_act = consigna_programa()
 elif consigna_manual():
-    # Si se ha establecido manual pone la consigna de la hoja de cálculo
-    consigna_temp_act = float(gsheet_datos.leer_celda("consigna","A1"))
+    consigna_temp_act = datos_json["cons_manual"]
 else:
     consigna_temp_act = consigna_programa()
+    datos_json["cons_manual"] = consigna_temp_act
 
 consigna_temp_var = consigna_temp_act - consigna_temp_ant
 
@@ -226,11 +194,11 @@ if not datos_json["modo_fuera"]:
 
     if consigna_temp_act < consigna_temp_sig and minutos_cambio < datos_json["inercia"]/60 and not datos_json["consigna"] == consigna_temp_sig:
         print(f"Se cambia la consigna de Tª de {str(consigna_temp_act)} a {str(consigna_temp_sig)}ºC.")
-        telegram.enviar(f"Se cambia la consigna de Tª de {str(consigna_temp_act)} a {str(consigna_temp_sig)}ºC.")
+        Telegram(f"Se cambia la consigna de Tª de {str(consigna_temp_act)} a {str(consigna_temp_sig)}ºC.")
         consigna_temp_act = consigna_temp_sig
     elif consigna_temp_act > consigna_temp_sig and minutos_cambio < (datos_json["inercia"]/60)/3 and not datos_json["consigna"] == consigna_temp_sig:
         print(f"Se cambia la consigna de Tª de {str(consigna_temp_act)} a {str(consigna_temp_sig)}ºC.")
-        telegram.enviar(f"Se cambia la consigna de Tª de {str(consigna_temp_act)} a {str(consigna_temp_sig)}ºC.")
+        Telegram(f"Se cambia la consigna de Tª de {str(consigna_temp_act)} a {str(consigna_temp_sig)}ºC.")
         consigna_temp_act = consigna_temp_sig
     else:
         print(f"Consigna actual de {consigna_temp_act}, faltan {str(minutos_cambio)} minutos para cambiar a {str(consigna_temp_sig)}ºC.")
@@ -251,7 +219,7 @@ datos_json["consigna"] = consigna_temp_act
 ## Cálculo de datos ##
 ######################
 
-if gsheet_online:
+if gsheet_datos.online:
 
     tiempo = datetime.now().strftime('%Y/%m/%d %H:%M:%S')
     tiempo_ant = datetime.strptime(gsheet_datos.leer_fila("datos",2)[0], '%Y/%m/%d %H:%M:%S')
@@ -259,18 +227,18 @@ if gsheet_online:
     real_temp_ant = float(gsheet_datos.leer_fila("datos",2)[3])
     hum_ant_real = float(gsheet_datos.leer_fila("datos",2)[4])
     temp_ant_estado = gsheet_datos.leer_fila("datos",2)[5]
-    var_temp = abs(real_temp - real_temp_ant) + abs(consigna_temp_act - consigna_temp_ant)
+    var_temp = abs(interior.temp - real_temp_ant) + abs(consigna_temp_act - consigna_temp_ant)
     var_tiempo = datetime.now() - tiempo_ant
-    var_temp_tiempo = round((60*(real_temp - real_temp_ant))/var_tiempo.seconds,2)
+    var_temp_tiempo = round((60*(interior.temp - real_temp_ant))/var_tiempo.seconds,2)
     if abs(var_temp_tiempo) < 0.01:
         var_temp_tiempo = 0
 
     # Incrementa la inercia si la Tª supera el rango de inercia con la caldera encendida
-    if real_temp > datos_json["inercia_rango"] * (datos_json["consigna"] + datos_json["histeresis"]) and datos_json["rele_estado"] == "on":
+    if interior.temp > datos_json["inercia_rango"] * (datos_json["consigna"] + datos_json["histeresis"]) and datos_json["rele_estado"] == "on":
         if datos_json["inercia"] <= 1800:
             datos_json["inercia"] += 25
         print("Se ha aumentado la inercia térmica de la caldera")
-        telegram.enviar("Se ha aumentado la inercia térmica de la caldera")
+        Telegram("Se ha aumentado la inercia térmica de la caldera")
 else:
     var_temp_tiempo = 0
 
@@ -303,31 +271,31 @@ if response == 0:
         print(f"Estado del relé - OK ({rele_estado})")
         datos_json["rele_estado"] = rele_estado
     else:
-        telegram.enviar("Algo falla en el relé de la calefacción")
+        Telegram("Algo falla en el relé de la calefacción")
         print(f"Estado del relé - KO")
 else:
     print("ATENCIÓN!!! El relé no está conectado a la red")
-    telegram.enviar("ATENCIÓN!!! El relé de la calefacción no está conectado a la red.")
+    Telegram("ATENCIÓN!!! El relé de la calefacción no está conectado a la red.")
 
 
 # Enciende la calefacción si la temp real está por debajo de la histéresis
-if real_temp < (consigna_temp_act - datos_json["histeresis"]) and rele_estado == "off":
+if interior.temp < (consigna_temp_act - datos_json["histeresis"]) and rele_estado == "off":
     consulta = requests.post(url, json = rele_on )
     if consulta.json()["error"] == 0:
         estado = "on"
         print("Se ha encendido la calefacción")
     else:
         estado = "ERROR en relé"
-        telegram.enviar("No ha sido posible encender el rele de la calefacción")     
+        Telegram("No ha sido posible encender el rele de la calefacción")     
 # Apaga la calefacción si la real mas la esperada por inercia está por encima
-elif real_temp + (var_temp_tiempo * (datos_json["inercia"]/60))> consigna_temp_act + datos_json["histeresis"] and rele_estado == "on":
+elif interior.temp + (var_temp_tiempo * (datos_json["inercia"]/60))> consigna_temp_act + datos_json["histeresis"] and rele_estado == "on":
     consulta = requests.post(url, json = rele_off)
     if consulta.json()["error"] == 0:
         estado = "off"
         print("Se ha apagado la calefacción")
     else:
         estado = "ERROR en relé"
-        telegram.enviar("No ha sido posible apagar el rele de la calefacción")
+        Telegram("No ha sido posible apagar el rele de la calefacción")
 else:
     estado = rele_estado
 
@@ -344,15 +312,15 @@ if estado != datos_json["rele_estado"]:
         if rele_tiempo_off < 15 and datos_json["inercia"] >= 300:
             datos_json["inercia"] -= 25
             print("Se ha disminuido la inercia")
-            telegram.enviar("Se ha disminuido la inercia de la calefacción")
+            Telegram("Se ha disminuido la inercia de la calefacción")
     
     if estado == "off":
         rele_tiempo_on = datetime.now()-rele_hora_cambio
         rele_tiempo_on = round((rele_tiempo_on.seconds)/60)
-        telegram.enviar(f'La calefacción ha estado {rele_tiempo_on} minutos encendida.')
+        Telegram(f'La calefacción ha estado {rele_tiempo_on} minutos encendida.')
         datos_json["rele_total_on"] += rele_tiempo_on
     
-    #telegram.enviar(f'Ha cambiado el estado de la calefacción a {estado}')
+    #Telegram(f'Ha cambiado el estado de la calefacción a {estado}')
     datos_json["rele_hora_cambio"] = datetime.now().strftime('%Y/%m/%d %H:%M:%S')
 
 datos_json["rele_estado"] = estado
@@ -361,16 +329,16 @@ datos_json["rele_estado"] = estado
 if datetime.now().hour == 23 and datetime.now().minute >= 54:
     if estado == "on":
         datos_json["rele_total_on"] += 5
-    telegram.enviar(f'Hoy la calefacción ha estado {datos_json["rele_total_on"]} minutos encendida con {exterior.temp_media}ºC de media exterior.')
+    Telegram(f'Hoy la calefacción ha estado {datos_json["rele_total_on"]} minutos encendida con {exterior.temp_media}ºC de media exterior.')
     datos_json["rele_total_on"] = 0
 
 
 #################################################################
 ## Graba los datos en una hoja de Google Sheets si han variado ##
 #################################################################
-if gsheet_online:
+if gsheet_datos.online:
     print(f"Dato ant: Tª consigna: {consigna_temp_ant} - Tª real:{real_temp_ant}ºC - Calef:{temp_ant_estado} - Humedad:{hum_ant_real}%")
-    print(f"Dato act: Tª consigna: {consigna_temp_act} - Tª real:{real_temp}ºC - Calef:{estado} - Humedad:{real_hume}%")
+    print(f"Dato act: Tª consigna: {consigna_temp_act} - Tª real:{interior.temp}ºC - Calef:{estado} - Humedad:{interior.hume}%")
 
     print("Datos GSheet: ", end="")
     # Guarda la consigna (Si ha variado)
@@ -384,10 +352,10 @@ if gsheet_online:
         print("Nada ha cambiado (La humedad no cuenta...)")
     elif var_temp >= 0.1 or rele_estado == "on":
         gsheet_datos.escribir_celda("consigna","A1",consigna_temp_act)
-        gsheet_datos.escribir_fila("datos",[tiempo,exterior.temp_actual,consigna_temp_act,real_temp,real_hume,rele_estado,var_temp_tiempo,rele_tiempo_on])
+        gsheet_datos.escribir_fila("datos",[tiempo,exterior.temp_actual,consigna_temp_act,interior.temp,interior.hume,rele_estado,var_temp_tiempo,rele_tiempo_on])
         print("Se han guardado los datos actuales.")
 else:
-    print(f"Dato act: Tª consigna: {consigna_temp_act} - Tª real:{real_temp}ºC - Calef:{estado} - Humedad:{real_hume}%")
+    print(f"Dato act: Tª consigna: {consigna_temp_act} - Tª real:{interior.temp}ºC - Calef:{estado} - Humedad:{interior.hume}%")
 
 #######################################################################
 ## Graba los parámetros de configuración en el archivo "config.json" ##

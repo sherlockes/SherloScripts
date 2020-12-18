@@ -63,7 +63,8 @@ class Aemet:
 
   
             aemet_hora = datetime.now()
-            self.datos_json["aemet_hora"] = aemet_hora.strftime('%Y/%m/%d %H:%M:%S')
+            self.hora = aemet_hora.strftime('%Y/%m/%d %H:%M:%S')
+            self.datos_json["aemet_hora"] = self.hora
             self.temp_actual = self.t_actual()
             self.datos_json["aemet_temp"] = self.temp_actual
             self.temp_media = self.t_media()
@@ -71,12 +72,13 @@ class Aemet:
 
             logging.info(f"Aemet - Se guarda {self.temp_actual}ºC a las {aemet_hora.hour}:{aemet_hora.minute}")
 
-            with open("cfg_aemet.json", "w") as archivo_json:
+            with open('cfg_aemet.json', 'w') as archivo_json:
                 json.dump(self.datos_json, archivo_json, indent = 2)
         else:
             logging.info(f"Aemet - No han pasado todavía {self.intervalo} minutos desde la última toma.")
             self.temp_actual = self.datos_json["aemet_temp"]
             self.temp_media = self.datos_json["aemet_media"]
+            self.hora = self.datos_json["aemet_hora"]
 
 
     def t_actual(self):
