@@ -1,3 +1,4 @@
-#source env/bin/activate
+#!/bin/bash
+cd SherloScripts/python/termoflask
 export FLASK_APP=run.py
-flask run --host 0.0.0.0 --port 5000
+python3 -m flask run --host 0.0.0.0 --port 5000
