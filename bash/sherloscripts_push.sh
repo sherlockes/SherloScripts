@@ -42,9 +42,29 @@ done
 
 
 # --------------------------------------------------------------
+# Comprueba el estado de las distintas nubes públicas
+# --------------------------------------------------------------
+
+unidades=(Onedrive_UN_en Sherlockes78_UN_en)
+
+notificacion=~/SherloScripts/bash/telegram.sh
+
+for u in "${unidades[@]}"
+do
+    rclone -v size $u:
+
+    if [ $? -eq 0 ]; then
+	echo "OK"
+    else
+	echo "KO"
+    $notificacion "Hay un erro de conexión con $u"
+    fi
+done
+
+# --------------------------------------------------------------
 # Sincroniza Sherloflix con la unidad compartida de Sherlockes78
 # --------------------------------------------------------------
-rclone sync Sherloflix_en: Sherlockes78_UN_en: --transfers 2 --tpslimit 8 --bwlimit 5M
+rclone sync Sherlockes78_UN_en: Onedrive_UN_en: --transfers 2 --tpslimit 8 --bwlimit 5M
 
 
 exit 0
