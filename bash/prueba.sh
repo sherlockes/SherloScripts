@@ -9,20 +9,21 @@
 # Email: sherlockes@gmail.com                                           
 ###################################################################
 
-lista=(pi@192.168.1.203 sherlockes@192.168.1.200)
+lista=(Onedrive_UN_en dd_gdu)
+
+notificacion=~/SherloScripts/bash/telegram.sh
 
 origen=$(rclone config file | cut -d ":" -f 2)
 
-#scp $origen $destino
 
 for u in "${lista[@]}"
 do
-    # Extrae ruta del archivo de configuración
-    destino=$(ssh $u rclone config file | cut -d ":" -f 2 | rev | cut -d "/" -f2-8 | rev )
-    # Quita el primer carácter en blanco y añade la barra
-    destino="${destino:1}/"
-    scp $origen $u:$destino
+    rclone -v size $u:
+
+    if [ $? -eq 0 ]; then
+	echo "OK"
+    else
+	echo "KO"
+    $notificacion "Hay un erro de conexión con $u"
+    fi
 done
-
-
-rclone copy $origen Sherlockes_GD:'Mis cosas'
