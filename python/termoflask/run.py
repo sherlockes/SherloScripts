@@ -24,6 +24,11 @@ def index():
         datos_json["consigna"] = datos_json["cons_manual"]
         datos_json["hora_manual"] = hora_manual
 
+        try:
+            datos_json["modo_fuera"] = request.form['modo_fuera']
+        except:
+            datos_json["modo_fuera"] = "False"
+
         # Graba los parámetros de configuración en el archivo "config.json"
 
         with open(os.environ['HOME']+'/config.json', "w") as archivo_json:
@@ -31,11 +36,11 @@ def index():
             
         return redirect(url_for('index'))
 
-
     return render_template("index.html", 
         consigna_manual=datos_json["cons_manual"],
         consigna=datos_json["consigna"],
         aemet_temp=datos_json["aemet_temp"],
         aemet_hora=datos_json["aemet_hora"],
-        rele_total_on=datos_json["rele_total_on"]
+        rele_total_on=datos_json["rele_total_on"],
+        modo_fuera=datos_json["modo_fuera"]
     )
