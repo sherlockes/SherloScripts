@@ -16,12 +16,14 @@
         
 
         <div class="range-slider">
+            <h1>Los deseos de Sarita...</h1>
+            <hr>
             <h1>Consigna de temperatura</h1>
             <input type="range" name="rangeInput" value={{ consigna }} min="15" max="25" step="0.5" oninput="actualizar(this.value);" onchange="cambio()"><br>
             <input type="text" id="textInput" value={{ consigna }} class="field left" readonly="readonly"><br>
             
             <hr>
-            <h1><input type="checkbox" class="grande" id="modo_fuera" name="modo_fuera" value="True" {% if modo_fuera == "True" %}checked="true"{% endif %} onchange="cambio()"> Modo fuera de casa </h1>
+            <h1><input type="checkbox" class="grande" id="modo_fuera" name="modo_fuera" value="True" {% if modo_fuera %}checked="true"{% endif %} onchange="cambio()"> Modo fuera de casa </h1>
             Si está activado, la consigna quedará a 16ºC hasta que se desactive este modo.
             <hr>
         </div>

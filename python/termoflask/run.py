@@ -25,9 +25,10 @@ def index():
         datos_json["hora_manual"] = hora_manual
 
         try:
-            datos_json["modo_fuera"] = request.form['modo_fuera']
+            request.form['modo_fuera']
+            datos_json["modo_fuera"] = True
         except:
-            datos_json["modo_fuera"] = "False"
+            datos_json["modo_fuera"] = False
 
         # Graba los parámetros de configuración en el archivo "config.json"
 
