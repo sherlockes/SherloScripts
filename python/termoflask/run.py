@@ -43,5 +43,6 @@ def index():
         aemet_temp=datos_json["aemet_temp"],
         aemet_hora=datos_json["aemet_hora"],
         rele_total_on=datos_json["rele_total_on"],
-        modo_fuera=datos_json["modo_fuera"]
+        modo_fuera=datos_json["modo_fuera"],
+        real_temp=datos_json["ultima_temp"]
     )
