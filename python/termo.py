@@ -96,6 +96,8 @@ datos_json["aemet_media"] = exterior.temp_media
 ##########################################################################
 
 interior = Dht22(4)
+datos_json["ultima_temp"] = interior.temp
+datos_json["ultima_hume"] = interior.hume
 
 ####################################################################
 ##  Clase e Reniciar el archivo de Gsheet  ##
@@ -194,11 +196,11 @@ if not datos_json["modo_fuera"]:
 
     if consigna_temp_act < consigna_temp_sig and minutos_cambio < datos_json["inercia"]/60 and not datos_json["consigna"] == consigna_temp_sig:
         print(f"Se cambia la consigna de Tª de {str(consigna_temp_act)} a {str(consigna_temp_sig)}ºC.")
-        Telegram(f"Se cambia la consigna de Tª de {str(consigna_temp_act)} a {str(consigna_temp_sig)}ºC.")
+        #Telegram(f"Se cambia la consigna de Tª de {str(consigna_temp_act)} a {str(consigna_temp_sig)}ºC.")
         consigna_temp_act = consigna_temp_sig
     elif consigna_temp_act > consigna_temp_sig and minutos_cambio < (datos_json["inercia"]/60)/3 and not datos_json["consigna"] == consigna_temp_sig:
         print(f"Se cambia la consigna de Tª de {str(consigna_temp_act)} a {str(consigna_temp_sig)}ºC.")
-        Telegram(f"Se cambia la consigna de Tª de {str(consigna_temp_act)} a {str(consigna_temp_sig)}ºC.")
+        #Telegram(f"Se cambia la consigna de Tª de {str(consigna_temp_act)} a {str(consigna_temp_sig)}ºC.")
         consigna_temp_act = consigna_temp_sig
     else:
         print(f"Consigna actual de {consigna_temp_act}, faltan {str(minutos_cambio)} minutos para cambiar a {str(consigna_temp_sig)}ºC.")
@@ -317,7 +319,7 @@ if estado != datos_json["rele_estado"]:
     if estado == "off":
         rele_tiempo_on = datetime.now()-rele_hora_cambio
         rele_tiempo_on = round((rele_tiempo_on.seconds)/60)
-        Telegram(f'La calefacción ha estado {rele_tiempo_on} minutos encendida.')
+        #Telegram(f'La calefacción ha estado {rele_tiempo_on} minutos encendida.')
         datos_json["rele_total_on"] += rele_tiempo_on
     
     #Telegram(f'Ha cambiado el estado de la calefacción a {estado}')
