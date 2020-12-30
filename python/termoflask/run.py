@@ -1,3 +1,14 @@
+#!/usr/bin/python3
+
+##################################################################
+# Script Name: run.py
+# Description: Web en Flask para manejo del termostato 
+# Args: N/A
+# Creation/Update: 20201204/20201230
+# Author: www.sherblog.pro                                                
+# Email: sherlockes@gmail.com                                           
+##################################################################
+
 from flask import Flask, render_template, request, redirect, url_for
 from datetime import datetime
 import json
@@ -20,9 +31,10 @@ def index():
         ahora = datetime.now()
         hora_manual = ahora.strftime('%Y/%m/%d %H:%M:%S')
         
-        datos_json["cons_manual"] = float(request.form['rangeInput'])
-        datos_json["consigna"] = datos_json["cons_manual"]
-        datos_json["hora_manual"] = hora_manual
+        if datos_json["cons_manual"] != float(request.form['rangeInput']):
+            datos_json["cons_manual"] = float(request.form['rangeInput'])
+            datos_json["consigna"] = datos_json["cons_manual"]
+            datos_json["hora_manual"] = hora_manual
 
         try:
             request.form['modo_fuera']
@@ -31,7 +43,6 @@ def index():
             datos_json["modo_fuera"] = False
 
         # Graba los parámetros de configuración en el archivo "config.json"
-
         with open(os.environ['HOME']+'/config.json', "w") as archivo_json:
             json.dump(datos_json, archivo_json, indent = 4)
             
