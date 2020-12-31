@@ -195,7 +195,7 @@ if datetime.now().hour == 23 and datetime.now().minute >= 54:
 #################################################################
 if gsheet_datos.online:
     print(f"Dato ant: Tª consigna: {consigna_temp_ant} - Tª real:{real_temp_ant}ºC - Calef:{temp_ant_estado} - Humedad:{hum_ant_real}%")
-    print(f"Dato act: Tª consigna: {consigna_temp_act} - Tª real:{interior.temp}ºC - Calef:{estado} - Humedad:{interior.hume}%")
+    print(f"Dato act: Tª consigna: {consigna_temp_act} - Tª real:{interior.temp}ºC - Calef:{rele.estado} - Humedad:{interior.hume}%")
 
     print("Datos GSheet: ", end="")
     # Guarda la consigna (Si ha variado)
