@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: comentario
+# key: comentario
+# --
+{{< borrador >}}
+${1:comentario...}
+{{< / borrador >}}
