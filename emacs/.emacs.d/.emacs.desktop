@@ -2,12 +2,12 @@
 ;; --------------------------------------------------------------------------
 ;; Desktop File for Emacs
 ;; --------------------------------------------------------------------------
-;; Created Sat Jan  9 12:35:29 2021
+;; Created Sat Jan  9 13:12:58 2021
 ;; Desktop file format version 208
 ;; Emacs version 26.3
 
 ;; Global section:
-(setq desktop-saved-frameset [frameset 1 (24569 38145 338902 590000) (desktop . "208") "sherlockes@imedia" nil nil ((((minibuffer . t) (undecorated) (override-redirect) (font-backend xft x) (font . "-PfEd-DejaVu Sans Mono-normal-normal-normal-*-13-*-*-*-m-0-iso10646-1") (font-parameter . "Monospace 10") (border-width . 0) (internal-border-width . 0) (right-divider-width . 0) (bottom-divider-width . 0) (vertical-scroll-bars . right) (horizontal-scroll-bars) (foreground-color . "#eeeeec") (background-color . "#2e3436") (mouse-color . "black") (border-color . "black") (screen-gamma) (line-spacing) (left-fringe . 8) (right-fringe . 8) (no-special-glyphs) (scroll-bar-foreground) (scroll-bar-background) (menu-bar-lines . 0) (tool-bar-lines . 0) (title) (wait-for-wm . t) (tool-bar-position . top) (inhibit-double-buffering) (icon-type . t) (auto-raise) (auto-lower) (cursor-type . box) (scroll-bar-width . 16) (scroll-bar-height . 0) (alpha) (no-focus-on-map) (no-accept-focus) (fullscreen . maximized) (visibility . t) (skip-taskbar) (z-group) (display-type . color) (background-mode . dark) (cursor-color . "#fce94f") (sticky) (environment) (modeline . t) (unsplittable) (frameset--id . "3AB3-C3EE-0A56-0BA5") (frameset--mini t . t) (display . ":0") (icon-name) (explicit-name) (height . 58) (width . 206) (left . 0) (top . 0)) ((min-height . 4) (min-width . 20) (min-height-ignore . 2) (min-width-ignore . 12) (min-height-safe . 1) (min-width-safe . 4) (min-pixel-height . 68) (min-pixel-width . 160) (min-pixel-height-ignore . 34) (min-pixel-width-ignore . 96) (min-pixel-height-safe . 17) (min-pixel-width-safe . 32)) hc (pixel-width . 1680) (pixel-height . 969) (total-width . 210) (total-height . 57) (normal-height . 1.0) (normal-width . 1.0) (combination-limit) (leaf (pixel-width . 840) (pixel-height . 969) (total-width . 105) (total-height . 57) (normal-height . 1.0) (normal-width . 0.5) (buffer "sherloscripts_push.sh" (selected . t) (hscroll . 0) (fringes 8 8 nil) (margins nil) (scroll-bars nil 2 t nil 0 t) (vscroll . 0) (dedicated) (point . 656) (start . 1))) (leaf (last . t) (pixel-width . 840) (pixel-height . 969) (total-width . 105) (total-height . 57) (normal-height . 1.0) (normal-width . 0.5) (buffer "bash" (selected) (hscroll . 0) (fringes 8 8 nil) (margins nil) (scroll-bars nil 2 t nil 0 t) (vscroll . 0) (dedicated) (point . 1058) (start . 1)))))])
+(setq desktop-saved-frameset [frameset 1 (24569 40394 488858 804000) (desktop . "208") "sherlockes@imedia" nil nil ((((minibuffer . t) (undecorated) (override-redirect) (font-backend xft x) (font . "-PfEd-DejaVu Sans Mono-normal-normal-normal-*-13-*-*-*-m-0-iso10646-1") (font-parameter . "Monospace 10") (border-width . 0) (internal-border-width . 0) (right-divider-width . 0) (bottom-divider-width . 0) (vertical-scroll-bars . right) (horizontal-scroll-bars) (foreground-color . "#eeeeec") (background-color . "#2e3436") (mouse-color . "black") (border-color . "black") (screen-gamma) (line-spacing) (left-fringe . 8) (right-fringe . 8) (no-special-glyphs) (scroll-bar-foreground) (scroll-bar-background) (menu-bar-lines . 0) (tool-bar-lines . 0) (title) (wait-for-wm . t) (tool-bar-position . top) (inhibit-double-buffering) (icon-type . t) (auto-raise) (auto-lower) (cursor-type . box) (scroll-bar-width . 16) (scroll-bar-height . 0) (alpha) (no-focus-on-map) (no-accept-focus) (fullscreen . maximized) (visibility . t) (skip-taskbar) (z-group) (display-type . color) (background-mode . dark) (cursor-color . "#fce94f") (sticky) (environment) (modeline . t) (unsplittable) (frameset--id . "3AB3-C3EE-0A56-0BA5") (frameset--mini t . t) (display . ":0") (icon-name) (explicit-name) (height . 58) (width . 206) (left . 0) (top . 0)) ((min-height . 4) (min-width . 20) (min-height-ignore . 2) (min-width-ignore . 12) (min-height-safe . 1) (min-width-safe . 4) (min-pixel-height . 68) (min-pixel-width . 160) (min-pixel-height-ignore . 34) (min-pixel-width-ignore . 96) (min-pixel-height-safe . 17) (min-pixel-width-safe . 32)) hc (pixel-width . 1680) (pixel-height . 969) (total-width . 210) (total-height . 57) (normal-height . 1.0) (normal-width . 1.0) (combination-limit) (leaf (pixel-width . 840) (pixel-height . 969) (total-width . 105) (total-height . 57) (normal-height . 1.0) (normal-width . 0.5) (buffer "README.org" (selected . t) (hscroll . 0) (fringes 8 8 nil) (margins nil) (scroll-bars nil 2 t nil 0 t) (vscroll . 0) (dedicated) (point . 826) (start . 1))) (leaf (last . t) (pixel-width . 840) (pixel-height . 969) (total-width . 105) (total-height . 57) (normal-height . 1.0) (normal-width . 0.5) (buffer "README.org" (selected) (hscroll . 0) (fringes 8 8 nil) (margins nil) (scroll-bars nil 2 t nil 0 t) (vscroll . 0) (dedicated) (point . 857) (start . 1)))))])
 (setq desktop-missing-file-warning nil)
 (setq tags-file-name nil)
 (setq tags-table-list nil)
@@ -18,38 +18,26 @@
 
 ;; Buffer section -- buffers listed in same order as in buffer list:
 (desktop-create-buffer 208
-  "/home/sherlockes/rpi/SherloScripts/bash/sherloscripts_push.sh"
-  "sherloscripts_push.sh"
-  'sh-mode
-  '(visual-line-mode yas-minor-mode)
-  656
-  '(nil nil)
-  nil
-  nil
-  '((buffer-display-time 24569 38105 930967 110000) (buffer-file-coding-system . utf-8-unix) (truncate-lines))
-  '((mark-ring nil)))
-
-(desktop-create-buffer 208
-  nil
-  "bash"
-  'dired-mode
-  '(visual-line-mode yas-minor-mode)
-  1058
-  '(nil nil)
-  t
-  '("/home/sherlockes/rpi/SherloScripts/bash/")
-  '((buffer-display-time 24569 38105 930972 487000) (truncate-lines))
-  '((mark-ring nil)))
-
-(desktop-create-buffer 208
   "/home/sherlockes/rpi/SherloScripts/README.org"
   "README.org"
   'org-mode
   '(visual-line-mode yas-minor-mode)
-  81
+  826
+  '(894 nil)
+  nil
+  nil
+  '((buffer-display-time 24569 40330 137870 353000) (buffer-file-coding-system . utf-8-unix) (truncate-lines))
+  '((mark-ring (894 894 765 761 862 894 831 831 862 857 894 759 826))))
+
+(desktop-create-buffer 208
+  nil
+  "SherloScripts"
+  'dired-mode
+  '(visual-line-mode yas-minor-mode)
+  637
   '(nil nil)
-  nil
-  nil
-  '((buffer-display-time 24569 38088 791654 689000) (buffer-file-coding-system . utf-8-unix) (truncate-lines))
+  t
+  '("/home/sherlockes/rpi/SherloScripts/")
+  '((buffer-display-time 24569 40278 889301 317000) (truncate-lines))
   '((mark-ring nil)))
 
