@@ -16,6 +16,7 @@ from datetime import datetime
 from datetime import timedelta
 from datetime import date
 import json
+from pathlib import Path
 
 import os
 import time
@@ -26,6 +27,7 @@ from etc.gsheet import Gsheet
 from etc.telegram import Telegram
 from etc.consigna import Consigna
 from etc.sonoff import Sonoff
+from etc.sqlite import Sqlite
 
 import logging
 logging.basicConfig(format='%(asctime)s %(message)s', datefmt='%Y%m%d %H:%M', level=logging.INFO)
@@ -182,13 +184,23 @@ if rele.estado != datos_json["rele_estado"]:
 
 datos_json["rele_estado"] = rele.estado
 
+
+
+
+################################################
+## Graba los datos en la base de datos sqlite ##
+################################################
+ruta_db = os.path.join(Path.home(),"termostato.db")
+datos = Sqlite(ruta_db)
+datos.nuevo_dato(exterior.temp_actual,interior.temp,consigna.actual,rele.estado)
+
 # Enviar el total de minutos en el ultimo informe del día
 if datetime.now().hour == 23 and datetime.now().minute >= 54:
     if estado == "on":
         datos_json["rele_total_on"] += 5
+    datos.nueva_media(datos.media("exterior"),datos.media("interior"),{datos_json["rele_total_on"]})
     Telegram(f'Hoy la calefacción ha estado {datos_json["rele_total_on"]} minutos encendida con {exterior.temp_media}ºC de media exterior.')
     datos_json["rele_total_on"] = 0
-
 
 #################################################################
 ## Graba los datos en una hoja de Google Sheets si han variado ##
