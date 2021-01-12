@@ -1,5 +1,13 @@
-from aemet import Aemet
+#!/usr/bin/python3
 
-alum = Aemet("9434P",20)
-print(alum.temp_actual)
-print(alum.temp_media)
+import os
+
+from etc.sqlite import Sqlite
+
+from pathlib import Path
+
+ruta_db = os.path.join(Path.home(),"termostato.db")
+datos = Sqlite(ruta_db)
+#datos.nuevo_dato(exterior.temp_actual,interior.temp,consigna.actual,rele.estado)
+datos.nueva_media(datos.media("exterior"),datos.media("interior"),222)
+

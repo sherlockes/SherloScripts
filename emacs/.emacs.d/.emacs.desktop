@@ -2,12 +2,12 @@
 ;; --------------------------------------------------------------------------
 ;; Desktop File for Emacs
 ;; --------------------------------------------------------------------------
-;; Created Sat Jan  9 14:28:03 2021
+;; Created Tue Jan 12 16:18:44 2021
 ;; Desktop file format version 208
 ;; Emacs version 26.3
 
 ;; Global section:
-(setq desktop-saved-frameset [frameset 1 (24569 44899 749278 55000) (desktop . "208") "sherlockes@imedia" nil nil ((((minibuffer . t) (undecorated) (override-redirect) (font-backend xft x) (font . "-PfEd-DejaVu Sans Mono-normal-normal-normal-*-13-*-*-*-m-0-iso10646-1") (font-parameter . "Monospace 10") (border-width . 0) (internal-border-width . 0) (right-divider-width . 0) (bottom-divider-width . 0) (vertical-scroll-bars . right) (horizontal-scroll-bars) (foreground-color . "#eeeeec") (background-color . "#2e3436") (mouse-color . "black") (border-color . "black") (screen-gamma) (line-spacing) (left-fringe . 8) (right-fringe . 8) (no-special-glyphs) (scroll-bar-foreground) (scroll-bar-background) (menu-bar-lines . 0) (tool-bar-lines . 0) (title) (wait-for-wm . t) (tool-bar-position . top) (inhibit-double-buffering) (icon-type . t) (auto-raise) (auto-lower) (cursor-type . box) (scroll-bar-width . 16) (scroll-bar-height . 0) (alpha) (no-focus-on-map) (no-accept-focus) (fullscreen . maximized) (visibility . t) (skip-taskbar) (z-group) (display-type . color) (background-mode . dark) (cursor-color . "#fce94f") (sticky) (environment) (modeline . t) (unsplittable) (frameset--id . "3AB3-C3EE-0A56-0BA5") (frameset--mini t . t) (display . ":0") (icon-name) (explicit-name) (height . 58) (width . 206) (left . 0) (top . 0)) ((min-height . 4) (min-width . 20) (min-height-ignore . 2) (min-width-ignore . 12) (min-height-safe . 1) (min-width-safe . 4) (min-pixel-height . 68) (min-pixel-width . 160) (min-pixel-height-ignore . 34) (min-pixel-width-ignore . 96) (min-pixel-height-safe . 17) (min-pixel-width-safe . 32)) hc (pixel-width . 1680) (pixel-height . 969) (total-width . 210) (total-height . 57) (normal-height . 1.0) (normal-width . 1.0) (combination-limit) (leaf (pixel-width . 840) (pixel-height . 969) (total-width . 105) (total-height . 57) (normal-height . 1.0) (normal-width . 0.5) (buffer "SherloScripts" (selected) (hscroll . 0) (fringes 8 8 nil) (margins nil) (scroll-bars nil 2 t nil 0 t) (vscroll . 0) (dedicated) (point . 596) (start . 1))) (leaf (last . t) (pixel-width . 840) (pixel-height . 969) (total-width . 105) (total-height . 57) (normal-height . 1.0) (normal-width . 0.5) (buffer "README.org" (selected . t) (hscroll . 0) (fringes 8 8 nil) (margins nil) (scroll-bars nil 2 t nil 0 t) (vscroll . 0) (dedicated) (point . 2320) (start . 1)))))])
+(setq desktop-saved-frameset [frameset 1 (24573 48596 750711 7000) (desktop . "208") "sherlockes@imedia" nil nil ((((minibuffer . t) (undecorated) (override-redirect) (font-backend xft x) (font . "-PfEd-DejaVu Sans Mono-normal-normal-normal-*-13-*-*-*-m-0-iso10646-1") (font-parameter . "Monospace 10") (border-width . 0) (internal-border-width . 0) (right-divider-width . 0) (bottom-divider-width . 0) (vertical-scroll-bars . right) (horizontal-scroll-bars) (foreground-color . "#eeeeec") (background-color . "#2e3436") (mouse-color . "black") (border-color . "black") (screen-gamma) (line-spacing) (left-fringe . 8) (right-fringe . 8) (no-special-glyphs) (scroll-bar-foreground) (scroll-bar-background) (menu-bar-lines . 0) (tool-bar-lines . 0) (title) (wait-for-wm . t) (tool-bar-position . top) (inhibit-double-buffering) (icon-type . t) (auto-raise) (auto-lower) (cursor-type . box) (scroll-bar-width . 16) (scroll-bar-height . 0) (alpha) (no-focus-on-map) (no-accept-focus) (fullscreen . maximized) (visibility . t) (skip-taskbar) (z-group) (display-type . color) (background-mode . dark) (cursor-color . "#fce94f") (sticky) (environment) (modeline . t) (unsplittable) (frameset--id . "3AB3-C3EE-0A56-0BA5") (frameset--mini t . t) (display . ":0") (icon-name) (explicit-name) (height . 58) (width . 206) (left . 0) (top . 0)) ((min-height . 4) (min-width . 20) (min-height-ignore . 2) (min-width-ignore . 12) (min-height-safe . 1) (min-width-safe . 4) (min-pixel-height . 68) (min-pixel-width . 160) (min-pixel-height-ignore . 34) (min-pixel-width-ignore . 96) (min-pixel-height-safe . 17) (min-pixel-width-safe . 32)) hc (pixel-width . 1680) (pixel-height . 969) (total-width . 210) (total-height . 57) (normal-height . 1.0) (normal-width . 1.0) (combination-limit) (leaf (pixel-width . 840) (pixel-height . 969) (total-width . 105) (total-height . 57) (normal-height . 1.0) (normal-width . 0.5) (buffer "post" (selected . t) (hscroll . 0) (fringes 8 8 nil) (margins nil) (scroll-bars nil 2 t nil 0 t) (vscroll . 0) (dedicated) (point . 243) (start . 1))) (leaf (last . t) (pixel-width . 840) (pixel-height . 969) (total-width . 105) (total-height . 57) (normal-height . 1.0) (normal-width . 0.5) (buffer "*scratch*" (selected) (hscroll . 0) (fringes 8 8 nil) (margins nil) (scroll-bars nil 2 t nil 0 t) (vscroll . 0) (dedicated) (point . 146) (start . 1)))))])
 (setq desktop-missing-file-warning nil)
 (setq tags-file-name nil)
 (setq tags-table-list nil)
@@ -18,27 +18,15 @@
 
 ;; Buffer section -- buffers listed in same order as in buffer list:
 (desktop-create-buffer 208
-  "/home/sherlockes/Google_Drive/SherloScripts/README.org"
-  "README.org"
-  'org-mode
-  '(visual-line-mode yas-minor-mode)
-  2320
-  '(nil nil)
   nil
-  nil
-  '((buffer-display-time 24569 41068 760740 191000) (buffer-file-coding-system . utf-8-unix) (truncate-lines))
-  '((mark-ring nil)))
-
-(desktop-create-buffer 208
-  nil
-  "SherloScripts"
+  "post"
   'dired-mode
   '(visual-line-mode yas-minor-mode)
-  596
-  '(664 nil)
+  243
+  '(nil nil)
   t
-  '("/home/sherlockes/Google_Drive/SherloScripts/")
-  '((buffer-display-time 24569 41028 554108 887000) (truncate-lines))
+  '("/home/sherlockes/Google_Drive/Sherblog/content/post/")
+  '((buffer-display-time 24573 35728 546825 808000) (truncate-lines))
   '((mark-ring nil)))
 
 (desktop-create-buffer 208
@@ -50,6 +38,6 @@
   '(nil nil)
   t
   '("/home/sherlockes/Google_Drive/SherloScripts/emacs/")
-  '((buffer-display-time 24569 41025 960462 44000) (truncate-lines))
+  '((buffer-display-time 24573 35456 562176 156000) (truncate-lines))
   '((mark-ring nil)))
 
