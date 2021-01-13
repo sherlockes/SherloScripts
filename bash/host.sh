@@ -4,7 +4,7 @@
 # Script Name: host.sh
 # Description: Monta "host" en la carpeta ~/hostname mediante sshfs
 # Args: N/A
-# Creation/Update: 20201016/20201016
+# Creation/Update: 20201016/20210113
 # Author: www.sherblog.pro                                                
 # Email: sherlockes@gmail.com                                           
 ###################################################################
@@ -45,9 +45,10 @@ mkdir ~/$hostname
 sshfs $host:/home/pi ~/$hostname
 
 # --------------------------------------------
-# Desmonta la unidad
+# Desmonta la unidad y borra la carpeta
 # --------------------------------------------
 read -p "La unidad esta montada en home/$hostname pulsa una tecla para desmontarla. " -n1 -s
 clear
 fusermount -u ~/$hostname
+rmdir ~/$hostname
 
