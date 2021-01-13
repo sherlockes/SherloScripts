@@ -30,6 +30,9 @@ class Dht22:
         while self.datos_dht[0] > 100:
             time.sleep(5)
             self.datos_dht = dht.read_retry(dht.DHT22,self.pin)
-            
+
+        
         self.hume = round(self.datos_dht[0],2)
         self.temp = round(self.datos_dht[1],2)
+        
+        logging.info(f"Dht22 - Tª interior de {self.temp}ºC y humedad del {self.hume}%")

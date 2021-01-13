@@ -94,16 +94,16 @@ interior = Dht22(4)
 datos_json["ultima_temp"] = interior.temp
 datos_json["ultima_hume"] = interior.hume
 
-####################################################################
-##  Clase e Reniciar el archivo de Gsheet  ##
-####################################################################
+#############################################################
+##  Clase e iniciar el archivo de base de datos de SqLite  ##
+#############################################################
 
-gsheet_datos = Gsheet("shermostat")
+ruta_db = os.path.join(Path.home(),"termostato.db")
+datos_sqlite = Sqlite(ruta_db)
 
 #################################################################
 ##  Establece las consignas de Temperatura actual y posterior  ##
 #################################################################
-ahora = datetime.now()
 
 hora_manual = datetime.strptime(datos_json["hora_manual"], '%Y/%m/%d %H:%M:%S')
 consigna = Consigna(datos_json["modo_fuera"],datos_json["cons_fuera"],hora_manual,datos_json["cons_manual"],datos_json["min_manual"],datos_json["horas"],datos_json["temperaturas"],datos_json["personas"],datos_json["dec_casa_vacia"])
@@ -119,28 +119,8 @@ datos_json["consigna"] = consigna_temp_act
 ## Cálculo de datos ##
 ######################
 
-if gsheet_datos.online:
-
-    tiempo = datetime.now().strftime('%Y/%m/%d %H:%M:%S')
-    tiempo_ant = datetime.strptime(gsheet_datos.leer_fila("datos",2)[0], '%Y/%m/%d %H:%M:%S')
-    temp_ant_consigna = float(gsheet_datos.leer_fila("datos",2)[2])
-    real_temp_ant = float(gsheet_datos.leer_fila("datos",2)[3])
-    hum_ant_real = float(gsheet_datos.leer_fila("datos",2)[4])
-    temp_ant_estado = gsheet_datos.leer_fila("datos",2)[5]
-    var_temp = abs(interior.temp - real_temp_ant) + abs(consigna_temp_act - consigna_temp_ant)
-    var_tiempo = datetime.now() - tiempo_ant
-    var_temp_tiempo = round((60*(interior.temp - real_temp_ant))/var_tiempo.seconds,2)
-    if abs(var_temp_tiempo) < 0.01:
-        var_temp_tiempo = 0
-
-    # Incrementa la inercia si la Tª supera el rango de inercia con la caldera encendida
-    if interior.temp > datos_json["inercia_rango"] * (datos_json["consigna"] + datos_json["histeresis"]) and datos_json["rele_estado"] == "on":
-        if datos_json["inercia"] <= 1800:
-            datos_json["inercia"] += 25
-        print("Se ha aumentado la inercia térmica de la caldera")
-        Telegram("Se ha aumentado la inercia térmica de la caldera")
-else:
-    var_temp_tiempo = 0
+var_tiempo = datetime.now() - datos_sqlite.hora_ant
+var_temp_tiempo = round((60*(interior.temp - datos_sqlite.tint_ant))/var_tiempo.seconds,2)
 
 #####################
 ## Lazo de control ##
@@ -184,47 +164,20 @@ if rele.estado != datos_json["rele_estado"]:
 
 datos_json["rele_estado"] = rele.estado
 
-
-
-
 ################################################
 ## Graba los datos en la base de datos sqlite ##
 ################################################
-ruta_db = os.path.join(Path.home(),"termostato.db")
-datos = Sqlite(ruta_db)
-datos.nuevo_dato(exterior.temp_actual,interior.temp,consigna.actual,rele.estado)
+datos_sqlite.nuevo_dato(exterior.temp_actual,interior.temp,consigna.actual,rele.estado)
+datos_sqlite.nueva_media(datos_sqlite.media("exterior"),datos_sqlite.media("interior"),datos_json["rele_total_on"])
+
 
 # Enviar el total de minutos en el ultimo informe del día
 if datetime.now().hour == 23 and datetime.now().minute >= 54:
     if estado == "on":
         datos_json["rele_total_on"] += 5
-    datos.nueva_media(datos.media("exterior"),datos.media("interior"),{datos_json["rele_total_on"]})
     Telegram(f'Hoy la calefacción ha estado {datos_json["rele_total_on"]} minutos encendida con {exterior.temp_media}ºC de media exterior.')
+    datos_sqlite.nueva_media(datos_sqlite.media("exterior"),datos_sqlite.media("interior"),datos_json["rele_total_on"])
     datos_json["rele_total_on"] = 0
-
-#################################################################
-## Graba los datos en una hoja de Google Sheets si han variado ##
-#################################################################
-if gsheet_datos.online:
-    print(f"Dato ant: Tª consigna: {consigna_temp_ant} - Tª real:{real_temp_ant}ºC - Calef:{temp_ant_estado} - Humedad:{hum_ant_real}%")
-    print(f"Dato act: Tª consigna: {consigna_temp_act} - Tª real:{interior.temp}ºC - Calef:{rele.estado} - Humedad:{interior.hume}%")
-
-    print("Datos GSheet: ", end="")
-    # Guarda la consigna (Si ha variado)
-    datos_json["consigna"] = consigna_temp_act
-    if consigna_temp_var != 0:
-        gsheet_datos.escribir_celda("consigna","A1",consigna_temp_act)
-        print(f"Nueva consigna a {consigna_temp_act}ºC, ", end="")
-
-    # Guarda los datos (Si han variado o la calefacción está en marcha)
-    if var_temp  < 0.1 and estado == temp_ant_estado:
-        print("Nada ha cambiado (La humedad no cuenta...)")
-    elif var_temp >= 0.1 or rele_estado == "on":
-        gsheet_datos.escribir_celda("consigna","A1",consigna_temp_act)
-        gsheet_datos.escribir_fila("datos",[tiempo,exterior.temp_actual,consigna_temp_act,interior.temp,interior.hume,rele_estado,var_temp_tiempo,rele_tiempo_on])
-        print("Se han guardado los datos actuales.")
-else:
-    print(f"Dato act: Tª consigna: {consigna_temp_act} - Tª real:{interior.temp}ºC - Calef:{estado} - Humedad:{interior.hume}%")
 
 #######################################################################
 ## Graba los parámetros de configuración en el archivo "config.json" ##

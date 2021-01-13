@@ -95,7 +95,7 @@ class Consigna:
             consigna_siguiente = consigna_programa_siguiente(ahora)
             logging.info(f"Consigna - Programada de {consigna_programa}ºC")
             logging.info(f"Consigna - Siguiente programa de {consigna_siguiente[0]}ºC dentro de {consigna_siguiente[1]} minutos.")
-            self.actual = consigna_programa if not casa_vacia else consigna_programa - dec_casa_vacia
+            self.actual = consigna_programa if not casa_vacia() else consigna_programa - dec_casa_vacia
             self.min_restan = consigna_siguiente[1]
             self.siguiente = consigna_siguiente[0]
 

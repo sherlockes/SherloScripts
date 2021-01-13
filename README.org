@@ -1,11 +1,11 @@
-#+TAGS: Org-Mode(o)  Python(p)  Bash(b)  Google_Scripts(g)  Hugo(h)
+#+TAGS:Org_Mode(o)  Python(p)  Bash(b)  Google_Scripts(g)  Hugo(h)
 
 * SherloScripts
 :properties:
 :visibility: children
 :end:
 Un cajón desastre para mis scripts en bash, python, elisp...
-** [[https://github.com/sherlockes/SherloScripts/blob/master/mi_diario.org][Mi diario en org-mode]] (org-mode)                                :Org:Mode:
+** [[https://github.com/sherlockes/SherloScripts/blob/master/mi_diario.org][Mi diario en org-mode]] (org-mode)		  :Org_Mode:
 Este archivo en formato org-mode voy escribiendo lo que día a día aprendo y utilizo en cualquiera de las plataformas que empleo. Un cuaderno de bitácora que consultar cuando no me acuerdo de como en su día hice algo
 - emacs
 - Hugo
@@ -15,7 +15,7 @@ Este archivo en formato org-mode voy escribiendo lo que día a día aprendo y ut
 - Markdown
 - Python
 - Y lo que vaya utilizando...
-** [[https://github.com/sherlockes/SherloScripts/blob/master/python/etc/aemet.py][aemet.py]] (python)                                                 :Python:
+** [[https://github.com/sherlockes/SherloScripts/blob/master/python/etc/aemet.py][aemet.py]] (python)				    :Python:
 Esta clase ha sido creada para el proyecto de [[https://github.com/sherlockes/SherloScripts/blob/master/python/termo.py][termostato inteligente]] en la Raspberry usando python. Su finalidad únicamente es la de obtener la Tª exterior cada determinado tiempo a través de la web de la [[http://www.aemet.es/es/eltiempo/observacion/ultimosdatos][AEMET]] y de la capacidad que ofrece (por ahora de forma gratuita) de descargar un archivo con los datos del último día.
 
 A la clase se le pasa como parámetros la estación de la que queremos extraer la Tª y el tiempo cada el que queremos obtenerla de forma que si se hacen llamadas a la clase con más frecuencia que la que el tiempo ha establecido se devolverá el último valor guardado. Existen dos métodos, "t_actual()" que devuelve la última temperatura que ha sido obtenida por la estación y "t_media()" que devuelve la temperatura media de las ultimas 24 horas.
@@ -30,7 +30,7 @@ Los temas que aparecen repajados en esta clase son los siguentes:
 - Manejo de fechas mediante la clase "datetime"
 - Calculos con fechas
 - Extracción de información de archivos csv con el método "split
-** [[https://github.com/sherlockes/SherloScripts/blob/master/bash/gphotos-sync.sh][gphotos-sync.sh]] (bash)                                              :Bash:
+** [[https://github.com/sherlockes/SherloScripts/blob/master/bash/gphotos-sync.sh][gphotos-sync.sh]] (bash)			      :Bash:
 Tras un tiempo realizando la sincronización de mi galería de Google Photos a mi NAS de forma manual a través de un script que corría en el ordenador de sobremesa ahora he conseguido que el paquete ghotos-sync funcione en la raspberry de forma que cada día hace una sincronización. Los temas que toco en esta script son:
 
 - Comprobación de la instalación de paquetes
@@ -39,7 +39,7 @@ Tras un tiempo realizando la sincronización de mi galería de Google Photos a m
 - Ejecución de gphotos mediante pipenv
 
 Para que el script funcione de forma autónoma es necesaria tener configurada el acceso ssh de un equipo a otro mediente llave público-privada (ssh-key-gen)
-** [[https://github.com/sherlockes/SherloScripts/blob/master/python/limpieza_gmail.gs][limpieza_gmail.gs]] (google scripts)                               :Scripts:
+** [[https://github.com/sherlockes/SherloScripts/blob/master/python/limpieza_gmail.gs][limpieza_gmail.gs]] (google scripts)		   :Scripts:
 Eliminar correos de publicidad e irrelevantes es una tarea que lleva su tiempo. Con este pequeño script que se ejecute cada hora consigo tener la bandeja de entrada mucho más limpia sin esfuerzo. Se tocan los siguientes aspectos:
 
 - Busqueda en Gmail por etiqueta, categoría y tiempo
@@ -47,7 +47,7 @@ Eliminar correos de publicidad e irrelevantes es una tarea que lleva su tiempo. 
 - Eliminación de mensajes
 
 Toda la info sobre la creación y funcionamiento del script la puedes encontrar en este [[https://sherblog.pro/automatizando-la-limpieza-de-gmail][articulo]] de mi blog.
-** [[https://github.com/sherlockes/SherloScripts/blob/master/python/renamer.py][renamer.py]] (python)                                               :Python:
+** [[https://github.com/sherlockes/SherloScripts/blob/master/python/renamer.py][renamer.py]] (python)				    :Python:
 Fruto de una necesidad de un renombrado rápido de unos cuantos cientos de fotografías. Nada pretencioso ni complicado simplemente rápido y efectivo que toca los siguientes aspectos:
 
 - Chequeo de ruta y nombre de directorio actual
@@ -59,7 +59,7 @@ Fruto de una necesidad de un renombrado rápido de unos cuantos cientos de fotog
 - Manejo del metodo "datetime"
 - Creación de rutas a aprtir de cadenas con "os.path.join"
 - Renombrado de archivos con "os.rename"
-** [[https://github.com/sherlockes/SherloScripts/blob/master/python/tiempo.py][tiempo.py]] (python)                                                :Python:
+** [[https://github.com/sherlockes/SherloScripts/blob/master/python/tiempo.py][tiempo.py]] (python)				    :Python:
 Mi primer Script en Python. Este realiza un pequeño resumen de las condiciones meteorológicas diarias extrayendo la información de la web de AEMET, no a través de su API sino que a través de su "*.csv" y "*.xml" públicos. Toca unos cuantos palos entre los que podemos encontar:
 
 - Manejo de listas (Creación, lectura, añadir elementos, trasposición, reemplazar valores...)
@@ -71,7 +71,7 @@ Mi primer Script en Python. Este realiza un pequeño resumen de las condiciones 
 - Manejo de cadenas (Definir, añadir, reemplazar...)
 - Almacenamiento de variables en un archivo de configuración externo
 - Envío de mensajes de Telegram a través de un bot
-** [[https://github.com/sherlockes/SherloScripts/blob/master/hugo/shortcodes/post.sh][post.sh]] (bash)                                                      :Bash:
+** [[https://github.com/sherlockes/SherloScripts/blob/master/hugo/shortcodes/post.sh][post.sh]] (bash)				      :Bash:
 Con este script doy de más funcionalidad a [[https://github.com/sherlockes/SherloScripts/blob/master/bash/publish.sh][publish.sh]] para que los Post en Hugo sean automáticamente formateados con la correspondiente cabecera haciendo uso de varias funciones de Bash. Está obsoleto por haber introducido las funciones dentro del archivo "Publish.sh"
 - Cálculo de líneas con `wc`
 - Extracción de la 1ª linea con `head`
@@ -80,13 +80,13 @@ Con este script doy de más funcionalidad a [[https://github.com/sherlockes/Sher
 - Separación de líneas en compos con `cut`
 - Cálculo del tiemo desde la última modificación con `date`
 - Buscar arcivos sin cabecera con `grep`
-** [[https://github.com/sherlockes/SherloScripts/blob/master/hugo/shortcodes/lista_vertices.html][lista_vertice.html]] (hugo shortcodes)                                :Hugo:
+** [[https://github.com/sherlockes/SherloScripts/blob/master/hugo/shortcodes/lista_vertices.html][lista_vertice.html]] (hugo shortcodes)		      :Hugo:
 Gracias a este [[https://gohugo.io/content-management/shortcodes][shortcode]] que utilizo en mi blog desarrollado en [[https://gohugo.io][Hugo]] consigo de una forma sencilla incluir una lista con todos los enlaces a las distintas páginas de una determinada categoría. En mi aso lo utilizo para listar todos los Vértices geodésicos que estan inluidos en la categoría "vertices". Su uso es tan sencillo como copiarlo dentro de la carpeta "layouts/shortcodes/" y llamarlo desde donde queramos incluri la lista con "{{< lista_vertices >}}". Hace uso de:
 - Filtrado de páginas por el contenido de una "section" (Carpeta)
 - Uso de la función "Range"
 - Acceso a parámetros de las páginas
 - Determinación de la existencia de un parámetro.
-** [[https://github.com/sherlockes/SherloScripts/blob/master/hugo/shortcodes/mapa_vertice.html][mapa_vertice]] (hugo shortcodes)                                      :Hugo:
+** [[https://github.com/sherlockes/SherloScripts/blob/master/hugo/shortcodes/mapa_vertice.html][mapa_vertice]] (hugo shortcodes)		      :Hugo:
 Con este [[https://gohugo.io/content-management/shortcodes][shortcode]] que utilizo en mi blog desarrollado en [[https://gohugo.io][Hugo]] introducto en cada página de la sección "vertices" toda la información relativa al mismo estrayendola de los parámetros de la propia página:
 - Cálculo del total de vértices
 - Introducir la información del vértice
@@ -94,9 +94,9 @@ Con este [[https://gohugo.io/content-management/shortcodes][shortcode]] que util
 - Creación del mapa con [[https://openlayers.org][Openlayers]]
 - Inclusión de la vista panorámica
 - Inclusión de la ruta para gps
-** [[https://github.com/sherlockes/SherloScripts/blob/master/bash/parse_gpx.sh][parse_gpx.sh]] (bash)                                                 :Bash:
+** [[https://github.com/sherlockes/SherloScripts/blob/master/bash/parse_gpx.sh][parse_gpx.sh]] (bash)				      :Bash:
 Este sencillo script recorre todos los archivos de la web de la carpeta donde ubico los vértices geodésicos para extraer de ellos los parámetros suficientes para generar una archivo *.gpx con el que poder representarlos en un mapa.
-** [[https://github.com/sherlockes/SherloScripts/blob/master/bash/rclone.sh][rclone.sh]] (bash)                                                    :Bash:
+** [[https://github.com/sherlockes/SherloScripts/blob/master/bash/rclone.sh][rclone.sh]] (bash)				      :Bash:
 Por el método de instalación que tiene, [[https://rclone.org][Rclone]] no se actualiza automáticamente. Este script comenzó siendo una pequeña utilidad para actualizarlo automáticamente pero poco a poco ha ido ganando funcionalidades:
 
 - Comprueba la arquitectura del procesador
@@ -104,7 +104,7 @@ Por el método de instalación que tiene, [[https://rclone.org][Rclone]] no se a
 - Comprueba la actualización de Rclone
 - Lista las nubes disponibles en .config
 - Monta y desmonta cualquiera de las nubes
-** [[https://github.com/sherlockes/SherloScripts/blob/master/google%2520scripts/20191219_mover_archivos.gs][mover_archivos.gs]] (google scripts)                        :Google_Scripts:
+** [[https://github.com/sherlockes/SherloScripts/blob/master/google%2520scripts/20191219_mover_archivos.gs][mover_archivos.gs]] (google scripts)	    :Google_Scripts:
 En mi lucha por descargar los archivos de Telegram al NAS he necesitado un pequeño script que corre dentro de la nube de google y cuya finalidad es mover los archivos que hay en la raiz de la unidad y meterlos dentro de una carpeta compartida que sincronizo con ni Synology. Todos los días esta utilidad vacía la carpeta y borra la papelera para poder mover más archivos.
 
 Entre otras cosas, lo que he utilizado para su desarrollo es:
@@ -116,7 +116,7 @@ Entre otras cosas, lo que he utilizado para su desarrollo es:
 - Vaciar la papelera de reciclaje
 
 Este script y el resto de utilidades necesarias para mover los archivos de Telegram al NAS lo puedes encontrar en [[https://sherblog.pro/archivos-de-telegram-al-nas][Sherblog]]
-** [[https://github.com/sherlockes/SherloScripts/blob/master/bash/hugo_update.sh][hugo_update.sh]] (bash)                                               :Bash:
+** [[https://github.com/sherlockes/SherloScripts/blob/master/bash/hugo_update.sh][hugo_update.sh]] (bash)			      :Bash:
 Para la creación y mantenimiento de [[www.sherblog.pro][Sherblog]] utilizo [[https://gohugo.io][Hugo]] sobre mi equipo local con linux mint o la Raspberry Pi 3B+. Este script, que tengo programado para ejecutarse a diario, se encarga de realizar una actualización de versión de Hugo en caso de que sea necesario.
 
 Entre otras cosas, lo que he utilizado para su desarrollo es:
@@ -126,7 +126,7 @@ Entre otras cosas, lo que he utilizado para su desarrollo es:
 - Descarga de páginas web con "curl"
 - Extracción de cadenas con "grep", "cut" y "tr"
 - Instalación de paquetes con "dpkg"
-** [[https://github.com/sherlockes/SherloScripts/blob/master/bash/sherlomenu][sherlomenu]] (bash)                                                   :Bash:
+** [[https://github.com/sherlockes/SherloScripts/blob/master/bash/sherlomenu][sherlomenu]] (bash)				      :Bash:
 Un pequeño lanzador para montar el local las distintas nubes que uso a diario tanto en Google Drive como en Mega gracias a Rclone. Tambien está incluido un apartado para realizar la copia de seguridad de Google Photos y el Push automático de este repositorio.
 
 - Uso básico de Rclone (mount)
@@ -136,7 +136,7 @@ Un pequeño lanzador para montar el local las distintas nubes que uso a diario t
 - Condiionales en Bash (En una o varias líneas)
 - Uso de variables indirectas en Bash
 - Uso del comando "case"
-** [[https://github.com/sherlockes/SherloScripts/blob/master/bash/radares.sh][radares.sh]] (bash)                                                   :Bash:
+** [[https://github.com/sherlockes/SherloScripts/blob/master/bash/radares.sh][radares.sh]] (bash)				      :Bash:
 Por que estar pendiente de cuando se actualiza la base de datos de radares de tráfico de www.laradiobbs.net, descomprimirla combinarla y renombrarla es un poco latoso he creado este pequeño script en Bash que lo hace de forma completamente desatendida.  Inluido en el crontab de la Raspberry Pi, ella sola se encarga de "acondicionar" los ficheros y guardarlos en una nube de Google Drive (Mediante Rclone) para poder acceder con cualquier terminal.
 
 - Descarga de archivos con "curl"
@@ -145,7 +145,7 @@ Por que estar pendiente de cuando se actualiza la base de datos de radares de tr
 - Uso básico de expresiones regulares
 - Sincronización con una carpeta de Google Drime mediante Rclone
 - Fusión de archivos con el comando "cat"
-** [[https://github.com/sherlockes/SherloScripts/blob/master/bash/publish.sh][publish.sh]] (bash)                                                   :Bash:
+** [[https://github.com/sherlockes/SherloScripts/blob/master/bash/publish.sh][publish.sh]] (bash)				      :Bash:
 Al usar un generador de páginas estáticas como es Hugo para la administración de www.sherblog.pro, guardar los archivos fuente en Google Drive y usar como alojamiento a Github la publicación de un nuevo artículo se vuelve en algo laborioso. Por esto he creado este script que realiza los siguientes pasos
 
 - Actualiza Hugo
@@ -161,7 +161,7 @@ Para ello he utilizado, entre otros, los siguientes conceptos
 - Uso de la propiedad "date" para calculos del tiempo de modificación
 - Uso de "cat" para añadir texto a archivos existentes
 - Uso de "git push"
-** [[https://github.com/sherlockes/SherloScripts/blob/master/google%2520scripts/20171210_sherblog_db_backup.gs][sherblog_db_backup]] (google scripts)                       :Google_Scripts:
+** [[https://github.com/sherlockes/SherloScripts/blob/master/google%2520scripts/20171210_sherblog_db_backup.gs][sherblog_db_backup]] (google scripts)	    :Google_Scripts:
 Cuando la web estaba en WordPress, este es el script que utilizaba para realizar una copia de seguriadd versionada de la base de datos de forma manual.  El script busca todos los archivos de una carpeta determinada y sólo guarda un número determinado en función de su antigüedad.
 
 Toda la información la puedes encontrar en [[https://sherblog.pro/copia-de-seguridad-de-la-base-de-datos-de-wordpress][Sherblog]]

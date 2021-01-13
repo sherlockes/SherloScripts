@@ -27,6 +27,7 @@
  '(inhibit-startup-echo-area-message (user-login-name))
  '(inhibit-startup-screen t)
  '(menu-bar-mode nil)
+ '(org-tags-column -60)
  '(package-selected-packages
    (quote
     (dired-sort-menu dired+ ## markdown-mode htmlize gnu-elpa-keyring-update elpy ace-window)))
