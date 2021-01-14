@@ -10,6 +10,7 @@
 ##################################################################
 
 from flask import Flask, render_template, request, redirect, url_for
+from etc.plot import Plot
 from datetime import datetime
 import json
 import os
@@ -20,7 +21,8 @@ app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 
 @app.route("/", methods=["GET", "POST"])
 def index():
-
+    # Prepara la gráfica para mostrar
+    Plot()
     # Carga el archivo "config.json" de configuración
     with open(os.environ['HOME']+'/config.json', 'r') as archivo_json:
         data = archivo_json.read()

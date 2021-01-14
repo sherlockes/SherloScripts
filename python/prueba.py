@@ -1,17 +1,11 @@
 #!/usr/bin/python3
 
 import os
-
 from etc.sqlite import Sqlite
-
 from datetime import datetime
-
 from pathlib import Path
-
 import matplotlib.pyplot as plt
 import numpy as np
-
-
 
 ruta_db = os.path.join(Path.home(),"termostato.db")
 datos = Sqlite(ruta_db)
@@ -41,4 +35,5 @@ plt.xlabel('Horas')
 plt.ylabel('Temperaturas')
 plt.gcf().autofmt_xdate()
 plt.legend()
-plt.show()
+#plt.show()
+plt.savefig('termoflask/static/images/plot.png')

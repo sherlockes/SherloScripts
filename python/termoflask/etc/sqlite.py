@@ -62,5 +62,5 @@ class Sqlite:
 
     def prueba(self):
         cursorObj = self.con.cursor()
-        cursorObj.execute("SELECT hora, interior, consigna from datos_temp order by hora desc limit 100")
+        cursorObj.execute("SELECT hora, interior, consigna from datos_temp order by hora desc limit 300")
         return cursorObj.fetchall()
