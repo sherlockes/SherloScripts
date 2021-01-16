@@ -168,7 +168,7 @@ datos_json["rele_estado"] = rele.estado
 ## Graba los datos en la base de datos sqlite ##
 ################################################
 datos_sqlite.nuevo_dato(exterior.temp_actual,interior.temp,consigna.actual,rele.estado)
-datos_sqlite.nueva_media(datos_sqlite.media("exterior"),datos_sqlite.media("interior"),datos_json["rele_total_on"])
+#datos_sqlite.nueva_media(datos_sqlite.media("exterior"),datos_sqlite.media("interior"),datos_json["rele_total_on"])
 
 
 # Enviar el total de minutos en el ultimo informe del día
