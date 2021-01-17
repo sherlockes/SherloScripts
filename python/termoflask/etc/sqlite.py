@@ -64,3 +64,23 @@ class Sqlite:
         cursorObj = self.con.cursor()
         cursorObj.execute("SELECT hora, interior, consigna from datos_temp order by hora desc limit 300")
         return cursorObj.fetchall()
+
+    def minutos_dia(self,dia):
+        cursorObj = self.con.cursor()
+        #consulta = f"select hora, rele from datos_temp where hora BETWEEN datetime('{dia}', 'start of day') AND datetime('{dia}', '+1 day')"
+        consulta = "SELECT hora, rele FROM  datos_temp WHERE hora BETWEEN JulianDay('now') AND JulianDay('now','+1 day','-0.001 second')"
+        cursorObj.execute(consulta)
+        registros = cursorObj.fetchall()
+        total_min = 0
+        i = 0
+        
+        for registro in registros:
+
+            if i > 0 and registro[1] == "on":
+                hora = datetime.strptime(registro[0], '%Y-%m-%d %H:%M:%S')
+                hora_ant = datetime.strptime(registros[i-1][0], '%Y-%m-%d %H:%M:%S')
+                total_min += (hora - hora_ant).seconds/60
+
+            i+=1
+
+        print(round(total_min))

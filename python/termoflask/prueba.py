@@ -1,5 +1,14 @@
 #!/usr/bin/python3
 
-from etc.plot import Plot
+#############################################################
+##  Clase e iniciar el archivo de base de datos de SqLite  ##
+#############################################################
 
-Plot()
+from etc.sqlite import Sqlite
+import os
+from pathlib import Path
+
+datos_sqlite = Sqlite("termostato.db")
+
+datos_sqlite.minutos_dia("2021-01-16")
+
