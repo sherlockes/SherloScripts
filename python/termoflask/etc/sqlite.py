@@ -62,7 +62,7 @@ class Sqlite:
 
     def prueba(self):
         cursorObj = self.con.cursor()
-        cursorObj.execute("SELECT hora, interior, consigna from datos_temp order by hora desc limit 300")
+        cursorObj.execute("SELECT hora, interior, rele, consigna from datos_temp order by hora desc limit 300")
         return cursorObj.fetchall()
 
     def minutos_dia(self,dia):
@@ -84,3 +84,51 @@ class Sqlite:
             i+=1
 
         print(round(total_min))
+
+    def inercia(self):
+        cursorObj = self.con.cursor()
+        cursorObj.execute("SELECT hora, interior, rele, consigna from datos_temp order by hora desc limit 300")
+        datos = cursorObj.fetchall()
+
+        estado_inicio = datos[0][2]
+        estado =  estado_inicio
+        i = 0
+
+        for registros in datos:
+            if registros[2] != estado:
+                estado = registros[2]
+                if registros[2] != estado_inicio:
+                    fin_ultimo_estado_completo = datos[i-1][0]
+                    print(f"Hora de finalización: {fin_ultimo_estado_completo}")
+                else:
+                    inicio_ultimo_estado_completo = datos[i-1][0]
+                    print(f"Hora de inicio: {inicio_ultimo_estado_completo}")
+                    break
+
+            i += 1
+
+        # Calcular media exterior
+        cursorObj.execute(f"select avg(exterior) from datos_temp where hora BETWEEN '{inicio_ultimo_estado_completo}' and '{fin_ultimo_estado_completo}' order by hora")
+        datos = cursorObj.fetchall()
+        media_exterior = round(datos[0][0])
+
+        # Calcular inercias
+        cursorObj.execute(f"select * from datos_temp where hora BETWEEN '{inicio_ultimo_estado_completo}' and '{fin_ultimo_estado_completo}' order by hora")
+        datos = cursorObj.fetchall()
+
+        if datos[0][4] == "on":
+            print("calculando la inercia de encendido")
+            i = 0
+            for registro in datos:
+                if registro[2] > datos[0][2]:
+                    hora = datetime.strptime(registro[0], '%Y-%m-%d %H:%M:%S')
+                    hora_ant = datetime.strptime(datos[i-1][0], '%Y-%m-%d %H:%M:%S')
+                    hora_inercia = hora - hora_ant
+                    hora_inercia = hora_ant + hora_inercia/2
+                    print(hora_inercia)
+                i += 1
+            
+            hora_on = datetime.strptime(datos[0][0], '%Y-%m-%d %H:%M:%S')
+            inercia = hora_inercia - hora_on
+            inercia = round(inercia.seconds/60)
+            print(f"La inercia de encendido es de {inercia} minutos con una temperatura exterior de {media_exterior}ºC.")
