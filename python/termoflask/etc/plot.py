@@ -26,25 +26,30 @@ class Plot:
         datax = []
         datay = []
         datayy = []
+        datayyy = []
 
         for registro in datos.prueba():
             hora = datetime.strptime(registro[0], '%Y-%m-%d %H:%M:%S')
             datax.append(hora)
             datay.append(registro[1])
             datayy.append(registro[2])
+            datayyy.append(registro[3])
 
         datax.reverse()
         datay.reverse()
         datayy.reverse()
+        datayyy.reverse()
 
         x = np.array(datax)
         y = np.array(datay)
         yy = np.array(datayy)
+        yyy = np.array(datayyy)
 
         plt.title('Consigna y valor real en Zaragoza')
         plt.figure(figsize=(10,5)) 
         plt.plot(x, y, label = "Tª Real")
         plt.plot(x, yy, label = "Consigna")
+        #plt.plot(x, yyy, label = "Tª Ext")
         #plt.xlabel('Horas')
         #plt.ylabel('Temperaturas')
         plt.gcf().autofmt_xdate()
