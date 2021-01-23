@@ -168,16 +168,10 @@ datos_json["rele_estado"] = rele.estado
 ## Graba los datos en la base de datos sqlite ##
 ################################################
 datos_sqlite.nuevo_dato(exterior.temp_actual,interior.temp,consigna.actual,rele.estado)
-#datos_sqlite.nueva_media(datos_sqlite.media("exterior"),datos_sqlite.media("interior"),datos_json["rele_total_on"])
 
+ahora = datetime.now()
 
-# Enviar el total de minutos en el ultimo informe del día
-if datetime.now().hour == 23 and datetime.now().minute >= 54:
-    if estado == "on":
-        datos_json["rele_total_on"] += 5
-    Telegram(f'Hoy la calefacción ha estado {datos_json["rele_total_on"]} minutos encendida con {exterior.temp_media}ºC de media exterior.')
-    datos_sqlite.nueva_media(datos_sqlite.media("exterior"),datos_sqlite.media("interior"),datos_json["rele_total_on"])
-    datos_json["rele_total_on"] = 0
+if ahora.hour == 0 and ahora.minute < 5: datos_sqlite.calculo_minutos()
 
 #######################################################################
 ## Graba los parámetros de configuración en el archivo "config.json" ##

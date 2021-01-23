@@ -10,10 +10,11 @@ from pathlib import Path
 
 datos_sqlite = Sqlite("termostato.db")
 
-#datos_sqlite.minutos_dia("2021-01-17")
+#datos_sqlite.minutos_dia("2021-01-23")
 
-datos_sqlite.parametros()
+#datos_sqlite.parametros()
 
+datos_sqlite.calculo_minutos()
 
 
 
