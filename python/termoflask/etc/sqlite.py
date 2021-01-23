@@ -9,6 +9,11 @@
 # Email: sherlockes@gmail.com                                           
 ########################################################################
 
+## Métodos
+# nuevo_dato(t_ext,t_int,consigna,rele) - Inserta nuevo dato en la tabla "datos_temp"
+# nueva media(meida_ext, media_int, minutos) Interta nuevo dato en la tabla "datos_dia" para el día actual
+# media(campo) - Calcula la media del día actual para la columna deseada en la tabla "datos_temp"
+
 import sqlite3
 import os
 
@@ -65,11 +70,26 @@ class Sqlite:
         cursorObj = self.con.cursor()
         cursorObj.execute("SELECT hora, interior, consigna, exterior from datos_temp order by hora desc limit 300")
         return cursorObj.fetchall()
+    
+    def calculo_minutos(self):
+        # Calcular los días guardados en la base de datos, aprox últimos diez días
+        cursorObj = self.con.cursor()
+        cursorObj.execute("select hora from datos_temp order by hora desc LIMIT 2500")
+        registros = cursorObj.fetchall()
+        dias = []
+        for fecha in registros:
+            dia = datetime.strptime(fecha[0], '%Y-%m-%d %H:%M:%S')
+            dia = dia.strftime('%Y-%m-%d')
+            dia = str(dia)
+
+            if dia not in dias: dias.append(dia)
+        
+        for x in dias: self.minutos_dia(x)
 
     def minutos_dia(self,dia):
+        # Cálculo de los minutos encendida
         cursorObj = self.con.cursor()
-        #consulta = f"select hora, rele from datos_temp where hora BETWEEN datetime('{dia}', 'start of day') AND datetime('{dia}', '+1 day')"
-        consulta = "SELECT hora, rele FROM  datos_temp WHERE hora BETWEEN JulianDay('now') AND JulianDay('now','+1 day','-0.001 second')"
+        consulta = f"select hora, rele from datos_temp where hora BETWEEN datetime('{dia}', 'start of day') AND datetime('{dia}', '+1 day')"
         cursorObj.execute(consulta)
         registros = cursorObj.fetchall()
         total_min = 0
@@ -83,8 +103,27 @@ class Sqlite:
                 total_min += (hora - hora_ant).seconds/60
 
             i+=1
+        
+        total_min = round(total_min)
 
-        print(round(total_min))
+        # Obtención de las medias interior y exterior
+        consulta = f"select hora, avg(interior), avg(exterior) from datos_temp where hora BETWEEN datetime('{dia}', 'start of day') AND datetime('{dia}', '+1 day')"
+        cursorObj.execute(consulta)
+        registros = cursorObj.fetchone()
+        media_int = round(registros[1],1)
+        media_ext = round(registros[2])
+
+        # Convertir formato de la fecha
+        
+        fecha = datetime.strptime(dia, '%Y-%m-%d')
+        fecha = fecha.strftime('%Y-%m-%d')
+        fecha = str(fecha)
+
+        # Grabar los resultados
+        cursorObj = self.con.cursor()
+        consulta = f"INSERT INTO datos_dia VALUES('{fecha}',{media_ext},{media_int},{total_min}) ON CONFLICT(dia) DO UPDATE SET media_ext=excluded.media_ext, media_int=excluded.media_int, minutos=excluded.minutos"
+        cursorObj.execute(consulta)
+        self.con.commit()
 
     def inercia(self):
         cursorObj = self.con.cursor()
