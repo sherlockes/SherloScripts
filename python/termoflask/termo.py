@@ -90,7 +90,7 @@ datos_json["aemet_media"] = exterior.temp_media
 ##  Capturar datos de Tª y humedad del sensor conectado a la raspberry  ##
 ##########################################################################
 
-interior = Dht22(4)
+interior = Dht22(4,3)
 datos_json["ultima_temp"] = interior.temp
 datos_json["ultima_hume"] = interior.hume
 
@@ -133,7 +133,9 @@ rele_estado = rele.estado
 if interior.temp < (consigna_temp_act - datos_json["histeresis"]) and rele.estado == "off":
     rele.encender()   
 # Apaga la calefacción si la real mas la esperada por inercia está por encima
-elif interior.temp + (var_temp_tiempo * (datos_json["inercia"]/60))> consigna_temp_act + datos_json["histeresis"] and rele.estado == "on":
+#elif interior.temp + (var_temp_tiempo * (datos_json["inercia"]/60))> consigna_temp_act + datos_json["histeresis"] and rele.estado == "on":
+#    rele.apagar()
+elif (interior.temp + 0.1) > consigna_temp_act and rele.estado == "on":
     rele.apagar()
 else:
     estado = rele.estado
@@ -171,7 +173,9 @@ datos_sqlite.nuevo_dato(exterior.temp_actual,interior.temp,consigna.actual,rele.
 
 ahora = datetime.now()
 
-if ahora.hour == 0 and ahora.minute < 5: datos_sqlite.calculo_minutos()
+if ahora.hour == 0 and ahora.minute < 5:
+    datos_sqlite.calculo_minutos()
+    datos_sqlite.parametros()
 
 #######################################################################
 ## Graba los parámetros de configuración en el archivo "config.json" ##
