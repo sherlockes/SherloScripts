@@ -13,6 +13,9 @@
 # nuevo_dato(t_ext,t_int,consigna,rele) - Inserta nuevo dato en la tabla "datos_temp"
 # nueva media(meida_ext, media_int, minutos) Interta nuevo dato en la tabla "datos_dia" para el día actual
 # media(campo) - Calcula la media del día actual para la columna deseada en la tabla "datos_temp"
+# anterior_dato - Devuelve el último datos guardado en la tabla "datos_temp"
+# calculo_minutos - 
+
 
 import sqlite3
 import os
@@ -37,11 +40,39 @@ class Sqlite:
         # Caldular datos anteriores
         self.anterior_dato()
 
+    def obtener(self,tabla,campo,coincidencia,valor):
+        cursorObj = self.con.cursor()
+        cursorObj.execute(f"SELECT {campo} from {tabla} where {coincidencia} = {valor}")
+        datos = cursorObj.fetchone()
+        if datos == None:
+            return None
+        else:
+            return datos[0]
+
     def nuevo_dato(self,exterior,interior,consigna,rele):
         cursorObj = self.con.cursor()
         consulta = f"INSERT INTO datos_temp VALUES(datetime('now','localtime'), {exterior},{interior},{consigna},'{rele}')"
         cursorObj.execute(consulta)
         self.con.commit()
+    
+    def nuevo_ajuste(self,t_ext,campo,valor):
+        valor_ext = self.obtener("datos_set",campo,"t_ext",t_ext)
+
+        if valor_ext != None:
+            valor_med = (valor + valor_ext)/2
+            logging.info(f"Ya existe el valor de ajuste de {campo} para {t_ext}ºC, se hace la media con {valor_ext} resultando {valor_med}")
+        else:
+            valor_med = valor
+            logging.info(f"Queda guardado el valor de ajuste de {campo} para {t_ext}ºC a {valor_med}")
+
+        valor_med = round(valor_med,2)
+
+        cursorObj = self.con.cursor()
+        cursorObj.executescript(f"""
+                INSERT OR IGNORE INTO datos_set(t_ext) VALUES({t_ext});
+                UPDATE datos_set SET {campo}={valor_med} WHERE t_ext={t_ext};   
+            """)
+        
 
     def nueva_media(self,exterior,interior,minutos):
         cursorObj = self.con.cursor()
@@ -65,11 +96,6 @@ class Sqlite:
         self.tint_ant = round(float(dato[2]),1)
         self.tcon_ant = round(float(dato[3]),1)
         self.rele_ant = dato[4]
-
-    def prueba(self):
-        cursorObj = self.con.cursor()
-        cursorObj.execute("SELECT hora, interior, consigna, exterior from datos_temp order by hora desc limit 300")
-        return cursorObj.fetchall()
     
     def calculo_minutos(self):
         # Calcular los días guardados en la base de datos, aprox últimos diez días
@@ -182,11 +208,12 @@ class Sqlite:
             """)
 
     def parametros(self):
+        logging.info("Calculando rampas e inercias...")
         cursorObj = self.con.cursor()
-        cursorObj.execute("SELECT * from datos_temp order by hora asc limit 2000")
+        cursorObj.execute("SELECT * from datos_temp order by hora asc limit 500")
         registros = cursorObj.fetchall()
 
-
+        logging.info("Calculando los ciclos de encendido y apagado...")
         # Cálculo de lcos ciclos de enciendido y apagado
         i = 0
         ciclo_on=[]
@@ -212,7 +239,8 @@ class Sqlite:
                     ciclo_on.append(hora_on)
             i += 1
 
-        # Cálculo de la pendiente de enfriamiento a partir de los ciclos de apagado     
+        # Cálculo de la pendiente de enfriamiento a partir de los ciclos de apagado
+        logging.info("Cálculo de la rampa de enfriamiento para enfriamientos prolongados")
         for ciclo in ciclo_off:
             i = 0
             buscando_max = False
@@ -236,43 +264,55 @@ class Sqlite:
             if hora_fin > hora_ini:
                 tiempo = hora_fin - hora_ini
                 pendiente = round((temp_max - temp_min) / (tiempo.seconds/3600),2)
-                pendiente_ant = self.obtener("datos_set","rampa_off","t_ext",temp_ext)
-                if pendiente_ant != None:
-                    pendiente = (pendiente_ant + pendiente_ant)/2
                 if pendiente > 0.1 and (tiempo.seconds)/60 > 30:
-                    print(f"Un ciclo empieza a las {hora_ini} con {temp_max}ºC y baja hasta las {hora_fin} con {temp_min}ºC ({pendiente}ºC/h")
-                    cursorObj.executescript(f"""
-                        INSERT OR IGNORE INTO datos_set(t_ext) VALUES({temp_ext});
-                        UPDATE datos_set SET rampa_off={pendiente} WHERE t_ext={temp_ext};   
-                    """)
+                    self.nuevo_ajuste(temp_ext,"rampa_off",pendiente)
         
         # Cálculo de la pendiente de calentamiento a partir de los ciclos de encendido     
         for ciclo in ciclo_on:
             i = 0
             buscando_max = False
             buscando_min = False
+            buscando_off = False
 
             for registro in registros:
                 hora = datetime.strptime(registro[0], '%Y-%m-%d %H:%M:%S')
+                temp_ext = round(registro[1])
                 if hora == ciclo:
                     temp = registro[2]
                     buscando_min = True
                 
                 if buscando_min and registro[2] > temp:
                     inercia = hora - ciclo
-                    print(inercia)
+                    inercia = round(inercia.seconds/60)
+                    self.nuevo_ajuste(temp_ext,"inercia_on",inercia)
+                    temp = registro[2]
                     buscando_min = False
+                    buscando_off = True
 
+                if buscando_off and registro[4] == "off":
+                    var_temp = round((registro[2] - temp),2)
+                    var_tiempo = hora - ciclo
+                    var_tiempo = round(var_tiempo.seconds/3600,2)
+                    
+                    if var_tiempo > 0:
+                        rampa_on = round((var_temp/var_tiempo),2)
+                        self.nuevo_ajuste(temp_ext,"rampa_on",rampa_on)
+                    buscando_off = False
+                    buscando_max = True
 
-    
-    def obtener(self,tabla,campo,coincidencia,valor):
+                if buscando_max and registro[2] > registros[i+1][2]:
+                    inercia = hora - ciclo
+                    inercia = round(inercia.seconds/60)
+                    self.nuevo_ajuste(temp_ext,"inercia_off",inercia)
+                    buscando_max = False
+
+                i += 1
+                    
+
+    def prueba(self):
         cursorObj = self.con.cursor()
-        cursorObj.execute(f"SELECT {campo} from {tabla} where {coincidencia} = {valor}")
-        datos = cursorObj.fetchone()
-        if datos == None:
-            return None
-        else:
-            return datos[0]
+        cursorObj.execute("SELECT hora, interior, consigna, exterior from datos_temp order by hora desc limit 300")
+        return cursorObj.fetchall()
 
 
 
