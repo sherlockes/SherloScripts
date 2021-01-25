@@ -118,6 +118,7 @@ SherloScripts(){
 copy_rclone_config(){
     scp ~/.config/rclone/rclone.conf sherlockes@192.168.1.200:~/.config/rclone/
     scp ~/.config/rclone/rclone.conf pi@192.168.1.203:~/.config/rclone/
+    scp ~/.config/rclone/rclone.conf pi@192.168.1.205:~/.config/rclone/
     cp ~/.config/rclone/rclone.conf ~/'Mis Documentos'/'Mis cosas'/
 }
 
