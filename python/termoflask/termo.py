@@ -76,7 +76,6 @@ for x in variables:
 
 rele_hora_cambio = datetime.strptime(datos_json["rele_hora_cambio"], '%Y/%m/%d %H:%M:%S')
 
-
 ##############################################################################################
 ##  Capturar datos de la web de la AEMET a partir del nº de estación e intervalo de tiempo  ##
 ##############################################################################################
@@ -128,43 +127,19 @@ var_temp_tiempo = round((60*(interior.temp - datos_sqlite.tint_ant))/var_tiempo.
 
 rele = Sonoff()
 rele_estado = rele.estado
+rele_tiempo_actual = datos_sqlite.ultimo_cambio()
 
-# Enciende la calefacción si la temp real está por debajo de la histéresis
 if interior.temp < (consigna_temp_act - datos_json["histeresis"]) and rele.estado == "off":
-    rele.encender()   
-# Apaga la calefacción si la real mas la esperada por inercia está por encima
-#elif interior.temp + (var_temp_tiempo * (datos_json["inercia"]/60))> consigna_temp_act + datos_json["histeresis"] and rele.estado == "on":
-#    rele.apagar()
+    rele.encender()
+elif (interior.temp + 0.25) > consigna_temp_act and rele.estado == "on" and rele_tiempo_actual > 18:
+    rele.apagar()
 elif (interior.temp + 0.1) > consigna_temp_act and rele.estado == "on":
     rele.apagar()
 else:
     estado = rele.estado
 
-# Calculo de la variable "rele_hora_cambio" y del tiempo de encendido
-rele_tiempo_on = 0
-
-if rele.estado != datos_json["rele_estado"]:
-
-    if rele.estado == "on":
-        rele_tiempo_off = datetime.now() - rele_hora_cambio
-        rele_tiempo_off = round((rele_tiempo_off.seconds)/60)
-        
-        # Disminuye la inercia si ha estado poco tiempo apagada
-        if rele_tiempo_off < 15 and datos_json["inercia"] >= 300:
-            datos_json["inercia"] -= 25
-            print("Se ha disminuido la inercia")
-            Telegram("Se ha disminuido la inercia de la calefacción")
-    
-    if rele.estado == "off":
-        rele_tiempo_on = datetime.now()-rele_hora_cambio
-        rele_tiempo_on = round((rele_tiempo_on.seconds)/60)
-        #Telegram(f'La calefacción ha estado {rele_tiempo_on} minutos encendida.')
-        datos_json["rele_total_on"] += rele_tiempo_on
-    
-    #Telegram(f'Ha cambiado el estado de la calefacción a {estado}')
-    datos_json["rele_hora_cambio"] = datetime.now().strftime('%Y/%m/%d %H:%M:%S')
-
 datos_json["rele_estado"] = rele.estado
+datos_json["rele_total_on"] = datos_sqlite.minutos_dia()
 
 ################################################
 ## Graba los datos en la base de datos sqlite ##
@@ -173,10 +148,9 @@ datos_sqlite.nuevo_dato(exterior.temp_actual,interior.temp,consigna.actual,rele.
 
 ahora = datetime.now()
 
-if ahora.hour == 0 and ahora.minute < 5:
-    datos_sqlite.calculo_minutos()
-    datos_sqlite.parametros()
-
+if ahora.minute > 54: datos_sqlite.parametros()
+if ahora.hour == 0 and ahora.minute < 5: datos_sqlite.calculo_minutos()
+    
 #######################################################################
 ## Graba los parámetros de configuración en el archivo "config.json" ##
 #######################################################################

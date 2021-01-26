@@ -96,6 +96,20 @@ class Sqlite:
         self.tint_ant = round(float(dato[2]),1)
         self.tcon_ant = round(float(dato[3]),1)
         self.rele_ant = dato[4]
+
+    def ultimo_cambio(self):
+        cursorObj = self.con.cursor()
+        consulta = "select hora, rele from datos_temp order by hora DESC limit 300"
+        cursorObj.execute(consulta)
+        datos = cursorObj.fetchall()
+        estado_actual = datos[0][1]
+        i=0
+        for dato in datos:
+            if dato[1] != estado_actual:
+                tiempo = datetime.now() - datetime.strptime(datos[i-1][0], '%Y-%m-%d %H:%M:%S')
+                tiempo = round(tiempo.seconds/60)
+                return(tiempo)
+            i += 1
     
     def calculo_minutos(self):
         # Calcular los días guardados en la base de datos, aprox últimos diez días
@@ -112,7 +126,7 @@ class Sqlite:
         
         for x in dias: self.minutos_dia(x)
 
-    def minutos_dia(self,dia):
+    def minutos_dia(self,dia ="now"):
         # Cálculo de los minutos encendida
         cursorObj = self.con.cursor()
         consulta = f"select hora, rele from datos_temp where hora BETWEEN datetime('{dia}', 'start of day') AND datetime('{dia}', '+1 day')"
@@ -132,24 +146,27 @@ class Sqlite:
         
         total_min = round(total_min)
 
-        # Obtención de las medias interior y exterior
-        consulta = f"select hora, avg(interior), avg(exterior) from datos_temp where hora BETWEEN datetime('{dia}', 'start of day') AND datetime('{dia}', '+1 day')"
-        cursorObj.execute(consulta)
-        registros = cursorObj.fetchone()
-        media_int = round(registros[1],1)
-        media_ext = round(registros[2])
+        if dia == "now":
+            return(total_min)
+        else:
+            # Obtención de las medias interior y exterior
+            consulta = f"select hora, avg(interior), avg(exterior) from datos_temp where hora BETWEEN datetime('{dia}', 'start of day') AND datetime('{dia}', '+1 day')"
+            cursorObj.execute(consulta)
+            registros = cursorObj.fetchone()
+            media_int = round(registros[1],1)
+            media_ext = round(registros[2])
 
-        # Convertir formato de la fecha
-        
-        fecha = datetime.strptime(dia, '%Y-%m-%d')
-        fecha = fecha.strftime('%Y-%m-%d')
-        fecha = str(fecha)
+            # Convertir formato de la fecha
+            
+            fecha = datetime.strptime(dia, '%Y-%m-%d')
+            fecha = fecha.strftime('%Y-%m-%d')
+            fecha = str(fecha)
 
-        # Grabar los resultados
-        cursorObj = self.con.cursor()
-        consulta = f"INSERT INTO datos_dia VALUES('{fecha}',{media_ext},{media_int},{total_min}) ON CONFLICT(dia) DO UPDATE SET media_ext=excluded.media_ext, media_int=excluded.media_int, minutos=excluded.minutos"
-        cursorObj.execute(consulta)
-        self.con.commit()
+            # Grabar los resultados
+            cursorObj = self.con.cursor()
+            consulta = f"INSERT INTO datos_dia VALUES('{fecha}',{media_ext},{media_int},{total_min}) ON CONFLICT(dia) DO UPDATE SET media_ext=excluded.media_ext, media_int=excluded.media_int, minutos=excluded.minutos"
+            cursorObj.execute(consulta)
+            self.con.commit()
 
     def inercia(self):
         cursorObj = self.con.cursor()

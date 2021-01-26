@@ -13,11 +13,13 @@ logging.basicConfig(format='%(asctime)s %(message)s', datefmt='%Y%m%d %H:%M', le
 
 datos_sqlite = Sqlite("termostato.db")
 
-#datos_sqlite.minutos_dia("2021-01-23")
+#print(datos_sqlite.minutos_dia())
 
-datos_sqlite.parametros()
+#datos_sqlite.parametros()
 
 #datos_sqlite.calculo_minutos()
+
+print(datos_sqlite.ultimo_cambio())
 
 
 
