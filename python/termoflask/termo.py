@@ -144,7 +144,13 @@ datos_json["rele_total_on"] = datos_sqlite.minutos_dia()
 ################################################
 ## Graba los datos en la base de datos sqlite ##
 ################################################
-datos_sqlite.nuevo_dato(exterior.temp_actual,interior.temp,consigna.actual,rele.estado)
+if exterior.temp_actual == "error":
+    datos_sqlite.anterior_dato()
+    temp_exterior = datos_sqlite.text_ant
+else:
+    temp_exterior = exterior.temp_actual
+
+datos_sqlite.nuevo_dato(temp_exterior,interior.temp,consigna.actual,rele.estado)
 
 ahora = datetime.now()
 
