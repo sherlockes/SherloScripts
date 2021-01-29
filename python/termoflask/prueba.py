@@ -8,6 +8,7 @@ from etc.sqlite import Sqlite
 import os
 from pathlib import Path
 import logging
+from etc.aemet import Aemet2
 
 logging.basicConfig(format='%(asctime)s %(message)s', datefmt='%Y%m%d %H:%M', level=logging.INFO)
 
@@ -19,7 +20,8 @@ datos_sqlite = Sqlite("termostato.db")
 
 #datos_sqlite.calculo_minutos()
 
-print(datos_sqlite.ultimo_cambio())
+exterior = Aemet2("9434P")
+print(exterior.temp_media)
 
 
 
