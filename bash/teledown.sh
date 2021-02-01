@@ -8,7 +8,6 @@
 # Email: sherlockes@gmail.com                                           
 ############################################################################
 
-# https://github.com/alfem/telegram-download-daemon.git
 # Carga los parámetros del archivo de configuración en el directorio de usuario
 . ~/config.conf
 
