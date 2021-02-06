@@ -12,7 +12,7 @@
 #       - Lista de temperaturas
 #       - Lista de personas
 #       - Decremento de Tª con casa vacía
-# Creation/Update: 20201230/20201230
+# Creation/Update: 20201230/20210206
 # Author: www.sherblog.pro                                                
 # Email: sherlockes@gmail.com                                           
 ########################################################################
@@ -34,7 +34,7 @@ class Consigna:
 
         def modo_manual():
             minutos_manual = round((ahora - hora_manual).seconds/60)
-            return True if minutos_manual < min_manual else False
+            return True if minutos_manual < min_manual and (ahora - hora_manual).days <1 else False
         
         def casa_vacia():
             for usuario in personas:
