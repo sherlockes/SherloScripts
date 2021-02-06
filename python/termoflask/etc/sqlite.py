@@ -4,7 +4,7 @@
 # Script Name:  sqlite.py
 # Description:  Clase para guardar los datos en una basede datos sqlite
 # Args:
-# Creation/Update: 202101312/20210112
+# Creation/Update: 202101312/20210206
 # Author: www.sherblog.pro                                                
 # Email: sherlockes@gmail.com                                           
 ########################################################################
@@ -137,10 +137,10 @@ class Sqlite:
         
         for registro in registros:
 
-            if i > 0 and registro[1] == "on":
+            if i > 0 and registros[i-1][1] == "on":
                 hora = datetime.strptime(registro[0], '%Y-%m-%d %H:%M:%S')
                 hora_ant = datetime.strptime(registros[i-1][0], '%Y-%m-%d %H:%M:%S')
-                total_min += (hora - hora_ant).seconds/60
+                total_min += (hora - hora_ant).seconds/60            
 
             i+=1
         

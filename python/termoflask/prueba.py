@@ -14,14 +14,11 @@ logging.basicConfig(format='%(asctime)s %(message)s', datefmt='%Y%m%d %H:%M', le
 
 datos_sqlite = Sqlite("termostato.db")
 
-#print(datos_sqlite.minutos_dia())
+datos_sqlite.minutos_dia("2021-01-23")
 
 #datos_sqlite.parametros()
 
 #datos_sqlite.calculo_minutos()
-
-exterior = Aemet2("9434P")
-print(exterior.temp_media)
 
 
 
