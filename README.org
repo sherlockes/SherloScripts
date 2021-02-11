@@ -1,4 +1,4 @@
-#+TAGS:Org_Mode(o)  Python(p)  Bash(b)  Google_Scripts(g)  Hugo(h)
+#+TAGS:Org_Mode(o)  Python(p)  Upython(u) Bash(b)  Google_Scripts(g)  Hugo(h)
 
 * SherloScripts
 :properties:
@@ -15,6 +15,13 @@ Este archivo en formato org-mode voy escribiendo lo que día a día aprendo y ut
 - Markdown
 - Python
 - Y lo que vaya utilizando...
+** [[https://github.com/sherlockes/SherloScripts/blob/master/upython/ahora.py][ahora.py]] (upython)                              :Upython:
+Para la gestión de la hora en el ESP32 programándolo con micropython me he encontrado con el problema de la hora en España ya que no he sido capaz de que la clase "utime" devuelva el valor de la hora local. Me devuelve la hora UTC pero necesito la hora UTC +1 en el horario de invierno y +2 en el horario de verano.  Esta sencilla clase me devuelve el tiempo actual en segundos para la hora peninsular en España corrigiendo con el horario de invierno o verano, para ello...
+- Define los segundos para UTC +1 (Horario de invierno)
+- Busca las 2:00 AM del último domingo de marzo como iniio del horario de verano.
+- Busca las 3:00 AM del último domingo de octubre como fin del horario de verano.
+- Compara la hora actual con la ventana del horario de verano
+- Devuelve el valor en segundos
 ** [[https://github.com/sherlockes/SherloScripts/blob/master/python/etc/aemet.py][aemet.py]] (python)				    :Python:
 Esta clase ha sido creada para el proyecto de [[https://github.com/sherlockes/SherloScripts/blob/master/python/termo.py][termostato inteligente]] en la Raspberry usando python. Su finalidad únicamente es la de obtener la Tª exterior cada determinado tiempo a través de la web de la [[http://www.aemet.es/es/eltiempo/observacion/ultimosdatos][AEMET]] y de la capacidad que ofrece (por ahora de forma gratuita) de descargar un archivo con los datos del último día.
 
