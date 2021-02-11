@@ -24,3 +24,5 @@ pip install -r telegram-download-daemon/requirements.txt
 python3 delete.py
 
 python3 telegram-download-daemon/telegram-download-daemon.py --api-id $api_id --api-hash $api_hash --channel $canal_descargas --dest ~/teledown/files --temp ~/teledown/files
+#python3 telegram-download-daemon-old/telegram-download-daemon.py --api-id $api_id --api-hash $api_hash --channel $canal_descargas --dest ~/teledown/files --temp ~/teledown/temp
+

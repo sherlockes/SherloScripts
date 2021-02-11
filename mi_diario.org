@@ -47,7 +47,18 @@
 *** Comentarios
 **** Multilínea -> : '  -------- '
 *** Regex
-**** Uso de variable en una expresión regular -> ${var}
+**** Uso de variable en una expresión regular -> ${var
+*** Listar y Matar un proceso (ps - Kill)
+**** Listar procesos (ps -aux)
+- e = muestra todos los procesos
+- f = formato extra completo
+- a = mostrar procesos para todos los usuarios.
+- u = muestra el usuario propietario del proceso.
+- x = también muestra procesos no conectados a terminal.
+**** Matar procesos (kill -9 pid)
+- -1 cuelga las llamadas al proceso
+- -9 mata literalmente el proceso
+- -15 termina el proceso
 ** Debian
 *** Instalar la compatibilidad para impresión a PDF
 #+begin_src sh
