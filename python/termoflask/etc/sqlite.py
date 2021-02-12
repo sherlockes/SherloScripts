@@ -36,6 +36,7 @@ class Sqlite:
         cursorObj.execute("CREATE TABLE IF NOT EXISTS datos_temp(hora date PRIMARY KEY, exterior real, interior real, consigna real, rele)")
         cursorObj.execute("CREATE TABLE IF NOT EXISTS datos_dia(dia date PRIMARY KEY, media_ext real, media_int real, minutos)")
         cursorObj.execute("CREATE TABLE IF NOT EXISTS datos_set(t_ext real PRIMARY KEY, inercia_on real, rampa_on real, inercia_off real, rampa_off real)")
+        #cursorObj.execute("CREATE TABLE IF NOT EXISTS datos_salon(hora date PRIMARY KEY, temp, hume)")
 
         # Caldular datos anteriores
         self.anterior_dato()
@@ -54,6 +55,22 @@ class Sqlite:
         consulta = f"INSERT INTO datos_temp VALUES(datetime('now','localtime'), {exterior},{interior},{consigna},'{rele}')"
         cursorObj.execute(consulta)
         self.con.commit()
+
+    def nuevo_salon(self,temp,hume):
+        cursorObj = self.con.cursor()
+        consulta = f"DELETE FROM datos_salon WHERE ROWID IN (SELECT ROWID FROM datos_salon ORDER BY ROWID DESC LIMIT -1 OFFSET 1000)"
+        cursorObj.execute(consulta)
+        consulta = f"INSERT INTO datos_salon VALUES(datetime('now','localtime'), {temp},{hume})"
+        cursorObj.execute(consulta)
+        self.con.commit()
+        # select avg(temp) from datos_salon where ROWID in (SELECT rowid from datos_salon order by hora desc limit 30)
+
+    def datos_salon(self,datos):
+        cursorObj = self.con.cursor()
+        consulta = f"select hora, temp from datos_salon order by hora desc limit {datos}"
+        cursorObj.execute(consulta)
+        datos = cursorObj.fetchall()
+        return datos 
     
     def nuevo_ajuste(self,t_ext,campo,valor):
         valor_ext = self.obtener("datos_set",campo,"t_ext",t_ext)
