@@ -3,22 +3,47 @@
 #############################################################
 ##  Clase e iniciar el archivo de base de datos de SqLite  ##
 #############################################################
+import logging
 
-from etc.sqlite import Sqlite
 import os
 from pathlib import Path
-import logging
-from etc.aemet import Aemet2
+
+import os
 
 logging.basicConfig(format='%(asctime)s %(message)s', datefmt='%Y%m%d %H:%M', level=logging.INFO)
 
-datos_sqlite = Sqlite("termostato.db")
+import sqlite3
+import os
 
-datos_sqlite.minutos_dia("2021-01-23")
+from datetime import datetime
 
-#datos_sqlite.parametros()
+from etc.sqlite_2 import Sqlite
 
-#datos_sqlite.calculo_minutos()
+
+
+#############################################################
+##  Clase e iniciar el archivo de base de datos de SqLite  ##
+#############################################################
+
+ruta_db = os.path.join(Path.home(),"termostato.db")
+sqlite = Sqlite(ruta_db)
+
+
+print(f"El ultimo valor de Tª es de {sqlite.salon_media(1)}")
+print(f"El ultimo minuto Tª es de {sqlite.salon_media(3)}")
+print(f"El ultimo ciclo Tª es de {sqlite.salon_media(10)}")
+
+
+
+import pandas as pd
+x = pd.Series(range(50))
+print(x)
+y = pd.Series(sqlite.salon_temp(50))
+print(y)
+print(type(sqlite.salon_temp(58)))
+print(x.corr(y))
+
+
 
 
 
