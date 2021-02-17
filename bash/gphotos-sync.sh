@@ -2,9 +2,9 @@
 
 ###################################################################
 # Script Name: photos-gsync.sh
-# Description: Copia de suguridad de Google Photos
+# Description: Copia de seguridad de Google Photos
 # Args: N/A
-# Creation/Update: 20201211/20201211
+# Creation/Update: 20201211/20210217
 # Author: www.sherblog.pro                                                
 # Email: sherlockes@gmail.com                                           
 ###################################################################
@@ -51,6 +51,39 @@ if [[ $status == ok ]] ; then
     # --------------------------------------------
     cd ~/$hostname
     pipenv run gphotos-sync ~/$hostname
+
+
+    # --------------------------------------------
+    # Coloca las fechas en las que no tengan
+    # --------------------------------------------
+
+    # Comprobando si exiftool está instalado en el sistema
+    if which exiftool >/dev/null; then
+        echo 'exiftool está instalado...'
+    else
+        echo 'instalando exiftool...'
+        sudo apt install libimage-exiftool-perl
+    fi
+
+    shopt -s nullglob
+
+    for ext in jpg jpeg png gif; do 
+        files=( *."$ext" )
+        if [ ${#files[@]} -gt 0 ]; then
+            printf 'Número de imágenes %s : %d\n' "$ext" "${#files[@]}"
+            for file in "${files[@]}"; do
+                captura=$( exiftool -CreateDate $file )
+                if [ -n "$captura" ]; then
+                    echo $file " tiene fecha de captura"
+                else
+                    echo $file " no tiene fecha de captura."
+                    exiftool "-CreateDate<FileModifyDate" $file
+                    exiftool "-FileModifyDate<CreateDate" $file
+                fi
+            done 
+            rm *."$ext"_original
+        fi
+    done
 
     # --------------------------------------------
     # Desmonta la unidad
