@@ -50,7 +50,7 @@ if [[ $status == ok ]] ; then
     # Realiza la sincronización
     # --------------------------------------------
     cd ~/$hostname
-    pipenv run gphotos-sync ~/$hostname
+    python3 -m pipenv run gphotos-sync ~/$hostname
 
     # --------------------------------------------
     # Desmonta la unidad
