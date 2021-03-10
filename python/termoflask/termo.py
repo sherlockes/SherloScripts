@@ -131,9 +131,13 @@ rele_tiempo_actual = datos_sqlite.ultimo_cambio()
 
 if interior.temp < (consigna_temp_act - datos_json["histeresis"]) and rele.estado == "off":
     rele.encender()
-elif (interior.temp + 0.25) > consigna_temp_act and rele.estado == "on" and rele_tiempo_actual > 18:
+elif (interior.temp + 0.5) > consigna_temp_act and rele.estado == "on" and rele_tiempo_actual > 18:
     rele.apagar()
-elif (interior.temp + 0.1) > consigna_temp_act and rele.estado == "on":
+elif (interior.temp + 0.35) > consigna_temp_act and rele.estado == "on" and rele_tiempo_actual > 14:
+    rele.apagar()
+elif (interior.temp + 0.25) > consigna_temp_act and rele.estado == "on" and rele_tiempo_actual > 8:
+    rele.apagar()
+elif (interior.temp + 0.15) > consigna_temp_act and rele.estado == "on":
     rele.apagar()
 else:
     estado = rele.estado
