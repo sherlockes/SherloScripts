@@ -5,7 +5,7 @@
 #Script Name: Radares
 #Description: Descarga de radares y copia a Google Drive
 #Args: N/A
-#Creation/Update: 20191112/20191113
+#Creation/Update: 20191112/20200317
 #Author: www.sherblog.pro                                                
 #Email: sherlockes@gmail.com                                           
 ###################################################################
@@ -67,7 +67,7 @@ mv $carpeta/R_BBS_APR.csv $carpeta/07_restringido.csv
 # ----------------------------------
 # Sincronizando con Google Drive
 # ----------------------------------
-rclone sync $carpeta dd_gdu:Radares
+rclone sync $carpeta Sherlockes_GD:Radares
 
 # ----------------------------------
 # Borrando los rastros
