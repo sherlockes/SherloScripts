@@ -190,6 +190,8 @@ sudo apt-get install emacs26
 ** ORG-mode
 *** Insertar un enlace -> C-c C-l
 *** Insertar un nuevo nodo -> C-Ret
+*** Insertar un bloque de código -> <s TAB
+*** Insertar una cita -> <q TAB
 *** Easy templates (plantillas sencillas) <s Tab [[https://www.gnu.org/software/emacs/manual/html_node/org/Easy-templates.html][Link]]
 **** Modificar las plantillas editando org-structure-template-alist
 *** Visualización inicial --> C-u C-u TAB
@@ -204,6 +206,52 @@ https://morioh.com/p/8a40c3345286
 *** Python en Emacs
 **** Guardar y ejecutar  >   C-c C-c
 **** Limpiar el shell    >   C-c M-o
+*** Pandas
+import pandas as pd
+Cargar csv -> datos = pd.read_csv(ruta/archivo.csv)
+Revisar datos -> datos.describe()
+Listar campos -> datos.columns
+Columna a variable -> y = datos.lacolumnaquesea
+Columnas a dataframe -> x = datos[listadecolumnas]
+Mostrar primeras filas de dataframe -> x.head()
+Eliminar filas con campos vacíos -> filtered_x = x.dropna(axis=0)
+** Machine Learning
+*** DecisionTreeRegressor
+**** Especificar y ajustar
+#+BEGIN_SRC python
+from sklearn.tree import DecisionTreeRegressor
+modelo = DecisionTreeRegressor(max_leaf_nodes=nodos, random_state=1)
+modelo.fit(X,y)
+#+END_SRC
+#+BEGIN_QUOTE
+modelo es el nombre asignado
+X es el dataframe con las columnas de entrada
+y es la columna con los resultados que esperamos obtener.
+#+END_QUOTE
+**** Predicciones
+#+BEGIN_SRC python
+predicciones = modelo.predict(X)
+#+END_SRC
+**** Cuantificar error
+#+BEGIN_SRC python
+from sklearn.metrics import mean_absolute_error
+predicciones_modelo = modelo.predict(X)
+error = mean_absolute_error(y, predicciones_modelo)
+#+END_SRC
+Partir datos de entrada entre entrenamiento y validación
+#+BEGIN_SRC python
+from sklearn.model_selection import train_test_split
+train_X, val_X, train_y, val_y = train_test_split(X, y, random_state = 0)
+#+END_SRC
+*** RandomForestRegressor
+#+BEGIN_SRC python
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.metrics import mean_absolute_error
+forest_model = RandomForestRegressor(random_state=1)
+forest_model.fit(train_X, train_y)
+melb_preds = forest_model.predict(val_X)
+print(mean_absolute_error(val_y, melb_preds))
+#+END_SRC
 ** MoodleBox
 *** Acceder a través de ssh -> [[https://moodlebox.net/en/help/command-line-connection/][Enlace]]
 *** Acceder desde internet -> [[https://moodlebox.net/en/help/access-from-internet/][Enlace]]
