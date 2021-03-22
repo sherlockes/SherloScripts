@@ -14,6 +14,10 @@
 #+end_src
 *** Comando sed
 **** Imprimir una línea -> sed '2p' file
+*** Parar un script ante un error
+- set -e
+- set -o errexit
+Ambos son equivalentes, con 'set +e' el script no para.
 *** Encabezado
 #+BEGIN_SRC 
 #!/bin/bash
