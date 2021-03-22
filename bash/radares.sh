@@ -10,6 +10,8 @@
 #Email: sherlockes@gmail.com                                           
 ###################################################################
 
+set -e
+
 # ----------------------------------
 # Definición de variables
 # ----------------------------------
@@ -63,7 +65,7 @@ unir_archivos(){
 # ----------------------------------
 # Renombrando archivos
 # ----------------------------------
-renombar_archivos(){
+renombrar_archivos(){
     mv $carpeta/R_BBS_fijos_total.csv $carpeta/01_fijos.csv
     mv $carpeta/R_BBS_camu_total.csv $carpeta/02_moviles.csv
     mv $carpeta/R_BBS_Foto.csv $carpeta/04_camaras.csv

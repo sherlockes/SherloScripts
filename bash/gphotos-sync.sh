@@ -4,7 +4,7 @@
 # Script Name: photos-gsync.sh
 # Description: Copia de seguridad de Google Photos
 # Args: N/A
-# Creation/Update: 20201211/20210218
+# Creation/Update: 20201211/20210322
 # Author: www.sherblog.pro                                                
 # Email: sherlockes@gmail.com                                           
 ###################################################################
@@ -49,9 +49,11 @@ if [[ $status == ok ]] ; then
     # --------------------------------------------
     # Realiza la sincronización
     # --------------------------------------------
-    cd ~/$hostname
-    python3 -m pipenv run gphotos-sync ~/$hostname
+    #cd ~/$hostname
+    #python3 -m pipenv run gphotos-sync ~/$hostname
 
+    cd ~/gphotos-sync
+    gphotos-sync ~/$hostname
     # --------------------------------------------
     # Desmonta la unidad
     # --------------------------------------------
