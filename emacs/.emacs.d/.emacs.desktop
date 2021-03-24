@@ -2,12 +2,12 @@
 ;; --------------------------------------------------------------------------
 ;; Desktop File for Emacs
 ;; --------------------------------------------------------------------------
-;; Created Tue Mar 23 14:58:40 2021
+;; Created Wed Mar 24 23:30:12 2021
 ;; Desktop file format version 208
 ;; Emacs version 26.3
 
 ;; Global section:
-(setq desktop-saved-frameset [frameset 1 (24665 62480 180322 514000) (desktop . "208") "sherlockes@imedia" nil nil ((((minibuffer . t) (undecorated) (override-redirect) (font-backend xft x) (font . "-PfEd-DejaVu Sans Mono-normal-normal-normal-*-13-*-*-*-m-0-iso10646-1") (font-parameter . "Monospace 10") (border-width . 0) (internal-border-width . 0) (right-divider-width . 0) (bottom-divider-width . 0) (vertical-scroll-bars . right) (horizontal-scroll-bars) (foreground-color . "#eeeeec") (background-color . "#222") (mouse-color . "black") (border-color . "black") (screen-gamma) (line-spacing) (left-fringe . 8) (right-fringe . 8) (no-special-glyphs) (scroll-bar-foreground) (scroll-bar-background) (menu-bar-lines . 0) (tool-bar-lines . 0) (title) (wait-for-wm . t) (tool-bar-position . top) (inhibit-double-buffering) (icon-type . t) (auto-raise) (auto-lower) (cursor-type . box) (scroll-bar-width . 16) (scroll-bar-height . 0) (alpha) (no-focus-on-map) (no-accept-focus) (fullscreen . maximized) (visibility . t) (skip-taskbar) (z-group) (display-type . color) (background-mode . dark) (cursor-color . "#fce94f") (sticky) (environment) (modeline . t) (unsplittable) (frameset--id . "8E08-233E-7245-5A7D") (frameset--mini t . t) (display . ":0") (icon-name) (explicit-name) (height . 58) (width . 206) (left . 0) (top . 0)) ((min-height . 4) (min-width . 20) (min-height-ignore . 2) (min-width-ignore . 12) (min-height-safe . 1) (min-width-safe . 4) (min-pixel-height . 68) (min-pixel-width . 160) (min-pixel-height-ignore . 34) (min-pixel-width-ignore . 96) (min-pixel-height-safe . 17) (min-pixel-width-safe . 32)) hc (pixel-width . 1680) (pixel-height . 969) (total-width . 210) (total-height . 57) (normal-height . 1.0) (normal-width . 1.0) (combination-limit) (leaf (pixel-width . 840) (pixel-height . 969) (total-width . 105) (total-height . 57) (normal-height . 1.0) (normal-width . 0.5) (buffer "computing" (selected) (hscroll . 0) (fringes 8 8 nil) (margins nil) (scroll-bars nil 2 t nil 0 t) (vscroll . 0) (dedicated) (point . 325) (start . 1))) (leaf (last . t) (pixel-width . 840) (pixel-height . 969) (total-width . 105) (total-height . 57) (normal-height . 1.0) (normal-width . 0.5) (buffer "post" (selected . t) (hscroll . 0) (fringes 8 8 nil) (margins nil) (scroll-bars nil 2 t nil 0 t) (vscroll . 0) (dedicated) (point . 1204) (start . 1)))))])
+(setq desktop-saved-frameset [frameset 1 (24667 48500 616032 38000) (desktop . "208") "sherlockes@imedia" nil nil ((((minibuffer . t) (tty-type . "xterm-256color") (tty . "/dev/tty") (display-type . color) (background-mode . dark) (foreground-color . "#eeeeec") (cursor-color . "#fce94f") (background-color . "#222") (menu-bar-lines . 0) (tool-bar-lines . 0) (font . "tty") (height . 24) (width . 80) (modeline . t) (unsplittable) (frameset--id . "AF69-559F-D897-5AD8") (frameset--mini t)) ((min-height . 4) (min-width . 10) (min-height-ignore . 2) (min-width-ignore . 2) (min-height-safe . 1) (min-width-safe . 2) (min-pixel-height . 4) (min-pixel-width . 10) (min-pixel-height-ignore . 2) (min-pixel-width-ignore . 2) (min-pixel-height-safe . 1) (min-pixel-width-safe . 2)) leaf (pixel-width . 80) (pixel-height . 23) (total-width . 80) (total-height . 23) (normal-height . 1.0) (normal-width . 1.0) (buffer "fotos_nas.sh" (selected . t) (hscroll . 0) (fringes 0 0 nil) (margins nil) (scroll-bars nil 0 t nil 0 t) (vscroll . 0) (dedicated) (point . 90) (start . 1))))])
 (setq desktop-missing-file-warning nil)
 (setq tags-file-name nil)
 (setq tags-table-list nil)
@@ -18,6 +18,18 @@
 
 ;; Buffer section -- buffers listed in same order as in buffer list:
 (desktop-create-buffer 208
+  "/home/sherlockes/rpi/SherloScripts/bash/fotos_nas.sh"
+  "fotos_nas.sh"
+  'sh-mode
+  '(visual-line-mode yas-minor-mode)
+  90
+  '(nil nil)
+  nil
+  nil
+  '((buffer-display-time 24667 48490 940267 717000) (buffer-file-coding-system . utf-8-unix) (truncate-lines))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
   nil
   "post"
   'dired-mode
@@ -26,7 +38,7 @@
   '(nil nil)
   t
   '("/home/sherlockes/Google_Drive/Sherblog/content/post/")
-  '((buffer-display-time 24665 53485 952160 59000) (truncate-lines))
+  '((buffer-display-time 24667 48490 569795 422000) (truncate-lines))
   '((mark-ring nil)))
 
 (desktop-create-buffer 208
@@ -38,7 +50,7 @@
   '(nil nil)
   t
   '("/home/sherlockes/Google_Drive/Sherblog/content/post/computing/")
-  '((buffer-display-time 24665 53485 952154 611000) (truncate-lines))
+  '((buffer-display-time 24667 39495 705532 563000) (truncate-lines))
   '((mark-ring nil)))
 
 (desktop-create-buffer 208
@@ -50,6 +62,6 @@
   '(317 nil)
   nil
   nil
-  '((indent-tabs-mode) (buffer-display-time 24665 53468 544831 128000) (buffer-file-coding-system . utf-8-unix) (truncate-lines))
+  '((indent-tabs-mode) (buffer-display-time 24667 39478 813744 938000) (buffer-file-coding-system . utf-8-unix) (truncate-lines))
   '((mark-ring (9478 9614 9428 8675 9159 9298 9246 9299 9020 8475 8935 8916 8753 8897 8739 8897))))
 
