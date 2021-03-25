@@ -2,44 +2,56 @@
 ;; --------------------------------------------------------------------------
 ;; Desktop File for Emacs
 ;; --------------------------------------------------------------------------
-;; Created Wed Mar 24 23:30:12 2021
+;; Created Thu Mar 25 11:50:26 2021
 ;; Desktop file format version 208
 ;; Emacs version 26.3
 
 ;; Global section:
-(setq desktop-saved-frameset [frameset 1 (24667 48500 616032 38000) (desktop . "208") "sherlockes@imedia" nil nil ((((minibuffer . t) (tty-type . "xterm-256color") (tty . "/dev/tty") (display-type . color) (background-mode . dark) (foreground-color . "#eeeeec") (cursor-color . "#fce94f") (background-color . "#222") (menu-bar-lines . 0) (tool-bar-lines . 0) (font . "tty") (height . 24) (width . 80) (modeline . t) (unsplittable) (frameset--id . "AF69-559F-D897-5AD8") (frameset--mini t)) ((min-height . 4) (min-width . 10) (min-height-ignore . 2) (min-width-ignore . 2) (min-height-safe . 1) (min-width-safe . 2) (min-pixel-height . 4) (min-pixel-width . 10) (min-pixel-height-ignore . 2) (min-pixel-width-ignore . 2) (min-pixel-height-safe . 1) (min-pixel-width-safe . 2)) leaf (pixel-width . 80) (pixel-height . 23) (total-width . 80) (total-height . 23) (normal-height . 1.0) (normal-width . 1.0) (buffer "fotos_nas.sh" (selected . t) (hscroll . 0) (fringes 0 0 nil) (margins nil) (scroll-bars nil 0 t nil 0 t) (vscroll . 0) (dedicated) (point . 90) (start . 1))))])
+(setq desktop-saved-frameset [frameset 1 (24668 27378 114305 519000) (desktop . "208") "sherlockes@imedia" nil nil ((((minibuffer . t) (undecorated) (override-redirect) (font-backend xft x) (font . "-PfEd-DejaVu Sans Mono-normal-normal-normal-*-13-*-*-*-m-0-iso10646-1") (font-parameter . "Monospace 10") (border-width . 0) (internal-border-width . 0) (right-divider-width . 0) (bottom-divider-width . 0) (vertical-scroll-bars . right) (horizontal-scroll-bars) (foreground-color . "#eeeeec") (background-color . "#222") (mouse-color . "black") (border-color . "black") (screen-gamma) (line-spacing) (left-fringe . 8) (right-fringe . 8) (no-special-glyphs) (scroll-bar-foreground) (scroll-bar-background) (menu-bar-lines . 0) (tool-bar-lines . 0) (title) (wait-for-wm . t) (tool-bar-position . top) (inhibit-double-buffering) (icon-type . t) (auto-raise) (auto-lower) (cursor-type . box) (scroll-bar-width . 16) (scroll-bar-height . 0) (alpha) (no-focus-on-map) (no-accept-focus) (fullscreen . maximized) (visibility . t) (skip-taskbar) (z-group) (display-type . color) (background-mode . dark) (cursor-color . "#fce94f") (sticky) (environment) (modeline . t) (unsplittable) (frameset--id . "AF69-559F-D897-5AD8") (frameset--mini t . t) (display . ":0") (height . 58) (width . 206) (left . 0) (top . 0) (icon-name) (explicit-name)) ((min-height . 4) (min-width . 20) (min-height-ignore . 2) (min-width-ignore . 12) (min-height-safe . 1) (min-width-safe . 4) (min-pixel-height . 68) (min-pixel-width . 160) (min-pixel-height-ignore . 34) (min-pixel-width-ignore . 96) (min-pixel-height-safe . 17) (min-pixel-width-safe . 32)) hc (pixel-width . 1680) (pixel-height . 969) (total-width . 210) (total-height . 57) (normal-height . 1.0) (normal-width . 1.0) (combination-limit) (leaf (pixel-width . 840) (pixel-height . 969) (total-width . 105) (total-height . 57) (normal-height . 1.0) (normal-width . 0.5) (buffer "mi_diario.org" (selected) (hscroll . 0) (fringes 8 8 nil) (margins nil) (scroll-bars nil 2 t nil 0 t) (vscroll . 0) (dedicated) (point . 10685) (start . 1))) (leaf (last . t) (pixel-width . 840) (pixel-height . 969) (total-width . 105) (total-height . 57) (normal-height . 1.0) (normal-width . 0.5) (buffer "20210217_raspberry_autofaenas.md" (selected . t) (hscroll . 0) (fringes 8 8 nil) (margins nil) (scroll-bars nil 2 t nil 0 t) (vscroll . 0) (dedicated) (point . 3817) (start . 2269)))))])
 (setq desktop-missing-file-warning nil)
 (setq tags-file-name nil)
 (setq tags-table-list nil)
 (setq search-ring '("twitt" "twitter" "phil" "zerotier" "wik" "you" "wiki" "y" "youtu" "garmin" "youtu" "buscar" "you" "garmin" "yout" "frand"))
 (setq regexp-search-ring nil)
 (setq register-alist nil)
-(setq file-name-history '("~/Google_Drive/Sherblog/content/post/computing/" "~/Google_Drive/Sherblog" "~/Google_Drive/SherloScripts/bash/" "~/Google_Drive/Sherblog/content/post/20210322_rclone_synology.md" "~/Google_Drive/Sherblog" "~/Google_Drive/SherloScripts/" "~" "~/" "~" "~/Google_Drive/Sherblog/content/post/computing/hugo/" "~/Google_Drive/Sherblog/content/vertices/loma_de_utebo.md" "~/Google_Drive/Sherblog/content/vertices/san_cristobal.md" "~/Google_Drive/Sherblog/content/vertices/loma_lobera.md" "~/Google_Drive/Sherblog/content/vertices/campillo.md" "~/Google_Drive/Sherblog/content/vertices/alto_del_molino.md" "~" "~/Google_Drive/Sherblog/content/vertices/cabezuela.md" "~/Google_Drive/Sherblog/content/vertices/tetas.md" "~/Google_Drive/Sherblog/content/vertices/puntal.md" "~/Google_Drive/Sherblog/content/vertices/iglesia.md" "~/Google_Drive/Sherblog/content/vertices/casa_vieja.md" "~/Google_Drive/Sherblog/content/vertices/galiana.md" "~/Google_Drive/Sherblog/content/vertices/valdelagua.md" "~/Google_Drive/Sherblog/content/vertices/galiana.md" "~/Google_Drive/Sherblog/content/vertices/ebri.md" "~/Google_Drive/Sherblog/content/vertices/" "~/Google_Drive/Sherblog/blog-old/posts/vertices/bota.md" "~/Google_Drive/SherloScripts/hugo/shortcodes/" "~/Google_Drive/Sherblog/content/post/computing/" "~/Google_Drive/Sherblog/content/post/computing/raspberry/" "~/Google_Drive/SherloScripts" "~/Google_Drive/Sherblog/content/post/20210217_raspberry_autofaenas.md" "~/Google_Drive/Sherblog/content/post/computing/iot/" "~/Google_Drive/Sherblog/content/post/computing/iot" "~/Google_Drive/SherloScripts" "~/Google_Drive/SherloScripts/upython/leer_mqtt.py" "~/Google_Drive/Sherblog/content/post/20210304_nodemcu_micropython.md" "~/Google_Drive/Sherblog/content/post/computing/" "~/Google_Drive/Sherblog/content/post/20200201_telegram_download_daemon.md" "~" "~/Google_Drive/Sherblog/content/post/computing/" "~/Google_Drive/Sherblog/" "~/rpi" "~/rpi/sherblog/" "~/Google_Drive/Sherblog/content/post/computing/" "~/Google_Drive/Sherblog/content/post/20210114_bash_exiftool.md" "~/Google_Drive/Sherblog" "~/Google_Drive/SherloScripts/emacs/.emacs.d/snippets/markdown-mode/post" "~/Google_Drive/Sherblog" "~/Google_Drive/Sherblog/content/post/exiftool.md" "~/Google_Drive/Sherblog" "~/GDrive/SherloScripts/python/etc" "~/GDrive/" "~/GDrive/SherloScripts/" "~" "~/rpi/SherloScripts/" "~/" "~/Google_Drive/SherloScripts/" "~/Google_Drive/SherloScripts/README.org" "~/Descargas/" "~/Google_Drive/SherloScripts/readmemd.tar" "~" "~/Google_Drive/SherloScripts/python/" "~" "~/Google_Drive/Sherblog/content/" "~/Google_Drive/Sherblog/content/post/" "~/" "~/Google_Drive/SherloScripts/emacs/.emacs.d/snippets/markdown-mode/comentariohugo" "~/Google_Drive/SherloScripts/emacs/.emacs.d/snippets/markdown-mode/+new-snippet+" "~/" "~/Google_Drive/Sherblog/content/post/computing/" "~/Google_Drive/Sherblog/content/post/" "~/rpi/gphotos-sync.sh" "~" "~/Google_Drive/Sherblog/content/post/gphotos.md" "~/Google_Drive/Sherblog/content/post/others/" "~/Google_Drive/Sherblog/content/" "~/Google_Drive/SherloScripts/google scripts/20201129_limpieza_gmail.gs" "~/Google_Drive/Sherblog/content/" "~/Google_Drive/Sherblog/content/post/computing/" "~/Google_Drive/Sherblog/content/post/renamer.md" "~/Google_Drive/Sherblog/content/post/renamer" "~/Google_Drive/Sherblog/content/post/computing/raspberry/" "~" "~/Google_Drive/SherloScripts/python/" "~/Google_Drive/SherloScripts/python" "~/Google_Drive/Sherblog/content/post/pythonemacs.md" "~/Google_Drive/SherloScripts/emacs/.emacs.d/snippets/markdown-mode/youtube_hugo_shortcode" "~/Google_Drive/SherloScripts/emacs/.emacs.d/snippets/markdown-mode/+new-snippet+" "~/Google_Drive/Sherblog/content/post/netatmo.md" "~/Google_Drive/Sherblog/content/post/" "~/Google_Drive/SherloScripts/bash/" "~/rpi/SherloScripts/bash/" "~/" "~/Google_Drive/SherloScripts/bash/" "~/" "~/rpi/SherloScripts/bash/" "~/" "~/Escritorio/" "~/Google_Drive/SherloScripts/bash/"))
+(setq file-name-history '("~/Google_Drive/Sherblog" "~/Google_Drive/Sherblog/content/post/computing/" "~/Google_Drive/Sherblog" "~/Google_Drive/SherloScripts/bash/" "~/Google_Drive/Sherblog/content/post/20210322_rclone_synology.md" "~/Google_Drive/Sherblog" "~/Google_Drive/SherloScripts/" "~" "~/" "~" "~/Google_Drive/Sherblog/content/post/computing/hugo/" "~/Google_Drive/Sherblog/content/vertices/loma_de_utebo.md" "~/Google_Drive/Sherblog/content/vertices/san_cristobal.md" "~/Google_Drive/Sherblog/content/vertices/loma_lobera.md" "~/Google_Drive/Sherblog/content/vertices/campillo.md" "~/Google_Drive/Sherblog/content/vertices/alto_del_molino.md" "~" "~/Google_Drive/Sherblog/content/vertices/cabezuela.md" "~/Google_Drive/Sherblog/content/vertices/tetas.md" "~/Google_Drive/Sherblog/content/vertices/puntal.md" "~/Google_Drive/Sherblog/content/vertices/iglesia.md" "~/Google_Drive/Sherblog/content/vertices/casa_vieja.md" "~/Google_Drive/Sherblog/content/vertices/galiana.md" "~/Google_Drive/Sherblog/content/vertices/valdelagua.md" "~/Google_Drive/Sherblog/content/vertices/galiana.md" "~/Google_Drive/Sherblog/content/vertices/ebri.md" "~/Google_Drive/Sherblog/content/vertices/" "~/Google_Drive/Sherblog/blog-old/posts/vertices/bota.md" "~/Google_Drive/SherloScripts/hugo/shortcodes/" "~/Google_Drive/Sherblog/content/post/computing/" "~/Google_Drive/Sherblog/content/post/computing/raspberry/" "~/Google_Drive/SherloScripts" "~/Google_Drive/Sherblog/content/post/20210217_raspberry_autofaenas.md" "~/Google_Drive/Sherblog/content/post/computing/iot/" "~/Google_Drive/Sherblog/content/post/computing/iot" "~/Google_Drive/SherloScripts" "~/Google_Drive/SherloScripts/upython/leer_mqtt.py" "~/Google_Drive/Sherblog/content/post/20210304_nodemcu_micropython.md" "~/Google_Drive/Sherblog/content/post/computing/" "~/Google_Drive/Sherblog/content/post/20200201_telegram_download_daemon.md" "~" "~/Google_Drive/Sherblog/content/post/computing/" "~/Google_Drive/Sherblog/" "~/rpi" "~/rpi/sherblog/" "~/Google_Drive/Sherblog/content/post/computing/" "~/Google_Drive/Sherblog/content/post/20210114_bash_exiftool.md" "~/Google_Drive/Sherblog" "~/Google_Drive/SherloScripts/emacs/.emacs.d/snippets/markdown-mode/post" "~/Google_Drive/Sherblog" "~/Google_Drive/Sherblog/content/post/exiftool.md" "~/Google_Drive/Sherblog" "~/GDrive/SherloScripts/python/etc" "~/GDrive/" "~/GDrive/SherloScripts/" "~" "~/rpi/SherloScripts/" "~/" "~/Google_Drive/SherloScripts/" "~/Google_Drive/SherloScripts/README.org" "~/Descargas/" "~/Google_Drive/SherloScripts/readmemd.tar" "~" "~/Google_Drive/SherloScripts/python/" "~" "~/Google_Drive/Sherblog/content/" "~/Google_Drive/Sherblog/content/post/" "~/" "~/Google_Drive/SherloScripts/emacs/.emacs.d/snippets/markdown-mode/comentariohugo" "~/Google_Drive/SherloScripts/emacs/.emacs.d/snippets/markdown-mode/+new-snippet+" "~/" "~/Google_Drive/Sherblog/content/post/computing/" "~/Google_Drive/Sherblog/content/post/" "~/rpi/gphotos-sync.sh" "~" "~/Google_Drive/Sherblog/content/post/gphotos.md" "~/Google_Drive/Sherblog/content/post/others/" "~/Google_Drive/Sherblog/content/" "~/Google_Drive/SherloScripts/google scripts/20201129_limpieza_gmail.gs" "~/Google_Drive/Sherblog/content/" "~/Google_Drive/Sherblog/content/post/computing/" "~/Google_Drive/Sherblog/content/post/renamer.md" "~/Google_Drive/Sherblog/content/post/renamer" "~/Google_Drive/Sherblog/content/post/computing/raspberry/" "~" "~/Google_Drive/SherloScripts/python/" "~/Google_Drive/SherloScripts/python" "~/Google_Drive/Sherblog/content/post/pythonemacs.md" "~/Google_Drive/SherloScripts/emacs/.emacs.d/snippets/markdown-mode/youtube_hugo_shortcode" "~/Google_Drive/SherloScripts/emacs/.emacs.d/snippets/markdown-mode/+new-snippet+" "~/Google_Drive/Sherblog/content/post/netatmo.md" "~/Google_Drive/Sherblog/content/post/" "~/Google_Drive/SherloScripts/bash/" "~/rpi/SherloScripts/bash/" "~/" "~/Google_Drive/SherloScripts/bash/" "~/" "~/rpi/SherloScripts/bash/" "~/" "~/Escritorio/"))
 
 ;; Buffer section -- buffers listed in same order as in buffer list:
 (desktop-create-buffer 208
-  "/home/sherlockes/rpi/SherloScripts/bash/fotos_nas.sh"
-  "fotos_nas.sh"
-  'sh-mode
-  '(visual-line-mode yas-minor-mode)
-  90
-  '(nil nil)
+  "/home/sherlockes/Google_Drive/Sherblog/content/post/20210217_raspberry_autofaenas.md"
+  "20210217_raspberry_autofaenas.md"
+  'markdown-mode
+  '(visual-line-mode eldoc-mode yas-minor-mode)
+  3817
+  '(3968 nil)
   nil
   nil
-  '((buffer-display-time 24667 48490 940267 717000) (buffer-file-coding-system . utf-8-unix) (truncate-lines))
-  '((mark-ring nil)))
+  '((tab-width . 4) (buffer-display-time 24668 22704 966842 87000) (buffer-file-coding-system . utf-8-unix) (truncate-lines))
+  '((mark-ring (3678 908 3819 3406 1 3374 1118 1073 3820 3050 796 744 2945 4028 4056 3906))))
 
 (desktop-create-buffer 208
   nil
   "post"
   'dired-mode
   '(visual-line-mode yas-minor-mode)
-  1204
+  1127
   '(nil nil)
   t
   '("/home/sherlockes/Google_Drive/Sherblog/content/post/")
-  '((buffer-display-time 24667 48490 569795 422000) (truncate-lines))
+  '((buffer-display-time 24668 22698 409029 63000) (truncate-lines))
   '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/home/sherlockes/Google_Drive/SherloScripts/mi_diario.org"
+  "mi_diario.org"
+  'org-mode
+  '(visual-line-mode yas-minor-mode org-indent-mode)
+  10685
+  '(317 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-display-time 24668 22688 41028 847000) (buffer-file-coding-system . utf-8-unix) (truncate-lines))
+  '((mark-ring (9478 9614 9428 8675 9159 9298 9246 9299 9020 8475 8935 8916 8753 8897 8739 10685))))
 
 (desktop-create-buffer 208
   nil
@@ -50,18 +62,6 @@
   '(nil nil)
   t
   '("/home/sherlockes/Google_Drive/Sherblog/content/post/computing/")
-  '((buffer-display-time 24667 39495 705532 563000) (truncate-lines))
+  '((buffer-display-time 24668 13660 412349 832000) (truncate-lines))
   '((mark-ring nil)))
-
-(desktop-create-buffer 208
-  "/home/sherlockes/Google_Drive/SherloScripts/mi_diario.org"
-  "mi_diario.org"
-  'org-mode
-  '(visual-line-mode yas-minor-mode org-indent-mode)
-  396
-  '(317 nil)
-  nil
-  nil
-  '((indent-tabs-mode) (buffer-display-time 24667 39478 813744 938000) (buffer-file-coding-system . utf-8-unix) (truncate-lines))
-  '((mark-ring (9478 9614 9428 8675 9159 9298 9246 9299 9020 8475 8935 8916 8753 8897 8739 8897))))
 
