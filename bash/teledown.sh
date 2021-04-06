@@ -8,6 +8,11 @@
 # Email: sherlockes@gmail.com                                           
 ############################################################################
 
+# Necesario que en el sitema esté instalado python3 y pip3
+# sudo apt install pyton3-pip
+# sudo python3 -m pip install -U pip
+# sudo python3 -m pip install -U setuptools
+
 # Carga los parámetros del archivo de configuración en el directorio de usuario
 . ~/config.conf
 
