@@ -4,13 +4,11 @@
 # Script Name: host.sh
 # Description: Monta "host" en la carpeta ~/hostname mediante sshfs
 # Args: N/A
-# Creation/Update: 20201016/20210113
+# Creation/Update: 20201016/20210414
 # Author: www.sherblog.pro                                                
 # Email: sherlockes@gmail.com                                           
 ###################################################################
 
-host=pi@192.168.191.204
-hostname=rpi5o
 
 # --------------------------------------------
 # Comprobar la instalación de sshfs
@@ -22,6 +20,12 @@ else
     echo 'instalando sshfs...'
     sudo apt install sshfs
 fi
+
+
+# --------------------------------------------
+# Servidor al que nos vamos a conectar
+# --------------------------------------------
+read -p 'Introduce la conexión (usuario@ip): ' host
 
 # --------------------------------------------
 # Comprobar el acceso ssh
@@ -41,8 +45,14 @@ fi
 # --------------------------------------------
 # Crea la carpeta y monta la unidad
 # --------------------------------------------
+
+read -p 'Introduce la ruta a montar (/home/pi/carpeta): ' ruta
+
+carpeta=($(echo $ruta | tr "/" "\n"))
+hostname="${carpeta[-1]}_en_$host"
+
 mkdir ~/$hostname
-sshfs $host:/home/pi ~/$hostname
+sshfs $host:$ruta ~/$hostname
 
 # --------------------------------------------
 # Desmonta la unidad y borra la carpeta
