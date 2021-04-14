@@ -269,8 +269,9 @@ print(mean_absolute_error(val_y, melb_preds))
 *** General
 **** Seleccionar todo > C-a
 *** Vscode
-**** Enfocar la pantalla de terminal - Ctrl +j
-**** Cambiar de pestaña - Ctrl + TAB
+**** Enfocar la pantalla de terminal > Ctrl +j
+**** Cambiar de pestaña > Ctrl + TAB
+**** Comentar un bloque de código > Ctrl + Mays + a
 * Temp
 ** Links
 https://www.linuxquestions.org/questions/blog/lumak-426618/having-fun-with-bash-varaibles-indirect-variable-references-2450/
