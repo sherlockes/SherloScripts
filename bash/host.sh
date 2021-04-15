@@ -2,15 +2,13 @@
 
 ###################################################################
 # Script Name: host.sh
-# Description: Monta "host" en la carpeta ~/hostname mediante sshfs
+# Description: Monta carpeta mediante sshfs
 # Args: N/A
-# Creation/Update: 20201016/20210113
+# Creation/Update: 20201016/20210415
 # Author: www.sherblog.pro                                                
 # Email: sherlockes@gmail.com                                           
 ###################################################################
 
-host=pi@192.168.1.203
-hostname=rpi
 
 # --------------------------------------------
 # Comprobar la instalación de sshfs
@@ -24,6 +22,11 @@ else
 fi
 
 # --------------------------------------------
+# Servidor al que nos vamos a conectar
+# --------------------------------------------
+read -p 'Introduce la conexión (usuario@ip): ' host
+
+# --------------------------------------------
 # Comprobar el acceso ssh
 # --------------------------------------------
 status=$(ssh -o BatchMode=yes -o ConnectTimeout=5 $host echo ok 2>&1)
@@ -34,15 +37,21 @@ elif [[ $status == "Permission denied"* ]] ; then
     echo "Acceso a $host no autorizado..."
     exit
 else
-    echo "No es posible el aceso a $host"
+    echo "No es posible el acceso a $host"
     exit
 fi
 
 # --------------------------------------------
 # Crea la carpeta y monta la unidad
 # --------------------------------------------
+
+read -p 'Introduce la ruta a montar (/home/pi/carpeta): ' ruta
+
+carpeta=($(echo $ruta | tr "/" "\n"))
+hostname="${carpeta[-1]}@$host"
+
 mkdir ~/$hostname
-sshfs $host:/home/pi ~/$hostname
+sshfs $host:$ruta ~/$hostname
 
 # --------------------------------------------
 # Desmonta la unidad y borra la carpeta
