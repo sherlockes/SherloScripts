@@ -1,5 +1,0 @@
-# -*- mode: snippet -*-
-# name: hugolink
-# key: hugolink
-# --
-[${2:Titulo}]({{<relref"${1:archivo}.md">}})
