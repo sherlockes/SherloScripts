@@ -195,6 +195,7 @@ sudo apt-get install emacs26
 *** Insertar un enlace -> C-c C-l
 *** Insertar un nuevo nodo -> C-Ret
 *** Insertar un bloque de código -> <s TAB
+*** Insertar un tag -> C-c C-q (C-c C-c)
 *** Insertar una cita -> <q TAB
 *** Easy templates (plantillas sencillas) <s Tab [[https://www.gnu.org/software/emacs/manual/html_node/org/Easy-templates.html][Link]]
 **** Modificar las plantillas editando org-structure-template-alist

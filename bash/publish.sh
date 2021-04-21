@@ -149,6 +149,11 @@ else
     ~/SherloScripts/bash/parse_gpx.sh
     comprobar $?
 
+    # Exporta la configuración del crontab a un archivo de texto
+    mensaje+='Generación del archivo crontab.txt............'
+    crontab -l > /home/pi/sherblog/static/files/crontab.txt
+    comprobar $?
+
     mensaje+='Publicación de la web en Hugo................'
     cd ~/sherblog
     /usr/local/bin/hugo
