@@ -15,6 +15,8 @@ Este archivo en formato org-mode voy escribiendo lo que día a día aprendo y ut
 - Markdown
 - Python
 - Y lo que vaya utilizando...
+** [[https://github.com/sherlockes/SherloScripts/blob/master/bash/dotfiles.sh][dotfiles.sh]] (bash)                                 :Bash:
+Uso este script para crear los enlaces simbólicos a los archivos sincronizados en una nube pública. Toda la info en este [[https://sherblog.pro/mi-gesti%25C3%25B3n-de-los-archivos-de-configuraci%25C3%25B3n/][artículo]] de mi blog.
 ** [[https://github.com/sherlockes/SherloScripts/blob/master/upython/ahora.py][ahora.py]] (upython)                              :Upython:
 Para la gestión de la hora en el ESP32 programándolo con micropython me he encontrado con el problema de la hora en España ya que no he sido capaz de que la clase "utime" devuelva el valor de la hora local. Me devuelve la hora UTC pero necesito la hora UTC +1 en el horario de invierno y +2 en el horario de verano.  Esta sencilla clase me devuelve el tiempo actual en segundos para la hora peninsular en España corrigiendo con el horario de invierno o verano, para ello...
 - Define los segundos para UTC +1 (Horario de invierno)
