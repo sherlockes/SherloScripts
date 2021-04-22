@@ -20,15 +20,45 @@ fi
 echo "Enlazando la configuración de ssh..."
 ln -sf ~/dotfiles/ssh/config ~/.ssh/config
 
-echo "Enlazando la configuración de emacs..."
-ln -sf ~/dotfiles/emacs/.emacs_home ~/.emacs
 
-echo "Enlazando la configuración de Rclone..."
-ln -sf ~/dotfiles/rclone/rclone.conf ~/.config/rclone/rclone.conf
 
-echo "Enlazando la configuración de Gphotos-Sync..."
-ln -sf ~/dotfiles/gphotos-sync/client_secret.json ~/.config/gphotos-sync/client_secret.json
+link_dotfile () {
 
-echo "Enlazando la configuración de Gspread..."
-ln -sf ~/dotfiles/gspread/service_account.json ~/.config/gspread/service_account.json
+    if [ -d "$2" ]; then
+	echo "Enlazando la configuración de $1..."
+	ln -sf $ORIGEN $DESTINO
+    else
+	echo "$1 no está instalado en el sistena."
+    fi
+
+}
+
+# Configuracion de Emacs
+NOMBRE="Emacs"
+RUTA="~/.emacs.d/"
+ORIGEN="~/dotfiles/emacs/.emacs_home"
+DESTINO="~/.emacs"
+link_dotfile $NOMBRE $RUTA $ORIGEN $DESTINO
+
+
+# Configuracion de Gspread
+NOMBRE="Gspread"
+RUTA="~/.config/gspread/"
+ORIGEN="~/dotfiles/gspread/service_account.json"
+DESTINO="~/.config/gspread/service_account.json"
+link_dotfile $NOMBRE $RUTA $ORIGEN $DESTINO
+
+# Configuración de Gphotos-Sync
+NOMBRE="Gphotos-Sync"
+RUTA="~/.config/gphotos-sync/"
+ORIGEN="~/dotfiles/gphotos-sync/client_secret.json"
+DESTINO="~/.config/gphotos-sync/client_secret.json"
+link_dotfile $NOMBRE $RUTA $ORIGEN $DESTINO
+
+# Configuración de Rclone
+NOMBRE="Rclone"
+RUTA="~/.config/rclone/"
+ORIGEN="~/dotfiles/rclone/rclone.conf"
+DESTINO="~/.config/rclone/rclone.conf"
+link_dotfile $NOMBRE $RUTA $ORIGEN $DESTINO
 
