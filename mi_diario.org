@@ -109,6 +109,7 @@ make clean
 - Ir a línea C-c & (org-mark-ring-goto)
 **** Dired
 ***** [[https://www.gnu.org/software/emacs/refcards/pdf/dired-ref.pdf][Dired Reference Card]]
+***** Buscar archivos en directorio -> % m
 ***** Directorio superior -> ^
 ***** Cambiar opciones ls -> C-u s
 ***** Ocultar detalles de archivos (dired-hide-details-mode) -> (
@@ -134,6 +135,8 @@ make clean
 **** Ejecutar comando anterior -> M-p
 *** Temas
 **** Cambiar el tema -> M-x customize-themes
+*** Yasnippet
+**** Ver snippets de un tipo de archivo -> Alt+x yas-describe-tables
 *** Ventanas
 **** Eliminar la ventana actual -> C-x 0
 **** Eliminar el resto de ventanas -> C-x 1
