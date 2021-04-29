@@ -15,6 +15,11 @@ Este archivo en formato org-mode voy escribiendo lo que día a día aprendo y ut
 - Markdown
 - Python
 - Y lo que vaya utilizando...
+** [[https://github.com/sherlockes/SherloScripts/blob/master/bash/move2sherloflix.sh][move2sherloflix.sh]] (bash)                          :Bash:
+Con este script que se ejecuta diariamente en mi NAS muevo de forma automática películas y series ya visualizadas desde el propio NAS a una unidad remota mediante Rclone. Escrito en Bash hago uso de:
+- Bucle for para recorrer directorios
+- Discriminación entre carpetas y archivos
+- Movimiento de archivos y carpetas mediante Rclone
 ** [[https://github.com/sherlockes/SherloScripts/blob/master/bash/dotfiles.sh][dotfiles.sh]] (bash)                                 :Bash:
 Uso este script para crear los enlaces simbólicos a los archivos sincronizados en una nube pública. Toda la info en este [[https://sherblog.pro/mi-gesti%25C3%25B3n-de-los-archivos-de-configuraci%25C3%25B3n/][artículo]] de mi blog.
 ** [[https://github.com/sherlockes/SherloScripts/blob/master/upython/ahora.py][ahora.py]] (upython)                              :Upython:
