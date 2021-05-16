@@ -69,6 +69,10 @@ Ambos son equivalentes, con 'set +e' el script no para.
     apt-get -y install cups
     apt-get -y install printer-driver-cups-pdf
 #+end_src
+** Docker
+*** Parar un contenedor - docker stop xxxxxxxxx
+*** Parar todos contenedores - docker stop `docker ps -q`
+*** Listar todos contenedores - docker ps
 ** Emacs
 *** Buffers
 **** Recargar archivo (revert-buffer) -> C-x C-v Ret
