@@ -73,6 +73,13 @@ Ambos son equivalentes, con 'set +e' el script no para.
 *** Parar un contenedor - docker stop xxxxxxxxx
 *** Parar todos contenedores - docker stop `docker ps -q`
 *** Listar todos contenedores - docker ps
+*** Instalación
+#+BEGIN_SRC bash
+curl -fsSL https://get.docker.com -o get-docker.sh
+chmod u+x get-docker.sh
+sudo ./get-docker.sh
+sudo usermod -aG docker $(whoami)
+#+END_SRC
 ** Emacs
 *** Buffers
 **** Recargar archivo (revert-buffer) -> C-x C-v Ret
