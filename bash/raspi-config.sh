@@ -4,7 +4,7 @@
 # Script Name: raspi-config.sh
 # Description: Init Raspberry after OS install
 # Args: N/A
-# Creation/Update: 20181106/20200928
+# Creation/Update: 20181106/20210521
 # Author: www.sherblog.pro
 # Email: sherlockes@gmail.com
 # Location: github.com/sherlockes/SherloScripts/blob/master/bash/
@@ -42,6 +42,7 @@ cfg_pihole=false
 # Instalar sshfs
 # pipenv
 # gphotos-sync
+# 
 
 
 # -------------------------------------------------------
@@ -59,6 +60,7 @@ if [ "$cfg_update" = true ]; then
     echo "Actualizando el sistema..."
     sudo apt-get update
     sudo apt-get upgrade -y
+    sudo apt autoremove -y
 fi
 
 # -------------------------------------------------------
