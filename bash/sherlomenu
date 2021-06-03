@@ -5,7 +5,7 @@
 #Script Name: Sherlomenu
 #Description: Menu de acceso para el montaje de las distintas nubes
 #Args: N/A
-#Creation/Update: 20191022/20200501
+#Creation/Update: 20191022/20210603
 #Author: www.sherblog.pro                                                
 #Email: sherlockes@gmail.com                                           
 ###################################################################
@@ -15,11 +15,11 @@
 # ----------------------------------
 
 VideoNas_dir=~/VideoNas
-VideoNas_lan_cmd='sshfs sherlockes@192.168.1.200:../../video/ $VideoNas_dir'
+VideoNas_lan_cmd='sshfs sherlockes@192.168.10.200:../../video/ $VideoNas_dir'
 VideoNas_zer_cmd='sshfs sherlockes@192.168.191.200:../../video/ $VideoNas_dir'
-Pi_lan_ip='192.168.1.203'
-Pi_zer_ip='192.168.191.203'
-Nas_lan_ip='192.168.1.200'
+Pi_lan_ip='192.168.10.202'
+Pi_zer_ip='192.168.191.202'
+Nas_lan_ip='192.168.10.200'
 Nas_zer_ip='192.168.191.200'
 Gphotos_dir=~/clouds/gphotos-sync
 Gphotos_cmd='rclone mount Sherlockes_Gphotos:/media/all Fotos'
