@@ -9,7 +9,7 @@
 # Email: sherlockes@gmail.com                                           
 ###################################################################
 
-host=sherlockes@192.168.1.200
+host=sherlockes@192.168.10.200
 ruta=/homes/sherlockes/gphotos
 hostname=nas-gphotos
 
