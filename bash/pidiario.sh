@@ -25,7 +25,7 @@
 # SherloScripts - Copia las carpeta de Google Drive
 # ---------------------------------------------------------
 echo "Sincronizando la carpeta SherloScripts"
-rclone sync -v Sherlockes_GD:/SherloScripts/ /home/pi/SherloScripts/ --exclude "/SherloScripts/.git"
+rclone sync -v Sherlockes_GD:/SherloScripts/ /home/pi/SherloScripts/ --exclude "/SherloScripts/.git/*"
 
 # ---------------------------------------------------------
 # Repositorios - Actualiza los repositorios de GitHub
