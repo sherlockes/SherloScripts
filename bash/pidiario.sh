@@ -42,7 +42,6 @@ do
     git push
 done
 
-
 # --------------------------------------------------------------
 # Comprueba el estado de las distintas nubes públicas
 # --------------------------------------------------------------
@@ -68,7 +67,7 @@ done
 # --------------------------------------------------------------
 ##rclone sync Sherlockes78_UN_en: Onedrive_UN_en: --transfers 2 --tpslimit 8 --bwlimit 5M
 
-#rclone sync Onedrive_UN_en: Sherlockes78_UN_en: --transfers 2 --tpslimit 8 --bwlimit 5M
+rclone sync Onedrive_UN_en: Sherlockes78_UN_en: --transfers 2 --tpslimit 8 --bwlimit 5M
 
 
 exit 0
