@@ -15,6 +15,24 @@ Este archivo en formato org-mode voy escribiendo lo que día a día aprendo y ut
 - Markdown
 - Python
 - Y lo que vaya utilizando...
+** [[https://github.com/sherlockes/SherloScripts/blob/master/bash/pidiario.sh][pidiario.sh]] (bash)                                 :Bash:
+Todas las noches se ejecuta este script que realiza las siguentes funciones:
+- Actualiza Hugo
+- Sincroniza la carpeta SherloScripts
+- Actualiza los repos de GitHubsincroniza nubes
+- Comprueba el estado de varias nubes públicas
+- Sincroniza las nubes de Sherloflix
+
+Para todo esto se hace uso de:
+- Ejecución de un script externo
+- Ejecución de una función de un script externo
+- Sincronización de carpetas con Rclone
+- Uso de filtros de exclusión en Rclone
+- Uso de "for" para recorrer listas en bash
+- Actualización de repositorios mediante git
+- Chequeo de disponibilidad de nube con Rclone
+- Sincronización de nubes con Rclone
+
 ** [[https://github.com/sherlockes/SherloScripts/blob/master/bash/move2sherloflix.sh][move2sherloflix.sh]] (bash)                          :Bash:
 Con este script que se ejecuta diariamente en mi NAS muevo de forma automática películas y series ya visualizadas desde el propio NAS a una unidad remota mediante Rclone. Escrito en Bash hago uso de:
 - Bucle for para recorrer directorios

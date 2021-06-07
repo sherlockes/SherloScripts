@@ -10,7 +10,7 @@
 #             - Comprueba el estado de varias nubes públicas
 #             - Sincroniza las nubes de Sherloflix
 #Args: N/A
-#Creation/Update: 20200521/20200927
+#Creation/Update: 20200521/20210607
 #Author: www.sherblog.pro                                                
 #Email: sherlockes@gmail.com                                           
 ###################################################################
@@ -65,8 +65,7 @@ done
 # --------------------------------------------------------------
 # Sincroniza Sherloflix con la unidad compartida de Sherlockes78
 # --------------------------------------------------------------
-##rclone sync Sherlockes78_UN_en: Onedrive_UN_en: --transfers 2 --tpslimit 8 --bwlimit 5M
-
+echo "Sincronizando las nubes de Sherloflix..."
 rclone sync Onedrive_UN_en: Sherlockes78_UN_en: --transfers 2 --tpslimit 8 --bwlimit 5M
 
 
