@@ -22,10 +22,11 @@
 . /home/pi/SherloScripts/bash/rclone.sh && rclone_check
 
 # ---------------------------------------------------------
-# SherloScripts - Copia las carpeta de Google Drive
+# Google Drive - Sincronización de carpetas
 # ---------------------------------------------------------
 echo "Sincronizando la carpeta SherloScripts"
 rclone sync -v Sherlockes_GD:/SherloScripts/ /home/pi/SherloScripts/ --exclude "/.git/**"
+rclone sync -v Sherlockes_GD:/dotfiles/ /home/pi/dotfiles --exclude "/emacs/**"
 
 # ---------------------------------------------------------
 # Repositorios - Actualiza los repositorios de GitHub
