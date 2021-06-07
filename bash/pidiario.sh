@@ -23,14 +23,14 @@
 # ---------------------------------------------------------
 # SherloScripts - Copia las carpeta de Google Drive
 # ---------------------------------------------------------
-rclone sync -v Sherlockes_GD:/SherloScripts/ /home/pi/SherloScripts/
+#rclone sync -v Sherlockes_GD:/SherloScripts/ /home/pi/SherloScripts/
 
-#rclone copy -v Sherlockes_GD:/SherloScripts/ /home/pi/SherloScripts/
-#rclone sync -v Sherlockes_GD:/SherloScripts/bash/ /home/pi/SherloScripts/bash/
-#rclone sync -v Sherlockes_GD:/SherloScripts/'google scripts'/ /home/pi/SherloScripts/'google scripts'/
-#rclone sync -v Sherlockes_GD:/SherloScripts/hugo/ /home/pi/SherloScripts/hugo/
-#rclone sync -v Sherlockes_GD:/SherloScripts/python/ /home/pi/SherloScripts/python/
-#rclone sync -v Sherlockes_GD:/SherloScripts/upython/ /home/pi/SherloScripts/upython/
+rclone copy -v Sherlockes_GD:/SherloScripts/ /home/pi/SherloScripts/
+rclone sync -v Sherlockes_GD:/SherloScripts/bash/ /home/pi/SherloScripts/bash/
+rclone sync -v Sherlockes_GD:/SherloScripts/'google scripts'/ /home/pi/SherloScripts/'google scripts'/
+rclone sync -v Sherlockes_GD:/SherloScripts/hugo/ /home/pi/SherloScripts/hugo/
+rclone sync -v Sherlockes_GD:/SherloScripts/python/ /home/pi/SherloScripts/python/
+rclone sync -v Sherlockes_GD:/SherloScripts/upython/ /home/pi/SherloScripts/upython/
 
 # ---------------------------------------------------------
 # Repositorios - Actualiza los repositorios de GitHub
