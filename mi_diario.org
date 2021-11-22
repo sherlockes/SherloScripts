@@ -234,6 +234,14 @@ Columna a variable -> y = datos.lacolumnaquesea
 Columnas a dataframe -> x = datos[listadecolumnas]
 Mostrar primeras filas de dataframe -> x.head()
 Eliminar filas con campos vacíos -> filtered_x = x.dropna(axis=0)
+** Raspberry
+*** Argon One Pi4 V2 (Caja Raspberry Pi)
+**** Jumper pin settings
+- Pin 1-2: Modo por defecto, hay que pulsar el botón "ON" para encender
+- Pin 2-3: Modo siempre on, no hay que pulsar para encender
+- Argon ONE Pi 4 script 'curl https://download.argon40.com/argon1.sh|bash'
+- Configurar utilidad 'argonone-config'
+- Desinstalar utilidad 'argonone-uninstall'
 ** Machine Learning
 *** DecisionTreeRegressor
 **** Especificar y ajustar
