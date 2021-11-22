@@ -20,6 +20,7 @@ unidades=(Onedrive_UN_en Sherlockes78_UN_en)
 carpetas=(pelis series)
 notificacion=~/SherloScripts/bash/telegram.sh
 inicio=$( date +%s )
+echo $inicio
 
 
 #----------------------------------------------------------
@@ -38,11 +39,11 @@ comprobar(){
 # ---------------------------------------------------------
 # Actualiza hugo rclone si es necesario
 # ---------------------------------------------------------
-mensaje+=$'Actualización de Hugo...........................'
+mensaje+=$'Actualización de Hugo . . . . . . . . . . . . . . . . . . . . '
 . /home/pi/SherloScripts/bash/hugo.sh
 comprobar $?
 
-mensaje+=$'Actualización de Rclone.........................'
+mensaje+=$'Actualización de Rclone . . . . . . . . . . . . . . . . . . . '
 . /home/pi/SherloScripts/bash/rclone.sh && rclone_check
 comprobar $?
 
@@ -51,11 +52,11 @@ comprobar $?
 # ---------------------------------------------------------
 echo "Sincronizando las carpetas de Google Drive..."
 
-mensaje+=$'Sincronizando carpeta SherloScripts.............'
+mensaje+=$'Sincronizando carpeta SherloScripts . . . . . . . . . . . . . .'
 rclone sync -v Sherlockes_GD:/SherloScripts/ /home/pi/SherloScripts/ --exclude "/.git/**"
 comprobar $?
 
-mensaje+=$'Sincronizando carpeta Dotfiles..................'
+mensaje+=$'Sincronizando carpeta Dotfiles . . . . . . . . . . . . . . . . . '
 rclone sync -v Sherlockes_GD:/dotfiles/ /home/pi/dotfiles --exclude "/emacs/**"
 comprobar $?
 
@@ -66,7 +67,7 @@ echo "Actualizando repositorios de GitHub..."
 repo=(SherloScripts sherblog)
 for i in "${repo[@]}"
 do
-    mensaje+=$"Actualizando el repositorio $i.............."
+    mensaje+=$"Actualizando el repositorio $i . . . . . . . . . "
     echo "Actualizando el repositorio $i"
     cd ~/$i
 
@@ -127,7 +128,7 @@ done
 
 
 fin=$( date +%s )
-let duracion=end-start
+let duracion=$fin-$inicio
 mensaje+=$'-------------------------------------------------\n'
 mensaje+=$"duración del Script:  $duracion segundos"
 
