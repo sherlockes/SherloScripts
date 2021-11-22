@@ -52,7 +52,7 @@ comprobar $?
 # ---------------------------------------------------------
 echo "Sincronizando las carpetas de Google Drive..."
 
-mensaje+=$'Sincronizando carpeta SherloScripts . . . . . '
+mensaje+=$'Sincronizando carpeta SherloScripts . . . . '
 rclone sync -v Sherlockes_GD:/SherloScripts/ /home/pi/SherloScripts/ --exclude "/.git/**"
 comprobar $?
 
@@ -67,7 +67,7 @@ echo "Actualizando repositorios de GitHub..."
 repo=(SherloScripts sherblog)
 for i in "${repo[@]}"
 do
-    mensaje+=$"Actualizando el repositorio $i . . . "
+    mensaje+=$"Actualizar el repositorio $i . . . "
     echo "Actualizando el repositorio $i"
     cd ~/$i
 
@@ -83,7 +83,7 @@ done
 
 for u in "${unidades[@]}"
 do
-    mensaje+=$"Disponibilidad de $u . . . . . . . "
+    mensaje+=$"Disponibilidad de $u . . . . . . "
     rclone -v size $u:
 
     if [ $? -eq 0 ]; then
@@ -102,7 +102,7 @@ done
 # Comprueba y sincroniza Sherloflix con la unidad compartida de Sherlockes78
 # --------------------------------------------------------------------------
 echo "Sincronizando las nubes de Sherloflix..."
-mensaje+=$"Sinc ${unidades[0]} y ${unidades[1]}."
+mensaje+=$"${unidades[0]} VS ${unidades[1]}..."
 rclone sync ${unidades[0]}: ${unidades[1]}: --transfers 2 --tpslimit 8 --bwlimit 10M -P
 comprobar $?
 
