@@ -20,8 +20,6 @@ unidades=(Onedrive_UN_en Sherlockes78_UN_en)
 carpetas=(pelis series)
 notificacion=~/SherloScripts/bash/telegram.sh
 inicio=$( date +%s )
-echo $inicio
-
 
 #----------------------------------------------------------
 # Función para comprobar la salida
@@ -83,7 +81,7 @@ done
 
 for u in "${unidades[@]}"
 do
-    mensaje+=$"Disponibilidad de $u............................."
+    mensaje+=$"Disponibilidad de $u . . . . . . . . . . . . . . . . . "
     rclone -v size $u:
 
     if [ $? -eq 0 ]; then
@@ -102,7 +100,7 @@ done
 # Comprueba y sincroniza Sherloflix con la unidad compartida de Sherlockes78
 # --------------------------------------------------------------------------
 echo "Sincronizando las nubes de Sherloflix..."
-mensaje+=$"Sincronizando ${unidades[0]} y ${unidades[1]}..."
+mensaje+=$"Sincronizando ${unidades[0]} y ${unidades[1]} . "
 rclone sync ${unidades[0]}: ${unidades[1]}: --transfers 2 --tpslimit 8 --bwlimit 10M -P
 comprobar $?
 
@@ -112,7 +110,7 @@ echo "Comprobando sincronización de las nubes de Sherloflix..."
 for u in "${carpetas[@]}"
 do
     echo "Comprobando sincronización de $u..."
-    mensaje+=$"Sincronización de $u.............................."
+    mensaje+=$"Sincronización de $u . . . . . . . . . . . . . . . . . . . . . . . "
     diferencias=$( rclone check ${unidades[0]}:/$u ${unidades[1]}:/$u --size-only 2>&1 | grep 'differences found' | cut -d ":" -f 6 | cut -d " " -f 2 )
 
 if [ $diferencias -ne 0 ];
