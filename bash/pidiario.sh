@@ -39,11 +39,11 @@ comprobar(){
 # ---------------------------------------------------------
 # Actualiza hugo rclone si es necesario
 # ---------------------------------------------------------
-mensaje+=$'Actualización de Hugo . . . . . . . . . . . . . . . . . . '
+mensaje+=$'Actualización de Hugo . . . . . . . . . . . . . . . . '
 . /home/pi/SherloScripts/bash/hugo.sh
 comprobar $?
 
-mensaje+=$'Actualización de Rclone . . . . . . . . . . . . . . . . . '
+mensaje+=$'Actualización de Rclone . . . . . . . . . . . . . . . '
 . /home/pi/SherloScripts/bash/rclone.sh && rclone_check
 comprobar $?
 
@@ -52,11 +52,11 @@ comprobar $?
 # ---------------------------------------------------------
 echo "Sincronizando las carpetas de Google Drive..."
 
-mensaje+=$'Sincronizando carpeta SherloScripts . . . . . . . . . . . '
+mensaje+=$'Sincronizando carpeta SherloScripts . . . . . . . . . '
 rclone sync -v Sherlockes_GD:/SherloScripts/ /home/pi/SherloScripts/ --exclude "/.git/**"
 comprobar $?
 
-mensaje+=$'Sincronizando carpeta Dotfiles . . . . . . . . . . . . . . '
+mensaje+=$'Sincronizando carpeta Dotfiles . . . . . . . . . . . . '
 rclone sync -v Sherlockes_GD:/dotfiles/ /home/pi/dotfiles --exclude "/emacs/**"
 comprobar $?
 
@@ -67,7 +67,7 @@ echo "Actualizando repositorios de GitHub..."
 repo=(SherloScripts sherblog)
 for i in "${repo[@]}"
 do
-    mensaje+=$"Actualizando el repositorio $i . . . . . . . . . "
+    mensaje+=$"Actualizando el repositorio $i . . . . . . . "
     echo "Actualizando el repositorio $i"
     cd ~/$i
 
@@ -83,7 +83,7 @@ done
 
 for u in "${unidades[@]}"
 do
-    mensaje+=$"Disponibilidad de $u . . . . . . . . . . . . . . "
+    mensaje+=$"Disponibilidad de $u . . . . . . . . . . . "
     rclone -v size $u:
 
     if [ $? -eq 0 ]; then
@@ -111,7 +111,7 @@ echo "Comprobando sincronización de las nubes de Sherloflix..."
 for u in "${carpetas[@]}"
 do
     echo "Comprobando sincronización de $u..."
-    mensaje+=$"Sincronización de $u . . . . . . . . . . . . . . . . . . . . "
+    mensaje+=$"Sincronización de $u . . . . . . . . . . . . . . . . . "
     diferencias=$( rclone check ${unidades[0]}:/$u ${unidades[1]}:/$u --size-only 2>&1 | grep 'differences found' | cut -d ":" -f 6 | cut -d " " -f 2 )
 
 if [ $diferencias -ne 0 ];
