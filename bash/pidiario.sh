@@ -48,7 +48,7 @@ done
 # --------------------------------------------------------------
 
 unidades=(Onedrive_UN_en Sherlockes78_UN_en)
-
+carpetas=(pelis series)
 notificacion=~/SherloScripts/bash/telegram.sh
 
 for u in "${unidades[@]}"
@@ -68,30 +68,21 @@ done
 # Comprueba y sincroniza Sherloflix con la unidad compartida de Sherlockes78
 # --------------------------------------------------------------------------
 echo "Sincronizando las nubes de Sherloflix..."
-rclone sync Onedrive_UN_en: Sherlockes78_UN_en: --transfers 2 --tpslimit 8 --bwlimit 10M -P
+rclone sync ${unidades[0]}: ${unidades[1]}: --transfers 2 --tpslimit 8 --bwlimit 10M -P
 
-diferencias=$( rclone check ${unidades[0]}:/series ${unidades[1]}:/series --size-only 2>&1 | grep 'differences found' | cut -d ":" -f 6 | cut -d " " -f 2 )
+echo "Comprobando sincronización de las nubes de Sherloflix..."
 
-echo $diferencias
-
-if [ $diferencias -ne 0 ];
-then
-    echo "La sincronización de las series de las nubes no es correcta."
-    $notificacion "Hay un error de sincronización de las series de las nubes!!!"
-else
-    echo "La sincronización de series es correcta."
-fi
-
-diferencias=$( rclone check ${unidades[0]}:/pelis ${unidades[1]}:/pelis --size-only 2>&1 | grep 'differences found' | cut -d ":" -f 6 | cut -d " " -f 2 )
-
-echo $diferencias
+for u in "${carpetas[@]}"
+do
+    diferencias=$( rclone check ${unidades[0]}:/$u ${unidades[1]}:/$u --size-only 2>&1 | grep 'differences found' | cut -d ":" -f 6 | cut -d " " -f 2 )
 
 if [ $diferencias -ne 0 ];
 then
-    echo "La sincronización de las pelis de las nubes no es correcta."
-    $notificacion "Hay un error de sincronización de las series de las nubes!!!"
+    echo "La sincronización de las $u de las nubes no es correcta."
+    $notificacion "Hay un error de sincronización de las $u de las nubes!!!"
 else
-    echo "La sincronización de pelis es correcta."
+    echo "La sincronización de $u es correcta."
 fi
+done
 
 exit 0
