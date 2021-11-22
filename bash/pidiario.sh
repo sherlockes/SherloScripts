@@ -1,4 +1,3 @@
-
 #!/bin/bash
 # -*- encoding: utf-8 -*-
 
@@ -10,23 +9,49 @@
 #             - Comprueba el estado de varias nubes públicas
 #             - Sincroniza las nubes de Sherloflix
 #Args: N/A
-#Creation/Update: 20200521/20210607
+#Creation/Update: 20200521/20211122
 #Author: www.sherblog.pro                                                
 #Email: sherlockes@gmail.com                                           
 ###################################################################
 
+mensaje=$'Faenas diarias de Rpi mediante pidiario.sh\n'
+#----------------------------------------------------------
+# Función para comprobar la salida
+#----------------------------------------------------------
+comprobar(){
+
+    if [ $1 -eq 0 ]; then
+	mensaje+=$'OK'
+    else
+	mensaje+=$'ERROR'
+    fi
+    mensaje+=$'\n'
+
+}
+
 # ---------------------------------------------------------
 # Actualiza hugo rclone si es necesario
 # ---------------------------------------------------------
+mensaje+=$'Actualización de Hugo...'
 . /home/pi/SherloScripts/bash/hugo.sh
+comprobar $?
+
+mensaje+=$'Actualización de Rclone...'
 . /home/pi/SherloScripts/bash/rclone.sh && rclone_check
+comprobar $?
 
 # ---------------------------------------------------------
 # Google Drive - Sincronización de carpetas
 # ---------------------------------------------------------
 echo "Sincronizando las carpetas de Google Drive..."
+
+mensaje+=$'Sincronizando carpeta SherloScripts...'
 rclone sync -v Sherlockes_GD:/SherloScripts/ /home/pi/SherloScripts/ --exclude "/.git/**"
+comprobar $?
+
+mensaje+=$'Sincronizando carpeta Dotfiles...'
 rclone sync -v Sherlockes_GD:/dotfiles/ /home/pi/dotfiles --exclude "/emacs/**"
+comprobar $?
 
 # ---------------------------------------------------------
 # Repositorios - Actualiza los repositorios de GitHub
@@ -84,5 +109,10 @@ else
     echo "La sincronización de $u es correcta."
 fi
 done
+
+
+
+# Envia el mensaje de telegram con el resultado
+$notificacion "$mensaje"
 
 exit 0
