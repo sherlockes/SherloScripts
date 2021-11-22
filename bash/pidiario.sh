@@ -21,7 +21,7 @@ notificacion=~/SherloScripts/bash/telegram.sh
 inicio=$( date +%s )
 
 mensaje=$'Faenas diarias de Rpi mediante pidiario.sh\n'
-mensaje+=$'- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n'
+mensaje+=$'- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n'
 
 #----------------------------------------------------------
 # Función para comprobar la salida
@@ -83,7 +83,7 @@ done
 
 for u in "${unidades[@]}"
 do
-    mensaje+=$"Disponibilidad de $u . . . . "
+    mensaje+=$"Disponibilidad de $u . . "
     rclone -v size $u:
 
     if [ $? -eq 0 ]; then
@@ -102,7 +102,7 @@ done
 # Comprueba y sincroniza Sherloflix con la unidad compartida de Sherlockes78
 # --------------------------------------------------------------------------
 echo "Sincronizando las nubes de Sherloflix..."
-mensaje+=$"${unidades[0]} VS ${unidades[1]}.."
+mensaje+=$"${unidades[0]} Vs ${unidades[1]}."
 rclone sync ${unidades[0]}: ${unidades[1]}: --transfers 2 --tpslimit 8 --bwlimit 10M -P
 comprobar $?
 
@@ -128,8 +128,8 @@ done
 # Envia el mensaje de telegram con el resultado
 fin=$( date +%s )
 let duracion=$fin-$inicio
-mensaje+=$'- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n'
-mensaje+=$"duración del Script:  $duracion segundos"
+mensaje+=$'- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n'
+mensaje+=$"Duración del Script:  $duracion segundos"
 
 $notificacion "$mensaje"
 
