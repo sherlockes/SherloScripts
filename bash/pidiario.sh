@@ -19,6 +19,8 @@ mensaje+=$'-------------------------------------------------\n'
 unidades=(Onedrive_UN_en Sherlockes78_UN_en)
 carpetas=(pelis series)
 notificacion=~/SherloScripts/bash/telegram.sh
+inicio=`date +%s.%N`
+
 
 #----------------------------------------------------------
 # Función para comprobar la salida
@@ -109,6 +111,7 @@ echo "Comprobando sincronización de las nubes de Sherloflix..."
 for u in "${carpetas[@]}"
 do
     echo "Comprobando sincronización de $u..."
+    mensaje+=$"Sincronización de $u..."
     diferencias=$( rclone check ${unidades[0]}:/$u ${unidades[1]}:/$u --size-only 2>&1 | grep 'differences found' | cut -d ":" -f 6 | cut -d " " -f 2 )
 
 if [ $diferencias -ne 0 ];
@@ -123,6 +126,10 @@ mensaje+=$'\n'
 done
 
 
+fin=`date +%s.%N`
+duracion=$( echo "$fin - $inicio" | bc -l )
+mensaje+=$'-------------------------------------------------\n'
+mensaje+=$"duración del Script:  $duracion segundos"
 
 # Envia el mensaje de telegram con el resultado
 $notificacion "$mensaje"
