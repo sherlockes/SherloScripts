@@ -15,7 +15,7 @@
 ###################################################################
 
 mensaje=$'Faenas diarias de Rpi mediante pidiario.sh\n'
-mensaje+=$'-------------------------------------------------\n'
+mensaje+=$'- - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n'
 unidades=(Onedrive_UN_en Sherlockes78_UN_en)
 carpetas=(pelis series)
 notificacion=~/SherloScripts/bash/telegram.sh
@@ -37,11 +37,11 @@ comprobar(){
 # ---------------------------------------------------------
 # Actualiza hugo rclone si es necesario
 # ---------------------------------------------------------
-mensaje+=$'Actualización de Hugo . . . . . . . . . . . . . . . . . . . . '
+mensaje+=$'Actualización de Hugo . . . . . . . . . . . . . . . . . . '
 . /home/pi/SherloScripts/bash/hugo.sh
 comprobar $?
 
-mensaje+=$'Actualización de Rclone . . . . . . . . . . . . . . . . . . . '
+mensaje+=$'Actualización de Rclone . . . . . . . . . . . . . . . . . '
 . /home/pi/SherloScripts/bash/rclone.sh && rclone_check
 comprobar $?
 
@@ -50,11 +50,11 @@ comprobar $?
 # ---------------------------------------------------------
 echo "Sincronizando las carpetas de Google Drive..."
 
-mensaje+=$'Sincronizando carpeta SherloScripts . . . . . . . . . . . . . .'
+mensaje+=$'Sincronizando carpeta SherloScripts . . . . . . . . . . . '
 rclone sync -v Sherlockes_GD:/SherloScripts/ /home/pi/SherloScripts/ --exclude "/.git/**"
 comprobar $?
 
-mensaje+=$'Sincronizando carpeta Dotfiles . . . . . . . . . . . . . . . . . '
+mensaje+=$'Sincronizando carpeta Dotfiles . . . . . . . . . . . . . . '
 rclone sync -v Sherlockes_GD:/dotfiles/ /home/pi/dotfiles --exclude "/emacs/**"
 comprobar $?
 
@@ -81,7 +81,7 @@ done
 
 for u in "${unidades[@]}"
 do
-    mensaje+=$"Disponibilidad de $u . . . . . . . . . . . . . . . . . "
+    mensaje+=$"Disponibilidad de $u . . . . . . . . . . . . . . "
     rclone -v size $u:
 
     if [ $? -eq 0 ]; then
@@ -100,7 +100,7 @@ done
 # Comprueba y sincroniza Sherloflix con la unidad compartida de Sherlockes78
 # --------------------------------------------------------------------------
 echo "Sincronizando las nubes de Sherloflix..."
-mensaje+=$"Sincronizando ${unidades[0]} y ${unidades[1]} . "
+mensaje+=$"Sinc ${unidades[0]} y ${unidades[1]} . "
 rclone sync ${unidades[0]}: ${unidades[1]}: --transfers 2 --tpslimit 8 --bwlimit 10M -P
 comprobar $?
 
@@ -110,7 +110,7 @@ echo "Comprobando sincronización de las nubes de Sherloflix..."
 for u in "${carpetas[@]}"
 do
     echo "Comprobando sincronización de $u..."
-    mensaje+=$"Sincronización de $u . . . . . . . . . . . . . . . . . . . . . . . "
+    mensaje+=$"Sincronización de $u . . . . . . . . . . . . . . . . . . . . "
     diferencias=$( rclone check ${unidades[0]}:/$u ${unidades[1]}:/$u --size-only 2>&1 | grep 'differences found' | cut -d ":" -f 6 | cut -d " " -f 2 )
 
 if [ $diferencias -ne 0 ];
@@ -127,7 +127,7 @@ done
 
 fin=$( date +%s )
 let duracion=$fin-$inicio
-mensaje+=$'-------------------------------------------------\n'
+mensaje+=$'- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n'
 mensaje+=$"duración del Script:  $duracion segundos"
 
 # Envia el mensaje de telegram con el resultado
