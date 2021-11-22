@@ -15,7 +15,7 @@
 ###################################################################
 
 mensaje=$'Faenas diarias de Rpi mediante pidiario.sh\n'
-mensaje=$'------------------------------------------\n'
+mensaje+=$'------------------------------------------\n'
 unidades=(Onedrive_UN_en Sherlockes78_UN_en)
 carpetas=(pelis series)
 notificacion=~/SherloScripts/bash/telegram.sh
@@ -64,7 +64,7 @@ echo "Actualizando repositorios de GitHub..."
 repo=(SherloScripts sherblog)
 for i in "${repo[@]}"
 do
-    mensaje+=$'Actualizando el repositorio $i...'
+    mensaje+=$"Actualizando el repositorio $i..."
     echo "Actualizando el repositorio $i"
     cd ~/$i
 
