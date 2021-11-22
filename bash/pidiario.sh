@@ -15,6 +15,10 @@
 ###################################################################
 
 mensaje=$'Faenas diarias de Rpi mediante pidiario.sh\n'
+unidades=(Onedrive_UN_en Sherlockes78_UN_en)
+carpetas=(pelis series)
+notificacion=~/SherloScripts/bash/telegram.sh
+
 #----------------------------------------------------------
 # Función para comprobar la salida
 #----------------------------------------------------------
@@ -59,31 +63,32 @@ echo "Actualizando repositorios de GitHub..."
 repo=(SherloScripts sherblog)
 for i in "${repo[@]}"
 do
+    mensaje+=$'Actualizando el repositorio $i...'
     echo "Actualizando el repositorio $i"
     cd ~/$i
 
     git add --all
     git commit -m "Update"
     git push
+    comprobar $?
 done
 
 # --------------------------------------------------------------
 # Comprueba el estado de las distintas nubes públicas
 # --------------------------------------------------------------
 
-unidades=(Onedrive_UN_en Sherlockes78_UN_en)
-carpetas=(pelis series)
-notificacion=~/SherloScripts/bash/telegram.sh
-
 for u in "${unidades[@]}"
 do
+    mensaje+=$'Comprobando disponibilidad de $u...'
     rclone -v size $u:
 
     if [ $? -eq 0 ]; then
 	echo "OK"
+	mensaje+=$'OK'
     else
 	echo "KO"
-	$notificacion "Hay un error de conexión con $u"
+	mensaje+=$'ERROR'
+	$notificacion "$mensaje"
 	exit 0
     fi
 done
@@ -92,7 +97,7 @@ done
 # Comprueba y sincroniza Sherloflix con la unidad compartida de Sherlockes78
 # --------------------------------------------------------------------------
 echo "Sincronizando las nubes de Sherloflix..."
-rclone sync ${unidades[0]}: ${unidades[1]}: --transfers 2 --tpslimit 8 --bwlimit 10M -P
+#rclone sync ${unidades[0]}: ${unidades[1]}: --transfers 2 --tpslimit 8 --bwlimit 10M -P
 
 echo "Comprobando sincronización de las nubes de Sherloflix..."
 
