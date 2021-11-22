@@ -5,21 +5,23 @@
 #Script Name: pidiario.sh
 #Description: - Actualiza Hugo
 #             - Sincroniza la carpeta SherloScripts
-#             - Actualiza los repos de GitHubsincroniza nubes
+#             - Actualiza los repos de GitHub
 #             - Comprueba el estado de varias nubes públicas
 #             - Sincroniza las nubes de Sherloflix
+#             - Comprueba la sincronización de las carpetas
 #Args: N/A
 #Creation/Update: 20200521/20211122
 #Author: www.sherblog.pro                                                
 #Email: sherlockes@gmail.com                                           
 ###################################################################
 
-mensaje=$'Faenas diarias de Rpi mediante pidiario.sh\n'
-mensaje+=$'- - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n'
 unidades=(Onedrive_UN_en Sherlockes78_UN_en)
 carpetas=(pelis series)
 notificacion=~/SherloScripts/bash/telegram.sh
 inicio=$( date +%s )
+
+mensaje=$'Faenas diarias de Rpi mediante pidiario.sh\n'
+mensaje+=$'- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n'
 
 #----------------------------------------------------------
 # Función para comprobar la salida
@@ -100,12 +102,11 @@ done
 # Comprueba y sincroniza Sherloflix con la unidad compartida de Sherlockes78
 # --------------------------------------------------------------------------
 echo "Sincronizando las nubes de Sherloflix..."
-mensaje+=$"Sinc ${unidades[0]} y ${unidades[1]} . "
+mensaje+=$"Sinc ${unidades[0]} y ${unidades[1]}..."
 rclone sync ${unidades[0]}: ${unidades[1]}: --transfers 2 --tpslimit 8 --bwlimit 10M -P
 comprobar $?
 
 echo "Comprobando sincronización de las nubes de Sherloflix..."
-
 
 for u in "${carpetas[@]}"
 do
@@ -124,13 +125,12 @@ fi
 mensaje+=$'\n'
 done
 
-
+# Envia el mensaje de telegram con el resultado
 fin=$( date +%s )
 let duracion=$fin-$inicio
-mensaje+=$'- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n'
+mensaje+=$'- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n'
 mensaje+=$"duración del Script:  $duracion segundos"
 
-# Envia el mensaje de telegram con el resultado
 $notificacion "$mensaje"
 
 exit 0
