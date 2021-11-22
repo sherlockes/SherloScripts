@@ -15,6 +15,7 @@
 ###################################################################
 
 mensaje=$'Faenas diarias de Rpi mediante pidiario.sh\n'
+mensaje=$'------------------------------------------\n'
 unidades=(Onedrive_UN_en Sherlockes78_UN_en)
 carpetas=(pelis series)
 notificacion=~/SherloScripts/bash/telegram.sh
@@ -79,7 +80,7 @@ done
 
 for u in "${unidades[@]}"
 do
-    mensaje+=$'Comprobando disponibilidad de $u...'
+    mensaje+=$"Comprobando disponibilidad de $u..."
     rclone -v size $u:
 
     if [ $? -eq 0 ]; then
