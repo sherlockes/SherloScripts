@@ -19,7 +19,7 @@ mensaje+=$'-------------------------------------------------\n'
 unidades=(Onedrive_UN_en Sherlockes78_UN_en)
 carpetas=(pelis series)
 notificacion=~/SherloScripts/bash/telegram.sh
-inicio=`date +%s.%N`
+inicio=$SECONDS
 
 
 #----------------------------------------------------------
@@ -126,8 +126,8 @@ mensaje+=$'\n'
 done
 
 
-fin=`date +%s.%N`
-duracion=$( echo "$fin - $inicio" | bc -l )
+fin=$SECONDS
+let duracion=end-start
 mensaje+=$'-------------------------------------------------\n'
 mensaje+=$"duración del Script:  $duracion segundos"
 
