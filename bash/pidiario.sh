@@ -83,7 +83,7 @@ done
 
 for u in "${unidades[@]}"
 do
-    mensaje+=$"Disponibilidad de $u . . . . . . "
+    mensaje+=$"Disponibilidad de $u . . . . "
     rclone -v size $u:
 
     if [ $? -eq 0 ]; then
@@ -102,7 +102,7 @@ done
 # Comprueba y sincroniza Sherloflix con la unidad compartida de Sherlockes78
 # --------------------------------------------------------------------------
 echo "Sincronizando las nubes de Sherloflix..."
-mensaje+=$"${unidades[0]} VS ${unidades[1]}..."
+mensaje+=$"${unidades[0]} VS ${unidades[1]}.."
 rclone sync ${unidades[0]}: ${unidades[1]}: --transfers 2 --tpslimit 8 --bwlimit 10M -P
 comprobar $?
 
