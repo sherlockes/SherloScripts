@@ -1,0 +1,16 @@
+{{/* ------------------------------------------------------------------ */}}
+{{/* ------ Generación del listado de artículos en la categoría ------- */}}
+{{/* ------------------------------------------------------------------ */}}
+
+{{/* Para insertarla... {{< lista_categoria cat="vertices" >}} ........ */}}
+
+{{ $categoria := .Get "cat" }}
+
+<h3>Artículos de la categoría "{{ $categoria }}"</h3>
+
+{{ range where .Site.RegularPages ".Params.categories" "intersect" (slice $categoria) }}
+
+<a href="{{.Permalink}}">{{.Params.title}} ({{.Params.creation}})</a></br>
+
+
+{{ end }}

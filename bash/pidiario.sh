@@ -24,14 +24,14 @@
 # ---------------------------------------------------------
 # Google Drive - Sincronización de carpetas
 # ---------------------------------------------------------
-echo "Sincronizando la carpeta SherloScripts"
+echo "Sincronizando las carpetas de Google Drive..."
 rclone sync -v Sherlockes_GD:/SherloScripts/ /home/pi/SherloScripts/ --exclude "/.git/**"
 rclone sync -v Sherlockes_GD:/dotfiles/ /home/pi/dotfiles --exclude "/emacs/**"
 
 # ---------------------------------------------------------
 # Repositorios - Actualiza los repositorios de GitHub
 # ---------------------------------------------------------
-echo "Actualizando repositorios de GitHub"
+echo "Actualizando repositorios de GitHub..."
 repo=(SherloScripts sherblog)
 for i in "${repo[@]}"
 do
@@ -59,15 +59,39 @@ do
 	echo "OK"
     else
 	echo "KO"
-    $notificacion "Hay un erro de conexión con $u"
+	$notificacion "Hay un error de conexión con $u"
+	exit 0
     fi
 done
 
-# --------------------------------------------------------------
-# Sincroniza Sherloflix con la unidad compartida de Sherlockes78
-# --------------------------------------------------------------
+# --------------------------------------------------------------------------
+# Comprueba y sincroniza Sherloflix con la unidad compartida de Sherlockes78
+# --------------------------------------------------------------------------
 echo "Sincronizando las nubes de Sherloflix..."
-rclone sync Onedrive_UN_en: Sherlockes78_UN_en: --transfers 2 --tpslimit 8 --bwlimit 5M
+rclone sync Onedrive_UN_en: Sherlockes78_UN_en: --transfers 2 --tpslimit 8 --bwlimit 10M -P
 
+diferencias=$( rclone check ${unidades[0]}:/series ${unidades[1]}:/series --size-only 2>&1 | grep 'differences found' | cut -d ":" -f 6 | cut -d " " -f 2 )
+
+echo $diferencias
+
+if [ $diferencias -ne 0 ];
+then
+    echo "La sincronización de las series de las nubes no es correcta."
+    $notificacion "Hay un error de sincronización de las series de las nubes!!!"
+else
+    echo "La sincronización de series es correcta."
+fi
+
+diferencias=$( rclone check ${unidades[0]}:/pelis ${unidades[1]}:/pelis --size-only 2>&1 | grep 'differences found' | cut -d ":" -f 6 | cut -d " " -f 2 )
+
+echo $diferencias
+
+if [ $diferencias -ne 0 ];
+then
+    echo "La sincronización de las pelis de las nubes no es correcta."
+    $notificacion "Hay un error de sincronización de las series de las nubes!!!"
+else
+    echo "La sincronización de pelis es correcta."
+fi
 
 exit 0
