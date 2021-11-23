@@ -20,7 +20,7 @@ carpetas=(pelis series)
 notificacion=~/SherloScripts/bash/telegram.sh
 inicio=$( date +%s )
 
-mensaje=$'Faenas diarias de Rpi mediante pidiario.sh\n'
+mensaje=$'Faenas diarias de Rpi mediante <a href="https://raw.githubusercontent.com/sherlockes/SherloScripts/master/bash/pidiario.sh">pidiario.sh</a>\n'
 mensaje+=$'- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n'
 
 #----------------------------------------------------------
