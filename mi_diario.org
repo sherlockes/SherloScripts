@@ -173,6 +173,8 @@ make clean
 Aquí iremos añadiendo el contenido con el que queremos actualizar la entrada...
 {{< / borrador >}}
 #+END_SRC
+*** Escapar shortcode para no evaluarlo -> {{</* youtube w7iekruei7 */>}}
+*** Insertar un comentario en plantilla -> {{/* This is my comment */}}
 *** Insertar tag "more" -> <!--more-->
 *** Insertar un video de youtube -> {{< youtube w7Ft2ymGmfc >}} 
 ** Inkscape
