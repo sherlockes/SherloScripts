@@ -10,7 +10,7 @@
 ###################################################################
 
 sherloflix="Onedrive_UN_en"
-sherloflix_path="/var/services/video/Sherloflix"
+sherloflix_path="/volume1/video/Sherloflix"
 conf_path="/var/services/homes/sherlockes/.config/rclone/rclone.conf"
 series_path="/volume1/video/Series/00_mover"
 pelis_path="/volume1/video/Peliculas/00_mover"
