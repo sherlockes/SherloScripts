@@ -4,7 +4,7 @@
 #Script Name: sherloflix.sh
 #Description: Montaje de Sherloflix en el NAS con rclone y limpieza
 #Args: N/A
-#Creation/Update: 20210217/20210814
+#Creation/Update: 20210217/20211212
 #Author: www.sherblog.pro                                                
 #Email: sherlockes@gmail.com                                           
 ###################################################################
@@ -48,7 +48,7 @@ find $pelis_path/* -empty -type d -delete
 
 # Monta la unidad remota en el NAS
 echo "3.- Montando la unidad remota de $sherloflix como Sherloflix...."
-rclone mount $sherloflix: $sherloflix_path --allow-other --config=$conf_path --daemon
+rclone mount $sherloflix: $sherloflix_path --vfs-cache-mode full --allow-other --config=$conf_path --daemon
 
 
 
