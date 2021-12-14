@@ -10,7 +10,7 @@
 #	- Genera la web estática
 #	- Sube la web a GitHub
 # Args: N/A
-# Creation/Update: 20180901/20201203
+# Creation/Update: 20180901/20201214
 # Author: www.sherblog.pro                                                
 # Email: sherlockes@gmail.com                                           
 ############################################################################
@@ -19,7 +19,10 @@
 dir_post=~/sherblog/content/post
 mins_mod=15
 notificacion=~/SherloScripts/bash/telegram.sh
-mensaje=$'Actualización de www.sherblog.pro mediante publish.sh\n'
+inicio=$( date +%s )
+
+mensaje=$'Actualización del <a href="https://sherblog.pro">blog</a> mediante <a href="https://raw.githubusercontent.com/sherlockes/SherloScripts/master/bash/publish.sh">publish.sh</a>\n'
+mensaje+=$'- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n'
 
 add_header(){ 
     # Calculo de lineas del archivo y líneas de contenido
@@ -168,6 +171,11 @@ else
     comprobar $?
 
     # Envia el mensaje de telegram con el resultado
+    fin=$( date +%s )
+    let duracion=$fin-$inicio
+    mensaje+=$'- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n'
+    mensaje+=$"Duración del Script:  $duracion segundos"
+    
     $notificacion "$mensaje"
 fi
 
