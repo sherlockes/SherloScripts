@@ -30,35 +30,65 @@ read_options(){
     local choice
     read -p "Selecciona una opción [ 1 - 8] " choice
     case $choice in
-	1) rclone_list ;;
-	2) des_montar "VideoNas" ;;
-	3) Google_Photos ;;
-	4) SherloScripts ;;
-	5) copy_rclone_config ;;
-	6) exit 0;;
-	7) exit 0;;
+	1) clonar_github ;;
+	2) clonar_rpi ;;
+	3) salir ;;
 	*) echo -e "...Error..." && sleep 2
     esac
 }
 
+clonar_github(){
+    echo "Creando arbol de directorios..."
+    mkdir ~/sherblog_dev
 
-echo "Creando arbol de directorios..."
-mkdir ~/sherblog_dev
+    echo "Clonando contenido de GitHub..."
+    cd ~/sherblog_dev
+    git clone https://github.com/sherlockes/sherblog.git blog/
 
-echo "Clonando contenido de GitHub..."
-cd ~/sherblog_dev
-git clone https://github.com/sherlockes/sherblog.git blog/
+    lanzar_servidor
+}
 
-echo "Publicando y arrancando el servidor de Hugo..."
-cd blog
-hugo server
+clonar_rpi(){
+    echo "Creando arbol de directorios..."
+    mkdir ~/sherblog_dev
+    echo "Clonando contenido de la Raspberry..."
+    cd ~/sherblog_dev
+    
+    rsync -avzhe ssh --exclude '.git' rpi:~/sherblog/ blog/
 
-echo "Eliminando las carpetas generadas..."
+    lanzar_servidor
+}
 
-rm -rf ~/sherblog_dev
-echo "Script terminado¡¡¡"
+lanzar_servidor(){
+    echo "Publicando y arrancando el servidor de Hugo..."
+    xdg-open http://localhost:1313
+    cd blog
+    hugo server
+}
 
-#mkdir dev
-#rsync -avzhe ssh --exclude '.git' rpi:~/sherblog/ ~/Sherblog/dev/
-#cd dev
-#hugo server
+salir(){
+    echo "Eliminando las carpetas generadas..."
+
+    rm -rf ~/sherblog_dev
+    echo "Script terminado¡¡¡"
+    exit 0
+}
+
+# ----------------------------------------------
+# Trap CTRL+C, CTRL+Z and quit singles
+# ----------------------------------------------
+trap '' SIGINT SIGQUIT SIGTSTP
+ 
+# -----------------------------------
+# Bucle Principal
+# ------------------------------------
+
+while true
+do
+    sleep 1
+    show_menus
+    read_options
+done
+
+
+

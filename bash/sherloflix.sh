@@ -25,7 +25,9 @@ sleep 30
 
 # Monta la unidad remota en el NAS
 echo "1.- Montando la unidad remota de $sherloflix como Sherloflix...."
-rclone mount $sherloflix: $sherloflix_path --vfs-cache-mode full --allow-other --config=$conf_path --daemon
+#rclone mount $sherloflix: $sherloflix_path --vfs-cache-mode full --allow-other --config=$conf_path --daemon
+rclone mount $sherloflix: $sherloflix_path --read-only --allow-other --config=$conf_path --gid 33 --umask 0027 --allow-non-empty --daemon
+
 
 # Moviendo las series de la carpeta 00_mover a la nube
 echo "2.- Archivando series ya visualizadas...."
