@@ -38,6 +38,11 @@ read_options(){
 }
 
 clonar_github(){
+    clear
+    
+    echo "Eliminando las carpetas generadas..."
+    rm -rf ~/sherblog_dev
+
     echo "Creando arbol de directorios..."
     mkdir ~/sherblog_dev
 
@@ -49,11 +54,16 @@ clonar_github(){
 }
 
 clonar_rpi(){
+    clear
+    
+    echo "Eliminando las carpetas generadas..."
+    rm -rf ~/sherblog_dev
+
     echo "Creando arbol de directorios..."
     mkdir ~/sherblog_dev
+
     echo "Clonando contenido de la Raspberry..."
     cd ~/sherblog_dev
-    
     rsync -avzhe ssh --exclude '.git' rpi:~/sherblog/ blog/
 
     lanzar_servidor
