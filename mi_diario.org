@@ -206,7 +206,8 @@ sudo add-apt-repository ppa:kelleyk/emacs -y
 sudo apt-get update
 sudo apt-get install emacs26
 ** MarkDown
-*** Cheatsheet de MarkDown para Hugo > https://sourceforge.net/p/hugo-generator/wiki/markdown_syntax/#md_ex_lists
+*** [[https://sourceforge.net/p/hugo-generator/wiki/markdown_syntax/#md_ex_lists][Hugo CheatSheet]]
+*** [[https://cheatography.com/xaon/cheat-sheets/emacs-markdown-mode/][Emacs CheatSheet]]
 ** ORG-mode
 *** Insertar un enlace -> C-c C-l
 *** Insertar un nuevo nodo -> C-Ret
