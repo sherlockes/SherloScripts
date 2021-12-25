@@ -135,6 +135,7 @@ make clean
 **** Yasnippet
 ***** Nuevo Snippet -> yas-new-snippet
 ***** Editar Snippet -> yas-visit-snippet-file
+*** Recuperar archivos -> m-x recover-file
 *** Selección
 **** Activar la marca de posición -> C-spc
 *** Shell
