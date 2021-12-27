@@ -82,13 +82,13 @@ sudo usermod -aG docker $(whoami)
 #+END_SRC
 ** Emacs
 *** Buffers
+**** Borrar el buffer completo -> erase-buffer (Sin tecla por defecto)
+**** Cuardar como (buffer) -> C-x C-w [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Save-Commands.html][Link]]
+**** Guardar como (todo el texto) -> C-x h M-x write-region
+**** Instalar paquete -> install-package-from-buffer
+**** Mostrar los números de línea -> linum-mode
 **** Recargar archivo (revert-buffer) -> C-x C-v Ret
 **** Seleccionar el buffer completo -> C-x h
-**** Guardar como (todo el texto) -> C-x h M-x write-region
-**** Cuardar como (buffer) -> C-x C-w [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Save-Commands.html][Link]]
-**** Borrar el buffer completo -> erase-buffer (Sin tecla por defecto)
-**** Mostrar los números de línea -> linum-mode
-**** Instalar paquete -> install-package-from-buffer
 *** Corrección Ortográfica y Diccionario
 **** Cambiar diccionario -> M-x ispell-change dictionary "castellano"
 **** Instalar diccionario -> [[https://ondahostil.wordpress.com/2017/01/17/lo-que-he-aprendido-configurando-aspell-para-emacs/][Onda Hostil]]
@@ -218,6 +218,7 @@ sudo apt-get install emacs26
 *** Easy templates (plantillas sencillas) <s Tab [[https://www.gnu.org/software/emacs/manual/html_node/org/Easy-templates.html][Link]]
 **** Modificar las plantillas editando org-structure-template-alist
 *** Visualización inicial --> C-u C-u TAB
+*** [[https://niklasfasching.github.io/go-org/][Niklasfasching Org mode parser]]
 ** Python
 *** Enlaces pendientes de revisar
 Tutorial automate the boring stuff
