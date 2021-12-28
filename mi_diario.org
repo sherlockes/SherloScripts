@@ -166,7 +166,9 @@ make clean
 *** Crear un enlace interno 
 - En el mismo directorio > [Titulo]({{<relref"archivo.md">}})
 - En un directorio absoluto > [Titulo]({{<ref"/dir/archivo.md">}})
-- A un apartado del post >[Foo]({{<ref "#foo" >}}) 
+- A un apartado del post >[Foo]({{<ref "#foo" >}})
+- A un apartado en un directorio absoluto > [Titulo]({{<ref"/dir/archivo.md#foo-">}})
+Muy importante el guíón al final del apartado, si no no funciona.
 *** [[https://sourceforge.net/p/hugo-generator/wiki/markdown_syntax/][Markdown Cheatsheet]]
 *** Crear un trozo en borrador
 #+BEGIN_SRC 
