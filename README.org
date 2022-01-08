@@ -32,7 +32,12 @@ Para todo esto se hace uso de:
 - Actualización de repositorios mediante git
 - Chequeo de disponibilidad de nube con Rclone
 - Sincronización de nubes con Rclone
-
+** [[https://github.com/sherlockes/SherloScripts/blob/master/bash/webdav.sh][webdav.sh]] (bash)                                   :Bash:
+Gracias a [[https://rclone.org][Rclone]] con este script de dos líneas al que hace una llamada en el arranque el crontab (Aunque directamente se podría haber insertado en el mismo) la Raspberry monta un servidor webdav con l contenido eu tengo cifrado en una de mis nubes públicas de acuerdo a los siguientes parámetros:
+- Nombre de la nube: Sherlockes78_UN_en
+- Ip y puerto del servidor: --addr 192.168.10.202:5005
+- Modo de sólo lectura: --read-only
+SEncillo y práctico con un consumo de recursos realmente bajo.
 ** [[https://github.com/sherlockes/SherloScripts/blob/master/bash/move2sherloflix.sh][move2sherloflix.sh]] (bash)                          :Bash:
 Con este script que se ejecuta diariamente en mi NAS muevo de forma automática películas y series ya visualizadas desde el propio NAS a una unidad remota mediante Rclone. Escrito en Bash hago uso de:
 - Bucle for para recorrer directorios

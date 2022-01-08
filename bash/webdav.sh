@@ -2,7 +2,7 @@
 
 ###################################################################
 #Script Name: webdav.sh
-#Description: Monta un sevidor webdav con rclone
+#Description: Monta un servidor webdav con rclone
 #Args: N/A
 #Creation/Update: 20211217/20211217
 #Author: www.sherblog.pro                                                
