@@ -10,7 +10,7 @@
 #             - Sincroniza las nubes de Sherloflix
 #             - Comprueba la sincronización de las carpetas
 #Args: N/A
-#Creation/Update: 20200521/20211123
+#Creation/Update: 20200521/20220110
 #Author: www.sherblog.pro                                                
 #Email: sherlockes@gmail.com                                           
 ###################################################################
@@ -103,7 +103,7 @@ done
 # --------------------------------------------------------------------------
 echo "Sincronizando las nubes de Sherloflix..."
 mensaje+=$"${unidades[0]} Vs ${unidades[1]}."
-rclone sync ${unidades[0]}: ${unidades[1]}: --transfers 2 --tpslimit 8 --bwlimit 10M -P
+timeout 3h rclone sync ${unidades[0]}: ${unidades[1]}: --transfers 2 --tpslimit 8 --bwlimit 10M -P
 comprobar $?
 
 echo "Comprobando sincronización de las nubes de Sherloflix..."
