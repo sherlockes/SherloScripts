@@ -162,6 +162,11 @@ make clean
 *** Variable global -> (setq variable valor)
 *** Escribir a un archivo -> (write-region "loquesea" nil "~/archivo")
 *** Añadir a un archivo -> (append-to-file "loquesea" nil "~/archivo")
+** Git
+*** Borrar último commit (Si el repositorio local y el remoto están sincronizados)
+git reset HEAD^ --hard
+git push origin -f
+*** Actualizar el repositorio local -> git fetch
 ** Hugo
 *** Crear un enlace interno 
 - En el mismo directorio > [Titulo]({{<relref"archivo.md">}})
@@ -176,10 +181,14 @@ Muy importante el guíón al final del apartado, si no no funciona.
 Aquí iremos añadiendo el contenido con el que queremos actualizar la entrada...
 {{< / borrador >}}
 #+END_SRC
+*** Clonar el repositorio
+git clone --recurse-submodules git@gitlab.com:sherlockes/sherlockes.gitlab.io.git
 *** Escapar shortcode para no evaluarlo -> {{</* youtube w7iekruei7 */>}}
 *** Insertar un comentario en plantilla -> {{/* This is my comment */}}
 *** Insertar tag "more" -> <!--more-->
 *** Insertar un video de youtube -> {{< youtube w7Ft2ymGmfc >}} 
+*** Servir dentro de una red local
+hugo server --bind=192.168.10.202 --baseURL=http://192.168.10.202:1313
 ** Inkscape
 *** Resetear las preferencias
 Borrar el archivo "~/.config/inkscape/preferences.xml"

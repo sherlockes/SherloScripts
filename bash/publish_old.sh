@@ -1,15 +1,16 @@
 #!/bin/bash
 
 ###########################################################################
-# Script Name: Actualización de www.sherblog.pro en Gitlab.io
+# Script Name: Actualización de www.sherblog.pro
 # Description:
+#	- Actualiza Hugo (Eliminado por actualización diaria aparte)
 #	- Sincroniza Google Drive con las carpetas locales
 #	- Añade una cabecera a los archivos que no la tienen
 #	- Actualiza los archivos de la nube a los nuevos con cabecera
 #	- Genera la web estática
 #	- Sube la web a GitHub
 # Args: N/A
-# Creation/Update: 20180901/20220119
+# Creation/Update: 20180901/20201214
 # Author: www.sherblog.pro                                                
 # Email: sherlockes@gmail.com                                           
 ############################################################################
@@ -48,6 +49,9 @@ add_header(){
     # Establece el nombre para el nuevo archivo
     file_name="$(date +%Y%m%d)_$short_title.md"
     echo El nombre del archivo será: $file_name
+
+    #thumbnail="images/$(date +%Y%m%d)_$short_title_00.jpg"
+    #echo $thumbnail
 
     # Creación del archivo definitivo
     echo "---" >> $file_name
@@ -123,7 +127,7 @@ comprobar(){
 }
 
 # Comprueba si hay contenido para actualizar
-if rclone check --one-way Sherlockes_GD:/Sherblog/content/ /home/pi/sherlockes.gitlab.io/content/; then
+if rclone check --one-way Sherlockes_GD:/Sherblog/content/ /home/pi/sherblog/content/; then
     echo No hay cambios que actualizar...
 else
     echo Actualizando los cambios...
@@ -132,11 +136,15 @@ else
     # Sincroniza el contenido de la nube de Google Drive con las carpetas locales
 
     mensaje+='Sincronizando el directorio Content.....'
-    rclone sync -v Sherlockes_GD:/Sherblog/content/ /home/pi/sherlockes.gitlab.io/content/
+    rclone sync -v Sherlockes_GD:/Sherblog/content/ /home/pi/sherblog/content/
     comprobar $?
 
     mensaje+='Sincronizando el directorio Static.....'
-    rclone sync -v Sherlockes_GD:/Sherblog/static/ /home/pi/sherlockes.gitlab.io/static/
+    rclone sync -v Sherlockes_GD:/Sherblog/static/ /home/pi/sherblog/static/
+    comprobar $?
+
+    mensaje+='Sincronizando el directorio Layouts....'
+    rclone sync -v Sherlockes_GD:/Sherblog/layouts/ /home/pi/sherblog/layouts/
     comprobar $?
 
     # Parsea los vertices para generar un gpx y genera la web estática en Hugo
@@ -146,17 +154,17 @@ else
 
     # Exporta la configuración del crontab a un archivo de texto
     mensaje+='Generación del archivo crontab.txt............'
-    crontab -l > /home/pi/sherlockes.gitlab.io/static/files/crontab.txt
+    crontab -l > /home/pi/sherblog/static/files/crontab.txt
     comprobar $?
 
     mensaje+='Publicación de la web en Hugo................'
-    cd ~/sherlockes.gitlab.io
+    cd ~/sherblog
     /usr/local/bin/hugo
     comprobar $?
 
     # Sube los cambios generados en la web a GitHub
     mensaje+='Actualización de la web en Github.com....'
-    cd ~/sherlockes.gitlab.io
+    cd ~/sherlockes.github.io
     git add --all
     git commit -m "Update"
     git push #-u origin master
@@ -174,6 +182,6 @@ fi
 scan_posts
 
 # Sincroniza los archivos de la nube con los modificados en local
-rclone sync -v --exclude 'public' --exclude 'themes' --exclude '.git' /home/pi/sherlockes.gitlab.io/content/ Sherlockes_GD:/Sherblog/content/
+rclone sync -v /home/pi/sherblog/content/ Sherlockes_GD:/Sherblog/content/
 
 exit 0
