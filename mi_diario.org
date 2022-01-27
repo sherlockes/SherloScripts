@@ -12,6 +12,10 @@
     var=x;x=foo
     echo ${!var}
 #+end_src
+*** Alias
+- Editar el archivo ~/.bashrc
+- Añadir el nuevo alias -> alias ll="ls -la"
+- Habilitar los cambios -> source ~/.bashrc
 *** Comando sed
 **** Imprimir una línea -> sed '2p' file
 *** Parar un script ante un error
