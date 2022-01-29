@@ -67,6 +67,10 @@ Ambos son equivalentes, con 'set +e' el script no para.
 - -1 cuelga las llamadas al proceso
 - -9 mata literalmente el proceso
 - -15 termina el proceso
+*** Comando ls (listar directorio)
+- ls -a (Listar directorio con ocultos)
+*** Comando mv (mover / renombrar)
+- mv old-name-dir/ new-name-dir (Renombra directorios)
 ** Debian
 *** Instalar la compatibilidad para impresión a PDF
 #+begin_src sh
