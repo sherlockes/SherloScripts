@@ -67,6 +67,10 @@ Ambos son equivalentes, con 'set +e' el script no para.
 - -1 cuelga las llamadas al proceso
 - -9 mata literalmente el proceso
 - -15 termina el proceso
+*** Comando ls (listar directorio)
+- ls -a (Listar directorio con ocultos)
+*** Comando mv (mover / renombrar)
+- mv old-name-dir/ new-name-dir (Renombra directorios)
 ** Debian
 *** Instalar la compatibilidad para impresión a PDF
 #+begin_src sh
@@ -262,6 +266,15 @@ Eliminar filas con campos vacíos -> filtered_x = x.dropna(axis=0)
 - Argon ONE Pi 4 script 'curl https://download.argon40.com/argon1.sh|bash'
 - Configurar utilidad 'argonone-config'
 - Desinstalar utilidad 'argonone-uninstall'
+*** Raspberry Pi 3B+
+**** Configurar usb como método de arranque
+- Instalar raspbian desde una microsd
+- Ejecutar los siguientes comandos
+#+BEGIN_SRC 
+sudo apt update && sudo apt upgrade && sudo reboot
+echo program_usb_boot_mode=1 | sudo tee -a /boot/config.txt
+sudo reboot
+#+END_SRC
 ** Machine Learning
 *** DecisionTreeRegressor
 **** Especificar y ajustar
