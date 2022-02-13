@@ -4,7 +4,7 @@
 # Script Name: dotfiles.sh
 # Description: Crea enlaces a archivos de configuración guardados
 # Args: N/A
-# Creation/Update: 20210416/20210416
+# Creation/Update: 20210416/20220213
 # Author: www.sherblog.pro                                                
 # Email: sherlockes@gmail.com                                           
 ###################################################################
@@ -17,8 +17,7 @@ if [ $carpeta != 'dotfiles' ];then
     ln -sf ~/"$carpeta" ~/dotfiles
 fi
 
-echo "Enlazando la configuración de ssh..."
-ln -sf ~/dotfiles/ssh/config ~/.ssh/config
+
 
 
 
@@ -32,6 +31,16 @@ link_dotfile () {
     fi
 
 }
+
+# Configuracion de Ssh
+echo "Enlazando la configuración de ssh..."
+ln -sf ~/dotfiles/ssh/config ~/.ssh/config
+
+# Configuracion de Alias
+echo "Enlazando la configuración de alias..."
+ln -sf ~/dotfiles/bash/.bash_aliases ~/.bash_aliases
+source ~/.bashrc
+
 
 # Configuracion de Emacs
 NOMBRE="Emacs"
