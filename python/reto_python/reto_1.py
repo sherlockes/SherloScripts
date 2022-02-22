@@ -19,4 +19,3 @@ print("Directorio:" + downloads_dir)
 for f in files:
     if os.path.isfile(os.path.join(downloads_dir, f)):
         print(f)
-

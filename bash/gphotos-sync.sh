@@ -4,7 +4,7 @@
 # Script Name: photos-gsync.sh
 # Description: Copia de seguridad de Google Photos
 # Args: N/A
-# Creation/Update: 20201211/20210322
+# Creation/Update: 20201211/20220222
 # Author: www.sherblog.pro                                                
 # Email: sherlockes@gmail.com                                           
 ###################################################################
@@ -12,6 +12,8 @@
 host=sherlockes@192.168.10.200
 ruta=/homes/sherlockes/gphotos
 hostname=nas-gphotos
+ruta_destino=/photo/sherlo_gphotos
+hostname_destino=syn-photos
 
 # --------------------------------------------
 # Comprobar la instalación de sshfs
@@ -41,20 +43,53 @@ fi
 
 if [[ $status == ok ]] ; then
     # --------------------------------------------
-    # Crea la carpeta y monta la unidad
+    # Crea las carpetas y monta la unidades
     # --------------------------------------------
     mkdir ~/$hostname
     sshfs $host:$ruta ~/$hostname
 
+    mkdir ~/$hostname_destino
+    sshfs $host:$ruta_destino ~/$hostname_destino
+
+    # --------------------------------------------
+    # Sincroniza sólo el mes anterior
+    # --------------------------------------------
+    mes_ant_ini_mes=$(date -d "last month" '+%m')
+    mes_ant_ini_ano=$(date -d "last month" '+%Y')
+    fecha_ini="${mes_ant_ini_ano}-${mes_ant_ini_mes}-01"
+
+    mes_ant_fin_dia=$(date -d "$(date +%Y-%m-01) -1 day" '+%d')
+    mes_ant_fin_mes=$(date -d "$(date +%Y-%m-01) -1 day" '+%m')
+    mes_ant_fin_ano=$(date -d "$(date +%Y-%m-01) -1 day" '+%Y')
+    fecha_fin="${mes_ant_fin_ano}-${mes_ant_fin_mes}-${mes_ant_fin_dia}"
+
     # --------------------------------------------
     # Realiza la sincronización
     # --------------------------------------------
-    #cd ~/gphotos-sync
-    gphotos-sync ~/$hostname
+    ~/.local/bin/gphotos-sync --rescan --flush-index --skip-video --do-delete --start-date $fecha_ini --end-date $fecha_fin ~/$hostname
+    #~/.local/bin/gphotos-sync --rescan --skip-video --do-delete ~/$hostname
+    
+
+    # --------------------------------------------
+    # Ajusta fecha de toma (exif_create.sh)
+    # --------------------------------------------
+    carpeta="/home/pi/${hostname}/photos/${mes_ant_ini_ano}/${mes_ant_ini_mes}"
+    cd $carpeta
+    source "$( dirname "${BASH_SOURCE[0]}" )/exif_create.sh"
+
+    # --------------------------------------------
+    # Copia la carpeta del mes anterior
+    # --------------------------------------------
+    carpeta_destino="/home/pi/${hostname_destino}/${mes_ant_ini_ano}"
+    mkdir -p $carpeta_destino
+    rsync -av $carpeta $carpeta_destino --delete
     
     # --------------------------------------------
-    # Desmonta la unidad
+    # Desmonta las unidades
     # --------------------------------------------
     fusermount -zu ~/$hostname
     rmdir ~/$hostname
+
+    fusermount -zu ~/$hostname_destino
+    rmdir ~/$hostname_destino
 fi

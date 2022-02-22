@@ -68,12 +68,19 @@ Los temas que aparecen repajados en esta clase son los siguentes:
 - Calculos con fechas
 - Extracción de información de archivos csv con el método "split
 ** [[https://github.com/sherlockes/SherloScripts/blob/master/bash/gphotos-sync.sh][gphotos-sync.sh]] (bash)			      :Bash:
-Tras un tiempo realizando la sincronización de mi galería de Google Photos a mi NAS de forma manual a través de un script que corría en el ordenador de sobremesa ahora he conseguido que el paquete ghotos-sync funcione en la raspberry de forma que cada día hace una sincronización. Los temas que toco en esta script son:
+Tras un tiempo realizando la sincronización de mi galería de Google Photos a mi NAS de forma manual a través de un script que corría en el ordenador de sobremesa ahora he conseguido que el paquete ghotos-sync funcione en la raspberry de forma que una vez a la semana hace una sincronización del mes anterior y lo copia en la carpeta del NAS de donde coge las fotos "Synology Photos". Los temas que toco en esta script son:
 
 - Comprobación de la instalación de paquetes
 - Comprobación de conexión a unidades remotas
 - Montaje de unidades remotas mediante sshfs
-- Ejecución de gphotos mediante pipenv
+- Determinacion del primer y último día del mes anterior
+- Concatenación de variables
+- Ejecución de gphotos-sync
+- Ajusta de valores exif en imágenes mediante exiftool (Script externo)
+- Creación de directorios de forma recursiva
+- Sincronización de carpetas mediante rsync
+- Desmontaje de unidades
+- Eliminación de directorios
 
 Para que el script funcione de forma autónoma es necesaria tener configurada el acceso ssh de un equipo a otro mediente llave público-privada (ssh-key-gen)
 ** [[https://github.com/sherlockes/SherloScripts/blob/master/python/limpieza_gmail.gs][limpieza_gmail.gs]] (google scripts)		   :Scripts:

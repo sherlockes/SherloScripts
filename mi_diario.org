@@ -200,8 +200,18 @@ hugo server --bind=192.168.10.202 --baseURL=http://192.168.10.202:1313
 ** Inkscape
 *** Resetear las preferencias
 Borrar el archivo "~/.config/inkscape/preferences.xml"
+** IOT
+*** Casa ZgZ - Galería - Sensor puerta
+cuando el sensor de la puerta de la galería pierde la conexión hayq ue realizar los siguientes pasos:
+- Eliminar sensor "Puerta de la galeria"
+- Reiniciar sensor
+ - Detectar sensores desde Phoscon
+ - Pulsar reset con la aguja durante 5 sg
+- Renombrar sensor "Puerta de la galeria"
+- Reiniciar Home Assistant
 ** Linux
 *** Buscar packetes instalados -> apt list --installed nombre
+*** Enlace simbólico -> ln -s target_file link_name
 *** Capturas de pantalla (Atajos de teclado)
 - Ctrl (Portapapeles) Alt (Ventana) Mays (area)
 - Escritorio al portapapeles - Ctrl+ImprPant
@@ -212,6 +222,7 @@ Borrar el archivo "~/.config/inkscape/preferences.xml"
 - Guardar ventana en directorio - Alt+ImprPant.
 *** nmap
 **** MAC a partir de IP -> sudo nmap -sP -n 192.168.1.200
+*** Ubicación de un comando -> type -a "comando"
 ** Linux Mint
 *** Cambio entre áreas de trabajo -> Ctrl+Alt+⬆️
 *** Cambio entre aplicaciones utilizando el efecto de exposición -> Ctrl+Alt+⬇️
