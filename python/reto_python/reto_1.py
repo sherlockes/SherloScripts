@@ -15,6 +15,7 @@ downloads_dir = GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DOWNLOAD)
 files = os.listdir(downloads_dir)
 
 print("Directorio:" + downloads_dir)
+print("-----------------------------------------------")
 
 for f in files:
     if os.path.isfile(os.path.join(downloads_dir, f)):
