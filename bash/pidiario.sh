@@ -83,7 +83,13 @@ done
 # ---------------------------------------------------------
 echo "Guardando config de HA en GitHub..."
 mensaje+=$"Guardando config de HA en GitHub . . . "
-ssh root@192.168.10.202 -p 222 'bash -s' < /home/pi/SherloScripts/bash/ha_gitpush.sh
+#ssh root@192.168.10.202 -p 222 'bash -s' < /home/pi/SherloScripts/bash/ha_gitpush.sh
+ssh -T root@192.168.10.202 -p 222 <<'ENDSSH'
+cd /config
+git add .
+git commit -m "Configuración HA de `date +'%d-%m-%Y %H:%M:%S'`"
+git push -u origin master
+ENDSSH
 comprobar $?
 
 # --------------------------------------------------------------
