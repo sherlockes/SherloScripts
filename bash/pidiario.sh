@@ -82,7 +82,7 @@ done
 # Home Assistant - Guarda la configuración en GitHub
 # ---------------------------------------------------------
 echo "Guardando config de HA en GitHub..."
-mensaje+=$"Guardando config de HA en GitHub . . . "
+mensaje+=$"Guardando config de HA en GitHub . . . . . "
 #ssh root@192.168.10.202 -p 222 'bash -s' < /home/pi/SherloScripts/bash/ha_gitpush.sh
 ssh -T root@192.168.10.202 -p 222 <<'ENDSSH'
 cd /config
