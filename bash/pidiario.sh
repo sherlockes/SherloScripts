@@ -6,11 +6,12 @@
 #Description: - Actualiza Hugo
 #             - Sincroniza la carpeta SherloScripts
 #             - Actualiza los repos de GitHub
+#             - Guarda la config de HA en GitHub
 #             - Comprueba el estado de varias nubes públicas
 #             - Sincroniza las nubes de Sherloflix
 #             - Comprueba la sincronización de las carpetas
 #Args: N/A
-#Creation/Update: 20200521/20220110
+#Creation/Update: 20200521/20220302
 #Author: www.sherblog.pro                                                
 #Email: sherlockes@gmail.com                                           
 ###################################################################
@@ -76,6 +77,14 @@ do
     git push
     comprobar $?
 done
+
+# ---------------------------------------------------------
+# Home Assistant - Guarda la configuración en GitHub
+# ---------------------------------------------------------
+echo "Guardando config de HA en GitHub..."
+mensaje+=$"Guardando config de HA en GitHub . . . "
+ssh root@192.168.10.202 -p 222 'bash -s' < /home/pi/SherloScripts/bash/ha_gitpush.sh
+comprobar $?
 
 # --------------------------------------------------------------
 # Comprueba el estado de las distintas nubes públicas
