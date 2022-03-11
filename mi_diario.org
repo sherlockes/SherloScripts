@@ -286,6 +286,8 @@ sudo apt update && sudo apt upgrade && sudo reboot
 echo program_usb_boot_mode=1 | sudo tee -a /boot/config.txt
 sudo reboot
 #+END_SRC
+** RegExp
+- [[https://devhints.io/regexp][CheatSheet (DevHints)]]
 ** Machine Learning
 *** DecisionTreeRegressor
 **** Especificar y ajustar
