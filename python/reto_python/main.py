@@ -11,9 +11,9 @@
 ##################################################################
 
 import os
+import re
 from pathlib import Path
 from gi.repository import GLib
-
 
 def main():
     try:
@@ -23,7 +23,12 @@ def main():
         print("-----------------------------------------------")
         for f in files:
             if os.path.isfile(os.path.join(downloads_dir, f)):
-                print(f)
+                x=re.compile(r'.+\.jpe*g$', re.IGNORECASE)
+                y=re.compile(r'[^0-9]+\.jpe*g$', re.IGNORECASE)
+                if y.match(f):
+                    print (f.upper())
+                elif x.match(f):
+                    print (f.lower())
     except Exception as exception:
         print(exception)
 
@@ -35,7 +40,15 @@ def main2():
         print("-----------------------------------------------")
         if downloads_dir.is_dir():
             for afile in [x for x in downloads_dir.iterdir() if not x.is_dir()]:
-                print(afile.name)
+                x=re.compile(r'.+\.jpe*g$', re.IGNORECASE)
+                y=re.compile(r'[^0-9]+\.jpe*g$', re.IGNORECASE)
+                if y.match(afile.name):
+                    print (afile.name.upper())
+                elif x.match(afile.name):
+                    print (afile.name.lower())
+                        
+
+
     except Exception as exception:
         print(exception)
 
