@@ -91,6 +91,7 @@ sudo usermod -aG docker $(whoami)
 ** Emacs
 *** Buffers
 **** Borrar el buffer completo -> erase-buffer (Sin tecla por defecto)
+**** Actualizar automáticamente un buffer abierto -> auto-revert-mode
 **** Cuardar como (buffer) -> C-x C-w [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Save-Commands.html][Link]]
 **** Guardar como (todo el texto) -> C-x h M-x write-region
 **** Instalar paquete -> install-package-from-buffer
