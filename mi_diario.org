@@ -18,6 +18,8 @@
 - Habilitar los cambios -> source ~/.bashrc
 *** Comando sed
 **** Imprimir una línea -> sed '2p' file
+*** Directorio de un script
+script_dir=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 *** Parar un script ante un error
 - set -e
 - set -o errexit
