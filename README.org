@@ -15,6 +15,28 @@ Este archivo en formato org-mode voy escribiendo lo que día a día aprendo y ut
 - Markdown
 - Python
 - Y lo que vaya utilizando...
+** [[https://github.com/sherlockes/SherloScripts/blob/master/bash/twitch2podcast.sh][twitch2podcast.sh]] (bash)                           :Bash:
+Todas las mañanas se ejecuta este script para descargar los nuevos vídeos de un canal de Twitch y convertirlos a audio en formato Podcast privado siguiendo los siguiente pasos:
+- Busca los últimos vídeos publicados por un canal
+- Descarta los de menos de 10 minutos
+- Comprueba los que no se han descargado anteriormente
+- Convierte los vídeos a mp3 eliminando los silencios
+- Crea un Feed Rss y lo actualiza con todos los archivos descargados
+- Sube el fedd y los mp3 a una nube pública de donde se nutre un servidor webdav
+
+Para todo esto hago uso de:
+- Uso de funciones con definición de argumentos obligatorios
+- Uso de variables locales
+- Uso de "jq" para extraer información de json
+- Uso de grep, awk, cut y rev para extraer información de texto
+- Uso de lazos "for" y condicionales "if"
+- Uso de "find" para buscar archivos y "do" para realizar acciones sobre ellos
+- Extraer audio de un vídeo y eliminar silencios mediante "ffmpeg"
+- Mover y eliminar archivos
+- Concatenar cadenas y archivos mediante "cat"
+- Extraer metadatos de mp3 mediante "ffprobe"
+- Insertar variables en plantillas
+- Subir contenido a una nube mediante "Rclone"
 ** [[https://github.com/sherlockes/SherloScripts/blob/master/bash/pidiario.sh][pidiario.sh]] (bash)                                 :Bash:
 Todas las noches se ejecuta este script que realiza las siguentes funciones:
 - Actualiza Hugo
