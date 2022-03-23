@@ -169,6 +169,8 @@ make clean
 - Instalar "ace-window" desde el repositorio de Melpa.
 - Añadir la línea "(global-set-key (kbd "M-o") 'ace-window)" al archivo de configuración.
 - Cambiar de ventana mediante M-o y el número que se deseb
+*** Visualización
+**** Ajuste de línea(cambiar) -> toggle-truncate-lines
 ** Elisp
 *** Variable global -> (setq variable valor)
 *** Escribir a un archivo -> (write-region "loquesea" nil "~/archivo")
