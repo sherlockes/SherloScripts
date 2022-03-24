@@ -2,9 +2,9 @@
 
 ###################################################################
 #Script Name: twitch2podcast.sh
-#Description: Generación de entorno de desarrollo para sherblog.pro
+#Description: Generación de Podcast a partir de canal de Twitch
 #Args: N/A
-#Creation/Update: 20220317/20220221
+#Creation/Update: 20220317/20220224
 #Author: www.sherblog.pro                                             
 #Email: sherlockes@gmail.com                               
 ###################################################################
@@ -66,13 +66,15 @@ buscar_ultimos () {
 }
 
 # Función para pasar a mp3 los vídeos descargados en la carpeta
-# (Coge todos os vídeos que hay en la carpeta del script
+# (Coge todos los vídeos que hay en la carpeta del script)
 convertir_mp3 () {
+    # comprueba si hay algún video, si no hay sale de la función
+    if [ ! -e ./*.mkv ]; then return; fi;
+
     local canal=${1:?Falta el nombre del canal}
     echo "- Buscando archivos para convertir en $canal"
-    
-    # Pasa a mp3, quita silencios, mueve el audio a destino y elimina el video
-    find . -type f -name "*.mkv" | while read -r file; do
+
+    for file in ./*.mkv; do
 	local nombre=$(basename $file .mkv)
 	local id_ep=$(echo $nombre | awk -F'_' '{print $2}')
 
@@ -89,7 +91,6 @@ convertir_mp3 () {
 
 # Función para actualizar el feed a partir de lo anterior y lo descargado
 # (Coge la info de
-
 actualizar_feed () {
     # Valores de argumentos
     local servidor=${1:?Falta el servidor del feed}
@@ -133,8 +134,9 @@ END_HEADER
 	ID_EP=$(echo $NOM_EP | awk -F'_' '{print $2}')
 
 	echo "- Añadiendo episodio $ID_EP a la dista de episodios"
-	
-	cat >> $canal/items.xml <<END_ITEM
+
+	# crea el "item.xml" con info del episodio
+	cat >> $canal/item.xml <<END_ITEM
     <item>
       <guid isPermaLink="true">$servidor/$canal/$ID_EP</guid>
       <title>$TIT_EP</title>
@@ -148,6 +150,10 @@ END_HEADER
 END_ITEM
     done
 
+    # Añade los "items.xml" ya descargado a continuación del "item.xml"
+    cat $canal/items.xml >> $canal/item.xml
+    mv $canal/item.xml $canal/items.xml
+    
     # Añadir lista de episodios al feed
     echo "- Añadiendo lista de episodios al feed"
     cat $canal/items.xml >> $canal/feed.xml
