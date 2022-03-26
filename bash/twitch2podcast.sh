@@ -4,7 +4,7 @@
 #Script Name: twitch2podcast.sh
 #Description: Generación de Podcast a partir de canal de Twitch
 #Args: N/A
-#Creation/Update: 20220317/20220224
+#Creation/Update: 20220317/20220226
 #Author: www.sherblog.pro                                             
 #Email: sherlockes@gmail.com                               
 ###################################################################
@@ -17,25 +17,43 @@ FECHA=$(date)
 twitch_dir=~/twitch
 twdl=$twitch_dir/twitch-dl.pyz
 
-echo "#####################################"
-echo "## Twitch to Podcast by Sherlockes ##"
-echo "#####################################"
+notificacion=~/SherloScripts/bash/telegram.sh
+inicio=$( date +%s )
+
+mensaje=$'Actualizar Twitch mediante <a href="https://raw.githubusercontent.com/sherlockes/SherloScripts/master/bash/twitch2podcast.sh">twitch2podcast.sh</a>\n'
+mensaje+=$'- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n'
 
 ###############
 ## Funciones ##
 ###############
 
-# Función para buscar los últimos vídeos de un canal no descargados
+#----------------------------------------------------------#
+#                   Comprobar la salida                    #
+#----------------------------------------------------------#
+comprobar(){
+
+    if [ $1 -eq 0 ]; then
+	mensaje+=$'OK'
+    else
+	mensaje+=$'ERROR'
+    fi
+    mensaje+=$'\n'
+}
+
+#----------------------------------------------------------#
+#   Buscar los últimos vídeos de un canal no descargados   #
+#----------------------------------------------------------#
 buscar_ultimos () {
     # Valores de argumentos
     local canal=${1:?Falta el nombre del canal}
-    #local titulo=${2:?Falta el título del canal}
-    local titulo=$2
+    local titulo=${2:?Falta el título del canal}
 
     # Obtiene el json de los ultimos vídeos.
-    echo "$2"
+    mensaje+=$'Obteniendo últimos vídeos . . . . . . . . . . . . . . '
     echo "- Obteniendo últimos vídeos de $titulo"
     json=$(python3 $twdl videos $canal -j)
+    comprobar $?
+    
 
     # Busca sobre los ultimos diez videos
     for i in {0..9}
@@ -46,56 +64,86 @@ buscar_ultimos () {
 
 	# Comprobar si el archivo ya ha sido descargado
 	if grep -q $id $twitch_dir/$canal/descargados.txt
-	then 
+	then
+        echo $i
+        if [ $i -eq 0 ]
+        then
+            echo "- No hay nuevos vídeos.";
+            mensaje+=$"No hay nuevos vídeos."
+            mensaje+=$'\n'
+	        # No sigue comprobando si ya ha visto uno descargado
+	        break
+        fi
 	    echo "- El vídeo $id ya ha sido descargado.";
+        mensaje+=$"El vídeo $id ya ha sido descargado."
+        mensaje+=$'\n'
 	    # No sigue comprobando si ya ha visto uno descargado
 	    break
 	else
 	    echo "- Descargando el audio del vídeo $id.";
-            if (( $mins > 10 ))
-            then
-		# Descarga el audio en formato mkv
-		$twdl download -q audio_only $id;
-            else
-		echo "- El archivo sólo tiene $mins minutos, no se descarga."
-            fi
+        mensaje+=$"Descargando el audio del vídeo $id."
+        mensaje+=$'\n'
+
+        if (( $mins > 10 ))
+        then
+		    # Descarga el audio en formato mkv
+		    $twdl download -q audio_only $id;
+        else
+		    echo "- El archivo sólo tiene $mins minutos, no se descarga."
+            mensaje+=$"El archivo sólo tiene $mins minutos, no se descarga."
+            mensaje+=$'\n'
+        fi
+
 	    # Añade el archivo a la lista de descargados
 	    echo $id >> $twitch_dir/$canal/descargados.txt;
 	fi
     done
 }
 
-# Función para pasar a mp3 los vídeos descargados en la carpeta
-# (Coge todos los vídeos que hay en la carpeta del script)
+#----------------------------------------------------------#
+#      Pasa a mp3 los vídeos descargados en la carpeta     #
+#----------------------------------------------------------#
 convertir_mp3 () {
     # comprueba si hay algún video, si no hay sale de la función
-    if [ ! -e ./*.mkv ]; then return; fi;
+    if [ ! -e ./*.mkv ]; then return; fi
 
     local canal=${1:?Falta el nombre del canal}
     echo "- Buscando archivos para convertir en $canal"
+    mensaje+=$"Buscando archivos para convertir en $canal"
+    mensaje+=$'\n'
 
     for file in ./*.mkv; do
-	local nombre=$(basename $file .mkv)
-	local id_ep=$(echo $nombre | awk -F'_' '{print $2}')
+	    local nombre=$(basename $file .mkv)
+	    local id_ep=$(echo $nombre | awk -F'_' '{print $2}')
 
-	echo "- Episodio $id_ep, codificando audio y eliminando silencios"
-	ffmpeg -loglevel 24 -i "$file" -af silenceremove=1:0:-50dB "${file%.mkv}.mp3"
+	    echo "- Episodio $id_ep, codificando audio y eliminando silencios"
+        mensaje+=$"Episodio $id_ep, codificando audio . . . ."
+        ffmpeg -loglevel 24 -i "$file" -af silenceremove=1:0:-50dB "${file%.mkv}.mp3"
+        comprobar $?
 
-	echo "- Episodio $id_ep, moviendo mp3"
-	mv $nombre.mp3 $canal/mp3/$nombre.mp3
+	    echo "- Episodio $id_ep, moviendo mp3"
+        mensaje+=$"Episodio $id_ep, moviendo mp3 . . . . . . ."
+	    mv $nombre.mp3 $canal/mp3/$nombre.mp3
+        comprobar $?
 
-	echo "- Episodio $id_ep, eliminando el video"
-	rm $file
+	    echo "- Episodio $id_ep, eliminando el video"
+        mensaje+=$"Episodio $id_ep, eliminando el video . . . . . . ."
+	    rm $file
+        comprobar $?
     done
 }
-
-# Función para actualizar el feed a partir de lo anterior y lo descargado
+#----------------------------------------------------------#
+#                    Actualizar el feed                    #
+#----------------------------------------------------------#
 # (Coge la info de
 actualizar_feed () {
     # Valores de argumentos
     local servidor=${1:?Falta el servidor del feed}
     local canal=${2:?Falta el nombre del canal}
     local titulo=${3:?Falta el título del canal}
+
+    # Comprueba si hay algún mp3 en la carpeta del canal, si no hay sale de la función
+    if [ ! -e ./$canal/*.mp3 ]; then return; fi
 
     # Encabezado del feed
     echo "- Insertando el encabezado del feed"
@@ -166,9 +214,16 @@ END_ITEM
 END
 }
 
+
+#----------------------------------------------------------#
+#               Subir contenido actualizado                #
+#----------------------------------------------------------#
 subir_contenido () {
     # Valores de argumentos
     local canal=${1:?Falta el nombre del canal}
+
+    # Comprueba si hay algún mp3 en la carpeta del canal, si no hay sale de la función
+    if [ ! -e ./$canal/*.mp3 ]; then return; fi
     
     # Subiendo archivos a la nube via rclone
     echo "- Subiendo los mp3's al sevidor remoto"
@@ -179,17 +234,37 @@ subir_contenido () {
     find . -type f -name "*.mp3" -delete
 }
 
+
 ########################
 ## Programa principal ##
 ########################
+
+echo "#####################################"
+echo "## Twitch to Podcast by Sherlockes ##"
+echo "#####################################"
 
 cd $twitch_dir
 echo "- Corriendo en $twitch_dir"
 
 # Comprobar la instalación de twitch-dl en el directorio
 . ~/SherloScripts/bash/twitch-dl.sh && check
-case 
+
+# Buscar nuevos videos y convertirlos a mp3
 buscar_ultimos "$CANAL" "$TITULO"
+
+# Convertir a mp3 los vídeos descargados
 convertir_mp3 "$CANAL"
+
+# Actualizar el feed con los nuevos vídeos
 actualizar_feed "$SERVIDOR" "$CANAL" "$TITULO"
+
+# Subir el nuevo contenido al servidor
 subir_contenido "$CANAL"
+
+# Envia el mensaje de telegram con el resultado
+fin=$( date +%s )
+let duracion=$fin-$inicio
+mensaje+=$'- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n'
+mensaje+=$"Duración del Script:  $duracion segundos"
+
+$notificacion "$mensaje"
