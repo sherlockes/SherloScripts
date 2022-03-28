@@ -17,7 +17,7 @@
 ###################################################################
 
 unidades=(Sherlockes78_UN_en Onedrive_UN_en)
-carpetas=(pelis series)
+carpetas=(pelis series twitch)
 notificacion=~/SherloScripts/bash/telegram.sh
 inicio=$( date +%s )
 
