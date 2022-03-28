@@ -4,7 +4,7 @@
 #Script Name: twitch2podcast.sh
 #Description: Generación de Podcast a partir de canal de Twitch
 #Args: N/A
-#Creation/Update: 20220317/20220226
+#Creation/Update: 20220317/20220228
 #Author: www.sherblog.pro                                             
 #Email: sherlockes@gmail.com                               
 ###################################################################
@@ -117,17 +117,17 @@ convertir_mp3 () {
 	    local id_ep=$(echo $nombre | awk -F'_' '{print $2}')
 
 	    echo "- Episodio $id_ep, codificando audio y eliminando silencios"
-        mensaje+=$"Episodio $id_ep, codificando audio . . . ."
+        mensaje+=$"Codificando audio de video $id_ep . . "
         ffmpeg -loglevel 24 -i "$file" -af silenceremove=1:0:-50dB "${file%.mkv}.mp3"
         comprobar $?
 
 	    echo "- Episodio $id_ep, moviendo mp3"
-        mensaje+=$"Episodio $id_ep, moviendo mp3 . . . . . . ."
+        mensaje+=$"Moviendo mp3 $id_ep . . . . . . . ."
 	    mv $nombre.mp3 $canal/mp3/$nombre.mp3
         comprobar $?
 
 	    echo "- Episodio $id_ep, eliminando el video"
-        mensaje+=$"Episodio $id_ep, eliminando el video . . . . . . ."
+        mensaje+=$"Eliminando vídeo $id_ep . . . . . ."
 	    rm $file
         comprobar $?
     done
@@ -143,10 +143,12 @@ actualizar_feed () {
     local titulo=${3:?Falta el título del canal}
 
     # Comprueba si hay algún mp3 en la carpeta del canal, si no hay sale de la función
-    if [ ! -e ./$canal/*.mp3 ]; then return; fi
+    if [ ! -e ./$canal/mp3/*.mp3 ]; then return; fi
 
     # Encabezado del feed
     echo "- Insertando el encabezado del feed"
+    mensaje+=$"Actualizando el Feed"
+    mensaje+=$'\n'
 
     cat > $canal/feed.xml <<END_HEADER
 <?xml version="1.0" encoding="UTF-8"?>
@@ -181,7 +183,9 @@ END_HEADER
 	FEC_EP=$(date -d $FEC_EP +'%a, %d %b %Y')
 	ID_EP=$(echo $NOM_EP | awk -F'_' '{print $2}')
 
-	echo "- Añadiendo episodio $ID_EP a la dista de episodios"
+	echo "- Añadiendo episodio $ID_EP a la lista de episodios"
+    mensaje+=$"Añadiendo episodio $ID_EP a la lista"
+    mensaje+=$'\n'
 
 	# crea el "item.xml" con info del episodio
 	cat >> $canal/item.xml <<END_ITEM
@@ -223,15 +227,23 @@ subir_contenido () {
     local canal=${1:?Falta el nombre del canal}
 
     # Comprueba si hay algún mp3 en la carpeta del canal, si no hay sale de la función
-    if [ ! -e ./$canal/*.mp3 ]; then return; fi
+    if [ ! -e ./$canal/mp3/*.mp3 ]; then return; fi
     
     # Subiendo archivos a la nube via rclone
     echo "- Subiendo los mp3's al sevidor remoto"
+    mensaje+=$"Subiendo los mp3's al sevidor webdav . . ."
     rclone copy $canal Sherlockes78_UN_en:twitch/$canal/ --create-empty-src-dirs
+    comprobar $?
+
 
     # Eliminando audio y video local
     echo "- Eliminando audios locales"
     find . -type f -name "*.mp3" -delete
+
+    # Borrando los archivos de la nube anteriores a 15 días
+    mensaje+=$"Borrando contenido antiguo . . ."
+    rclone ls Sherlockes78_UN_en:twitch/$canal/mp3 --min-age 15d
+    comprobar $?
 }
 
 
