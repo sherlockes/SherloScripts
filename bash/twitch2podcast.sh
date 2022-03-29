@@ -4,7 +4,7 @@
 #Script Name: twitch2podcast.sh
 #Description: Generación de Podcast a partir de canal de Twitch
 #Args: N/A
-#Creation/Update: 20220317/20220228
+#Creation/Update: 20220317/20220229
 #Author: www.sherblog.pro                                             
 #Email: sherlockes@gmail.com                               
 ###################################################################
@@ -49,11 +49,21 @@ buscar_ultimos () {
     local titulo=${2:?Falta el título del canal}
 
     # Obtiene el json de los ultimos vídeos.
-    mensaje+=$'Obteniendo últimos vídeos . . . . . . . . . . . . . . '
+    mensaje+=$'Obteniendo últimos vídeos . . . . . . . . . . . . '
     echo "- Obteniendo últimos vídeos de $titulo"
     json=$(python3 $twdl videos $canal -j)
     comprobar $?
-    
+
+    # Limitar a 15 videos la lista de descargados
+    mensaje+=$'Recortando listas de descargados . . . . . '
+    echo "- Recortando listas de descargados"
+    head -n15 $twitch_dir/$canal/descargados.txt > tmp
+    mv tmp $twitch_dir/$canal/descargados.txt
+
+    # Limitar a 15 videos la lista de items
+    head -n150 $twitch_dir/$canal/items.xml > tmp
+    mv tmp $twitch_dir/$canal/items.xml
+    comprobar $?
 
     # Busca sobre los ultimos diez videos
     for i in {0..9}
@@ -94,8 +104,10 @@ buscar_ultimos () {
             mensaje+=$'\n'
         fi
 
-	    # Añade el archivo a la lista de descargados
-	    echo $id >> $twitch_dir/$canal/descargados.txt;
+	    # Añade el archivo al principio de la lista de descargados
+	#echo $id >> $twitch_dir/$canal/descargados.txt;
+	echo $id | cat - $twitch_dir/$canal/descargados.txt > temp && mv temp $twitch_dir/$canal/descargados.txt
+	
 	fi
     done
 }
@@ -123,7 +135,7 @@ convertir_mp3 () {
 
 	    echo "- Episodio $id_ep, moviendo mp3"
         mensaje+=$"Moviendo mp3 $id_ep . . . . . . . ."
-	    mv $nombre.mp3 $canal/mp3/$nombre.mp3
+	    mv $nombre.mp3 $canal/mp3/$id_ep.mp3
         comprobar $?
 
 	    echo "- Episodio $id_ep, eliminando el video"
@@ -179,25 +191,33 @@ END_HEADER
 	NOM_EP=$(basename $file)
 	ART_EP=$(ffprobe -loglevel error -show_entries format_tags=artist -of default=noprint_wrappers=1:nokey=1 $file)
 	TIT_EP=$(ffprobe -loglevel error -show_entries format_tags=title -of default=noprint_wrappers=1:nokey=1 $file)
-	FEC_EP=$(echo $NOM_EP | awk -F'_' '{print $1}')
-	FEC_EP=$(date -d $FEC_EP +'%a, %d %b %Y')
 	ID_EP=$(echo $NOM_EP | awk -F'_' '{print $2}')
 
+	ID_EP=$(basename $file .mp3)
+	
+	# Obteniendo info a partir de la ID
+	json=$(python3 $twdl info $ID_EP -j)
+	FEC_EP=$(echo "$json" | jq ".publishedAt" | cut -c2- | rev | cut -c2- | rev)
+	FEC_EP=$(date -d $FEC_EP +"%Y-%m-%dT%H:%M:%S%:z")
+	FEC_EP=$(date --date "$FEC_EP-2 hours" "+%a, %d %b %Y %T %Z")
+
+	lengthSeconds=$(echo "$json" | jq ".lengthSeconds")
+ 
 	echo "- Añadiendo episodio $ID_EP a la lista de episodios"
-    mensaje+=$"Añadiendo episodio $ID_EP a la lista"
-    mensaje+=$'\n'
+	mensaje+=$"Añadiendo episodio $ID_EP a la lista"
+	mensaje+=$'\n'
 
 	# crea el "item.xml" con info del episodio
 	cat >> $canal/item.xml <<END_ITEM
     <item>
       <guid isPermaLink="true">$servidor/$canal/$ID_EP</guid>
       <title>$TIT_EP</title>
-      <link>http://linktoyourpodcast.com/$ID_EP</link>
-      <description>Esta es la descripción</description>
-      <pubDate>$FEC_EP 22:00:00 PST</pubDate>
+      <link>https://www.twitch.tv/videos/$ID_EP</link>
+      <description>$TIT_EP</description>
+      <pubDate>$FEC_EP</pubDate>
       <author>$ART_EP</author>
       <content:encoded><![CDATA[<p>Episodio descargado de Twitch.</p>]]></content:encoded>
-      <enclosure length="37424476" type="audio/mpeg" url="$servidor/twitch/$canal/mp3/$NOM_EP"/>
+      <enclosure length="$lengthSeconds" type="audio/mpeg" url="$servidor/twitch/$canal/mp3/$NOM_EP"/>
     </item>
 END_ITEM
     done
@@ -241,7 +261,7 @@ subir_contenido () {
     find . -type f -name "*.mp3" -delete
 
     # Borrando los archivos de la nube anteriores a 15 días
-    mensaje+=$"Borrando contenido antiguo . . ."
+    mensaje+=$"Borrando contenido antiguo . . . . . . . . ."
     rclone ls Sherlockes78_UN_en:twitch/$canal/mp3 --min-age 15d
     comprobar $?
 }
