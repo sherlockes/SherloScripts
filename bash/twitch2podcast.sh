@@ -4,7 +4,7 @@
 #Script Name: twitch2podcast.sh
 #Description: Generación de Podcast a partir de canal de Twitch
 #Args: N/A
-#Creation/Update: 20220317/20220229
+#Creation/Update: 20220317/20220230
 #Author: www.sherblog.pro                                             
 #Email: sherlockes@gmail.com                               
 ###################################################################
@@ -55,7 +55,7 @@ buscar_ultimos () {
     comprobar $?
 
     # Limitar a 15 videos la lista de descargados
-    mensaje+=$'Recortando listas de descargados . . . . . '
+    mensaje+=$'Recortando listas de descargados . . . . . .'
     echo "- Recortando listas de descargados"
     head -n15 $twitch_dir/$canal/descargados.txt > tmp
     mv tmp $twitch_dir/$canal/descargados.txt
@@ -68,6 +68,17 @@ buscar_ultimos () {
     # Busca sobre los ultimos diez videos
     for i in {0..9}
     do
+	# Si el vídeo a comenzado hace menos de 3 horas pasa al siguiente
+	publicado=$(echo "$json" | jq ".videos[$i].publishedAt" | cut -c2- | rev | cut -c2- | rev)
+	publicado=$(date -d "$publicado+3 hours" +%s)
+	
+	if [[ $(date +%s) < $publicado ]]
+	then
+	    mensaje+=$"El vídeo $id está en emisión."
+            mensaje+=$'\n'
+	    continue
+	fi
+	
 	# obtiene la identificación y minutos de duración del último vídeo
 	id=$(echo "$json" | jq ".videos[$i].id" | cut -c2- | rev | cut -c2- | rev)
 	mins=$(expr $(echo "$json" | jq ".videos[$i].lengthSeconds") / 60)
@@ -91,18 +102,18 @@ buscar_ultimos () {
 	    break
 	else
 	    echo "- Descargando el audio del vídeo $id.";
-        mensaje+=$"Descargando el audio del vídeo $id."
-        mensaje+=$'\n'
+            mensaje+=$"Descargando el audio de $id . . ."
 
-        if (( $mins > 10 ))
-        then
-		    # Descarga el audio en formato mkv
-		    $twdl download -q audio_only $id;
-        else
-		    echo "- El archivo sólo tiene $mins minutos, no se descarga."
-            mensaje+=$"El archivo sólo tiene $mins minutos, no se descarga."
-            mensaje+=$'\n'
-        fi
+            if (( $mins > 10 ))
+            then
+		# Descarga el audio en formato mkv
+		$twdl download -q audio_only $id;
+		comprobar $?
+            else
+		echo "- El archivo sólo tiene $mins minutos, no se descarga."
+		mensaje+=$"El archivo sólo tiene $mins minutos, no se descarga."
+		mensaje+=$'\n'
+            fi
 
 	    # Añade el archivo al principio de la lista de descargados
 	#echo $id >> $twitch_dir/$canal/descargados.txt;
@@ -125,23 +136,23 @@ convertir_mp3 () {
     mensaje+=$'\n'
 
     for file in ./*.mkv; do
-	    local nombre=$(basename $file .mkv)
-	    local id_ep=$(echo $nombre | awk -F'_' '{print $2}')
+       local nombre=$(basename $file .mkv)
+       local id_ep=$(echo $nombre | awk -F'_' '{print $2}')
 
-	    echo "- Episodio $id_ep, codificando audio y eliminando silencios"
-        mensaje+=$"Codificando audio de video $id_ep . . "
-        ffmpeg -loglevel 24 -i "$file" -af silenceremove=1:0:-50dB "${file%.mkv}.mp3"
-        comprobar $?
+       echo "- Episodio $id_ep, codificando audio y eliminando silencios"
+       mensaje+=$"Recodificando audio de $id_ep . . . . "
+       ffmpeg -loglevel 24 -i "$file" -af silenceremove=1:0:-50dB "${file%.mkv}.mp3"
+       comprobar $?
 
-	    echo "- Episodio $id_ep, moviendo mp3"
-        mensaje+=$"Moviendo mp3 $id_ep . . . . . . . ."
-	    mv $nombre.mp3 $canal/mp3/$id_ep.mp3
-        comprobar $?
+       echo "- Episodio $id_ep, moviendo mp3"
+       mensaje+=$"Moviendo mp3 $id_ep . . . . . . . . ."
+       mv $nombre.mp3 $canal/mp3/$id_ep.mp3
+       comprobar $?
 
-	    echo "- Episodio $id_ep, eliminando el video"
-        mensaje+=$"Eliminando vídeo $id_ep . . . . . ."
-	    rm $file
-        comprobar $?
+       echo "- Episodio $id_ep, eliminando el video"
+       mensaje+=$"Eliminando vídeo $id_ep . . . . . . ."
+       rm $file
+       comprobar $?
     done
 }
 #----------------------------------------------------------#
