@@ -12,12 +12,19 @@
 
 import os
 import re
+import toml
 from pathlib import Path
 from gi.repository import GLib
+
 
 def main():
     try:
         downloads_dir = GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DOWNLOAD)
+        # Comprueba si existe el archivo de configuración
+        path = '/home/sherlockes/.config/diogenes/diogenes.toml'
+        isFile = os.path.isfile(path) 
+        print(isFile)
+        
         files = os.listdir(downloads_dir)
         print("Directorio:" + downloads_dir)
         print("-----------------------------------------------")
@@ -36,6 +43,8 @@ def main():
 def main2():
     try:
         downloads_dir = Path(GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DOWNLOAD))
+        data = toml.load("/home/sherlockes/.config/diogenes/diogenes.toml")
+        print (toml.dumps(data))
         print(f"\nDirectorio: {downloads_dir}")
         print("-----------------------------------------------")
         if downloads_dir.is_dir():
