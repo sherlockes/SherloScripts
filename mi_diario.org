@@ -244,6 +244,8 @@ sudo apt-get install emacs26
 ** MarkDown
 *** [[https://sourceforge.net/p/hugo-generator/wiki/markdown_syntax/#md_ex_lists][Hugo CheatSheet]]
 *** [[https://cheatography.com/xaon/cheat-sheets/emacs-markdown-mode/][Emacs CheatSheet]]
+** Nemo
+*** Crear enlace simbólico: Ctrl + Shift + Arrastrar (Editar-Preferencias-Menús contextuales)
 ** ORG-mode
 *** Insertar un enlace -> C-c C-l
 *** Insertar un nuevo nodo -> C-Ret
