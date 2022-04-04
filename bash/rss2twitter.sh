@@ -68,14 +68,3 @@ then
 	echo "publicando un enlace"
     fi
 fi
-
-
-
-
-
-
-
-
-
-
-
