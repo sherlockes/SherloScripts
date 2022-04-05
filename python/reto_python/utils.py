@@ -13,10 +13,12 @@
 import os
 import mimetypes
 
-class list_images():
-    def __init__(self, path):
-        if not path.exists():
-            os.makedirs(path)
-        for afile in path.iterdir():
-            if not afile.is_dir() and mimetypes.guess_type(afile)[0] == 'image/jpeg':
-                print(afile.name)
+mimetypes.init()
+
+
+def list_images(directory):
+    if not directory.exists():
+        os.makedirs(directory)
+    for afile in directory.iterdir():
+        if not afile.is_dir() and mimetypes.guess_type(afile)[0] == 'image/jpeg':
+            print(afile.name)
