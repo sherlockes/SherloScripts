@@ -13,19 +13,27 @@
 import os
 import toml
 
-class Configurator():
-    def __init__(self, path, config):
-        if not path.exists():
-            os.makedirs(path)
-        
-        self.config_file = path / config
-        
-        if not self.config_file.exists():
+class Configurator:
+    def __init__(self, path, filename):
+        self.path = path
+        self.filename = filename
+        self.check()
+
+    def check(self):
+        if not self.path.exists():
+            os.makedirs(self.path)
+        config_file = self.path / self.filename
+        if not config_file.exists():
             idata = {}
-            idata["directorio"] = "/home/sherlockes/Descargas"
-            with open(self.config_file, 'w') as file_writer:
+            idata["directorio"] = "/home/lorenzo/Descargas"
+            with open(config_file, 'w') as file_writer:
                 toml.dump(idata, file_writer)
 
     def read(self):
-        idata = toml.load(self.config_file)
-        return idata
+        config_file = self.path / self.filename
+        return toml.load(config_file)
+
+    def save(self, conf):
+        config_file = self.path / self.filename
+        with open(config_file, 'w') as file_writer:
+            toml.dump(conf, file_writer)
