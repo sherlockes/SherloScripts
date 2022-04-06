@@ -15,6 +15,7 @@ from xdg import xdg_config_home
 from configurator import Configurator
 from utils import list_images
 
+# https://github.com/atareao/reto-python
 
 def main(app, config):
     path = Path(xdg_config_home()) / app
