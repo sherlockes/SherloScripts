@@ -15,15 +15,16 @@ import subprocess
 import json
 
 class Lista:
-    def __init__(self, canal):
+    def __init__(self, canal, ubicacion):
         self.canal = canal
-        self.ruta_canal =  canal + '/'
-        self.ruta_ultimos = canal + '/ultimos_id.txt'
+        self.ruta_canal =  ubicacion + canal + '/'
+        self.ruta_ultimos = ubicacion + canal + '/ultimos_id.txt'
         
         existe_canal = os.path.isdir(self.ruta_canal)
         
         # Crea la carpeta del canal si no existe
         if not existe_canal:
+            print("Creando la carpeta del canal")
             os.mkdir(self.ruta_canal)
         
         # Info de los últimos vídeos
