@@ -18,6 +18,7 @@ class Configurator:
         self.path = path
         self.filename = filename
         self.check()
+        self.instalador()
 
     def check(self):
         if not self.path.exists():
@@ -36,7 +37,6 @@ class Configurator:
             with open(config_file, 'w') as file_writer:
                 toml.dump(idata, file_writer)
 
-
     def read(self):
         config_file = self.path / self.filename
         return toml.load(config_file)
@@ -45,3 +45,6 @@ class Configurator:
         config_file = self.path / self.filename
         with open(config_file, 'w') as file_writer:
             toml.dump(conf, file_writer)
+
+    def instalador(self):
+        print("Hola mundo")

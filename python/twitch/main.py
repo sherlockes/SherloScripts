@@ -15,7 +15,20 @@ import sys
 import subprocess
 from lista import Lista
 from pathlib import Path
-from xdg import xdg_config_home
+
+# Comprobando la instalación de PiP
+try:
+    print("Comprobando la instalación de PiP")
+    subprocess.call(['pip'])
+except FileNotFoundError:
+    sys.exit("Hay que instalar PiP mediante 'sudo apt install pip'")
+
+try:
+    from xdg import xdg_config_home
+    print('Módulo "xdg" instalado.')
+except ImportError:
+    sys.exit('Hay que instalar el módulo "xdg" mediante "pip install xdg".')
+
 from configurator import Configurator
 
 CANAL = 'jordillatzer'
@@ -23,7 +36,6 @@ CANAL = 'jordillatzer'
 
 
 def main(app, config):
-
     path = Path(xdg_config_home()) / app
     configurator = Configurator(path, config)
 
