@@ -12,6 +12,7 @@
 
 import os
 import toml
+from pathlib import Path
 
 class Configurator:
     def __init__(self, path, filename):
@@ -20,14 +21,27 @@ class Configurator:
         self.check()
 
     def check(self):
+        # Crea la ruta si no existe
         if not self.path.exists():
             os.makedirs(self.path)
         config_file = self.path / self.filename
+
+        # Crea el archivo de configuración si no existe
         if not config_file.exists():
             idata = {}
-            idata["directorio"] = "/home/lorenzo/Descargas"
+            idata["directorios"] = {}
             with open(config_file, 'w') as file_writer:
                 toml.dump(idata, file_writer)
+
+        # Crea las carpetas del archivo de configuración si no existen
+        if config_file.exists():
+            data = self.read()
+            if len(data['directorios'])>0:
+                for carpeta in data['directorios'].values():
+                    for x in ["in", "out"]:
+                        ruta = Path(carpeta[x])
+                        if not os.path.isdir(ruta):
+                            os.mkdir(ruta)
 
     def read(self):
         config_file = self.path / self.filename
