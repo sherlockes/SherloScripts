@@ -13,13 +13,17 @@
 import os
 import sys
 import subprocess
-from lista import Lista
 from pathlib import Path
+
+from xdg import XDG_DATA_HOME, xdg_data_dirs, xdg_data_home
+from lista import Lista
+from configurator import Configurator
+
 
 # Comprobando la instalación de PiP
 try:
-    print("Comprobando la instalación de PiP")
-    subprocess.call(['pip'])
+    subprocess.call(['pip'],stderr=subprocess.DEVNULL, stdout=subprocess.DEVNULL)
+    print("PiP está instalado.")
 except FileNotFoundError:
     sys.exit("Hay que instalar PiP mediante 'sudo apt install pip'")
 
@@ -29,22 +33,18 @@ try:
 except ImportError:
     sys.exit('Hay que instalar el módulo "xdg" mediante "pip install xdg".')
 
-from configurator import Configurator
-
 CANAL = 'jordillatzer'
 
 
-
-def main(app, config):
+def main(app, conf):
     path = Path(xdg_config_home()) / app
-    configurator = Configurator(path, config)
-
-    sys.exit("Hasta aquí")
-  
-
+    configurator = Configurator(path, conf)
     # Comprueba nuevos vídeos en el canal
-    lista = Lista(CANAL,UBICACION)
-
+    ubicacion = os.path.expanduser("~") + f"/twitch/{CANAL}"
+    print(type(ubicacion))
+    print(ubicacion)
+    lista = Lista(CANAL,ubicacion)
+    sys.exit("Hasta aquí")
     # Comprueba que hay para descargar
     if not lista.no_vistos():
         print ("No hay nada para descargar")
@@ -52,6 +52,7 @@ def main(app, config):
         for i in lista.no_vistos():
             print(i['id'])
             subprocess.run("python3 twitch-dl.pyz download -q audio_only " + str(i['id']), shell=True)
+
 
 if __name__ == '__main__':
     APP = "twitch2podcast"
