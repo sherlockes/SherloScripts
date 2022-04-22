@@ -10,23 +10,27 @@
 # Email: sherlockes@gmail.com
 ################################################################
 
-import os 
+import os
 import subprocess
 import json
 
+
 class Lista:
+
+    """ Lista los ultimos vídeos de un canal """
+
     def __init__(self, canal, ubicacion):
         self.canal = canal
         self.ruta_canal =  ubicacion + canal + '/'
         self.ruta_ultimos = ubicacion + canal + '/ultimos_id.txt'
-        
+
         existe_canal = os.path.isdir(self.ruta_canal)
-        
+
         # Crea la carpeta del canal si no existe
         if not existe_canal:
             print("Creando la carpeta del canal")
             os.mkdir(self.ruta_canal)
-        
+
         # Info de los últimos vídeos
         output = subprocess.check_output("python3 twitch-dl.pyz videos " + self.canal + " -j", shell=True)
         self.videos_ultimos = json.loads(output.decode('utf-8'))
