@@ -11,7 +11,7 @@
 #             - Sincroniza las nubes de Sherloflix
 #             - Comprueba la sincronización de las carpetas
 #Args: N/A
-#Creation/Update: 20200521/20220302
+#Creation/Update: 20200521/20220424
 #Author: www.sherblog.pro                                                
 #Email: sherlockes@gmail.com                                           
 ###################################################################
@@ -46,6 +46,15 @@ comprobar $?
 
 mensaje+=$'Actualización de Rclone . . . . . . . . . . . . . . . '
 . /home/pi/SherloScripts/bash/rclone.sh && rclone_check
+comprobar $?
+
+
+# ---------------------------------------------------------
+# Actualiza el archivo init.el en el repositorio de Github
+# ---------------------------------------------------------
+echo "Actualizando el archivo init.el..."
+mensaje+=$'Actualizando el archivo init.el . . . . . . '
+rclone sync -vv Sherlockes_GD:/dotfiles/emacs/.emacs.d/ Sherlockes_GD:/SherloScripts/elisp/ --include "/init.el"
 comprobar $?
 
 # ---------------------------------------------------------
