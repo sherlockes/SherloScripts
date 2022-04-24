@@ -2,7 +2,7 @@
 ;; Script Name: .emacs                             ;;
 ;; Description: Archivo de configuración de Emacs  ;;
 ;; Args: N/A                                       ;;
-;; Creation/Update: 20200225/20220314              ;; 
+;; Creation/Update: 20200225/20220423              ;; 
 ;; Author: www.sherblog.pro                        ;;                      
 ;; Email: sherlockes@gmail.com                     ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -22,6 +22,8 @@
 ;; Inicializar y actualizar paquetes
 (package-initialize)
 ;;(package-refresh-contents)
+(when (not package-archive-contents)
+  (package-refresh-contents))
 
 ;; Añadir Yasnippet
 (require 'yasnippet)
@@ -38,29 +40,28 @@
 ;;(setq temporary-file-directory "~/.emacs_backup")
 
 ;; Ocultar barras y pantalla de inicio
-(tool-bar-mode -1)
-(tooltip-mode -1)
-(menu-bar-mode -1)
-(setq inhibit-startup-screen t)
-(setq inhibit-startup-echo-area-message (user-login-name))
+(tool-bar-mode -1)                                                                                  ;; Oculta la barra de herramientas superior
+(tooltip-mode -1)                                                                                   ;; Mostrar consejos en la barra inferior
+(menu-bar-mode -1)                                                                                  ;; Oculta la barra de menús superior
+(setq inhibit-startup-screen t)                                                                     ;; No mostrar la pantalla de bienvenida
 
 ;; Configuración de Dired
-(setq dired-dwim-target t) ;; Fija como objetivo el otro buffer con Dired
-(setq dired-listing-switches "-laGh1v --group-directories-first") ;; Configuración ls defecto
-(put 'dired-find-alternate-file 'disabled nil)    ;; Habilita la "a" en Dired
-;;(add-hook 'dired-mode-hook (lambda()(dired-hide-details-mode))) ;; Ocultar detalles
+(setq dired-dwim-target t)                                                                          ;; Fija como objetivo el otro buffer con Dired
+(setq dired-listing-switches "-laGh1v --group-directories-first")                                   ;; Configuración ls defecto
+(put 'dired-find-alternate-file 'disabled nil)                                                      ;; Habilita la "a" en Dired
+;;(add-hook 'dired-mode-hook (lambda()(dired-hide-details-mode)))                                   ;; Ocultar detalles al ejecutar el modo dired
 
-(setq my-dired-ls-switches-show "-laGh1v --group-directories-first")
-(setq my-dired-ls-switches-hide "-lGh1v --group-directories-first")
+(setq my-dired-ls-switches-show "-laGh1v --group-directories-first")                                ;; Modo para mostrar detalles
+(setq my-dired-ls-switches-hide "-lGh1v --group-directories-first")                                 ;; Modo para ocultar detalles
 (setq my-dired-switch 1)
 
-(add-hook 'dired-mode-hook
+(add-hook 'dired-mode-hook                                                                          ;; Hook al activar el Modo Dired
  (lambda ()
   (dired-hide-details-mode)
   (if (= my-dired-switch 1)(dired-sort-other my-dired-ls-switches-hide))
-  (define-key dired-mode-map (kbd "M-<up>") (lambda () (interactive) (find-alternate-file "..")))
-  (define-key dired-mode-map (kbd "M-<down>") 'dired-find-alternate-file)
-  (define-key dired-mode-map (kbd "M-o")
+  (define-key dired-mode-map (kbd "M-<up>") (lambda () (interactive) (find-alternate-file "..")))   ;; Ir a directorio superior "Alt-arriba"
+  (define-key dired-mode-map (kbd "M-<down>") 'dired-find-alternate-file)                           ;; Entrar en directorio "Alt-abajo"
+  (define-key dired-mode-map (kbd "M-o")                                                            ;; Función Mostrar/Ocultar detalles "Alt-o"
    (lambda ()
     "Alterna entre mostrar y ocultar"
     (interactive)
@@ -76,9 +77,9 @@
 (setq elpy-rpc-virtualenv-path (quote system))
 
 ;; Plantillas con Auto-insert
-(auto-insert-mode)
-(setq auto-insert 'other)
-(setq auto-insert-directory "~/dotfiles/templates/")
+(auto-insert-mode)                                                                                  ;; Habilitar el modo Auto-insert
+(setq auto-insert 'other)                                                                           ;; Lanzar el modo en otra ventana
+(setq auto-insert-directory "~/dotfiles/templates/")                                                ;; Directorio de plantillas
 (setq auto-insert-query nil)
 
 (defun autoinsert-yas-expand()
@@ -94,22 +95,20 @@
 )
 
 ;; Lanzadores de plantillas con Auto-insert
-(setq auto-insert-alist '((("\\.sh\\'" . "Shell script") . ["template.sh" autoinsert-yas-expand])
-    (("20[0-9]\\{6\\}_.+\\.md\\'" . "Markdown") . ["template.md" autoinsert-yas-expand])
+(setq auto-insert-alist '(
+    (("\\.sh\\'" . "Shell script") . ["template.sh" autoinsert-yas-expand])                         ;; Lanzador para reación de scripts en Bash
+    (("20[0-9]\\{6\\}_.+\\.md\\'" . "Markdown") . ["template.md" autoinsert-yas-expand])            ;; Lanzador para post del blog en markdown
 ))
 
 ;; Otros
-(put 'upcase-region 'disabled nil)                          ;; Habilita el comando para pasar a mayúsculas
-(put 'erase-buffer 'disabled nil)                           ;; Habilita el comando de borrado del buffer
-(global-visual-line-mode t)                                 ;; Ajuste de línea
-(add-hook 'window-setup-hook 'toggle-frame-maximized t)     ;; Arrancar emacs maximizado
+(put 'upcase-region 'disabled nil)                                                                  ;; Habilita el comando para pasar a mayúsculas
+(put 'erase-buffer 'disabled nil)                                                                   ;; Habilita el comando de borrado del buffer
+(global-visual-line-mode t)                                                                         ;; Ajuste de línea
+(add-hook 'window-setup-hook 'toggle-frame-maximized t)                                             ;; Arrancar emacs maximizado
+(add-to-list 'display-buffer-alist '("^\\*shell\\*" . (display-buffer-same-window . nil)))          ;; Mostrar la sesión de terminal en el mismo buffer
+(add-hook 'markdown-mode-hook 'flyspell-mode)                                                       ;; Habilita la correción ortográfica para archivos Markdown
+(add-hook 'flyspell-mode-hook 'flyspell-buffer)                                                     ;; Corrige el buffer cuando se habilita la corrección
 
-;; Corrección ortográfica al abrir ficheros Markdown
-(add-hook 'markdown-mode-hook 'flyspell-mode)
-(add-hook 'flyspell-mode-hook 'flyspell-buffer)
-
-;; Mostrar la sesión de terminal en el mismo buffer
-(add-to-list 'display-buffer-alist '("^\\*shell\\*" . (display-buffer-same-window . nil)))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -162,10 +161,21 @@
   (browse-url "http://192.168.10.202:1313")
 )
 
+(defun reiniciar ()
+    (interactive)
+    (dolist (cur (buffer-list))
+        (kill-buffer cur)
+    )
+)
+
+(global-set-key (kbd "C-x K") 'reiniciar)
+
 ;; Accesos directos
-(global-set-key (kbd "<f1>") (lambda() (interactive)(load-file user-init-file)))
+;;(global-set-key (kbd "<f1>") (lambda() (interactive)(load-file user-init-file)))
+(global-set-key (kbd "<f1>") 'reiniciar)
 (global-set-key (kbd "<f2>") (lambda() (interactive)(find-file "~/Google_Drive/SherloScripts/mi_diario.org")))
 (global-set-key (kbd "<f4>") 'sherblog_edit)
 (global-set-key (kbd "<f5>") 'flyspell-mode)
+(global-set-key (kbd "<f6>") (kbd "C-u C-c C-c"))
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 (global-set-key (kbd "C-c r") 'query-replace-regexp)
