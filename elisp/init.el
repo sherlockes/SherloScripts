@@ -30,9 +30,9 @@
 (yas-global-mode 1)
 
 ;; Directorios por defecto
-(setq user-emacs-directory "/home/sherlockes/dotfiles/emacs/.emacs.d/")
-(setq default-directory "/home/sherlockes")
-(setenv "HOME" "/home/sherlockes")
+(setq user-emacs-directory "/home/sherlockes/dotfiles/emacs/.emacs.d/")                     ;; Directorio de configuración
+(setq default-directory "/home/sherlockes")                                                 ;; Directorio por defecto
+(setenv "HOME" "/home/sherlockes")                                                          ;; Directorio HOME
 
 ;; Crear la copia de seguridad en la papelera en lugar de en la carpeta del archivo.
 (setq backup-directory-alist `((".*" . ,temporary-file-directory)))
@@ -40,28 +40,31 @@
 ;;(setq temporary-file-directory "~/.emacs_backup")
 
 ;; Ocultar barras y pantalla de inicio
-(tool-bar-mode -1)                                                                                  ;; Oculta la barra de herramientas superior
-(tooltip-mode -1)                                                                                   ;; Mostrar consejos en la barra inferior
-(menu-bar-mode -1)                                                                                  ;; Oculta la barra de menús superior
-(setq inhibit-startup-screen t)                                                                     ;; No mostrar la pantalla de bienvenida
+(tool-bar-mode -1)                                                                          ;; Oculta la barra de herramientas superior
+(tooltip-mode -1)                                                                           ;; Mostrar consejos en la barra inferior
+(menu-bar-mode -1)                                                                          ;; Oculta la barra de menús superior
+(setq inhibit-startup-screen t)                                                             ;; No mostrar la pantalla de bienvenida
 
 ;; Configuración de Dired
-(setq dired-dwim-target t)                                                                          ;; Fija como objetivo el otro buffer con Dired
-(setq dired-listing-switches "-laGh1v --group-directories-first")                                   ;; Configuración ls defecto
-(put 'dired-find-alternate-file 'disabled nil)                                                      ;; Habilita la "a" en Dired
-;;(add-hook 'dired-mode-hook (lambda()(dired-hide-details-mode)))                                   ;; Ocultar detalles al ejecutar el modo dired
+(setq dired-dwim-target t)                                                                  ;; Fija como objetivo el otro buffer con Dired
+(setq dired-listing-switches "-laGh1v --group-directories-first")                           ;; Configuración ls defecto
+(put 'dired-find-alternate-file 'disabled nil)                                              ;; Habilita la "a" en Dired
+;;(add-hook 'dired-mode-hook (lambda()(dired-hide-details-mode)))                           ;; Ocultar detalles al ejecutar el modo dired
 
-(setq my-dired-ls-switches-show "-laGh1v --group-directories-first")                                ;; Modo para mostrar detalles
-(setq my-dired-ls-switches-hide "-lGh1v --group-directories-first")                                 ;; Modo para ocultar detalles
-(setq my-dired-switch 1)
+(setq my-dired-ls-switches-show "-laGh1v --group-directories-first")                        ;; Modo para mostrar detalles
+(setq my-dired-ls-switches-hide "-lGh1v --group-directories-first")                         ;; Modo para ocultar detalles
+(setq my-dired-switch 1)                                                                    ;; Variable para alternar modo
 
-(add-hook 'dired-mode-hook                                                                          ;; Hook al activar el Modo Dired
+(add-hook 'dired-mode-hook                                                                  ;; Hook al activar el Modo Dired
  (lambda ()
   (dired-hide-details-mode)
   (if (= my-dired-switch 1)(dired-sort-other my-dired-ls-switches-hide))
-  (define-key dired-mode-map (kbd "M-<up>") (lambda () (interactive) (find-alternate-file "..")))   ;; Ir a directorio superior "Alt-arriba"
-  (define-key dired-mode-map (kbd "M-<down>") 'dired-find-alternate-file)                           ;; Entrar en directorio "Alt-abajo"
-  (define-key dired-mode-map (kbd "M-o")                                                            ;; Función Mostrar/Ocultar detalles "Alt-o"
+  (define-key dired-mode-map (kbd "M-<up>") (                                               ;; Ir a directorio superior "Alt-arriba"
+    lambda () (interactive) (find-alternate-file ".."))
+  )
+  (define-key dired-mode-map (kbd "M-<down>") 'dired-find-alternate-file)                   ;; Entrar en directorio "Alt-abajo"
+  (define-key dired-mode-map (kbd "<f1>") 'restart-emacs)                                   ;; Atajo para reiniciar Emacs desde Dired
+  (define-key dired-mode-map (kbd "M-o")                                                    ;; Función Mostrar/Ocultar detalles "Alt-o"
    (lambda ()
     "Alterna entre mostrar y ocultar"
     (interactive)
@@ -77,9 +80,9 @@
 (setq elpy-rpc-virtualenv-path (quote system))
 
 ;; Plantillas con Auto-insert
-(auto-insert-mode)                                                                                  ;; Habilitar el modo Auto-insert
-(setq auto-insert 'other)                                                                           ;; Lanzar el modo en otra ventana
-(setq auto-insert-directory "~/dotfiles/templates/")                                                ;; Directorio de plantillas
+(auto-insert-mode)                                                                          ;; Habilitar el modo Auto-insert
+(setq auto-insert 'other)                                                                   ;; Lanzar el modo en otra ventana
+(setq auto-insert-directory "~/dotfiles/templates/")                                        ;; Directorio de plantillas
 (setq auto-insert-query nil)
 
 (defun autoinsert-yas-expand()
@@ -96,18 +99,18 @@
 
 ;; Lanzadores de plantillas con Auto-insert
 (setq auto-insert-alist '(
-    (("\\.sh\\'" . "Shell script") . ["template.sh" autoinsert-yas-expand])                         ;; Lanzador para reación de scripts en Bash
-    (("20[0-9]\\{6\\}_.+\\.md\\'" . "Markdown") . ["template.md" autoinsert-yas-expand])            ;; Lanzador para post del blog en markdown
+    (("\\.sh\\'" . "Shell script") . ["template.sh" autoinsert-yas-expand])                 ;; Lanzador para reación de scripts en Bash
+    (("20[0-9]\\{6\\}_.+\\.md\\'" . "Markdown") . ["template.md" autoinsert-yas-expand])    ;; Lanzador para post del blog en markdown
 ))
 
 ;; Otros
-(put 'upcase-region 'disabled nil)                                                                  ;; Habilita el comando para pasar a mayúsculas
-(put 'erase-buffer 'disabled nil)                                                                   ;; Habilita el comando de borrado del buffer
-(global-visual-line-mode t)                                                                         ;; Ajuste de línea
-(add-hook 'window-setup-hook 'toggle-frame-maximized t)                                             ;; Arrancar emacs maximizado
-(add-to-list 'display-buffer-alist '("^\\*shell\\*" . (display-buffer-same-window . nil)))          ;; Mostrar la sesión de terminal en el mismo buffer
-(add-hook 'markdown-mode-hook 'flyspell-mode)                                                       ;; Habilita la correción ortográfica para archivos Markdown
-(add-hook 'flyspell-mode-hook 'flyspell-buffer)                                                     ;; Corrige el buffer cuando se habilita la corrección
+(put 'upcase-region 'disabled nil)                                                          ;; Habilita el comando para pasar a mayúsculas
+(put 'erase-buffer 'disabled nil)                                                           ;; Habilita el comando de borrado del buffer
+(global-visual-line-mode t)                                                                 ;; Ajuste de línea
+(add-hook 'window-setup-hook 'toggle-frame-maximized t)                                     ;; Arrancar emacs maximizado
+(add-to-list 'display-buffer-alist '("^\\*shell\\*" . (display-buffer-same-window . nil)))  ;; Mostrar la sesión de terminal en el mismo buffer
+(add-hook 'markdown-mode-hook 'flyspell-mode)                                               ;; Habilita la correción ortográfica para archivos Markdown
+(add-hook 'flyspell-mode-hook 'flyspell-buffer)                                             ;; Corrige el buffer cuando se habilita la corrección
 
 
 (custom-set-variables
@@ -163,16 +166,36 @@
 
 (defun reiniciar ()
     (interactive)
-    (dolist (cur (buffer-list))
-        (kill-buffer cur)
-    )
+    (mapcar 'kill-buffer (buffer-list))
+    (delete-other-windows)
+    (load-file user-init-file)
 )
 
-(global-set-key (kbd "C-x K") 'reiniciar)
+(defun launch-separate-emacs-in-terminal ()
+  (suspend-emacs "fg ; emacs -nw")
+)
+
+(defun launch-separate-emacs-under-x ()
+  (call-process "sh" nil nil nil "-c" "emacs &")
+)
+
+(defun restart-emacs ()
+  (interactive)
+  ;; We need the new emacs to be spawned after all kill-emacs-hooks
+  ;; have been processed and there is nothing interesting left
+  (let ((kill-emacs-hook (append kill-emacs-hook (list (if (display-graphic-p)
+                                                           #'launch-separate-emacs-under-x
+                                                         #'launch-separate-emacs-in-terminal)))))
+    (save-buffers-kill-emacs)
+  )
+)
+
+;;(toggle-frame-maximized)
+(add-to-list 'initial-frame-alist '(fullscreen . maximized))
 
 ;; Accesos directos
-;;(global-set-key (kbd "<f1>") (lambda() (interactive)(load-file user-init-file)))
-(global-set-key (kbd "<f1>") 'reiniciar)
+;(global-set-key (kbd "<f1>") (lambda() (interactive)(load-file user-init-file)))
+(global-set-key (kbd "<f1>") 'restart-emacs)
 (global-set-key (kbd "<f2>") (lambda() (interactive)(find-file "~/Google_Drive/SherloScripts/mi_diario.org")))
 (global-set-key (kbd "<f4>") 'sherblog_edit)
 (global-set-key (kbd "<f5>") 'flyspell-mode)
