@@ -1,8 +1,8 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Script Name: .emacs                             ;;
+;; Script Name: init.el                            ;;
 ;; Description: Archivo de configuración de Emacs  ;;
 ;; Args: N/A                                       ;;
-;; Creation/Update: 20200225/20220423              ;; 
+;; Creation/Update: 20200225/20220427              ;; 
 ;; Author: www.sherblog.pro                        ;;                      
 ;; Email: sherlockes@gmail.com                     ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -83,7 +83,7 @@
 (auto-insert-mode)                                                                          ;; Habilitar el modo Auto-insert
 (setq auto-insert 'other)                                                                   ;; Lanzar el modo en otra ventana
 (setq auto-insert-directory "~/dotfiles/templates/")                                        ;; Directorio de plantillas
-(setq auto-insert-query nil)
+(setq auto-insert-query nil)                                                                ;; No preguntar sobre la inserción
 
 (defun autoinsert-yas-expand()
     "Reemplaza el texto en una plantilla de yasnippet."
@@ -152,16 +152,16 @@
 ;; Entorno de desarrollo para sherblog
 (defun sherblog_edit ()
   (interactive)
-  (mapc 'kill-buffer (buffer-list))
-  (delete-other-windows nil)
-  (split-window-right 80)
-  (split-window-below)
-  (setq default-directory "/ssh:pi@192.168.10.202:/home/pi/sherblog/")
-  (comint-send-string (shell) "hugoser\n")
-  (other-window 1)
-  (dired "/ssh:pi@192.168.10.202:/home/pi/sherblog/content/post/")
-  (enlarge-window 10)
-  (browse-url "http://192.168.10.202:1313")
+  (mapc 'kill-buffer (buffer-list))                                                         ;; Cierra todos los bufers activos
+  (delete-other-windows nil)                                                                ;; Cierra todas las ventanas
+  (split-window-right 80)                                                                   ;; Parte la pantalla verticalmente en dos
+  (split-window-below)                                                                      ;; Parte la ventana derecha horizontalmente en dos
+  (setq default-directory "/ssh:pi@192.168.10.202:/home/pi/sherblog/")                      ;; Cambia el directorio por defecto a la Raspberry
+  (comint-send-string (shell) "hugoser\n")                                                  ;; Lanza el servidor de Hugo en la Raspberry
+  (other-window 1)                                                                          ;; Cambia el foco a la otra ventana
+  (dired "/ssh:pi@192.168.10.202:/home/pi/sherblog/content/post/")                          ;; Abre el directorio de los Post del Blog
+  (enlarge-window 10)                                                                       ;; Hace un poco mas alta la ventana de los post
+  (browse-url "http://192.168.10.202:1313")                                                 ;; Abre el Blog en el navegador
 )
 
 (defun reiniciar ()
@@ -171,21 +171,22 @@
     (load-file user-init-file)
 )
 
-(defun launch-separate-emacs-in-terminal ()
+(defun emacs-terminal ()                                                                    ;; Función para volver a abrir Emacs en la terminal
   (suspend-emacs "fg ; emacs -nw")
 )
 
-(defun launch-separate-emacs-under-x ()
+(defun emacs-x11 ()                                                                         ;; Función para volver a abrir Emacs en escritorio
   (call-process "sh" nil nil nil "-c" "emacs &")
 )
 
-(defun restart-emacs ()
+(defun reiniciar ()                                                                         ;; Función para reiniciar Emacs
   (interactive)
-  ;; We need the new emacs to be spawned after all kill-emacs-hooks
-  ;; have been processed and there is nothing interesting left
-  (let ((kill-emacs-hook (append kill-emacs-hook (list (if (display-graphic-p)
-                                                           #'launch-separate-emacs-under-x
-                                                         #'launch-separate-emacs-in-terminal)))))
+  (let ((kill-emacs-hook (
+    append kill-emacs-hook (list
+      (if (display-graphic-p)
+          #'emacs-x11
+        #'emacs-terminal)
+    ))))
     (save-buffers-kill-emacs)
   )
 )
@@ -195,7 +196,7 @@
 
 ;; Accesos directos
 ;(global-set-key (kbd "<f1>") (lambda() (interactive)(load-file user-init-file)))
-(global-set-key (kbd "<f1>") 'restart-emacs)
+(global-set-key (kbd "<f1>") 'reiniciar)
 (global-set-key (kbd "<f2>") (lambda() (interactive)(find-file "~/Google_Drive/SherloScripts/mi_diario.org")))
 (global-set-key (kbd "<f4>") 'sherblog_edit)
 (global-set-key (kbd "<f5>") 'flyspell-mode)
