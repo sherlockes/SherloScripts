@@ -4,7 +4,7 @@
 #Script Name: twitch2podcast.sh
 #Description: Generación de Podcast a partir de canal de Twitch
 #Args: N/A
-#Creation/Update: 20220317/20220230
+#Creation/Update: 20220317/20220521
 #Author: www.sherblog.pro                                             
 #Email: sherlockes@gmail.com                               
 ###################################################################
@@ -266,14 +266,13 @@ subir_contenido () {
     rclone copy $canal Sherlockes78_UN_en:twitch/$canal/ --create-empty-src-dirs
     comprobar $?
 
-
     # Eliminando audio y video local
     echo "- Eliminando audios locales"
     find . -type f -name "*.mp3" -delete
 
-    # Borrando los archivos de la nube anteriores a 15 días
+    # Borrando los archivos de la nube anteriores a 30 días
     mensaje+=$"Borrando contenido antiguo . . . . . . . . ."
-    rclone ls Sherlockes78_UN_en:twitch/$canal/mp3 --min-age 15d
+    rclone delete Sherlockes78_UN_en:twitch/$canal/mp3 --min-age 30d
     comprobar $?
 }
 
