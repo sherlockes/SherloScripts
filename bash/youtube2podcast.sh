@@ -58,7 +58,7 @@ while read -r line; do
 	else
 	    # Descargando el episodio
 	    echo -e "- Descargando episodio $EPISODIO...."
-	    yt-dlp -o "%(id)s.%(ext)s" --extract-audio --audio-format mp3 "https://www.youtube.com/watch?v="$EPISODIO
+	    yt-dlp -o "%(id)s.%(ext)s" --embed-metadata --extract-audio --audio-format mp3 "https://www.youtube.com/watch?v="$EPISODIO
 
 	    # Añadiendo el episodio descargado a la lista
 	    echo -e "- Añadiendo a la lista de episodios descargados"
@@ -70,7 +70,3 @@ while read -r line; do
     fi
 
 done < salida
-
-track_num=${track%_-_*}
-title=${track#*_} ; title=${title%.mp3} ; title=${title//_/ }
-id3v2 -t "${title}" -T ${track_num} ${track}
