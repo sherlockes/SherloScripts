@@ -49,7 +49,7 @@ buscar_ultimos_yt(){
 
     echo "- Buscando últimos vídeos de $CANAL_NOMBRE"
     
-    mapfile -t videos < <( yt-dlp --dateafter now-30day --get-filename -o "%(id)s/%(duration)s" $CANAL_YT )
+    mapfile -t videos < <( yt-dlp --dateafter now-5day --get-filename -o "%(id)s/%(duration)s" $CANAL_YT )
 
     for video in ${videos[@]}
     do
@@ -122,7 +122,7 @@ anadir_item(){
 	# Personalización para Youtube
 	URL_VID="https://www.youtube.com/watch?v=$ID_EP"
 	FEC_EP=$(yt-dlp --print "%(upload_date)s" $URL_VID)
-	FEC_EP=$(date -d $fecha +"%Y-%m-%dT%H:%M:%S%:z")
+	FEC_EP=$(date -d $FEC_EP +"%Y-%m-%dT%H:%M:%S%:z")
 	FEC_EP=$(date --date "$FEC_EP+14 hours" "+%a, %d %b %Y %T %Z")
     else
 	# Personalización para Twitch
@@ -243,7 +243,7 @@ cd $twitch_dir
 echo "- Corriendo en $twitch_dir"
 
 # Buscar nuevos videos y convertirlos a mp3
-buscar_ultimos_yt "$CANAL"
+#buscar_ultimos_yt "$CANAL"
 
 tag_y_mover
 
