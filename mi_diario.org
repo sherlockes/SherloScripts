@@ -74,6 +74,9 @@ Ambos son equivalentes, con 'set +e' el script no para.
 *** Comando mv (mover / renombrar)
 - mv old-name-dir/ new-name-dir (Renombra directorios)
 ** Debian
+:PROPERTIES:
+:ORDERED:  t
+:END:
 *** Instalar la compatibilidad para impresión a PDF
 #+begin_src sh
     apt-get -y install cups
