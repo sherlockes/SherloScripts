@@ -87,6 +87,8 @@ tag_y_mover(){
     cd $twitch_dir
     if [ ! -e ./*.mp3 ]; then return; fi
 
+    echo -e "- Taggeando y moviendo los archivos"
+
     # Lista todos los mp3 de la carpeta
     for track in *.mp3 ; do
 	local nombre="${track%.*}"
@@ -162,9 +164,11 @@ actualizar_feed () {
     local canal=${2:?Falta el nombre del canal}
     local titulo=${3:?Falta el título del canal}
 
+    cd $twitch_dir
+
     # Comprueba si hay algún mp3 en la carpeta del canal, si no hay sale de la función
     if [ ! -e ./$canal/mp3/*.mp3 ]; then return; fi
-
+    
     # Encabezado del feed
     echo "- Insertando el encabezado del feed"
     mensaje+=$"Actualizando el Feed"
@@ -243,7 +247,7 @@ cd $twitch_dir
 echo "- Corriendo en $twitch_dir"
 
 # Buscar nuevos videos y convertirlos a mp3
-#buscar_ultimos_yt "$CANAL"
+buscar_ultimos_yt "$CANAL"
 
 tag_y_mover
 
@@ -251,8 +255,4 @@ tag_y_mover
 actualizar_feed "$SERVIDOR" "$CANAL" "$TITULO"
 
 # Subir el nuevo contenido al servidor
-#subir_contenido "$CANAL"
-
-
-
-
+subir_contenido "$CANAL"
