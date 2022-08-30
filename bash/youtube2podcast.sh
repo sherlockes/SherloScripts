@@ -144,7 +144,7 @@ anadir_item(){
       <pubDate>$FEC_EP</pubDate>
       <author>$ART_EP</author>
       <content:encoded><![CDATA[<p>Episodio descargado de $servicio.</p>]]></content:encoded>
-      <enclosure length="$LEN_EP" type="audio/mpeg" url="$servidor/twitch/$canal/mp3/$NOM_EP"/>
+      <enclosure length="$LEN_EP" type="audio/mpeg" url="$SERVIDOR/twitch/$canal/mp3/$ID_EP.mp3"/>
     </item>
 END_ITEM
 
@@ -222,7 +222,6 @@ subir_contenido () {
     echo "- Subiendo los mp3's al sevidor remoto"
     mensaje+=$"Subiendo los mp3's al sevidor webdav . . ."
     rclone copy $canal Sherlockes78_UN_en:twitch/$canal/ --create-empty-src-dirs
-    comprobar $?
 
     # Eliminando audio y video local
     echo "- Eliminando audios locales"
@@ -231,7 +230,6 @@ subir_contenido () {
     # Borrando los archivos de la nube anteriores a 30 días
     mensaje+=$"Borrando contenido antiguo . . . . . . . . ."
     rclone delete Sherlockes78_UN_en:twitch/$canal/mp3 --min-age 30d
-    comprobar $?
 }
 
 
