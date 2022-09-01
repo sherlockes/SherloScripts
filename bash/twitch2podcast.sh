@@ -4,7 +4,7 @@
 #Script Name: twitch2podcast.sh
 #Description: Generación de Podcast a partir de canal de Twitch
 #Args: N/A
-#Creation/Update: 20220317/20220521
+#Creation/Update: 20220317/20220901
 #Author: www.sherblog.pro                                             
 #Email: sherlockes@gmail.com                               
 ###################################################################
@@ -49,13 +49,13 @@ buscar_ultimos () {
     local titulo=${2:?Falta el título del canal}
 
     # Obtiene el json de los ultimos vídeos.
-    mensaje+=$'Obteniendo últimos vídeos . . . . . . . . . . . . '
+    mensaje+=$'Obteniendo últimos vídeos. . . . . . . . . . . . . '
     echo "- Obteniendo últimos vídeos de $titulo"
     json=$(python3 $twdl videos $canal -j)
     comprobar $?
 
     # Limitar a 15 videos la lista de descargados
-    mensaje+=$'Recortando listas de descargados . . . . . .'
+    mensaje+=$'Recortando listas de descargados. . . . . . . '
     echo "- Recortando listas de descargados"
     head -n15 $twitch_dir/$canal/descargados.txt > tmp
     mv tmp $twitch_dir/$canal/descargados.txt
@@ -132,7 +132,7 @@ convertir_mp3 () {
 
     local canal=${1:?Falta el nombre del canal}
     echo "- Buscando archivos para convertir en $canal"
-    mensaje+=$"Buscando archivos para convertir en $canal"
+    mensaje+=$"Buscando archivos en $canal . . . ."
     mensaje+=$'\n'
 
     for file in ./*.mkv; do
@@ -145,12 +145,12 @@ convertir_mp3 () {
        comprobar $?
 
        echo "- Episodio $id_ep, moviendo mp3"
-       mensaje+=$"Moviendo mp3 $id_ep . . . . . . . . ."
+       mensaje+=$"Moviendo mp3 $id_ep . . . . . . . . . . . . "
        mv $nombre.mp3 $canal/mp3/$id_ep.mp3
        comprobar $?
 
        echo "- Episodio $id_ep, eliminando el video"
-       mensaje+=$"Eliminando vídeo $id_ep . . . . . . ."
+       mensaje+=$"Eliminando vídeo $id_ep . . . . . . . . . . "
        rm $file
        comprobar $?
     done
@@ -271,7 +271,7 @@ subir_contenido () {
     find . -type f -name "*.mp3" -delete
 
     # Borrando los archivos de la nube anteriores a 30 días
-    mensaje+=$"Borrando contenido antiguo . . . . . . . . ."
+    mensaje+=$"Borrando contenido antiguo . . . . . . . . . . . "
     rclone delete Sherlockes78_UN_en:twitch/$canal/mp3 --min-age 30d
     comprobar $?
 }

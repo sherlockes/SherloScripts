@@ -4,7 +4,7 @@
 #Script Name: youtube2podcast.sh
 #Description: Creación de un podcast a partir de un canal de youtube
 #Args: N/A
-#Creation/Update: 20220605/20220605
+#Creation/Update: 20220605/20220901
 #Author: www.sherblog.pro                                             
 #Email: sherlockes@gmail.com                               
 ###################################################################
@@ -20,9 +20,14 @@ SERVIDOR="http://192.168.10.202:5005"
 #CANAL_YT="https://www.youtube.com/channel/UCSQJX9lm4u92bx0XGpEIUiA"
 CANAL_YT="https://www.youtube.com/watch?v=T-SliI2PHQQ&list=PLD75mPDs8ehwjBOCDPUlmxsnNySzJl-Lv"
 
-
 twitch_dir=~/twitch
 DESCARGADOS="$twitch_dir/$CANAL/descargados_yt.txt"
+
+notificacion=~/SherloScripts/bash/telegram.sh
+inicio=$( date +%s )
+
+mensaje=$'Actualizar Youtube mediante <a href="https://raw.githubusercontent.com/sherlockes/SherloScripts/master/bash/youtube2podcast.sh">youtube2podcast.sh</a>\n'
+mensaje+=$'- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n'
 
 ################################
 ####      Dependencias      ####
@@ -37,6 +42,19 @@ DESCARGADOS="$twitch_dir/$CANAL/descargados_yt.txt"
 ################################
 
 #----------------------------------------------------------#
+#                   Comprobar la salida                    #
+#----------------------------------------------------------#
+comprobar(){
+
+    if [ $1 -eq 0 ]; then
+	mensaje+=$'OK'
+    else
+	mensaje+=$'ERROR'
+    fi
+    mensaje+=$'\n'
+}
+
+#----------------------------------------------------------#
 #   Buscar los últimos vídeos de un canal no descargados   #
 #----------------------------------------------------------#
 
@@ -47,9 +65,12 @@ buscar_ultimos_yt(){
     local id
     local duracion
 
+    # Obtiene el json de los ultimos vídeos.
+    mensaje+=$'Obteniendo últimos vídeos . . . . . . . . . . . . '
     echo "- Buscando últimos vídeos de $CANAL_NOMBRE"
     
     mapfile -t videos < <( yt-dlp --dateafter now-5day --get-filename -o "%(id)s/%(duration)s" $CANAL_YT )
+    comprobar $?
 
     for video in ${videos[@]}
     do
@@ -59,7 +80,10 @@ buscar_ultimos_yt(){
 	# Comprueba si el archivo es de más de 20'
 	if (( $duracion > 1200 )) && ! grep -q $id "$DESCARGADOS"; then
 	    # Descargando el episodio
+	    echo "- Descargando el vídeo $id"
+	    mensaje+=$'Descargando el vídeo $id . . . . . . . . . . .'
 	    descargar_video_yt $id
+	    comprobar $?
 	else
 	    echo "- El episodio $id no se procesa por corto o ya descargado"
 	fi
@@ -93,13 +117,18 @@ tag_y_mover(){
     for track in *.mp3 ; do
 	local nombre="${track%.*}"
 	local titulo=$(yt-dlp --get-title "https://www.youtube.com/watch?v=$nombre")
-	
+
+	mensaje+=$'Tageando el vídeo $id . . . . . . . . . . .'
 	id3v2 -t "$titulo" -a "$CANAL_NOMBRE" -A "Youtube2Podcast" $track
-	
+	comprobar $?
+
+	mensaje+=$'Añadiendo el vídeo $id a la lista. . . . . . . . . . .'
 	anadir_item $track "youtube" "$CANAL"
+	comprobar $?
 
+	mensaje+=$'Guardando el audio $id . . . . . . . . . . .'
 	mv $track $CANAL/mp3
-
+	comprobar $?
     done
 }
 
@@ -246,11 +275,22 @@ echo "- Corriendo en $twitch_dir"
 
 # Buscar nuevos videos y convertirlos a mp3
 buscar_ultimos_yt "$CANAL"
-
 tag_y_mover
 
 # Actualizar el feed con los nuevos vídeos
+mensaje+=$'Actualizando el Feed . . . . . . . . . . .'
 actualizar_feed "$SERVIDOR" "$CANAL" "$TITULO"
+comprobar $?
 
 # Subir el nuevo contenido al servidor
+mensaje+=$'Subiendo contenido al servidor . . . . . . . . . . .'
 subir_contenido "$CANAL"
+compobar $?
+
+# Envia el mensaje de telegram con el resultado
+fin=$( date +%s )
+let duracion=$fin-$inicio
+mensaje+=$'- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n'
+mensaje+=$"Duración del Script:  $duracion segundos"
+
+$notificacion "$mensaje"
