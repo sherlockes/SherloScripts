@@ -127,7 +127,7 @@ make clean
 *** MarkDown Mode
 **** Insertar encabezado -> C-c C-s
 *** Navegación
-**** Abrir un directorio remoto ssh C-x d /user@host:folder
+**** Abrir un directorio remoto ssh C-x d /ssh:user@host:folder
 **** Ir al principio/final del Buffer -> M-</>
 **** Marcar línea al anillo (Ir de un punto a otro del archivo)
 - Marcar linea C-c % (org-mark-ring-push)
