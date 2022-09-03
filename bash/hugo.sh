@@ -26,6 +26,8 @@ hugo_check(){
 			   | tr -d \" \
 			   | perl -pe '($_)=/([0-9]+([.][0-9]+)+)/')
 
+	echo $hugo_local_ver
+	echo $hugo_web_ver
 
 	if [ $hugo_local_ver == $hugo_web_ver ]
 	then

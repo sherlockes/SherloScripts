@@ -16,8 +16,15 @@
 - Editar el archivo ~/.bashrc
 - Añadir el nuevo alias -> alias ll="ls -la"
 - Habilitar los cambios -> source ~/.bashrc
-*** Comando sed
-**** Imprimir una línea -> sed '2p' file
+*** Comandos
+**** ls (listar directorio)
+- ls -a (Listar directorio con ocultos)
+**** mv (mover / renombrar)
+- mv old-name-dir/ new-name-dir (Renombra directorios)
+**** sed
+- Imprimir una línea -> sed '2p' file
+**** which (Localizar un comando)
+- which comando
 *** Directorio de un script
 script_dir=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 *** Parar un script ante un error
@@ -69,10 +76,6 @@ Ambos son equivalentes, con 'set +e' el script no para.
 - -1 cuelga las llamadas al proceso
 - -9 mata literalmente el proceso
 - -15 termina el proceso
-*** Comando ls (listar directorio)
-- ls -a (Listar directorio con ocultos)
-*** Comando mv (mover / renombrar)
-- mv old-name-dir/ new-name-dir (Renombra directorios)
 ** Debian
 :PROPERTIES:
 :ORDERED:  t
@@ -127,11 +130,12 @@ make clean
 *** MarkDown Mode
 **** Insertar encabezado -> C-c C-s
 *** Navegación
-**** Abrir un directorio remoto ssh C-x d /ssh:user@host:folder
-**** Ir al principio/final del Buffer -> M-</>
-**** Marcar línea al anillo (Ir de un punto a otro del archivo)
+- Abrir un directorio remoto ssh C-x d /ssh:user@host:folder
+- Ir al principio/final del Buffer -> M-</>
+- Marcar línea al anillo (Ir de un punto a otro del archivo)
 - Marcar linea C-c % (org-mark-ring-push)
 - Ir a línea C-c & (org-mark-ring-goto)
+- Ir a línea M-g g (goto-line)
 **** Dired
 ***** [[https://www.gnu.org/software/emacs/refcards/pdf/dired-ref.pdf][Dired Reference Card]]
 ***** Buscar archivos en directorio -> % m
