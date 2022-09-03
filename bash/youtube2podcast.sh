@@ -26,7 +26,7 @@ DESCARGADOS="$twitch_dir/$CANAL/descargados_yt.txt"
 notificacion=~/SherloScripts/bash/telegram.sh
 inicio=$( date +%s )
 
-mensaje=$'Actualizar Youtube mediante <a href="https://raw.githubusercontent.com/sherlockes/SherloScripts/master/bash/youtube2podcast.sh">youtube2podcast.sh</a>\n'
+mensaje=$'Actualizar Youtube desde <a href="https://raw.githubusercontent.com/sherlockes/SherloScripts/master/bash/youtube2podcast.sh">youtube2podcast.sh</a>\n'
 mensaje+=$'- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n'
 
 ################################
@@ -81,7 +81,7 @@ buscar_ultimos_yt(){
 	if (( $duracion > 1200 )) && ! grep -q $id "$DESCARGADOS"; then
 	    # Descargando el episodio
 	    echo "- Descargando el vídeo $id"
-	    mensaje+=$'Descargando el vídeo $id . . . . . . . . . . .'
+	    mensaje+=$"Descargando el vídeo $id . . . . . . . . . . ."
 	    descargar_video_yt $id
 	    comprobar $?
 	else
@@ -118,15 +118,15 @@ tag_y_mover(){
 	local nombre="${track%.*}"
 	local titulo=$(yt-dlp --get-title "https://www.youtube.com/watch?v=$nombre")
 
-	mensaje+=$'Tageando el vídeo $id . . . . . . . . . . .'
+	mensaje+=$"Tageando el vídeo $id . . . . . . . . . . ."
 	id3v2 -t "$titulo" -a "$CANAL_NOMBRE" -A "Youtube2Podcast" $track
 	comprobar $?
 
-	mensaje+=$'Añadiendo el vídeo $id a la lista. . . . . . . . . . .'
+	mensaje+=$"Añadiendo el vídeo $id a la lista. . . . . . . . . . ."
 	anadir_item $track "youtube" "$CANAL"
 	comprobar $?
 
-	mensaje+=$'Guardando el audio $id . . . . . . . . . . .'
+	mensaje+=$"Guardando el audio $id . . . . . . . . . . ."
 	mv $track $CANAL/mp3
 	comprobar $?
     done
@@ -285,7 +285,7 @@ comprobar $?
 # Subir el nuevo contenido al servidor
 mensaje+=$'Subiendo contenido al servidor . . . . . . . . . . .'
 subir_contenido "$CANAL"
-compobar $?
+comprobar $?
 
 # Envia el mensaje de telegram con el resultado
 fin=$( date +%s )

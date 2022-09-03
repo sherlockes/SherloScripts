@@ -20,7 +20,7 @@ twdl=$twitch_dir/twitch-dl.pyz
 notificacion=~/SherloScripts/bash/telegram.sh
 inicio=$( date +%s )
 
-mensaje=$'Actualizar Twitch mediante <a href="https://raw.githubusercontent.com/sherlockes/SherloScripts/master/bash/twitch2podcast.sh">twitch2podcast.sh</a>\n'
+mensaje=$'Actualizar Twitch desde <a href="https://raw.githubusercontent.com/sherlockes/SherloScripts/master/bash/twitch2podcast.sh">twitch2podcast.sh</a>\n'
 mensaje+=$'- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n'
 
 ###############
@@ -145,12 +145,12 @@ convertir_mp3 () {
        comprobar $?
 
        echo "- Episodio $id_ep, moviendo mp3"
-       mensaje+=$"Moviendo mp3 $id_ep . . . . . . . . . . . . "
+       mensaje+=$"Moviendo mp3 $id_ep . . . . . . . . . . . ."
        mv $nombre.mp3 $canal/mp3/$id_ep.mp3
        comprobar $?
 
        echo "- Episodio $id_ep, eliminando el video"
-       mensaje+=$"Eliminando vídeo $id_ep . . . . . . . . . . "
+       mensaje+=$"Eliminando vídeo $id_ep . . . . . . . . . ."
        rm $file
        comprobar $?
     done
@@ -271,7 +271,7 @@ subir_contenido () {
     find . -type f -name "*.mp3" -delete
 
     # Borrando los archivos de la nube anteriores a 30 días
-    mensaje+=$"Borrando contenido antiguo . . . . . . . . . . . "
+    mensaje+=$"Borrando contenido antiguo . . . . . . . . . . . ."
     rclone delete Sherlockes78_UN_en:twitch/$canal/mp3 --min-age 30d
     comprobar $?
 }
