@@ -4,7 +4,7 @@
 #Script Name: youtube2podcast.sh
 #Description: Creación de un podcast a partir de un canal de youtube
 #Args: N/A
-#Creation/Update: 20220605/20220901
+#Creation/Update: 20220605/20220906
 #Author: www.sherblog.pro                                             
 #Email: sherlockes@gmail.com                               
 ###################################################################
@@ -34,8 +34,25 @@ mensaje+=$'- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 ################################
 
 # yt-dlp
+if command -v yt-dlp >/dev/null 2>&1 ; then
+    echo "Versión de yt-dlp: $(yt-dlp --version)"
+else
+    echo "ATENCION: yt-dlp no está disponible"
+fi
+
 # id3v2
+if command -v id3v2 >/dev/null 2>&1 ; then
+    echo "Versión de id3v2: $(id3v2 --version | head -n 1)"
+else
+    echo "ATENCION: id3v2 no está disponible"
+fi
+
 # ffmpeg
+if command -v ffmpeg >/dev/null 2>&1 ; then
+    echo "Versión de ffmpeg: $(ffmpeg -version | grep 'ffmpeg version' | sed 's/ffmpeg version \([-0-9.]*\).*/\1/')"
+else
+    echo "ATENCION: ffmpeg no está disponible"
+fi
 
 ################################
 ####       Funciones        ####
@@ -69,7 +86,7 @@ buscar_ultimos_yt(){
     mensaje+=$'Obteniendo últimos vídeos . . . . . . . . . . . . '
     echo "- Buscando últimos vídeos de $CANAL_NOMBRE"
     
-    mapfile -t videos < <( yt-dlp --dateafter now-5day --get-filename -o "%(id)s/%(duration)s" $CANAL_YT )
+    mapfile -t videos < <( /usr/local/bin/yt-dlp --dateafter now-5day --get-filename -o "%(id)s/%(duration)s" $CANAL_YT )
     comprobar $?
 
     for video in ${videos[@]}
@@ -97,7 +114,7 @@ descargar_video_yt(){
     local url="https://www.youtube.com/watch?v=$id"
     
     echo -e "- Descargando episodio $id...."
-    yt-dlp -o "%(id)s.%(ext)s" --extract-audio --audio-format mp3 $url
+    /usr/local/bin/yt-dlp -o "%(id)s.%(ext)s" --extract-audio --audio-format mp3 $url
 
     if [ $? -eq 0 ]; then
 	# Añadiendo el episodio descargado a la lista
@@ -116,7 +133,7 @@ tag_y_mover(){
     # Lista todos los mp3 de la carpeta
     for track in *.mp3 ; do
 	local nombre="${track%.*}"
-	local titulo=$(yt-dlp --get-title "https://www.youtube.com/watch?v=$nombre")
+	local titulo=$(/usr/local/bin/yt-dlp --get-title "https://www.youtube.com/watch?v=$nombre")
 
 	mensaje+=$"Tageando el vídeo $id . . . . . . . . . . ."
 	id3v2 -t "$titulo" -a "$CANAL_NOMBRE" -A "Youtube2Podcast" $track
@@ -152,7 +169,7 @@ anadir_item(){
     if [ "$servicio" = "youtube" ]; then
 	# Personalización para Youtube
 	URL_VID="https://www.youtube.com/watch?v=$ID_EP"
-	FEC_EP=$(yt-dlp --print "%(upload_date)s" $URL_VID)
+	FEC_EP=$(/usr/local/bin/yt-dlp --print "%(upload_date)s" $URL_VID)
 	FEC_EP=$(date -d $FEC_EP +"%Y-%m-%dT%H:%M:%S%:z")
 	FEC_EP=$(date --date "$FEC_EP+14 hours" "+%a, %d %b %Y %T %Z")
     else
