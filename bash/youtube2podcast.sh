@@ -4,7 +4,7 @@
 #Script Name: youtube2podcast.sh
 #Description: Creación de un podcast a partir de un canal de youtube
 #Args: N/A
-#Creation/Update: 20220605/20220906
+#Creation/Update: 20220605/20220913
 #Author: www.sherblog.pro                                             
 #Email: sherlockes@gmail.com                               
 ###################################################################
@@ -12,6 +12,8 @@
 ################################
 ####       Variables        ####
 ################################
+
+PATH="/home/pi/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 
 CANAL="jordillatzer"
 CANAL_NOMBRE="Jordi Llatzer"
@@ -26,33 +28,41 @@ DESCARGADOS="$twitch_dir/$CANAL/descargados_yt.txt"
 notificacion=~/SherloScripts/bash/telegram.sh
 inicio=$( date +%s )
 
-mensaje=$'Actualizar Youtube desde <a href="https://raw.githubusercontent.com/sherlockes/SherloScripts/master/bash/youtube2podcast.sh">youtube2podcast.sh</a>\n'
+mensaje=$'Actualizar Youtube via <a href="https://raw.githubusercontent.com/sherlockes/SherloScripts/master/bash/youtube2podcast.sh">youtube2podcast.sh</a>\n'
 mensaje+=$'- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n'
+
+
+echo "######################################"
+echo "## Youtube to Podcast by Sherlockes ##"
+echo "######################################"
 
 ################################
 ####      Dependencias      ####
 ################################
 
-# yt-dlp
-if command -v yt-dlp >/dev/null 2>&1 ; then
-    echo "Versión de yt-dlp: $(yt-dlp --version)"
-else
-    echo "ATENCION: yt-dlp no está disponible"
-fi
+dependencias(){
+        # yt-dlp
+    if command -v yt-dlp >/dev/null 2>&1 ; then
+	echo "Versión de yt-dlp: $(yt-dlp --version)"
+    else
+	echo "ATENCION: yt-dlp no está disponible"
+    fi
 
-# id3v2
-if command -v id3v2 >/dev/null 2>&1 ; then
-    echo "Versión de id3v2: $(id3v2 --version | head -n 1)"
-else
-    echo "ATENCION: id3v2 no está disponible"
-fi
+    # id3v2
+    if command -v id3v2 >/dev/null 2>&1 ; then
+	echo "Versión de id3v2: $(id3v2 --version | head -n 1)"
+    else
+	echo "ATENCION: id3v2 no está disponible"
+    fi
 
-# ffmpeg
-if command -v ffmpeg >/dev/null 2>&1 ; then
-    echo "Versión de ffmpeg: $(ffmpeg -version | grep 'ffmpeg version' | sed 's/ffmpeg version \([-0-9.]*\).*/\1/')"
-else
-    echo "ATENCION: ffmpeg no está disponible"
-fi
+    # ffmpeg
+    if command -v ffmpeg >/dev/null 2>&1 ; then
+	echo "Versión de ffmpeg: $(ffmpeg -version | grep 'ffmpeg version' | sed 's/ffmpeg version \([-0-9.]*\).*/\1/')"
+    else
+	echo "ATENCION: ffmpeg no está disponible"
+    fi
+}
+
 
 ################################
 ####       Funciones        ####
@@ -83,7 +93,7 @@ buscar_ultimos_yt(){
     local duracion
 
     # Obtiene el json de los ultimos vídeos.
-    mensaje+=$'Obteniendo últimos vídeos . . . . . . . . . . . . '
+    mensaje+=$'Obteniendo últimos vídeos . . . . . . . . . . . . .'
     echo "- Buscando últimos vídeos de $CANAL_NOMBRE"
     
     mapfile -t videos < <( /usr/local/bin/yt-dlp --dateafter now-5day --get-filename -o "%(id)s/%(duration)s" $CANAL_YT )
@@ -98,7 +108,7 @@ buscar_ultimos_yt(){
 	if (( $duracion > 1200 )) && ! grep -q $id "$DESCARGADOS"; then
 	    # Descargando el episodio
 	    echo "- Descargando el vídeo $id"
-	    mensaje+=$"Descargando el vídeo $id . . . . . . . . . . ."
+	    mensaje+=$"Descargando vídeo $id . . . . . . . . . . ."
 	    descargar_video_yt $id
 	    comprobar $?
 	else
@@ -135,17 +145,17 @@ tag_y_mover(){
 	local nombre="${track%.*}"
 	local titulo=$(/usr/local/bin/yt-dlp --get-title "https://www.youtube.com/watch?v=$nombre")
 
-	mensaje+=$"Tageando el vídeo $id . . . . . . . . . . ."
+	# mensaje+=$"Añadiendo info del vídeo $id . . . . . . . . ."
 	id3v2 -t "$titulo" -a "$CANAL_NOMBRE" -A "Youtube2Podcast" $track
-	comprobar $?
+	#comprobar $?
 
-	mensaje+=$"Añadiendo el vídeo $id a la lista. . . . . . . . . . ."
+	#mensaje+=$"Añadiendo el vídeo $id a la lista. . . . . . . . . . ."
 	anadir_item $track "youtube" "$CANAL"
-	comprobar $?
+	#comprobar $?
 
-	mensaje+=$"Guardando el audio $id . . . . . . . . . . ."
+	#mensaje+=$"Guardando el audio $id . . . . . . . . . . ."
 	mv $track $CANAL/mp3
-	comprobar $?
+	#comprobar $?
     done
 }
 
@@ -266,15 +276,14 @@ subir_contenido () {
     
     # Subiendo archivos a la nube via rclone
     echo "- Subiendo los mp3's al sevidor remoto"
-    mensaje+=$"Subiendo los mp3's al sevidor webdav . . ."
     rclone copy $canal Sherlockes78_UN_en:twitch/$canal/ --create-empty-src-dirs
+    comprobar $?
 
     # Eliminando audio y video local
     echo "- Eliminando audios locales"
     find . -type f -name "*.mp3" -delete
 
     # Borrando los archivos de la nube anteriores a 30 días
-    mensaje+=$"Borrando contenido antiguo . . . . . . . . ."
     rclone delete Sherlockes78_UN_en:twitch/$canal/mp3 --min-age 30d
 }
 
@@ -283,26 +292,37 @@ subir_contenido () {
 ####    Script principal    ####
 ################################
 
-echo "######################################"
-echo "## Youtube to Podcast by Sherlockes ##"
-echo "######################################"
-
 cd $twitch_dir
 echo "- Corriendo en $twitch_dir"
 
+# Comprobar dependencias
+mensaje+=$'Comprobando dependencias. . . . . . . . . . . '
+dependencias
+comprobar $?
+
 # Buscar nuevos videos y convertirlos a mp3
 buscar_ultimos_yt "$CANAL"
-tag_y_mover
 
-# Actualizar el feed con los nuevos vídeos
-mensaje+=$'Actualizando el Feed . . . . . . . . . . .'
-actualizar_feed "$SERVIDOR" "$CANAL" "$TITULO"
-comprobar $?
+# Añadir info si hay nuevos vídeos y moverlos a la carpeta mp3
+if [ -e ./*.mp3 ]; then
+    mensaje+=$'Añadiendo info del nuevo vídeo . . . . . . '
+    tag_y_mover
+    comprobar $?
+fi
 
-# Subir el nuevo contenido al servidor
-mensaje+=$'Subiendo contenido al servidor . . . . . . . . . . .'
-subir_contenido "$CANAL"
-comprobar $?
+# Actualizar el feed si hay nuevos vídeos
+if [ -e ./$canal/mp3/*.mp3 ]; then
+    mensaje+=$'Actualizando el Feed . . . . . . . . . . . . . '
+    actualizar_feed "$SERVIDOR" "$CANAL" "$TITULO"
+    comprobar $?
+fi
+
+# Subir si hay nuevo contenido al servidor
+if [ -e ./$canal/mp3/*.mp3 ]; then
+    mensaje+=$"Subiendo los mp3's al sevidor webdav . . ."
+    subir_contenido "$CANAL"
+    comprobar $?
+fi
 
 # Envia el mensaje de telegram con el resultado
 fin=$( date +%s )
