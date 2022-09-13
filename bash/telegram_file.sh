@@ -8,10 +8,10 @@
 #  - El archivo "config.conf" constará de
 #        TOKEN="xxxxxxxxxxxxxxxxxxxxxxx"
 #        CHAT_ID="-167687696987674433"
-#        Archivo="Mensaje vacío de Telegram"
+#        Archivo="/home/pi/config.conf"
 # Args:
 #  - Ubicación del archivo a enviar
-# Creation/Update: 20220901/20220901
+# Creation/Update: 20220901/20220913
 # Author: www.sherblog.pro                                                
 # Email: sherlockes@gmail.com                                           
 ############################################################################
