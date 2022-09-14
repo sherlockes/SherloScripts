@@ -311,14 +311,14 @@ if [ -e ./*.mp3 ]; then
 fi
 
 # Actualizar el feed si hay nuevos vídeos
-if [ -e ./$canal/mp3/*.mp3 ]; then
+if [ -e ./$CANAL/mp3/*.mp3 ]; then
     mensaje+=$'Actualizando el Feed . . . . . . . . . . . . . '
     actualizar_feed "$SERVIDOR" "$CANAL" "$TITULO"
     comprobar $?
 fi
 
 # Subir si hay nuevo contenido al servidor
-if [ -e ./$canal/mp3/*.mp3 ]; then
+if [ -e ./$CANAL/mp3/*.mp3 ]; then
     mensaje+=$"Subiendo los mp3's al sevidor webdav . . ."
     subir_contenido "$CANAL"
     comprobar $?
