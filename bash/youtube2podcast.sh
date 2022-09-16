@@ -4,7 +4,7 @@
 #Script Name: youtube2podcast.sh
 #Description: Creación de un podcast a partir de un canal de youtube
 #Args: N/A
-#Creation/Update: 20220605/20220913
+#Creation/Update: 20220605/20220916
 #Author: www.sherblog.pro                                             
 #Email: sherlockes@gmail.com                               
 ###################################################################
@@ -41,7 +41,7 @@ echo "######################################"
 ################################
 
 dependencias(){
-        # yt-dlp
+    # yt-dlp
     if command -v yt-dlp >/dev/null 2>&1 ; then
 	echo "Versión de yt-dlp: $(yt-dlp --version)"
     else
@@ -96,7 +96,7 @@ buscar_ultimos_yt(){
     mensaje+=$'Obteniendo últimos vídeos . . . . . . . . . . . . .'
     echo "- Buscando últimos vídeos de $CANAL_NOMBRE"
     
-    mapfile -t videos < <( /usr/local/bin/yt-dlp --dateafter now-5day --get-filename -o "%(id)s/%(duration)s" $CANAL_YT )
+    mapfile -t videos < <( yt-dlp --dateafter now-5day --get-filename -o "%(id)s/%(duration)s" $CANAL_YT )
     comprobar $?
 
     for video in ${videos[@]}
@@ -108,7 +108,7 @@ buscar_ultimos_yt(){
 	if (( $duracion > 1200 )) && ! grep -q $id "$DESCARGADOS"; then
 	    # Descargando el episodio
 	    echo "- Descargando el vídeo $id"
-	    mensaje+=$"Descargando vídeo $id . . . . . . . . . . ."
+	    mensaje+=$"Descargando vídeo $id . . . . . . . ."
 	    descargar_video_yt $id
 	    comprobar $?
 	else
@@ -124,7 +124,7 @@ descargar_video_yt(){
     local url="https://www.youtube.com/watch?v=$id"
     
     echo -e "- Descargando episodio $id...."
-    /usr/local/bin/yt-dlp -o "%(id)s.%(ext)s" --extract-audio --audio-format mp3 $url
+    yt-dlp -o "%(id)s.%(ext)s" --extract-audio --audio-format mp3 $url
 
     if [ $? -eq 0 ]; then
 	# Añadiendo el episodio descargado a la lista
@@ -143,19 +143,16 @@ tag_y_mover(){
     # Lista todos los mp3 de la carpeta
     for track in *.mp3 ; do
 	local nombre="${track%.*}"
-	local titulo=$(/usr/local/bin/yt-dlp --get-title "https://www.youtube.com/watch?v=$nombre")
+	local titulo=$(yt-dlp --get-title "https://www.youtube.com/watch?v=$nombre")
 
-	# mensaje+=$"Añadiendo info del vídeo $id . . . . . . . . ."
+	# Poniendo título al audio
 	id3v2 -t "$titulo" -a "$CANAL_NOMBRE" -A "Youtube2Podcast" $track
-	#comprobar $?
 
-	#mensaje+=$"Añadiendo el vídeo $id a la lista. . . . . . . . . . ."
+	# Añadir el item al listado del feed
 	anadir_item $track "youtube" "$CANAL"
-	#comprobar $?
 
-	#mensaje+=$"Guardando el audio $id . . . . . . . . . . ."
+	# Mover a la carpeta mp3
 	mv $track $CANAL/mp3
-	#comprobar $?
     done
 }
 
@@ -179,7 +176,7 @@ anadir_item(){
     if [ "$servicio" = "youtube" ]; then
 	# Personalización para Youtube
 	URL_VID="https://www.youtube.com/watch?v=$ID_EP"
-	FEC_EP=$(/usr/local/bin/yt-dlp --print "%(upload_date)s" $URL_VID)
+	FEC_EP=$(yt-dlp --print "%(upload_date)s" $URL_VID)
 	FEC_EP=$(date -d $FEC_EP +"%Y-%m-%dT%H:%M:%S%:z")
 	FEC_EP=$(date --date "$FEC_EP+14 hours" "+%a, %d %b %Y %T %Z")
     else
@@ -227,8 +224,6 @@ actualizar_feed () {
     
     # Encabezado del feed
     echo "- Insertando el encabezado del feed"
-    mensaje+=$"Actualizando el Feed"
-    mensaje+=$'\n'
 
     cat > $canal/feed.xml <<END_HEADER
 <?xml version="1.0" encoding="UTF-8"?>
@@ -277,7 +272,6 @@ subir_contenido () {
     # Subiendo archivos a la nube via rclone
     echo "- Subiendo los mp3's al sevidor remoto"
     rclone copy $canal Sherlockes78_UN_en:twitch/$canal/ --create-empty-src-dirs
-    comprobar $?
 
     # Eliminando audio y video local
     echo "- Eliminando audios locales"
@@ -305,7 +299,7 @@ buscar_ultimos_yt "$CANAL"
 
 # Añadir info si hay nuevos vídeos y moverlos a la carpeta mp3
 if [ -e ./*.mp3 ]; then
-    mensaje+=$'Añadiendo info del nuevo vídeo . . . . . . '
+    mensaje+=$'Añadiendo info del nuevo vídeo . . . . . . . . '
     tag_y_mover
     comprobar $?
 fi
