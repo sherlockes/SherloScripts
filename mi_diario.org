@@ -85,6 +85,9 @@ Ambos son equivalentes, con 'set +e' el script no para.
     apt-get -y install cups
     apt-get -y install printer-driver-cups-pdf
 #+end_src
+*** Reparar el error de gpg ([[https://www.youtube.com/watch?v=AFNPYDWXeVI][Video]])
+Las firmas siguientes no se pudieron verificar porque su clave pública no está disponible: NO_PUBKEY 4EB27DB2A3B88B8B
+```sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 4EB27DB2A3B88B8B```
 ** Docker
 *** Parar un contenedor - docker stop xxxxxxxxx
 *** Parar todos contenedores - docker stop `docker ps -q`
