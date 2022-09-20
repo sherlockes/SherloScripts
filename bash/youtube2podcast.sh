@@ -108,7 +108,7 @@ buscar_ultimos_yt(){
 	if (( $duracion > 1200 )) && ! grep -q $id "$DESCARGADOS"; then
 	    # Descargando el episodio
 	    echo "- Descargando el vídeo $id"
-	    mensaje+=$"Descargando vídeo $id . . . . . . . ."
+	    mensaje+=$"Descargando vídeo $id . . . . . . "
 	    descargar_video_yt $id
 	    comprobar $?
 	else
@@ -306,7 +306,7 @@ fi
 
 # Actualizar el feed si hay nuevos vídeos
 if [ -e ./$CANAL/mp3/*.mp3 ]; then
-    mensaje+=$'Actualizando el Feed . . . . . . . . . . . . . '
+    mensaje+=$'Actualizando el Feed . . . . . . . . . . . . . . . . '
     actualizar_feed "$SERVIDOR" "$CANAL" "$TITULO"
     comprobar $?
 fi
