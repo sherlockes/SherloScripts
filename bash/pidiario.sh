@@ -53,7 +53,7 @@ comprobar $?
 # Actualiza el archivo init.el en el repositorio de Github
 # ---------------------------------------------------------
 echo "Actualizando el archivo init.el..."
-mensaje+=$'Actualizando el archivo init.el . . . . . . '
+mensaje+=$'Actualizando el archivo init.el . . . . . . . . . '
 rclone sync -vv Sherlockes_GD:/dotfiles/emacs/.emacs.d/ Sherlockes_GD:/SherloScripts/elisp/ --include "/init.el"
 comprobar $?
 
