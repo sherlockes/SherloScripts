@@ -28,7 +28,7 @@ hugo_check(){
 
 	echo $hugo_local_ver
 	echo $hugo_web_ver
-
+	
 	if [ $hugo_local_ver == $hugo_web_ver ]
 	then
 	    echo "hugo instalado y actualizado..."
@@ -45,15 +45,30 @@ hugo_check(){
 }
 
 hugo_install(){
+    cd ~
+    
+    mkdir hugo_install
+    cd hugo_install
+
     echo 'Descargando la última versión de Hugo...'
-	curl -s https://api.github.com/repos/gohugoio/hugo/releases/latest \
-	| grep "browser_download_url.*hugo_[^extended].*_Linux-${bits}\.deb" \
+    curl -s https://api.github.com/repos/gohugoio/hugo/releases/latest \
+	| grep "browser_download_url" \
+	| grep "[Ll]inux" \
+	| grep "${bits}" \
+	| grep -v "hugo_extended" \
 	| cut -d ":" -f 2,3 \
 	| tr -d \" \
 	| wget -qi -
-    installer="$(find . -name "*Linux-${bits}.deb")"
-    sudo dpkg -i $installer
-    rm $installer
+
+    
+    instalador="$(find . -maxdepth 1 -name "hugo_*")"
+    tar -xvzf $instalador
+
+    ./hugo version
+    #installer="$(find . -name "*Linux-${bits}.deb")"
+    
+    #sudo dpkg -i $installer
+    #rm $installer
 }
 
 hugo_check
