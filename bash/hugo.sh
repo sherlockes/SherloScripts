@@ -47,8 +47,7 @@ hugo_check(){
 hugo_install(){
     cd ~
     
-    mkdir hugo_install
-    cd hugo_install
+    mkdir -p ~/.local/bin
 
     echo 'Descargando la última versión de Hugo...'
     curl -s https://api.github.com/repos/gohugoio/hugo/releases/latest \
@@ -61,14 +60,29 @@ hugo_install(){
 	| wget -qi -
 
     
-    instalador="$(find . -maxdepth 1 -name "hugo_*")"
-    tar -xvzf $instalador
+    # Busca el archivo *.tar.gz descargado
+    instalador="$(find . -maxdepth 1 -name "hugo_*.tar.gz")"
 
-    ./hugo version
-    #installer="$(find . -name "*Linux-${bits}.deb")"
+    echo $instalador
+
+    if [[ -n $instalador ]]
+    then
+	# Extrae el archivo "Hugo" a "~/.local/bin"
+	tar -xvzf $instalador -C ~/.local/bin hugo
+
+	# Borra el archivo descargado
+	rm $instalador
+    fi
     
-    #sudo dpkg -i $installer
-    #rm $installer
+    if [[ -n $(echo $PATH | grep "$HOME/.local/bin") ]]
+    then
+	echo "La ruta $HOME/.local/bin está en el PATH"
+    else
+	echo "La ruta no está en el Path, se añade"
+	PATH=$PATH:~/.local/bin
+    fi
+    
+    
 }
 
 hugo_check
