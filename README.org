@@ -15,6 +15,32 @@ Este archivo en formato org-mode voy escribiendo lo que día a día aprendo y ut
 - Markdown
 - Python
 - Y lo que vaya utilizando...
+** [[https://github.com/sherlockes/SherloScripts/blob/master/bash/youtube2podcast.sh][youtube2podcast.sh]] (bash)                          :Bash:
+durante la hora de la siesta se ejecuta este script para descargar los nuevos vídeos de un canal de Twitch y convertirlos a audio en formato Podcast privado siguiendo los siguiente pasos:
+- Busca los últimos vídeos publicados por un canal
+- Descarta los de menos de 10 minutos
+- Comprueba los que no se han descargado anteriormente
+- Convierte los vídeos a mp3 eliminando los silencios
+- Crea un Feed Rss y lo actualiza con todos los archivos descargados
+- Sube el fedd y los mp3 a una nube pública de donde se nutre un servidor webdav
+
+Para todo esto hago uso de:
+- Comprobación de dependencias mediante "command" e "if"
+- Creación de un array con los últimos vídeos de un canal mediante "mapfile" y "yt-dlp"
+- Uso de "for" para recorrer lo elementos de un array
+- Uso de "cut" para extraer información de parte de una cadena
+- Comprobar la existencia de una cadena en un archivo externo
+- Descargar el audio de un vídeo de Youtube con "yt-dlp"
+- Mover archivos mediante el comando "mv"
+- Comprobar la existencia de un tipo de archivos en un determinado directorio
+- Extraer el título de un vídeo de Youtube mediante "yt-dlp"
+- Añadir tags a un audio con la utilidad "id3v2"
+- Extraer info de los tags de un audio con la utilidad "ffprobe"
+- Crear fechas a partir de cadenas con el comando "date"
+- Concatenar archivos mediante el comando "cat"
+- Subir archivos a un servidor remoto mediante "rclone"
+- Calcular la duración de la ejecución del script
+
 ** [[https://github.com/sherlockes/SherloScripts/blob/master/bash/twitch2podcast.sh][twitch2podcast.sh]] (bash)                           :Bash:
 Todas las mañanas se ejecuta este script para descargar los nuevos vídeos de un canal de Twitch y convertirlos a audio en formato Podcast privado siguiendo los siguiente pasos:
 - Busca los últimos vídeos publicados por un canal

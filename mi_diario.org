@@ -124,6 +124,7 @@ make clean
 **** Corregir el buffer -> M-x ispell-minor-mode
 **** Subrayado -> M-x flyspell-mode
 *** Edición
+**** Comentar varias líneas seleccionadas -> M-; (Con las líneas preseleccionadas)
 **** Sangrar varias líneas 8 -> C-u 8 C-x Tab
 **** Reemplazar ^M por un salto de línea > M-x replace-string C-q C-m RET RET
 **** Seleccionar todo -> C-x h
@@ -348,6 +349,7 @@ print(mean_absolute_error(val_y, melb_preds))
 *** Acceder desde internet -> [[https://moodlebox.net/en/help/access-from-internet/][Enlace]]
 ** Atajos
 *** Navegador
+**** Cerrar una pestaña > C-w
 **** Mandar el foco a la barra de direcciones > C-l
 **** Mover a la pestaña anterior (Temporal) > C-Shift-Tab
 **** Mover a la pestaña posterior (Temporal) > C-Tab

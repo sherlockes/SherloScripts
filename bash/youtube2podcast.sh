@@ -270,7 +270,7 @@ subir_contenido () {
     if [ ! -e ./$canal/mp3/*.mp3 ]; then return; fi
     
     # Subiendo archivos a la nube via rclone
-    echo "- Subiendo los mp3's al sevidor remoto"
+    echo "- Subiendo los mp3's al servidor remoto"
     rclone copy $canal Sherlockes78_UN_en:twitch/$canal/ --create-empty-src-dirs
 
     # Eliminando audio y video local

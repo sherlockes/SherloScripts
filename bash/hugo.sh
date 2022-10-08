@@ -4,7 +4,7 @@
 # Script Name: hugo.sh
 # Description: Instala y actualiza Hugo
 # Args: N/A
-# Creation/Update: 20191114/20220930
+# Creation/Update: 20191114/20221007
 # Author: www.sherblog.pro                                                
 # Email: sherlockes@gmail.com                                           
 ###################################################################
@@ -19,7 +19,9 @@ fi
 
 hugo_check(){
 
-    ultimo_path=$(curl -s https://api.github.com/repos/gohugoio/hugo/releases/latest \
+    hugo_download_path="https://github.com/gohugoio/hugo/releases/download/"
+
+    hugo_latest_path=$(curl -s https://api.github.com/repos/gohugoio/hugo/releases/latest \
 	| grep "browser_download_url" \
 	| grep "[Ll]inux" \
 	| grep "${bits}" \
@@ -29,27 +31,31 @@ hugo_check(){
 	| cut -d ":" -f 2,3 \
 	| tr -d \")
 
+    if [[ $hugo_latest_path =~ ^$hugo_download_path[v](.*)[/].*\.tar\.gz$ ]]; then
+    	hugo_latest_ver=${BASH_REMATCH[1]}
+    	echo "La última versión disponible es $hugo_latest_ver"
+    fi
 
-    echo $ultimo_path
-    exit 0
-    
     if which hugo >/dev/null; then
 	hugo_local_ver=$(hugo version | perl -pe '($_)=/([0-9]+([.][0-9]+)+)/')
-	hugo_web_ver=$(curl -s https://api.github.com/repos/gohugoio/hugo/releases/latest \
-			   | grep "browser_download_url.*hugo_[^extended].*_Linux-${bits}\.tar.gz" \
-			   | cut -d ":" -f 2,3 \
-			   | tr -d \" \
-			   | perl -pe '($_)=/([0-9]+([.][0-9]+)+)/')
 
-	echo "Versión instalada $hugo_local_ver, última versión $hugo_web_ver"
+	echo "Versión instalada $hugo_local_ver, última versión $hugo_latest_ver"
+
+	exit 0
 	
 	if [ $hugo_local_ver == $hugo_web_ver ]
 	then
 	    echo "hugo instalado y actualizado..."
 	else
-	    echo 'actualizando a hugo '$hugo_web_ver
-	    sudo dpkg -P hugo
-	    rm ~/.local/bin/hugo
+	    echo 'actualizando a hugo '$hugo_latest_ver
+	    
+	    if [[ -f ~/.local/bin/hugo ]] 
+	    then 
+		rm ~/.local/bin/hugo
+	    else 
+		sudo dpkg -P hugo
+	    fi
+	    
 	    hugo_install
 	fi
 	
@@ -66,7 +72,7 @@ hugo_install(){
     mkdir -p ~/.local/bin
 
     echo 'Descargando la última versión de Hugo...'
-    wget -q $ultimo_path
+    wget -q $hugo_latest_path
 
     
     # Busca el archivo *.tar.gz descargado
