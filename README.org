@@ -15,6 +15,32 @@ Este archivo en formato org-mode voy escribiendo lo que día a día aprendo y ut
 - Markdown
 - Python
 - Y lo que vaya utilizando...
+** [[https://github.com/sherlockes/SherloScripts/blob/master/bash/hugo.sh][hugo.sh]] (bash)                                     :Bash:
+Dentro de las "faenas" diarias que tiene mi raspberry está incluida la actualización de Hugo en caso de que haya una nueva versión. Esto se realiza mediante este script que:
+- Busca si Hugo esta instalado en el sistema
+- Compara la versión instalada con la ultima disponible
+- Actualiza a la última versión o realiza una instalación nueva.
+
+Pare todo esto hago uso de:
+- Uso de condicionales `if`
+- Comando `getconf LONG_BIT` para determinar la arquitectura del sistema
+- Uso de funciones
+- Asignación de comandos a variables
+- Comando `curl` para "scrapear" el contenido de una web
+- Comando `grep` para buscar coincidencias en un texto
+- Comando `cut`para extraer partes de una cadena de texto
+- Comando `tr`para eliminar caracteres de una cadena de texto
+- Uso de Regex en Bash mediante BASH_REMATCH para extraer una parte de una cadena
+- Comprobar la existencia de un omando mediante `which`
+- Uso del comando `perl` para extraer de una cadena mediante Regex
+- Comprobar la existencia de un archivo
+- Eliminar un archivo mediante `rm`
+- Desinstalar un paquete mediante `dpgk`
+- Crear directorios mediante `mkdir`
+- Descargar archivos de la web con `wget`
+- Buscar archivos en un directorio con `find`
+- Extraer archivos comprimidos con `tar`
+- Comprobar y modificar rutas en el PATH
 ** [[https://github.com/sherlockes/SherloScripts/blob/master/bash/youtube2podcast.sh][youtube2podcast.sh]] (bash)                          :Bash:
 durante la hora de la siesta se ejecuta este script para descargar los nuevos vídeos de un canal de Twitch y convertirlos a audio en formato Podcast privado siguiendo los siguiente pasos:
 - Busca los últimos vídeos publicados por un canal

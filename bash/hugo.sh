@@ -4,7 +4,7 @@
 # Script Name: hugo.sh
 # Description: Instala y actualiza Hugo
 # Args: N/A
-# Creation/Update: 20191114/20221007
+# Creation/Update: 20191114/20221015
 # Author: www.sherblog.pro                                                
 # Email: sherlockes@gmail.com                                           
 ###################################################################
@@ -41,8 +41,6 @@ hugo_check(){
 
 	echo "Versión instalada $hugo_local_ver, última versión $hugo_latest_ver"
 
-	exit 0
-	
 	if [ $hugo_local_ver == $hugo_web_ver ]
 	then
 	    echo "hugo instalado y actualizado..."
