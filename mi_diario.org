@@ -100,6 +100,19 @@ sudo ./get-docker.sh
 sudo usermod -aG docker $(whoami)
 #+END_SRC
 ** Emacs
+*** Bookmarks (Favoritos)
+**** Añadir favorito --> C-x r m
+**** Listar favoritos --> C-x r l
+‘a’ – show annotation for the current bookmark
+‘A’ – show all annotations for your bookmarks
+‘d’ – mark various entries for deletion (‘x’ – to delete them)
+‘e’ – edit the annotation for the current bookmark
+‘m’ – mark various entries for display and other operations, (‘v’ – to visit)
+‘o’ – visit the current bookmark in another window, keeping the bookmark list open
+‘C-o’ – switch to the current bookmark in another window
+‘r’ – rename the current bookmark
+**** Ir a favorito --> C-x r b
+**** Archivo de favoritos - bookmarks-default-file
 *** Buffers
 **** Borrar el buffer completo -> erase-buffer (Sin tecla por defecto)
 **** Actualizar automáticamente un buffer abierto -> auto-revert-mode
@@ -109,6 +122,10 @@ sudo usermod -aG docker $(whoami)
 **** Mostrar los números de línea -> linum-mode
 **** Recargar archivo (revert-buffer) -> C-x C-v Ret
 **** Seleccionar el buffer completo -> C-x h
+*** Busqueda (Isearch) -> C-s
+**** Repetir búsqueda -> C-s C-s
+**** Añadir siguiente palabra -> C-w
+**** Volver al inicio -> C-u C-<spc>
 *** Corrección Ortográfica y Diccionario
 **** Cambiar diccionario -> M-x ispell-change dictionary "castellano"
 **** Instalar diccionario -> [[https://ondahostil.wordpress.com/2017/01/17/lo-que-he-aprendido-configurando-aspell-para-emacs/][Onda Hostil]]
@@ -126,13 +143,28 @@ make clean
 *** Edición
 **** Comentar varias líneas seleccionadas -> M-; (Con las líneas preseleccionadas)
 **** Sangrar varias líneas 8 -> C-u 8 C-x Tab
+**** Reemplazar cadena --> M-x replace-string
 **** Reemplazar ^M por un salto de línea > M-x replace-string C-q C-m RET RET
 **** Seleccionar todo -> C-x h
 **** Editar archivos svg en modo texto > C-c C-c (auto-image-file-mode 1)
 **** Borrar una línea -> C-S-Backspace
-**** insertar un trozo de código -> <sTAB
+**** Corta la siguiente palabra -> M-d
+**** Corta la palabra anterior -> M-<back>
+**** Insertar un trozo de código -> <sTAB
 *** MarkDown Mode
 **** Insertar encabezado -> C-c C-s
+*** Movimiento del cursor
+**** Scroll
+- Scroll Abajo/Arriba --> C-v / M-v
+- Scroll Abajo/Arriba (Otra ventana) --> C-M-v / C-M-S-v (C-M-- C-M-v)
+- Scroll Horizontal --> C-x < / C-x >
+**** Buffer
+- Inicio/Fin de buffer --> M-</M->
+- Retornar a posición anterior --> C-u C-<spc>
+**** Desplazamiento
+- Mueve al primer espacio no blanco -> M-n
+- Mueve a la siguiente palabra -> M-f
+- Mueve a la palabra anterior -> M-b
 *** Navegación
 - Abrir un directorio remoto ssh C-x d /ssh:user@host:folder
 - Ir al principio/final del Buffer -> M-</>
@@ -153,6 +185,14 @@ make clean
 ***** Grep en DIRED (buscar en archivos) -> find-grep-dired
 ***** Ordenar -> dired-listing-switches [[https://oremacs.com/2015/01/13/dired-options/][Oremacs]]
 ***** Renombrar -> C-x C-q (C-c C-c para terminar)
+**** Ocur Mode (Buscar por líneas) M-x occur / M-s o
+- Sig/anterior coincidencia en bufer occur --> M-n M-p 
+- Refrescar buffer --> g
+- Salir --> q
+- Editar en buffer ocur --> e
+- Guardar la edición --> C-c C-c
+- En varios buffers --> M-x multi-occur
+- En varios archivos (*.py) --> M-x multi-occur \
 *** Paquetes
 **** Instalar paquete desde archivo -> package-install-file
 **** Yasnippet
@@ -161,6 +201,13 @@ make clean
 *** Recuperar archivos -> m-x recover-file
 *** Selección
 **** Activar la marca de posición -> C-spc
+**** Marcar el siguiente párrafo -> M-h
+**** Marcar todo el buffer -> C-x h
+**** Marcar una función -> C-M-h
+**** Marcar la siguiente palabra -> M-@
+**** Marcar las dos siguiente palabras - M-2 M-@
+**** Marcar la siguiente expresión -> C-M-@
+**** Desactivar la marca -> C-u C-<spc>
 *** Shell
 **** Abrir la consola de comandos -> M-x shell
 **** Comando anterior -> M-p
