@@ -273,6 +273,12 @@ cuando el sensor de la puerta de la galería pierde la conexión hayq ue realiza
  - Pulsar reset con la aguja durante 5 sg
 - Renombrar sensor "Puerta de la galeria"
 - Reiniciar Home Assistant
+*** Casa Zgz - Salón - Emparejar GU10 Ikea Tradfri
+- Colocar la bombilla cerca del concentrador Zigbee
+- Eliminar el dispositivo de la bombilla en Home Assistant
+- Buscar nuevos dispositivos en la integración de ZHA
+- Encender y apagar 6 veces la bombilla dejándola encendida
+- Poner el mismo nombre que ya tenía a la bombilla descubierta
 ** Linux
 *** Buscar packetes instalados -> apt list --installed nombre
 *** Enlace simbólico -> ln -s target_file link_name
