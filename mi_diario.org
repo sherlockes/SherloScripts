@@ -266,13 +266,11 @@ hugo server --bind=192.168.10.202 --baseURL=http://192.168.10.202:1313
 Borrar el archivo "~/.config/inkscape/preferences.xml"
 ** IOT
 *** Casa ZgZ - Galería - Sensor puerta
-cuando el sensor de la puerta de la galería pierde la conexión hayq ue realizar los siguientes pasos:
-- Eliminar sensor "Puerta de la galeria"
-- Reiniciar sensor
- - Detectar sensores desde Phoscon
- - Pulsar reset con la aguja durante 5 sg
-- Renombrar sensor "Puerta de la galeria"
-- Reiniciar Home Assistant
+Cuando el sensor de la puerta de la galería pierde la conexión hayq ue realizar los siguientes pasos:
+- Buscar nuevos dispositivos en la integracion ZHA
+- Reiniciar sensor con el clip hsta que parpadea el led tres veces
+- Volver a reiniciar
+- Seleccionar el area de "galería" una vez detectado
 *** Casa Zgz - Salón - Emparejar GU10 Ikea Tradfri
 - Colocar la bombilla cerca del concentrador Zigbee
 - Eliminar el dispositivo de la bombilla en Home Assistant
