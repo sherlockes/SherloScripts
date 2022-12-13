@@ -1,10 +1,10 @@
 #!/bin/bash
 
 ###################################################################
-#Script Name: rss2twiter.sh
-#Description: Generación de Tweet cuando hay un nuevo post del blog
+#Script Name: rss2mastodon.sh
+#Description: Generación de Toot cuando hay un nuevo post del blog
 #Args: N/A
-#Creation/Update: 20220326/20221213
+#Creation/Update: 20221213/20221213
 #Author: www.sherblog.pro                                             
 #Email: sherlockes@gmail.com                               
 ###################################################################
@@ -15,7 +15,6 @@
 
 RUTA=~/temp
 RSS_URL="https://sherblog.pro/index.xml"
-TWEETSH_URL="https://raw.githubusercontent.com/piroor/tweet.sh/trunk/tweet.sh"
 INSTANCIA="https://emacs.ch"
 
 # Carga los parámetros del archivo de configuración en el directorio de usuario
@@ -33,13 +32,6 @@ if ! which xmllint >/dev/null; then sudo apt install -y libxml2-utils; fi
 
 # Instala nkf si no está disponible
 if ! which nkf >/dev/null; then sudo apt install -y nkf; fi
-
-# Descarga tweet.sh si no está en la RUTA
-if [[ ! -e $RUTA/tweet.sh ]]
-then
-    curl --fail --silent --show-error $TWEETSH_URL --output $RUTA/tweet.sh
-    chmod +x $RUTA/tweet.sh
-fi
 
 ################################
 ####       Funciones        ####
@@ -65,15 +57,15 @@ then
     curl --fail --silent --show-error $RSS_URL --output $RUTA/rss.xml
     LINK_ACTUAL=$(obtener_xml $RUTA/rss.xml "item" "link" "1")
 
+
+    
     # Compara el ultimo link con el actual
     if [[ $LINK_ULTIMO != $LINK_ACTUAL ]]
     then
-	# Publicando para Twitter
-	bash $RUTA/tweet.sh post $LINK_ACTUAL
-
-	# Publicando para Mastodon
 	curl $INSTANCIA/api/v1/statuses -H "Authorization: Bearer $TOKENM" -F "status=Lo último de mi blog $LINK_ACTUAL"
-	
 	echo "publicando un enlace"
     fi
 fi
+
+
+
