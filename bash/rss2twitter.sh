@@ -4,7 +4,7 @@
 #Script Name: rss2twiter.sh
 #Description: Generación de Tweet cuando hay un nuevo post del blog
 #Args: N/A
-#Creation/Update: 20220326/20221213
+#Creation/Update: 20220326/20221217
 #Author: www.sherblog.pro                                             
 #Email: sherlockes@gmail.com                               
 ###################################################################
@@ -47,7 +47,8 @@ fi
 
 # Función para obtener de un xml 
 obtener_xml() {
-    SALIDA="$(xmllint --xpath "//$2[$4]/$3" $1 | sed -E "s/<$3>([^<]*)<\/$3>/\1;/g" | rev | cut -c2- | rev)"
+    #SALIDA="$(xmllint --xpath "//$2[$4]/$3" $1 | sed -E "s/<$3>([^<]*)<\/$3>/\1;/g" | rev | cut -c2- | rev)"
+    SALIDA="$(xmllint --xpath "//$2[$4]/$3" $1 | sed -E "s/<$3>([^<]*)\/<\/$3>/\1/g")"
     echo "$SALIDA"
 }
 
