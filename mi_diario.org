@@ -13,7 +13,8 @@
     echo ${!var}
 #+end_src
 *** Alias
-- Editar el archivo ~/.bashrc
+- Comprobar si existe el archivo ~/.bash_aliases
+- Editar el archivo ~/.bashrc si no existe el anterior
 - Añadir el nuevo alias -> alias ll="ls -la"
 - Habilitar los cambios -> source ~/.bashrc
 *** Comandos

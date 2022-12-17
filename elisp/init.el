@@ -228,3 +228,4 @@
                     path (or desc "video"))))))
 
 
+(put 'downcase-region 'disabled nil)
