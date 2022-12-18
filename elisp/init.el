@@ -45,6 +45,9 @@
 (menu-bar-mode -1)                                                                          ;; Oculta la barra de menús superior
 (setq inhibit-startup-screen t)                                                             ;; No mostrar la pantalla de bienvenida
 
+;; Modo para copiar la línea completa
+(whole-line-or-region-global-mode 1)
+
 ;; Configuración de Dired
 (setq dired-dwim-target t)                                                                  ;; Fija como objetivo el otro buffer con Dired
 (setq dired-listing-switches "-laGh1v --group-directories-first")                           ;; Configuración ls defecto
@@ -136,7 +139,9 @@
 	   (name 16 -1)
 	   " " filename))))
  '(org-tags-column -60)
- '(package-selected-packages(quote(markdown-mode htmlize gnu-elpa-keyring-update elpy)))
+ '(package-selected-packages
+   (quote
+    (whole-line-or-region markdown-mode htmlize gnu-elpa-keyring-update elpy)))
  '(safe-local-variable-values (quote ((ENCODING . UTF-8) (encoding . utf-8))))
  '(tramp-default-method "ssh"))
 

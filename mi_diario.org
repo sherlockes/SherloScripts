@@ -142,16 +142,30 @@ make clean
 **** Corregir el buffer -> M-x ispell-minor-mode
 **** Subrayado -> M-x flyspell-mode
 *** Edición
-**** Comentar varias líneas seleccionadas -> M-; (Con las líneas preseleccionadas)
-**** Sangrar varias líneas 8 -> C-u 8 C-x Tab
-**** Reemplazar cadena --> M-x replace-string
-**** Reemplazar ^M por un salto de línea > M-x replace-string C-q C-m RET RET
-**** Seleccionar todo -> C-x h
-**** Editar archivos svg en modo texto > C-c C-c (auto-image-file-mode 1)
 **** Borrar una línea -> C-S-Backspace
-**** Corta la siguiente palabra -> M-d
-**** Corta la palabra anterior -> M-<back>
+**** Comentar línea (comment-dwim) -> M-;
+**** Comentar línea (comment-line) -> C-x C-;
+**** Copiar línea (Instalar/habilitar paquete whole-line-or-region) -> M-w
+**** Copiar selección al anillo (kill-ring-save) -> M-w
+**** Copiar selección, añadir (append-next-kill) -> C-M-w
+**** Corta linea hasta el final (kill-line) -> C-k
+**** Corta línea completa (kill-whole-line) -> C-S-<backspace>
+**** Corta palabra anterior (backward-kill-word) -> M-<back>
+**** Corta palabra siguiente (kill-word) -> M-d 
+**** Corta selección (kill-region) -> C-w
+**** Cortar línea (Instalar/habilitar paquete whole-line-or-region) -> C-w
+**** Transponer carácteres (transpose-chars) -> C-t
+**** Transponer carácteres (transpose-chars) -> C-t
+**** Transponer expresiones (transpose-sexps) -> C-M-t
+**** Transponer líneas (transpose-lines) -> C-x C-t
+**** Transponer oraciones (transpose-sentences)
+**** Transponer párrafos (transpose-paragraphs)
+**** Editar archivos svg en modo texto > C-c C-c (auto-image-file-mode 1)
 **** Insertar un trozo de código -> <sTAB
+**** Reemplazar ^M por un salto de línea > M-x replace-string C-q C-m RET RET
+**** Reemplazar cadena --> M-x replace-string
+**** Sangrar varias líneas 8 -> C-u 8 C-x Tab
+**** Seleccionar todo -> C-x h
 *** MarkDown Mode
 **** Insertar encabezado -> C-c C-s
 *** Movimiento del cursor
@@ -318,6 +332,7 @@ sudo apt-get install emacs26
 *** Insertar una cita -> <q TAB
 *** Easy templates (plantillas sencillas) <s Tab [[https://www.gnu.org/software/emacs/manual/html_node/org/Easy-templates.html][Link]]
 **** Modificar las plantillas editando org-structure-template-alist
+*** Ordenar encabezados (org-sort) -> C-c ^
 *** Visualización inicial --> C-u C-u TAB
 *** [[https://niklasfasching.github.io/go-org/][Niklasfasching Org mode parser]]
 ** Python
