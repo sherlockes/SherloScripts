@@ -153,7 +153,17 @@ make clean
 **** Corta palabra anterior (backward-kill-word) -> M-<back>
 **** Corta palabra siguiente (kill-word) -> M-d 
 **** Corta selección (kill-region) -> C-w
+**** Corta hasta carácter (zap-to-char) -> M-z
 **** Cortar línea (Instalar/habilitar paquete whole-line-or-region) -> C-w
+**** Línea en blanco a continuación, insertar (open-line) -> C-o
+**** Líneas en blanco, borrar (delete-blank-lines) -> C-x C-o
+**** Líneas, ordenar selección (sort-lines)
+**** Mayúsculas selección (upcase-region) -> C-x C-u
+**** Mayúsculas siguiente palabra (upcase-word) -> M-u
+**** Minúsculas selección (downcase-region) -> C-x C-u
+**** Minúsculas siguiente palabra (downcase-word) -> M-l
+**** Capitalizar palabra (capitalize-word) -> M-c
+**** Capitalizar selección (upcase-initials-region)
 **** Transponer carácteres (transpose-chars) -> C-t
 **** Transponer carácteres (transpose-chars) -> C-t
 **** Transponer expresiones (transpose-sexps) -> C-M-t
@@ -163,9 +173,13 @@ make clean
 **** Editar archivos svg en modo texto > C-c C-c (auto-image-file-mode 1)
 **** Insertar un trozo de código -> <sTAB
 **** Reemplazar ^M por un salto de línea > M-x replace-string C-q C-m RET RET
-**** Reemplazar cadena --> M-x replace-string
+**** Reemplazar cadena (replace-string) -> M-%
+**** Reemplazar expresión regular (replace-regexp) -> C-M-%
 **** Sangrar varias líneas 8 -> C-u 8 C-x Tab
 **** Seleccionar todo -> C-x h
+*** Macros
+**** Iniciar grabación de macro (start-kbd-macro) -> <f3>  ò  C-x (
+**** Parar grabación de macro (stop-kbd-macro) -> <f4>  ò C-x )
 *** MarkDown Mode
 **** Insertar encabezado -> C-c C-s
 *** Movimiento del cursor
