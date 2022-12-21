@@ -101,6 +101,12 @@ sudo ./get-docker.sh
 sudo usermod -aG docker $(whoami)
 #+END_SRC
 ** Emacs
+*** Ayuda
+**** Prefijo, muestra comandos que empiezan por -> ______ C-h f
+**** Atajo, muestra descripción y ayuda (describe-key) -> C-h k
+**** Modo, describe el modo activo (describe-mode) -> C-h m
+**** Funcion, descripción y ayuda (describe-function) -> C-h f
+**** variable, descripción y ayuda (describe-variable) -> C-h v
 *** Bookmarks (Favoritos)
 **** Añadir favorito --> C-x r m
 **** Listar favoritos --> C-x r l
@@ -117,11 +123,14 @@ sudo usermod -aG docker $(whoami)
 *** Buffers
 **** Borrar el buffer completo -> erase-buffer (Sin tecla por defecto)
 **** Actualizar automáticamente un buffer abierto -> auto-revert-mode
+**** Siguiente|anterior buffer (previous-buffer|next-buffer) -> C-x <left> | C-x <right>
 **** Cuardar como (buffer) -> C-x C-w [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Save-Commands.html][Link]]
 **** Guardar como (todo el texto) -> C-x h M-x write-region
 **** Instalar paquete -> install-package-from-buffer
 **** Mostrar los números de línea -> linum-mode
 **** Recargar archivo (revert-buffer) -> C-x C-v Ret
+**** Recargar archivo automáticamente (auto-revert-mode)
+**** Recargar archivo (añade al final) (auto-revert-tail-mode)
 **** Seleccionar el buffer completo -> C-x h
 *** Busqueda (Isearch) -> C-s
 **** Repetir búsqueda -> C-s C-s
@@ -155,6 +164,7 @@ make clean
 **** Corta selección (kill-region) -> C-w
 **** Corta hasta carácter (zap-to-char) -> M-z
 **** Cortar línea (Instalar/habilitar paquete whole-line-or-region) -> C-w
+**** Deshacer (Undo) -> C-/ | C-x u | C-_   
 **** Línea en blanco a continuación, insertar (open-line) -> C-o
 **** Líneas en blanco, borrar (delete-blank-lines) -> C-x C-o
 **** Líneas, ordenar selección (sort-lines)
@@ -203,6 +213,16 @@ make clean
 - Ir a línea M-g g (goto-line)
 **** Dired
 ***** [[https://www.gnu.org/software/emacs/refcards/pdf/dired-ref.pdf][Dired Reference Card]]
+***** Visor de imágenes (image-dired)
+****** Miniatura siguiente/anterior -> C-f / C-b
+****** Miniatura arriba/abajo -> C-p / C-n
+****** Borrar, marcar, desmarcar -> d / m / u
+****** Tag, untag -> tt / tu
+****** Girar izda/dcha -> l / r
+****** Abrir imagen -> Ret
+******* Salir -> q
+******* Ajustar a ventana -> s
+******* Tamaño completo -> f
 ***** Buscar archivos en directorio -> % m
 ***** Cambiar el modo de un fichero -> M (Tras seleccionar)
 ***** Directorio superior -> ^
