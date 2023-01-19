@@ -142,8 +142,10 @@
  '(package-selected-packages
    (quote
     (whole-line-or-region markdown-mode htmlize gnu-elpa-keyring-update elpy)))
+ '(remote-shell-program "ssh")
  '(safe-local-variable-values (quote ((ENCODING . UTF-8) (encoding . utf-8))))
- '(tramp-default-method "ssh"))
+ '(tramp-default-method "ssh")
+ '(tramp-encoding-shell "/bin/bash"))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
