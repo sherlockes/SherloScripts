@@ -201,7 +201,8 @@
 
 ;; Accesos directos
 (global-set-key (kbd "<f1>") 'reiniciar)
-(global-set-key (kbd "<f2>") (lambda() (interactive)(find-file "~/Google_Drive/SherloScripts/mi_diario.org")))
+;;(global-set-key (kbd "<f2>") (lambda() (interactive)(find-file "~/Google_Drive/SherloScripts/mi_diario.org")))
+(global-set-key (kbd "<f2>") (lambda() (interactive)(browse-url-emacs "https://raw.githubusercontent.com/sherlockes/SherloScripts/master/mi_diario.org")))
 (global-set-key (kbd "<f4>") 'sherblog_edit)
 (global-set-key (kbd "<f5>") 'flyspell-mode)
 (global-set-key (kbd "<f6>") (kbd "C-u C-c C-c"))

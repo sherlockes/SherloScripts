@@ -206,6 +206,7 @@ make clean
 - Mueve a la palabra anterior -> M-b
 *** Navegación
 - Abrir un directorio remoto ssh C-x d /ssh:user@host:folder
+- Abrir una url en buffer -> browse-url-emacs
 - Ir al principio/final del Buffer -> M-</>
 - Marcar línea al anillo (Ir de un punto a otro del archivo)
 - Marcar linea C-c % (org-mark-ring-push)
@@ -260,7 +261,7 @@ make clean
 *** Shell
 **** Abrir la consola de comandos -> M-x shell
 **** Comando anterior -> M-p
-**** Ejecutar un archivo -> C-c C-x
+**** Ejecutar un archivo (executable-interpret) -> C-c C-x
 **** Abrir la terminal -> M-x shell
 **** Terminar la ejecución -> C-c C-c
 **** Ejecutar comando anterior -> M-p
