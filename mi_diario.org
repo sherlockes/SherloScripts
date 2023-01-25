@@ -204,6 +204,12 @@ make clean
 - Mueve al primer espacio no blanco -> M-n
 - Mueve a la siguiente palabra -> M-f
 - Mueve a la palabra anterior -> M-b
+**** Encabezados
+- siguiente (outline-up-heading) -> C-c C-n
+- anterior (outline-previous-visible-heading) -> C-c C-p
+- siguiente mismo nivel (outline-forward-same-level) -> C-c C-f
+- anterior mismo nivel (backward-same-level) -> C-c C-b
+- inmediatamente superior (outline-up-heading) -> C-c C-u
 *** Navegación
 - Abrir un directorio remoto ssh C-x d /ssh:user@host:folder
 - Abrir una url en buffer -> browse-url-emacs
