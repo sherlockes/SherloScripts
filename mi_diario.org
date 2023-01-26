@@ -470,9 +470,42 @@ print(mean_absolute_error(val_y, melb_preds))
 **** Cambiar de pestaña > Ctrl + TAB
 **** Comentar un bloque de código > Ctrl + Mays + a
 * Temp
-** Links
-https://www.linuxquestions.org/questions/blog/lumak-426618/having-fun-with-bash-varaibles-indirect-variable-references-2450/
+** Instalando debian 11 en Raspberry Pi 3b+
+- Descargar [[https://raspi.debian.net/tested-images/][imagen]]
+- Tostar imagen con RPI imager
+- Buscar la ip de la raspberry con ‘sudo nmap -sn 192.168.1.0/24’ o 'sudo nast -m'
+- Con el teclado y monitor conectado
+  - Logearse como 'root' sin contraseña
+  - Crear un nuevo usuario 'pi' con 'add user pi'
+  - Buscar la ip local asignada con 'ip address'
+- Conectarse desde una terminal remota con 'ssh pi@xxx.xxx.xxx.xxx'
+- cambiar al usuario 'root' mediante 'su root'
+- Poner el sistema en castellano '# export LANG=es_ES.UTF-8'
+- Actualizar el sistema con 'apt update & apt upgrade -y'
+- Instalar 'sudo' mediante 'apt sudo'
+- Añadir al usuario 'pi' al grupo de sudoers 'sudo usermod -aG sudo pi'
+- Instalar dependencias 'sudo apt-get install jq wget curl avahi-daemon udisks2 libglib2.0-bin network-manager dbus apparmor -y'
+- Descargar el script de instalación de Docker 'curl -fsSL https://get.docker.com -o get-docker.sh'
+- Convertir el archivo en ejecutable 'chmod +x get-docker.sh'
+- Ejecutar el archivo './get-docker.sh'
+- Añadir el usuario 'pi' al grupo de Docker 'sudo usermod -aG docker pi'
 
-http://mywiki.wooledge.org/BashFAQ/006#How_can_I_use_variable_variables_.28indirect_variables.2C_pointers.2C_references.29_or_associative_arrays.3F
+- https://github.com/home-assistant/os-agent/releases/latest
+- 'wget https://github.com/home-assistant/os-agent/releases/download/1.2.2/os-agent_1.2.2_linux_armv7.deb'
 
-https://codeday.me/es/qa/20190211/180474.html
+- sudo dpkg --add-architecture armhf
+- 'sudo dpkg -i os-agent_1.2.2_linux_armv7.deb'
+- Chequear que se ha instalado correctaemnte 'gdbus introspect --system --dest io.hass.os --object-path /io/hass/os'
+
+
+
+
+
+
+Links
+https://www.bollyinside.com/articles/how-to-configure-and-turn-on-ssh-on-debian-11-bullseye-linux
+https://vitux.com/shutdown-reboot-debian-11/
+https://linuxhandbook.com/find-ip-address/
+https://peyanski.com/how-to-install-home-assistant-supervised-official-way/#Home_Assistant_Supervised_method
+https://www.howtogeek.com/842739/how-to-add-a-user-to-the-sudoers-file-in-linux/
+
