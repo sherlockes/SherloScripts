@@ -39,12 +39,11 @@ ssh_config=$(cat $ssh_config_ruta)
 ################################
 
 
-# for line in $ssh_config
-# do
-#     echo -e "$line\n"
-# done
+# Colocer la IP local y el rango
+LOCAL_IP=$(ip route get 8.8.8.8 | grep -oP 'src \K[^ ]+')
+LOCAL_RANGE=$(echo $LOCAL_IP | cut -f1-3 -d".")
 
-number=1
+ZERO_RANGE='192.168.191'
 
 while read -r line; do
     IFS=' '
@@ -57,15 +56,20 @@ while read -r line; do
 
     if [ "${newarr[0]}" = 'Hostname' ]; then
 	
-	hostname="${newarr[1]}"
+	REMOTE_IP="${newarr[1]}"
+	REMOTE_RANGE=$(echo $REMOTE_IP | cut -f1-3 -d".")
 
-	if ping -c 1 $hostname &> /dev/null
-	then
-	    echo "Conexión exitosa a $nombre"
-	else
-	    echo "Error de conexión a $nombre"
-	fi
+	echo $REMOTE_RANGE
+	echo $LOCAL_RANGE
 	
+	if [ $REMOTE_RANGE = $LOCAL_RANGE ] || [ $REMOTE_RANGE = $ZERO_RANGE ] ; then
+	    if ping -c 1 $REMOTE_IP &> /dev/null
+	    then
+		echo "Conexión exitosa a $nombre"
+	    else
+		echo "Error de conexión a $nombre"
+	    fi
+	fi
     fi
     
 done <$ssh_config_ruta
