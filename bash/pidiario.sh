@@ -16,7 +16,7 @@
 #Email: sherlockes@gmail.com                                           
 ###################################################################
 
-unidades=(Sherlockes78_UN_en Onedrive_UN_en)
+unidades=(Sherlockes78_UN_en Sherlockes78_UN2_en)
 carpetas=(pelis series twitch)
 notificacion=~/SherloScripts/bash/telegram.sh
 inicio=$( date +%s )
