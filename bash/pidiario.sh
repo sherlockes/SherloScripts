@@ -4,7 +4,7 @@
 ###################################################################
 #Script Name: pidiario.sh
 #Description: - Actualiza Hugo
-#             - Sincroniza la carpeta SherloScripts
+#             - Sincroniza la carpeta SherloScripts y dotfiles
 #             - Actualiza los repos de GitHub
 #             - Guarda la config de HA en GitHub
 #             - Comprueba el estado de varias nubes públicas
