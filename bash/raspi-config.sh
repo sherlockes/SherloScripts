@@ -27,7 +27,7 @@ cfg_git_email='sherlockes@yahoo.es'
 cfg_git_name='sherlockes'
 cfg_git_repos_names=('SherloScripts' 'sherlockes.github.io' 'sherblog')
 # Configure Crontabs Jobs
-cfg_cron=true
+cfg_cron=false
 # Install Hugo
 cfg_hugo=false
 # Install Rclone
