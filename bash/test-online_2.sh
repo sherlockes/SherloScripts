@@ -127,8 +127,7 @@ while read -r line; do
 	    fi
 	    mensaje+=$'\n'
 	elif [ $REMOTE_RANGE != $LOCAL_RANGE ] ; then
-	    if ssh rpi5oz "ping -c 1 $REMOTE_IP" &> /dev/null
-	    then
+	    if ssh rpi5oz "ping -c 1 $REMOTE_IP" &< /dev/null ; then
 		echo -e "$nombre is ${GREEN}OK${NOCOLOR} @ $REMOTE_IP"
 		mensaje+=$"$nombre is OK @ $REMOTE_IP"
 	    else
@@ -147,7 +146,7 @@ if ! $TODO_OK ; then
     let duracion=$fin-$inicio
     mensaje+=$'- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n'
     mensaje+=$"Duración del Script:  $duracion segundos"
-    $notificacion "$mensaje"
+    #$notificacion "$mensaje"
 fi
 
 exit 0

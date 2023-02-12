@@ -4,7 +4,7 @@
 #Script Name: test-online.sh
 #Description: Comprueba que dispositivos estan online a partir del ssh config
 #Args: N/A
-#Creation/Update: 20230206/20230209
+#Creation/Update: 20230206/20230212
 #Author: www.sherblog.pro                                             
 #Email: sherlockes@gmail.com                               
 ###################################################################
@@ -107,26 +107,35 @@ while read -r line; do
 	if [ $REMOTE_RANGE = $ZERO_RANGE ] ; then
 	    if ping -c 1 $REMOTE_IP &> /dev/null
 	    then
-		echo -e "$nombre (Zerotier) is ${GREEN}OK${NOCOLOR} @ $REMOTE_IP"
-		mensaje+=$"$nombre (Zerotier) is OK @ $REMOTE_IP"
+		echo -e "$nombre (Zerotier) ${GREEN}OK${NOCOLOR} @ $REMOTE_IP"
+		mensaje+=$"$nombre (Zerotier) OK @ $REMOTE_IP"
 	    else
-		echo -e "$nombre (Zerotier) is ${RED}KO${NOCOLOR} @ $REMOTE_IP"
-		mensaje+=$"$nombre (Zerotier) is KO @ $REMOTE_IP --- ATENCION ---"
+		echo -e "$nombre (Zerotier) ${RED}KO${NOCOLOR} @ $REMOTE_IP"
+		mensaje+=$"$nombre (Zerotier) KO @ $REMOTE_IP --- ATENCION ---"
 		TODO_OK=false
 	    fi
 	    mensaje+=$'\n'
 	elif [ $REMOTE_RANGE = $LOCAL_RANGE ] ; then
 	    if ping -c 1 $REMOTE_IP &> /dev/null
 	    then
-		echo -e "$nombre is ${GREEN}OK${NOCOLOR} @ $REMOTE_IP"
-		mensaje+=$"$nombre is OK @ $REMOTE_IP"
+		echo -e "$nombre ${GREEN}OK${NOCOLOR} @ $REMOTE_IP"
+		mensaje+=$"$nombre OK @ $REMOTE_IP"
 	    else
-		echo -e "$nombre is ${RED}KO${NOCOLOR} @ $REMOTE_IP"
-		mensaje+=$"$nombre is KO @ $REMOTE_IP --- ATENCION ---"
+		echo -e "$nombre ${RED}KO${NOCOLOR} @ $REMOTE_IP"
+		mensaje+=$"$nombre KO @ $REMOTE_IP --- ATENCION ---"
 		TODO_OK=false
 	    fi
 	    mensaje+=$'\n'
-	
+	elif [ $REMOTE_RANGE != $LOCAL_RANGE ] ; then
+	    if ssh rpi5oz "ping -c 1 $REMOTE_IP" &< /dev/null ; then
+		echo -e "$nombre ${GREEN}OK${NOCOLOR} @ $REMOTE_IP"
+		mensaje+=$"$nombre OK @ $REMOTE_IP"
+	    else
+		echo -e "$nombre ${RED}KO${NOCOLOR} @ $REMOTE_IP"
+		mensaje+=$"$nombre KO @ $REMOTE_IP --- ATENCION ---"
+		TODO_OK=false
+	    fi
+	    mensaje+=$'\n'	
 	fi
     fi
 done <$ssh_config_ruta
