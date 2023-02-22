@@ -11,7 +11,7 @@
 #             - Sincroniza las nubes de Sherloflix
 #             - Comprueba la sincronización de las carpetas
 #Args: N/A
-#Creation/Update: 20200521/20220424
+#Creation/Update: 20200521/20230222
 #Author: www.sherblog.pro                                                
 #Email: sherlockes@gmail.com                                           
 ###################################################################
@@ -68,6 +68,10 @@ comprobar $?
 
 mensaje+=$'Sincronizando carpeta Dotfiles . . . . . . . . . '
 rclone sync -v Sherlockes_GD:/dotfiles/ /home/pi/dotfiles --exclude "/emacs/**"
+comprobar $?
+
+mensaje+=$'Actualizando enlace rclone config. . . . . . . . '
+ln -sf /home/pi/dotfiles/rclone/rclone.conf /home/pi/.config/rclone/rclone.conf
 comprobar $?
 
 # ---------------------------------------------------------
