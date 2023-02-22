@@ -5,7 +5,7 @@
 #Script Name: Sherlomenu
 #Description: Menu de acceso para el montaje de las distintas nubes
 #Args: N/A
-#Creation/Update: 20191022/20210603
+#Creation/Update: 20191022/20230222
 #Author: www.sherblog.pro                                                
 #Email: sherlockes@gmail.com                                           
 ###################################################################
@@ -95,7 +95,7 @@ des_montar(){
 SherloScripts(){
 
     #Comprobar el acceso a la Raspberry
-    status=$(ssh -o BatchMode=yes -o ConnectTimeout=5 pi@192.168.1.203 echo ok 2>&1)
+    status=$(ssh -o BatchMode=yes -o ConnectTimeout=5 pi@$Pi_lan_ip echo ok 2>&1)
 
     if [[ $status == ok ]] ; then
 	echo 'Acceso a la Raspberry en Lan autorizado...'
@@ -116,10 +116,19 @@ SherloScripts(){
 # Propagación del archivo de config de rclone
 # -------------------------------------------
 copy_rclone_config(){
-    scp ~/.config/rclone/rclone.conf sherlockes@192.168.1.200:~/.config/rclone/
-    scp ~/.config/rclone/rclone.conf pi@192.168.1.203:~/.config/rclone/
-    scp ~/.config/rclone/rclone.conf pi@192.168.1.205:~/.config/rclone/
-    cp ~/.config/rclone/rclone.conf ~/'Mis Documentos'/'Mis cosas'/
+
+    rclone config
+    
+    LOCAL_CON=$(rclone config file | tail -1)
+    REMOTE_CON="Sherlockes_GD:dotfiles/rclone/rclone.conf"
+    BKP_CON="Sherlockes_GD:dotfiles/rclone/rclone($(date '+%Y%m%d')bkp).conf"
+
+    rclone copyto $REMOTE_CON $BKP_CON
+    rclone copyto $LOCAL_CON $REMOTE_CON
+    
+    if [ -d ~/dotfiles/rclone/ ]; then
+	ln -sf ~/dotfiles/rclone/rclone.conf $LOCAL_CON
+    fi
 }
 
 # -------------------------------------------------------
@@ -185,7 +194,7 @@ show_menus() {
     montado "VideoNas" && echo "-- 2. Videos en Nas (Desmontar)" || echo "-- 2. Videos en Ds216+ II"
     echo "-- 3. Backup de Google Photos"
     echo "-- 4. SherloScripts a Github"
-    echo "-- 5. Propagar rclone config"
+    echo "-- 5. Actualizar rclone config"
     echo "-- 6. Actualizar entorno desarrollo Sherblog"
     echo "-- 7. Salir"
     echo "------------------------------------------------"
