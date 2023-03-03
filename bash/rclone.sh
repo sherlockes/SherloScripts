@@ -4,7 +4,7 @@
 # Script Name: rclone.sh
 # Description: Instala, actualiza y copia configuración de rclone
 # Args: N/A
-# Creation/Update: 20200429/20200430
+# Creation/Update: 20200429/20230303
 # Author: www.sherblog.pro                                                
 # Email: sherlockes@gmail.com                                           
 ###################################################################
@@ -70,6 +70,61 @@ rclone_install(){
 	sudo dpkg -i $installer
 	rm $installer
 }
+
+# -------------------------------------------
+# Propagación del archivo de config de rclone
+# -------------------------------------------
+
+rclone_config(){
+    clear
+    echo "------------------------------------------------"	
+    echo "--------------  www.sherblog.pro  --------------"
+    echo "------------------------------------------------"
+    echo "-- Actualizar la config remota de Rclone..."
+
+    # Ubicaciones de archivos de configuración local, remoto y copia de seguridad
+    LOCAL_CON=$(rclone config file | tail -1)
+    REMOTE_CON="Sherlockes_GD:dotfiles/rclone/rclone.conf"
+    BKP_CON="Sherlockes_GD:dotfiles/rclone/rclone($(date '+%Y%m%d')bkp).conf"
+
+    # Comprueba si el archivo de configuración es un enlace simbólico
+    if [ -h $LOCAL_CON ]; then
+	echo "-- La configuración no ha sido modificada."
+	sleep 2
+	return
+    fi
+
+    # Calcula las antigüedades de los archivos
+    echo 'Calculando antigüedades de los archivos...'
+    DATE_LOCAL_CON=`echo $(rclone lsl $LOCAL_CON) | cut -d ' ' -f 2,3 | xargs -i date -d {} "+%s"`
+    DATE_REMOTE_CON=`echo $(rclone lsl $REMOTE_CON) | cut -d ' ' -f 2,3 | xargs -i date -d {} "+%s"`
+    
+    if (( $DATE_REMOTE_CON > $DATE_LOCAL_CON )); then
+	echo "-- Config remota más reciente, no se va a propagar."
+    else
+	read -p "El archivo local es mayor, quieres propaparlo? (si/no) " yn
+
+	case $yn in 
+	    si ) rclone_config_propagate ;;
+	    * )  exit;;
+	esac
+    fi
+
+    # Si existe la carpeta "Dotfiles" cambia el archivo por un enlace simbólico
+    if [ -d ~/dotfiles/rclone/ ]; then
+	echo "-- Actualizando Dotfiles locales..."
+	cp $LOCAL_CON ~/dotfiles/rclone/rclone.conf
+	echo "-- Creando el enlace con los Dotfiles"
+	ln -sf ~/dotfiles/rclone/rclone.conf $LOCAL_CON
+    fi
+}
+
+rclone_config_propagate(){
+    echo "-- Guardando backup remoto y actualizando..."
+    rclone copyto $REMOTE_CON $BKP_CON
+    rclone copyto $LOCAL_CON $REMOTE_CON
+}
+
 
 # -------------------------------------------------------
 # Lista las nubes de /.config/rclone/rclone.conf
