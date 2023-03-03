@@ -112,25 +112,6 @@ SherloScripts(){
     ssh pi@$Pi_ip '~/SherloScripts/bash/sherloscripts_push.sh'
 }
 
-# -------------------------------------------
-# Propagación del archivo de config de rclone
-# -------------------------------------------
-copy_rclone_config(){
-
-    rclone config
-    
-    LOCAL_CON=$(rclone config file | tail -1)
-    REMOTE_CON="Sherlockes_GD:dotfiles/rclone/rclone.conf"
-    BKP_CON="Sherlockes_GD:dotfiles/rclone/rclone($(date '+%Y%m%d')bkp).conf"
-
-    rclone copyto $REMOTE_CON $BKP_CON
-    rclone copyto $LOCAL_CON $REMOTE_CON
-    
-    if [ -d ~/dotfiles/rclone/ ]; then
-	ln -sf ~/dotfiles/rclone/rclone.conf $LOCAL_CON
-    fi
-}
-
 # -------------------------------------------------------
 # Copia de seguridad de Google Photos
 # -------------------------------------------------------
@@ -212,7 +193,7 @@ read_options(){
 	2) des_montar "VideoNas" ;;
 	3) Google_Photos ;;
 	4) SherloScripts ;;
-	5) copy_rclone_config ;;
+	5) rclone_config ;;
 	6) exit 0;;
 	7) exit 0;;
 	*) echo -e "...Error..." && sleep 2
