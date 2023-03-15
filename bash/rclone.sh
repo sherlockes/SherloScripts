@@ -4,7 +4,7 @@
 # Script Name: rclone.sh
 # Description: Instala, actualiza y copia configuración de rclone
 # Args: N/A
-# Creation/Update: 20200429/20230303
+# Creation/Update: 20200429/20230315
 # Author: www.sherblog.pro                                                
 # Email: sherlockes@gmail.com                                           
 ###################################################################
@@ -21,7 +21,7 @@ rclone_check(){
     then
 	bits='amd64'
     else
-	bits='arm'
+	bits='arm-v7'
     fi
 
     # Comprueba si Rclone está instalado
