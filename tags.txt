@@ -1,0 +1,86 @@
+<a class="widget-taglist__link widget__link btn" href="/tags/apps/" title="apps">apps (2)</a>
+<a class="widget-taglist__link widget__link btn" href="/tags/averias/" title="averias">averias (3)</a>
+<a class="widget-taglist__link widget__link btn" href="/tags/backup/" title="Backup">Backup (1)</a>
+<a class="widget-taglist__link widget__link btn" href="/tags/bash/" title="bash">bash (27)</a>
+<a class="widget-taglist__link widget__link btn" href="/tags/bricolaje/" title="Bricolaje">Bricolaje (2)</a>
+<a class="widget-taglist__link widget__link btn" href="/tags/darktable/" title="darktable">darktable (1)</a>
+<a class="widget-taglist__link widget__link btn" href="/tags/desarrollo/" title="desarrollo">desarrollo (16)</a>
+<a class="widget-taglist__link widget__link btn" href="/tags/dired/" title="dired">dired (1)</a>
+<a class="widget-taglist__link widget__link btn" href="/tags/docker/" title="docker">docker (1)</a>
+<a class="widget-taglist__link widget__link btn" href="/tags/dotfiles/" title="dotfiles">dotfiles (1)</a>
+<a class="widget-taglist__link widget__link btn" href="/tags/emacs/" title="emacs">emacs (8)</a>
+<a class="widget-taglist__link widget__link btn" href="/tags/emule/" title="emule">emule (1)</a>
+<a class="widget-taglist__link widget__link btn" href="/tags/esp/" title="esp">esp (3)</a>
+<a class="widget-taglist__link widget__link btn" href="/tags/excel/" title="excel">excel (1)</a>
+<a class="widget-taglist__link widget__link btn" href="/tags/exif/" title="exif">exif (1)</a>
+<a class="widget-taglist__link widget__link btn" href="/tags/facebook/" title="Facebook">Facebook (1)</a>
+<a class="widget-taglist__link widget__link btn" href="/tags/fontaner%C3%ADa/" title="Fontanería">Fontanería (1)</a>
+<a class="widget-taglist__link widget__link btn" href="/tags/garmin/" title="garmin">garmin (3)</a>
+<a class="widget-taglist__link widget__link btn" href="/tags/gdrive/" title="Gdrive">Gdrive (1)</a>
+<a class="widget-taglist__link widget__link btn" href="/tags/gimp/" title="Gimp">Gimp (2)</a>
+<a class="widget-taglist__link widget__link btn" href="/tags/git/" title="git">git (3)</a>
+<a class="widget-taglist__link widget__link btn" href="/tags/gmail/" title="gmail">gmail (3)</a>
+<a class="widget-taglist__link widget__link btn" href="/tags/google-chrome/" title="google chrome">google chrome (1)</a>
+<a class="widget-taglist__link widget__link btn" href="/tags/google-drive/" title="Google Drive">Google Drive (4)</a>
+<a class="widget-taglist__link widget__link btn" href="/tags/google-earth/" title="google earth">google earth (1)</a>
+<a class="widget-taglist__link widget__link btn" href="/tags/google-keep/" title="google keep">google keep (1)</a>
+<a class="widget-taglist__link widget__link btn" href="/tags/google-photos/" title="google photos">google photos (1)</a>
+<a class="widget-taglist__link widget__link btn" href="/tags/google-scripts/" title="Google Scripts">Google Scripts (1)</a>
+<a class="widget-taglist__link widget__link btn" href="/tags/google-sheets/" title="google sheets">google sheets (2)</a>
+<a class="widget-taglist__link widget__link btn" href="/tags/gopro/" title="Gopro">Gopro (1)</a>
+<a class="widget-taglist__link widget__link btn" href="/tags/gphoto-sync/" title="gphoto-sync">gphoto-sync (1)</a>
+<a class="widget-taglist__link widget__link btn" href="/tags/gpio/" title="gpio">gpio (1)</a>
+<a class="widget-taglist__link widget__link btn" href="/tags/gps/" title="GPS">GPS (1)</a>
+<a class="widget-taglist__link widget__link btn" href="/tags/grub/" title="grub">grub (1)</a>
+<a class="widget-taglist__link widget__link btn" href="/tags/gthumb/" title="gthumb">gthumb (1)</a>
+<a class="widget-taglist__link widget__link btn" href="/tags/hacs/" title="hacs">hacs (2)</a>
+<a class="widget-taglist__link widget__link btn" href="/tags/hdr/" title="hdr">hdr (2)</a>
+<a class="widget-taglist__link widget__link btn" href="/tags/html/" title="html">html (1)</a>
+<a class="widget-taglist__link widget__link btn" href="/tags/hue/" title="hue">hue (1)</a>
+<a class="widget-taglist__link widget__link btn" href="/tags/iawriter/" title="iAWriter">iAWriter (1)</a>
+<a class="widget-taglist__link widget__link btn" href="/tags/imagemagick/" title="imagemagick">imagemagick (2)</a>
+<a class="widget-taglist__link widget__link btn" href="/tags/jinja2/" title="jinja2">jinja2 (4)</a>
+<a class="widget-taglist__link widget__link btn" href="/tags/keepass/" title="Keepass">Keepass (1)</a>
+<a class="widget-taglist__link widget__link btn" href="/tags/linux/" title="linux">linux (6)</a>
+<a class="widget-taglist__link widget__link btn" href="/tags/linux-mint/" title="linux mint">linux mint (3)</a>
+<a class="widget-taglist__link widget__link btn" href="/tags/lisp/" title="lisp">lisp (1)</a>
+<a class="widget-taglist__link widget__link btn" href="/tags/mantenimiento/" title="mantenimiento">mantenimiento (20)</a>
+<a class="widget-taglist__link widget__link btn" href="/tags/mapas/" title="Mapas">Mapas (1)</a>
+<a class="widget-taglist__link widget__link btn" href="/tags/markdown/" title="markdown">markdown (1)</a>
+<a class="widget-taglist__link widget__link btn" href="/tags/mastodon/" title="mastodon">mastodon (1)</a>
+<a class="widget-taglist__link widget__link btn" href="/tags/mathjax/" title="mathjax">mathjax (1)</a>
+<a class="widget-taglist__link widget__link btn" href="/tags/micropython/" title="micropython">micropython (1)</a>
+<a class="widget-taglist__link widget__link btn" href="/tags/moodle/" title="moodle">moodle (1)</a>
+<a class="widget-taglist__link widget__link btn" href="/tags/mqtt/" title="mqtt">mqtt (1)</a>
+<a class="widget-taglist__link widget__link btn" href="/tags/openstreetmap/" title="openstreetmap">openstreetmap (1)</a>
+<a class="widget-taglist__link widget__link btn" href="/tags/orgmode/" title="orgmode">orgmode (1)</a>
+<a class="widget-taglist__link widget__link btn" href="/tags/panoramica/" title="panoramica">panoramica (2)</a>
+<a class="widget-taglist__link widget__link btn" href="/tags/pdf/" title="pdf">pdf (1)</a>
+<a class="widget-taglist__link widget__link btn" href="/tags/phillips-hue/" title="phillips hue">phillips hue (1)</a>
+<a class="widget-taglist__link widget__link btn" href="/tags/photomatix/" title="photomatix">photomatix (1)</a>
+<a class="widget-taglist__link widget__link btn" href="/tags/photoshop/" title="photoshop">photoshop (2)</a>
+<a class="widget-taglist__link widget__link btn" href="/tags/podcast/" title="Podcast">Podcast (1)</a>
+<a class="widget-taglist__link widget__link btn" href="/tags/poppler/" title="poppler">poppler (2)</a>
+<a class="widget-taglist__link widget__link btn" href="/tags/python/" title="python">python (4)</a>
+<a class="widget-taglist__link widget__link btn" href="/tags/raspberry/" title="raspberry">raspberry (2)</a>
+<a class="widget-taglist__link widget__link btn" href="/tags/rclone/" title="rclone">rclone (7)</a>
+<a class="widget-taglist__link widget__link btn" href="/tags/regex/" title="regex">regex (1)</a>
+<a class="widget-taglist__link widget__link btn" href="/tags/regexp/" title="regexp">regexp (2)</a>
+<a class="widget-taglist__link widget__link btn" href="/tags/sherlodj/" title="SherloDj">SherloDj (3)</a>
+<a class="widget-taglist__link widget__link btn" href="/tags/shortcodes/" title="shortcodes">shortcodes (5)</a>
+<a class="widget-taglist__link widget__link btn" href="/tags/software/" title="software">software (1)</a>
+<a class="widget-taglist__link widget__link btn" href="/tags/ssh/" title="ssh">ssh (1)</a>
+<a class="widget-taglist__link widget__link btn" href="/tags/synology/" title="synology">synology (13)</a>
+<a class="widget-taglist__link widget__link btn" href="/tags/telegram/" title="telegram">telegram (1)</a>
+<a class="widget-taglist__link widget__link btn" href="/tags/thonny/" title="thonny">thonny (1)</a>
+<a class="widget-taglist__link widget__link btn" href="/tags/tilt-shift/" title="tilt-shift">tilt-shift (1)</a>
+<a class="widget-taglist__link widget__link btn" href="/tags/tracks/" title="tracks">tracks (2)</a>
+<a class="widget-taglist__link widget__link btn" href="/tags/trekbuddy/" title="trekbuddy">trekbuddy (2)</a>
+<a class="widget-taglist__link widget__link btn" href="/tags/trimage/" title="trimage">trimage (1)</a>
+<a class="widget-taglist__link widget__link btn" href="/tags/upython/" title="upython">upython (1)</a>
+<a class="widget-taglist__link widget__link btn" href="/tags/vba/" title="vba">vba (1)</a>
+<a class="widget-taglist__link widget__link btn" href="/tags/virtualdub/" title="virtualdub">virtualdub (4)</a>
+<a class="widget-taglist__link widget__link btn" href="/tags/windows/" title="windows">windows (1)</a>
+<a class="widget-taglist__link widget__link btn" href="/tags/yaml/" title="yaml">yaml (1)</a>
+<a class="widget-taglist__link widget__link btn" href="/tags/zerotier/" title="zerotier">zerotier (2)</a>
+<a class="widget-taglist__link widget__link btn" href="/tags/zigbee/" title="zigbee">zigbee (1)</a>
