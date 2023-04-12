@@ -4,7 +4,7 @@
 # Script Name: hugo.sh
 # Description: Instala y actualiza Hugo
 # Args: N/A
-# Creation/Update: 20191114/20221015
+# Creation/Update: 20191114/20230412
 # Author: www.sherblog.pro                                                
 # Email: sherlockes@gmail.com                                           
 ###################################################################
@@ -31,17 +31,18 @@ hugo_check(){
 	| cut -d ":" -f 2,3 \
 	| tr -d \")
 
-    if [[ $hugo_latest_path =~ ^$hugo_download_path[v](.*)[/].*\.tar\.gz$ ]]; then
-    	hugo_latest_ver=${BASH_REMATCH[1]}
-    	echo "La última versión disponible es $hugo_latest_ver"
-    fi
+    # Extrae el número de la última version disponible
+    nombre_carpeta=$(basename $(dirname $hugo_latest_path))
+    hugo_latest_ver="${nombre_carpeta:1}"
+    echo "La última versión disponible es $hugo_latest_ver"
 
     if which hugo >/dev/null; then
+	# Extrae el número de la versión de Hugo isntalada
 	hugo_local_ver=$(hugo version | perl -pe '($_)=/([0-9]+([.][0-9]+)+)/')
 
 	echo "Versión instalada $hugo_local_ver, última versión $hugo_latest_ver"
 
-	if [ $hugo_local_ver == $hugo_web_ver ]
+	if [ $hugo_local_ver == $hugo_latest_ver ]
 	then
 	    echo "hugo instalado y actualizado..."
 	else
