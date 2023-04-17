@@ -42,11 +42,18 @@ echo "######################################"
 
 dependencias(){
     # yt-dlp
+    
     if command -v yt-dlp >/dev/null 2>&1 ; then
 	echo "Versión de yt-dlp: $(yt-dlp --version)"
+	sudo yt-dlp -U
     else
 	echo "ATENCION: yt-dlp no está disponible"
+	sudo wget https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp -O /usr/local/bin/yt-dlp
+	sudo chmod a+rx /usr/local/bin/yt-dlp
     fi
+    
+
+    
 
     # id3v2
     if command -v id3v2 >/dev/null 2>&1 ; then
@@ -103,6 +110,8 @@ buscar_ultimos_yt(){
     do
 	id=$( echo "$video" |cut -d\/ -f1 )
 	duracion=$( echo "$video" |cut -d\/ -f2 )
+
+	echo $id
 
 	# Comprueba si el archivo es de más de 20'
 	if (( $duracion > 1200 )) && ! grep -q $id "$DESCARGADOS"; then

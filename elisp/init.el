@@ -14,10 +14,14 @@
 (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
 (add-to-list 'package-archives '("gnu"   . "https://elpa.gnu.org/packages/") t)
 
+
+
+
 ;; Añadir Dired+
 (add-to-list 'load-path "~/dotfiles/emacs/.emacs.d/dired+/")
 (load "dired+.el")
 (require 'dired+)
+
 
 ;; Inicializar y actualizar paquetes
 (package-initialize)
