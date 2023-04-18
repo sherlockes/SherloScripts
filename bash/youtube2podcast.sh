@@ -4,7 +4,7 @@
 #Script Name: youtube2podcast.sh
 #Description: Creación de un podcast a partir de un canal de youtube
 #Args: N/A
-#Creation/Update: 20220605/20220916
+#Creation/Update: 20220605/20230416
 #Author: www.sherblog.pro                                             
 #Email: sherlockes@gmail.com                               
 ###################################################################
@@ -20,7 +20,8 @@ CANAL_NOMBRE="Jordi Llatzer"
 TITULO="Jordi Llatzer en Twitch"
 SERVIDOR="http://192.168.10.202:5005"
 #CANAL_YT="https://www.youtube.com/channel/UCSQJX9lm4u92bx0XGpEIUiA"
-CANAL_YT="https://www.youtube.com/watch?v=T-SliI2PHQQ&list=PLD75mPDs8ehwjBOCDPUlmxsnNySzJl-Lv"
+#CANAL_YT="https://www.youtube.com/watch?v=T-SliI2PHQQ&list=PLD75mPDs8ehwjBOCDPUlmxsnNySzJl-Lv"
+CANAL_YT="https://www.youtube.com/@jordillatzer/videos"
 
 twitch_dir=~/twitch
 DESCARGADOS="$twitch_dir/$CANAL/descargados_yt.txt"
