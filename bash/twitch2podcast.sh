@@ -4,7 +4,7 @@
 #Script Name: twitch2podcast.sh
 #Description: Generación de Podcast a partir de canal de Twitch
 #Args: N/A
-#Creation/Update: 20220317/20220901
+#Creation/Update: 20220317/20230420
 #Author: www.sherblog.pro                                             
 #Email: sherlockes@gmail.com                               
 ###################################################################
@@ -36,6 +36,8 @@ comprobar(){
 	mensaje+=$'OK'
     else
 	mensaje+=$'ERROR'
+	$notificacion "$mensaje"
+	exit 0
     fi
     mensaje+=$'\n'
 }
@@ -54,7 +56,7 @@ buscar_ultimos () {
     json=$(python3 $twdl videos $canal -j)
     comprobar $?
 
-    # Limitar a 15 videos la lista de descargados
+    # Limitar a 15 videos la lista de descargadoscase 
     mensaje+=$'Recortando listas de descargados. . . . . . . '
     echo "- Recortando listas de descargados"
     head -n15 $twitch_dir/$canal/descargados.txt > tmp
@@ -86,7 +88,7 @@ buscar_ultimos () {
 	# Comprobar si el archivo ya ha sido descargado
 	if grep -q $id $twitch_dir/$canal/descargados.txt
 	then
-        echo $i
+	    
         if [ $i -eq 0 ]
         then
             echo "- No hay nuevos vídeos.";
@@ -263,7 +265,8 @@ subir_contenido () {
     # Subiendo archivos a la nube via rclone
     echo "- Subiendo los mp3's al sevidor remoto"
     mensaje+=$"Subiendo los mp3's al sevidor webdav . . ."
-    rclone copy $canal Sherlockes78_UN2_en:twitch/$canal/ --create-empty-src-dirs
+    rclone copy $canal Sherlockes78_UN_en:twitch/$canal/ --create-empty-src-dirs
+
     comprobar $?
 
     # Eliminando audio y video local
@@ -272,7 +275,7 @@ subir_contenido () {
 
     # Borrando los archivos de la nube anteriores a 30 días
     mensaje+=$"Borrando contenido antiguo . . . . . . . . . . . ."
-    rclone delete Sherlockes78_UN2_en:twitch/$canal/mp3 --min-age 30d
+    rclone delete Sherlockes78_UN_en:twitch/$canal/mp3 --min-age 30d
     comprobar $?
 }
 
