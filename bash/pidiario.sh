@@ -131,7 +131,7 @@ done
 # --------------------------------------------------------------------------
 echo "Sincronizando las nubes de Sherloflix..."
 mensaje+=$"${unidades[0]} Vs ${unidades[1]}."
-timeout 3h rclone sync ${unidades[0]}: ${unidades[1]}: --transfers 2 --tpslimit 8 --bwlimit 10M -P
+timeout 3h rclone sync ${unidades[0]}: ${unidades[1]}: --transfers 2 --tpslimit 8 --bwlimit 10M -P --exclude "/twitch/**"
 comprobar $?
 
 echo "Comprobando sincronización de las nubes de Sherloflix..."
