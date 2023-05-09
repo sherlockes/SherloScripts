@@ -4,7 +4,7 @@
 #Script Name: youtube2podcast.sh
 #Description: Creación de un podcast a partir de un canal de youtube
 #Args: N/A
-#Creation/Update: 20220605/20230416
+#Creation/Update: 20220605/20230509
 #Author: www.sherblog.pro                                             
 #Email: sherlockes@gmail.com                               
 ###################################################################
@@ -103,19 +103,29 @@ buscar_ultimos_yt(){
     # Obtiene el json de los ultimos vídeos.
     mensaje+=$'Obteniendo últimos vídeos . . . . . . . . . . . . .'
     echo "- Buscando últimos vídeos de $CANAL_NOMBRE"
+
     
-    mapfile -t videos < <( yt-dlp --dateafter now-5day --get-filename -o "%(id)s/%(duration)s" $CANAL_YT )
+    #mapfile -t videos < <( yt-dlp --dateafter now-5day --get-filename -o "%(id)s/%(duration)s" $CANAL_YT )
+  
+
+    mapfile -t videos < <( yt-dlp --flat-playlist --print "%(id)s/%(duration)s" --playlist-end 10 "https://www.youtube.com/@jordillatzer/videos" )
+
     comprobar $?
+
 
     for video in ${videos[@]}
     do
 	id=$( echo "$video" |cut -d\/ -f1 )
 	duracion=$( echo "$video" |cut -d\/ -f2 )
+	duracion=${duracion%??}
+
+
+	echo $duracion
 
 	echo $id
 
-	# Comprueba si el archivo es de más de 20'
-	if (( $duracion > 1200 )) && ! grep -q $id "$DESCARGADOS"; then
+	# Comprueba si el archivo es de más de 10'
+	if (( $duracion > 600 )) && ! grep -q $id "$DESCARGADOS"; then
 	    # Descargando el episodio
 	    echo "- Descargando el vídeo $id"
 	    mensaje+=$"Descargando vídeo $id . . . . . . "
