@@ -94,12 +94,12 @@ buscar_ultimos () {
             echo "- No hay nuevos vídeos.";
             mensaje+=$"No hay nuevos vídeos."
             mensaje+=$'\n'
-	        # No sigue comprobando si ya ha visto uno descargado
-	        break
+	    # No sigue comprobando si ya ha visto uno descargado
+	    break
         fi
 	    echo "- El vídeo $id ya ha sido descargado.";
-        mensaje+=$"El vídeo $id ya ha sido descargado."
-        mensaje+=$'\n'
+            mensaje+=$"El vídeo $id ya ha sido descargado."
+            mensaje+=$'\n'
 	    # No sigue comprobando si ya ha visto uno descargado
 	    break
 	else
@@ -129,9 +129,6 @@ buscar_ultimos () {
 #      Pasa a mp3 los vídeos descargados en la carpeta     #
 #----------------------------------------------------------#
 convertir_mp3 () {
-    # comprueba si hay algún video, si no hay sale de la función
-    if [ ! -e ./*.mkv ]; then return; fi
-
     local canal=${1:?Falta el nombre del canal}
     echo "- Buscando archivos para convertir en $canal"
     mensaje+=$"Buscando archivos en $canal . . . ."
@@ -166,9 +163,6 @@ actualizar_feed () {
     local servidor=${1:?Falta el servidor del feed}
     local canal=${2:?Falta el nombre del canal}
     local titulo=${3:?Falta el título del canal}
-
-    # Comprueba si hay algún mp3 en la carpeta del canal, si no hay sale de la función
-    if [ ! -e ./$canal/mp3/*.mp3 ]; then return; fi
 
     # Encabezado del feed
     echo "- Insertando el encabezado del feed"
@@ -258,14 +252,11 @@ END
 subir_contenido () {
     # Valores de argumentos
     local canal=${1:?Falta el nombre del canal}
-
-    # Comprueba si hay algún mp3 en la carpeta del canal, si no hay sale de la función
-    if [ ! -e ./$canal/mp3/*.mp3 ]; then return; fi
     
     # Subiendo archivos a la nube via rclone
     echo "- Subiendo los mp3's al sevidor remoto"
-    mensaje+=$"Subiendo los mp3's al sevidor webdav . . ."
-    rclone copy $canal Sherlockes78_UN_en:twitch/$canal/ --create-empty-src-dirs
+    mensaje+=$"Subiendo los mp3's al servidor webdav . . ."
+    rclone copy $canal Sherlockes78_GD:podcast/twitch/$canal/ --create-empty-src-dirs
 
     comprobar $?
 
@@ -275,7 +266,7 @@ subir_contenido () {
 
     # Borrando los archivos de la nube anteriores a 30 días
     mensaje+=$"Borrando contenido antiguo . . . . . . . . . . . ."
-    rclone delete Sherlockes78_UN_en:twitch/$canal/mp3 --min-age 30d
+    rclone delete Sherlockes78_GD:podcast/twitch/$canal/mp3 --min-age 30d
     comprobar $?
 }
 
@@ -297,14 +288,21 @@ echo "- Corriendo en $twitch_dir"
 # Buscar nuevos videos y convertirlos a mp3
 buscar_ultimos "$CANAL" "$TITULO"
 
-# Convertir a mp3 los vídeos descargados
-convertir_mp3 "$CANAL"
+# Convertir a mp3 los vídeos descargados (Si los hay)
+if ls ./*.mkv 1> /dev/null 2>&1; then
+    convertir_mp3 "$CANAL"
+fi
 
-# Actualizar el feed con los nuevos vídeos
-actualizar_feed "$SERVIDOR" "$CANAL" "$TITULO"
+# Actualizar el feed y sube el nuevo contenido (Si lo hay)
+if ls ./$CANAL/mp3/*.mp3 1> /dev/null 2>&1; then
+    actualizar_feed "$SERVIDOR" "$CANAL" "$TITULO"
+    subir_contenido "$CANAL"
+else
+    echo "- No hay nuevo contenido."
+    mensaje+=$"No hay nuevo contenido que añadir al feed"
+    mensaje+=$'\n'
+fi
 
-# Subir el nuevo contenido al servidor
-subir_contenido "$CANAL"
 
 # Envia el mensaje de telegram con el resultado
 fin=$( date +%s )
