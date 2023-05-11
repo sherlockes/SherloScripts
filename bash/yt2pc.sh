@@ -1,10 +1,10 @@
 #!/bin/bash
 
 ###################################################################
-#Script Name: youtube2podcast.sh
+#Script Name: yt2pc.sh
 #Description: Creación de un podcast a partir de un canal de youtube
 #Args: N/A
-#Creation/Update: 20220605/20230511
+#Creation/Update: 20230511/20230511
 #Author: www.sherblog.pro                                             
 #Email: sherlockes@gmail.com                               
 ###################################################################
@@ -27,7 +27,7 @@ DESCARGADOS="$twitch_dir/$CANAL/descargados_yt.txt"
 notificacion=~/SherloScripts/bash/telegram.sh
 inicio=$( date +%s )
 
-mensaje=$'Actualizar Youtube via <a href="https://raw.githubusercontent.com/sherlockes/SherloScripts/master/bash/youtube2podcast.sh">youtube2podcast.sh</a>\n'
+mensaje=$'Actualizar Youtube via <a href="https://raw.githubusercontent.com/sherlockes/SherloScripts/master/bash/yt2pc.sh">yt2pc.sh</a>\n'
 mensaje+=$'- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n'
 
 
@@ -97,37 +97,43 @@ buscar_ultimos_yt(){
     # Obtiene el json de los ultimos vídeos.
     mensaje+=$'Obteniendo últimos vídeos . . . . . . . . . . . . .'
     echo "- Buscando últimos vídeos de $CANAL_NOMBRE"
-
     mapfile -t videos < <( yt-dlp --flat-playlist --print "%(id)s/%(duration)s" --playlist-end 10 $CANAL_YT )
-
     comprobar $?
 
-
+    # Recorre la matriz de los diez últimos vídeos obtenidos
     for video in ${videos[@]}
     do
 	id=$( echo "$video" |cut -d\/ -f1 )
 	duracion=$( echo "$video" |cut -d\/ -f2 )
 	duracion=${duracion%??}
-
+	
 	# Comprueba si el archivo es de más de 10'
-	if (( $duracion > 600 )) && ! grep -q $id "$DESCARGADOS"; then
+	if (( $duracion > 900 )) && ! grep -q -- "$id" "$DESCARGADOS"; then
 	    # Descargando el episodio
+	    echo "- Descargando el vídeo $id"
+	    mensaje+=$"Descargando vídeo $id . . . . . . "
 	    descargar_video_yt $id
 	    comprobar $?
+
+	    echo "- Taggeando el vídeo $id"
+	    mensaje+=$"Taggeando vídeo $id . . . . . . "
+	    tag_yt $id
+	    comprobar $?
 	else
-	    echo "- El episodio $id escorto o ya descargado"
+	    echo "- El video $id es corto o ya descargado"
 	fi
 	
     done
     
 }
 
+#----------------------------------------------------------#
+#       Descargar un vídeo de Youtube a partir del ID      #
+#----------------------------------------------------------#
 descargar_video_yt(){
     local id=${1:?Falta el id del video}
     local url="https://www.youtube.com/watch?v=$id"
-    
-    echo "- Descargando el vídeo $id"
-    mensaje+=$"Descargando vídeo $id . . . . . . "
+
     yt-dlp -o "%(id)s.%(ext)s" --extract-audio --audio-format mp3 $url
 
     if [ $? -eq 0 ]; then
@@ -137,25 +143,23 @@ descargar_video_yt(){
     fi
 }
 
-tag_y_mover(){
-    cd $twitch_dir
+#----------------------------------------------------------#
+#        Añadir info al archivo de audio de Youtube        #
+#----------------------------------------------------------#
+tag_yt(){
+    local id=${1:?Falta el id del archivo}
+    local titulo=$(yt-dlp --get-title "https://www.youtube.com/watch?v=$id")
 
-    echo -e "- Taggeando y moviendo los archivos"
+    echo -e "- Taggeando y moviendo el audio."
 
-    # Lista todos los mp3 de la carpeta
-    for track in *.mp3 ; do
-	local nombre="${track%.*}"
-	local titulo=$(yt-dlp --get-title "https://www.youtube.com/watch?v=$nombre")
+    # Poniendo título al audio
+    id3v2 -t "$titulo" -a "$CANAL_NOMBRE" -A "Youtube2Podcast" -- "$id.mp3"
 
-	# Poniendo título al audio
-	id3v2 -t "$titulo" -a "$CANAL_NOMBRE" -A "Youtube2Podcast" $track
+    # Añadir el item al listado del feed
+    anadir_item "$id.mp3" "youtube" "$CANAL"
 
-	# Añadir el item al listado del feed
-	anadir_item $track "youtube" "$CANAL"
-
-	# Mover a la carpeta mp3
-	mv $track $CANAL/mp3
-    done
+    # Mover a la carpeta mp3
+    mv -- "$id.mp3" $CANAL/mp3
 }
 
 #----------------------------------------------------------#
@@ -167,10 +171,11 @@ anadir_item(){
     local servicio=${2:?Falta el servicio de descarga}
     local canal=${3:?Falta el canal de descarga}
     
-    local ID_EP="${track%.*}"
+    #local ID_EP="${track%.*}"
+    local ID_EP=$id
     
-    local TIT_EP=$(ffprobe -loglevel error -show_entries format_tags=title -of default=noprint_wrappers=1:nokey=1 $file)
-    local ART_EP=$(ffprobe -loglevel error -show_entries format_tags=artist -of default=noprint_wrappers=1:nokey=1 $file)
+    local TIT_EP=$(ffprobe -loglevel error -show_entries format_tags=title -of default=noprint_wrappers=1:nokey=1 -- $file)
+    local ART_EP=$(ffprobe -loglevel error -show_entries format_tags=artist -of default=noprint_wrappers=1:nokey=1 -- $file)
 
     local URL_VID
     local FEC_EP
@@ -296,25 +301,17 @@ comprobar $?
 # Buscar nuevos videos y convertirlos a mp3
 buscar_ultimos_yt "$CANAL"
 
-# Añadir info si hay nuevos vídeos y moverlos a la carpeta mp3
-if ls ./*.mp3 1> /dev/null 2>&1; then
-    mensaje+=$'Añadiendo info del nuevo vídeo . . . . . . . . '
-    tag_y_mover
-    comprobar $?
-fi
-
-# Actualizar el feed si hay nuevos vídeos
+# Actualizar el feed  y subir contenido si hay nuevos vídeos
 if ls ./$CANAL/mp3/*.mp3 1> /dev/null 2>&1; then
     mensaje+=$'Actualizando el Feed . . . . . . . . . . . . . . . . '
     actualizar_feed "$SERVIDOR" "$CANAL" "$TITULO"
     comprobar $?
-fi
 
-# Subir si hay nuevo contenido al servidor
-if ls ./$CANAL/mp3/*.mp3 1> /dev/null 2>&1; then
-    mensaje+=$"Subiendo los mp3's al sevidor webdav . . ."
+    mensaje+=$"Subiendo los mp3's al servidor webdav . . ."
     subir_contenido "$CANAL"
     comprobar $?
+else
+    mensaje+=$'No hay nuevo contenido para el Podcast.'
 fi
 
 # Envia el mensaje de telegram con el resultado
