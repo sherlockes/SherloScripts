@@ -55,6 +55,33 @@ rclone_check(){
 
 
 # -------------------------------------------------------
+# Comprueba el estado de las unidades remotas
+# -------------------------------------------------------
+rclone_test_remotes(){
+    local remotos=( $(rclone listremotes) )
+    for remoto in "${remotos[@]}"
+    do
+	# Le quitamos los ":" al final de la cadena
+	remoto=${remoto%?}
+
+	if [$remoto -eq "Sherlockes_Gphotos"]; then
+	    continue
+	fi
+
+	rclone mkdir $remoto:test
+
+	if [ $? -eq 0 ]; then
+	    echo "Es posible crear un directorio en $remoto"
+	    rclone rmdir $remoto:test
+	else
+	    echo "No es posible crear un directorio en $remoto"
+	fi
+    done
+    exit
+}
+
+
+# -------------------------------------------------------
 # Realiza la instalación de Rclone
 # -------------------------------------------------------
 

@@ -109,7 +109,7 @@ buscar_ultimos () {
             if (( $mins > 10 ))
             then
 		# Descarga el audio en formato mkv
-		$twdl download -q audio_only $id;
+		$twdl download -q --auth-token huimxzjg56hs2xxlhx8zsj3wggej6n audio_only $id;
 		comprobar $?
             else
 		echo "- El archivo sólo tiene $mins minutos, no se descarga."
@@ -283,7 +283,7 @@ cd $twitch_dir
 echo "- Corriendo en $twitch_dir"
 
 # Comprobar la instalación de twitch-dl en el directorio
-#. ~/SherloScripts/bash/twitch-dl.sh && check
+. ~/SherloScripts/bash/twitch-dl.sh && check
 
 # Buscar nuevos videos y convertirlos a mp3
 buscar_ultimos "$CANAL" "$TITULO"
