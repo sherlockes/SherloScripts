@@ -16,7 +16,7 @@
 #Email: sherlockes@gmail.com                                           
 ###################################################################
 
-unidades=(Sherlockes78_UN2_en Sherlockes78_UN_en)
+unidades=(Sherlockes78_UN2_en Sherlockes78_UN3_en)
 carpetas=(pelis series twitch)
 notificacion=~/SherloScripts/bash/telegram.sh
 inicio=$( date +%s )
@@ -40,118 +40,173 @@ comprobar(){
 # ---------------------------------------------------------
 # Actualiza hugo rclone si es necesario
 # ---------------------------------------------------------
-mensaje+=$'Actualización de Hugo . . . . . . . . . . . . . . . . '
-. /home/pi/SherloScripts/bash/hugo.sh
-comprobar $?
+hugo_rclone_check(){
+    echo "Actualizando Hugo..."
+    mensaje+=$'Actualización de Hugo . . . . . . . . . . . . . . . . '
+    . /home/pi/SherloScripts/bash/hugo.sh
+    comprobar $?
 
-mensaje+=$'Actualización de Rclone . . . . . . . . . . . . . . . '
-. /home/pi/SherloScripts/bash/rclone.sh && rclone_check
-comprobar $?
+    echo "Actualizando Rclone"
+    mensaje+=$'Actualización de Rclone . . . . . . . . . . . . . . . '
+    . /home/pi/SherloScripts/bash/rclone.sh && rclone_check
+    comprobar $?
+}
 
+# -------------------------------------------------------
+# Comprueba el estado de las unidades remotas
+# -------------------------------------------------------
+rclone_check_remotes(){
+    remotos=( $(rclone listremotes) )
+    for remoto in "${remotos[@]}"
+    do
+	# Le quitamos los ":" al final de la cadena
+	remoto=${remoto%?}
+
+	if [ "$remoto" = "Sherlockes_Gphotos" ]; then
+	    continue
+	fi
+
+	mensaje+=$"Estado escritura en $remoto. . . . . . . "
+	rclone mkdir $remoto:test
+
+	if [ $? -eq 0 ]; then
+	    mensaje+=$'OK'
+	    echo "Es posible crear un directorio en $remoto"
+	    rclone rmdir $remoto:test
+	else
+	    mensaje+=$'ERROR'
+	    echo "No es posible crear un directorio en $remoto"
+	fi
+	mensaje+=$'\n'
+    done
+}
 
 # ---------------------------------------------------------
 # Actualiza el archivo init.el en el repositorio de Github
 # ---------------------------------------------------------
-echo "Actualizando el archivo init.el..."
-mensaje+=$'Actualizando el archivo init.el . . . . . . . . . '
-rclone sync -vv Sherlockes_GD:/dotfiles/emacs/.emacs.d/ Sherlockes_GD:/SherloScripts/elisp/ --include "/init.el"
-comprobar $?
+update_initel(){
+    echo "Actualizando el archivo init.el..."
+    mensaje+=$'Actualizando el archivo init.el . . . . . . . . . '
+    rclone sync -vv Sherlockes_GD:/dotfiles/emacs/.emacs.d/ Sherlockes_GD:/SherloScripts/elisp/ --include "/init.el"
+    comprobar $?
+}
 
 # ---------------------------------------------------------
 # Google Drive - Sincronización de carpetas
 # ---------------------------------------------------------
-echo "Sincronizando las carpetas de Google Drive..."
+gdrive_folders_sync(){
+    echo "Sincronizando las carpetas de Google Drive..."
 
-mensaje+=$'Sincronizando carpeta SherloScripts . . . . '
-rclone sync -v Sherlockes_GD:/SherloScripts/ /home/pi/SherloScripts/ --exclude "/.git/**"
-comprobar $?
+    mensaje+=$'Sincronizando carpeta SherloScripts . . . . '
+    rclone sync -v Sherlockes_GD:/SherloScripts/ /home/pi/SherloScripts/ --exclude "/.git/**"
+    comprobar $?
 
-mensaje+=$'Sincronizando carpeta Dotfiles . . . . . . . . . '
-rclone sync -v Sherlockes_GD:/dotfiles/ /home/pi/dotfiles --exclude "/emacs/**"
-comprobar $?
+    mensaje+=$'Sincronizando carpeta Dotfiles . . . . . . . . . '
+    rclone sync -v Sherlockes_GD:/dotfiles/ /home/pi/dotfiles --exclude "/emacs/**"
+    comprobar $?
 
-mensaje+=$'Actualizando enlace rclone config. . . . . . . . '
-ln -sf /home/pi/dotfiles/rclone/rclone.conf /home/pi/.config/rclone/rclone.conf
-comprobar $?
+    mensaje+=$'Actualizando enlace rclone config. . . . . . . . '
+    ln -sf /home/pi/dotfiles/rclone/rclone.conf /home/pi/.config/rclone/rclone.conf
+    comprobar $?
+}
+
 
 # ---------------------------------------------------------
 # Repositorios - Actualiza los repositorios de GitHub
 # ---------------------------------------------------------
-echo "Actualizando repositorios de GitHub..."
-repo=(SherloScripts sherblog)
-for i in "${repo[@]}"
-do
-    mensaje+=$"Actualizar el repositorio $i . . . "
-    echo "Actualizando el repositorio $i"
-    cd ~/$i
+github_repos_update(){
+    echo "Actualizando repositorios de GitHub..."
+    repo=(SherloScripts sherblog)
+    for i in "${repo[@]}"
+    do
+	mensaje+=$"Actualizar el repositorio $i . . . "
+	echo "Actualizando el repositorio $i"
+	cd ~/$i
 
-    git add --all
-    git commit -m "Update"
-    git push
-    comprobar $?
-done
+	git add --all
+	git commit -m "Update"
+	git push
+	comprobar $?
+    done
+}
 
 # ---------------------------------------------------------
 # Home Assistant - Guarda la configuración en GitHub
 # ---------------------------------------------------------
-echo "Guardando config de HA en GitHub..."
-mensaje+=$"Guardando config de HA en GitHub . . . . . "
-#ssh root@192.168.10.202 -p 222 'bash -s' < /home/pi/SherloScripts/bash/ha_gitpush.sh
-ssh -T root@192.168.10.202 -p 222 <<'ENDSSH'
+ha_config(){
+    echo "Guardando config de HA en GitHub..."
+    mensaje+=$"Guardando config de HA en GitHub . . . . . "
+    #ssh root@192.168.10.202 -p 222 'bash -s' < /home/pi/SherloScripts/bash/ha_gitpush.sh
+    ssh -T root@192.168.10.202 -p 222 <<'ENDSSH'
 cd /config
 git add .
 git commit -m "Configuración HA de `date +'%d-%m-%Y %H:%M:%S'`"
 git push -u origin master
 ENDSSH
-comprobar $?
-
+    comprobar $?
+}
 # --------------------------------------------------------------
 # Comprueba el estado de las distintas nubes públicas
 # --------------------------------------------------------------
+clouds_check(){
+    for u in "${unidades[@]}"
+    do
+	mensaje+=$"Disponibilidad de $u . . "
+	rclone -v size $u:
 
-for u in "${unidades[@]}"
-do
-    mensaje+=$"Disponibilidad de $u . . "
-    rclone -v size $u:
-
-    if [ $? -eq 0 ]; then
-	echo "OK"
-	mensaje+=$'OK'
-    else
-	echo "KO"
-	mensaje+=$'ERROR'
-	$notificacion "$mensaje"
-	exit 0
-    fi
-    mensaje+=$'\n'
-done
+	if [ $? -eq 0 ]; then
+	    echo "OK"
+	    mensaje+=$'OK'
+	else
+	    echo "KO"
+	    mensaje+=$'ERROR'
+	    $notificacion "$mensaje"
+	    exit 0
+	fi
+	mensaje+=$'\n'
+    done
+}
 
 # --------------------------------------------------------------------------
 # Comprueba y sincroniza Sherloflix con la unidad compartida de Sherlockes78
 # --------------------------------------------------------------------------
-echo "Sincronizando las nubes de Sherloflix..."
-mensaje+=$"${unidades[0]} Vs ${unidades[1]}."
-timeout 3h rclone sync ${unidades[0]}: ${unidades[1]}: --transfers 2 --tpslimit 8 --bwlimit 10M -P --exclude "/twitch/**"
-comprobar $?
+sherloflix_sync(){
+    echo "Sincronizando las nubes de Sherloflix..."
+    mensaje+=$"${unidades[0]} Vs ${unidades[1]}."
+    timeout 3h rclone sync ${unidades[0]}: ${unidades[1]}: --transfers 2 --tpslimit 8 --bwlimit 10M -P --exclude "/twitch/**"
+    comprobar $?
 
-echo "Comprobando sincronización de las nubes de Sherloflix..."
+    echo "Comprobando sincronización de las nubes de Sherloflix..."
 
-for u in "${carpetas[@]}"
-do
-    echo "Comprobando sincronización de $u..."
-    mensaje+=$"Sincronización de $u . . . . . . . . . . . . . . . "
-    diferencias=$( rclone check ${unidades[0]}:/$u ${unidades[1]}:/$u --size-only 2>&1 | grep 'differences found' | cut -d ":" -f 6 | cut -d " " -f 2 )
+    for u in "${carpetas[@]}"
+    do
+	echo "Comprobando sincronización de $u..."
+	mensaje+=$"Sincronización de $u . . . . . . . . . . . . . . . "
+	diferencias=$( rclone check ${unidades[0]}:/$u ${unidades[1]}:/$u --size-only 2>&1 | grep 'differences found' | cut -d ":" -f 6 | cut -d " " -f 2 )
 
-if [ $diferencias -ne 0 ];
-then
-    echo "La sincronización de las $u de las nubes no es correcta."
-    mensaje+=$'ERROR'
-else
-    mensaje+=$'OK'
-    echo "La sincronización de $u es correcta."
-fi
-mensaje+=$'\n'
-done
+	if [ $diferencias -ne 0 ];
+	then
+	    echo "La sincronización de las $u de las nubes no es correcta."
+	    mensaje+=$'ERROR'
+	else
+	    mensaje+=$'OK'
+	    echo "La sincronización de $u es correcta."
+	fi
+	mensaje+=$'\n'
+    done
+}
+
+################################
+####    Script principal    ####
+################################
+
+hugo_rclone_check
+rclone_check_remotes
+update_initel
+gdrive_folders_sync
+github_repos_update
+ha_config
+clouds_check
 
 # Envia el mensaje de telegram con el resultado
 fin=$( date +%s )
@@ -160,5 +215,3 @@ mensaje+=$'- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 mensaje+=$"Duración del Script:  $duracion segundos"
 
 $notificacion "$mensaje"
-
-exit 0
