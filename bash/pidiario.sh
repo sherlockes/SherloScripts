@@ -66,7 +66,7 @@ rclone_check_remotes(){
 	    continue
 	fi
 
-	mensaje+=$"Estado escritura en $remoto. . . . . . . "
+	mensaje+=$"Escritura en $remoto. . . . . "
 	rclone mkdir $remoto:test
 
 	if [ $? -eq 0 ]; then
@@ -105,7 +105,7 @@ gdrive_folders_sync(){
     rclone sync -v Sherlockes_GD:/dotfiles/ /home/pi/dotfiles --exclude "/emacs/**"
     comprobar $?
 
-    mensaje+=$'Actualizando enlace rclone config. . . . . . . . '
+    mensaje+=$'Actualizando link rclone config. . . . . . . . '
     ln -sf /home/pi/dotfiles/rclone/rclone.conf /home/pi/.config/rclone/rclone.conf
     comprobar $?
 }
@@ -151,7 +151,7 @@ ENDSSH
 clouds_check(){
     for u in "${unidades[@]}"
     do
-	mensaje+=$"Disponibilidad de $u . . "
+	mensaje+=$"Lectura de $u . . "
 	rclone -v size $u:
 
 	if [ $? -eq 0 ]; then

@@ -256,7 +256,7 @@ subir_contenido () {
     # Subiendo archivos a la nube via rclone
     echo "- Subiendo los mp3's al sevidor remoto"
     mensaje+=$"Subiendo los mp3's al servidor webdav . . ."
-    rclone copy $canal Sherlockes78_GD:podcast/twitch/$canal/ --create-empty-src-dirs
+    rclone copy $canal Sherlockes78_UN3_en:twitch/$canal/ --create-empty-src-dirs
 
     comprobar $?
 
@@ -266,7 +266,7 @@ subir_contenido () {
 
     # Borrando los archivos de la nube anteriores a 30 días
     mensaje+=$"Borrando contenido antiguo . . . . . . . . . . . ."
-    rclone delete Sherlockes78_GD:podcast/twitch/$canal/mp3 --min-age 30d
+    rclone delete Sherlockes78_UN3_en:twitch/$canal/mp3 --min-age 30d
     comprobar $?
 }
 
