@@ -109,7 +109,7 @@ buscar_ultimos () {
             if (( $mins > 10 ))
             then
 		# Descarga el audio en formato mkv
-		$twdl download -q --auth-token huimxzjg56hs2xxlhx8zsj3wggej6n audio_only $id;
+		$twdl download -q audio_only --auth-token huimxzjg56hs2xxlhx8zsj3wggej6n $id;
 		comprobar $?
             else
 		echo "- El archivo sólo tiene $mins minutos, no se descarga."
