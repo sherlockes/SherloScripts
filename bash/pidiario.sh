@@ -11,7 +11,7 @@
 #             - Sincroniza las nubes de Sherloflix
 #             - Comprueba la sincronización de las carpetas
 #Args: N/A
-#Creation/Update: 20200521/20230222
+#Creation/Update: 20200521/20230521
 #Author: www.sherblog.pro                                                
 #Email: sherlockes@gmail.com                                           
 ###################################################################
@@ -56,6 +56,7 @@ hugo_rclone_check(){
 # Comprueba el estado de las unidades remotas
 # -------------------------------------------------------
 rclone_check_remotes(){
+    mensaje+=$'Disponibilidad de nubes\n'
     remotos=( $(rclone listremotes) )
     for remoto in "${remotos[@]}"
     do
@@ -66,7 +67,7 @@ rclone_check_remotes(){
 	    continue
 	fi
 
-	mensaje+=$"Escritura en $remoto. . . . . "
+	mensaje+=$"$remoto (W). . "
 	rclone mkdir $remoto:test
 
 	if [ $? -eq 0 ]; then
@@ -76,6 +77,20 @@ rclone_check_remotes(){
 	else
 	    mensaje+=$'ERROR'
 	    echo "No es posible crear un directorio en $remoto"
+	fi
+	mensaje+=$'\n'
+
+	mensaje+=$"$remoto (R). . "
+	rclone -v size $remoto:
+
+	if [ $? -eq 0 ]; then
+	    echo "OK"
+	    mensaje+=$'OK'
+	else
+	    echo "KO"
+	    mensaje+=$'ERROR'
+	    $notificacion "$mensaje"
+	    exit 0
 	fi
 	mensaje+=$'\n'
     done
@@ -151,7 +166,7 @@ ENDSSH
 clouds_check(){
     for u in "${unidades[@]}"
     do
-	mensaje+=$"Lectura de $u . . "
+	mensaje+=$"Lectura $u . . "
 	rclone -v size $u:
 
 	if [ $? -eq 0 ]; then
