@@ -67,7 +67,7 @@ rclone_check_remotes(){
 	    continue
 	fi
 
-	mensaje+=$"$remoto (W). . "
+	mensaje+=$" -$remoto (W). . "
 	rclone mkdir $remoto:test
 
 	if [ $? -eq 0 ]; then
@@ -80,7 +80,7 @@ rclone_check_remotes(){
 	fi
 	mensaje+=$'\n'
 
-	mensaje+=$"$remoto (R). . "
+	mensaje+=$" -$remoto (R). . "
 	rclone -v size $remoto:
 
 	if [ $? -eq 0 ]; then
@@ -160,34 +160,13 @@ git push -u origin master
 ENDSSH
     comprobar $?
 }
-# --------------------------------------------------------------
-# Comprueba el estado de las distintas nubes públicas
-# --------------------------------------------------------------
-clouds_check(){
-    for u in "${unidades[@]}"
-    do
-	mensaje+=$"Lectura $u . . "
-	rclone -v size $u:
-
-	if [ $? -eq 0 ]; then
-	    echo "OK"
-	    mensaje+=$'OK'
-	else
-	    echo "KO"
-	    mensaje+=$'ERROR'
-	    $notificacion "$mensaje"
-	    exit 0
-	fi
-	mensaje+=$'\n'
-    done
-}
 
 # --------------------------------------------------------------------------
 # Comprueba y sincroniza Sherloflix con la unidad compartida de Sherlockes78
 # --------------------------------------------------------------------------
 sherloflix_sync(){
     echo "Sincronizando las nubes de Sherloflix..."
-    mensaje+=$"${unidades[0]} Vs ${unidades[1]}."
+    mensaje+=$"SherloFlix sinc. .  . ."
     timeout 3h rclone sync ${unidades[0]}: ${unidades[1]}: --transfers 2 --tpslimit 8 --bwlimit 10M -P --exclude "/twitch/**"
     comprobar $?
 
