@@ -115,7 +115,7 @@ buscar_ultimos_yt(){
 	    descargar_video_yt $id
 	    comprobar $?
 	else
-	    echo "- El episodio $id escorto o ya descargado"
+	    echo "- El episodio $id es corto o ya descargado"
 	fi
 	
     done
@@ -270,14 +270,14 @@ subir_contenido () {
     
     # Subiendo archivos a la nube via rclone
     echo "- Subiendo los mp3's al servidor remoto"
-    rclone copy $canal Sherlockes78_GD:twitch/$canal/ --create-empty-src-dirs
+    rclone copy $canal Sherlockes78_UN3_en:twitch/$canal/ --create-empty-src-dirs
 
     # Eliminando audio y video local
     echo "- Eliminando audios locales"
     find . -type f -name "*.mp3" -delete
 
     # Borrando los archivos de la nube anteriores a 30 días
-    rclone delete Sherlockes78_GD:twitch/$canal/mp3 --min-age 30d
+    rclone delete Sherlockes78_UN3_en:twitch/$canal/mp3 --min-age 30d
 }
 
 
