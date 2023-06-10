@@ -56,6 +56,12 @@ hugo_rclone_check(){
 # Comprueba el estado de las unidades remotas
 # -------------------------------------------------------
 rclone_check_remotes(){
+    # Crea el enlace a la configuración de Rclon en Dotfiles
+    mensaje+=$'Actualizando configuración Rclone . . . . '
+    ln -sf ~/dotfiles/rclone/rclone.conf ~/.config/rclone/rclone.conf
+    #cp ~/dotfiles/rclone/rclone.conf ~/.config/rclone
+    comprobar $?
+    
     mensaje+=$'Disponibilidad de nubes\n'
     remotos=( $(rclone listremotes) )
     for remoto in "${remotos[@]}"
