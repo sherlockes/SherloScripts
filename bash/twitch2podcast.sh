@@ -37,7 +37,7 @@ comprobar(){
     else
 	mensaje+=$'ERROR'
 	$notificacion "$mensaje"
-	exit 0
+	#exit 0
     fi
     mensaje+=$'\n'
 }
@@ -109,7 +109,8 @@ buscar_ultimos () {
             if (( $mins > 10 ))
             then
 		# Descarga el audio en formato mkv
-		$twdl download -q audio_only --auth-token huimxzjg56hs2xxlhx8zsj3wggej6n $id;
+		#$twdl download -q audio_only --auth-token huimxzjg56hs2xxlhx8zsj3wggej6n $id;
+        $twdl download -q audio_only $id;
 		comprobar $?
             else
 		echo "- El archivo sólo tiene $mins minutos, no se descarga."
