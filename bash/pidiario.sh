@@ -17,7 +17,7 @@
 ###################################################################
 
 unidades=(Sherlockes78_UN2_en Sherlockes78_UN3_en)
-carpetas=(pelis series twitch)
+carpetas=(pelis series) # No se incluye la carpeta twitch
 notificacion=~/SherloScripts/bash/telegram.sh
 inicio=$( date +%s )
 
@@ -181,7 +181,7 @@ sherloflix_sync(){
     for u in "${carpetas[@]}"
     do
 	echo "Comprobando sincronización de $u..."
-	mensaje+=$"Sincronización de $u . . . . . . . . . . . . . . . "
+	mensaje+=$"Sincronización de $u . . . . . . . . . . . . . "
 	diferencias=$( rclone check ${unidades[0]}:/$u ${unidades[1]}:/$u --size-only 2>&1 | grep 'differences found' | cut -d ":" -f 6 | cut -d " " -f 2 )
 
 	if [ $diferencias -ne 0 ];
@@ -207,7 +207,7 @@ gdrive_folders_sync # Sincroniza "SherloScripts", "Dotfiles" y el enlace simból
 github_repos_update # Actualiza los repositorios de "SherloScripts" y "Sherblog"
 ha_config # Guarda la configuración de Home Assistant
 clouds_check # Comprueba la disponibilidad de las nubes
-sherloflix_sync # Sincroniza las nubes de Sherloflix y comprueba el estado
+#sherloflix_sync # Sincroniza las nubes de Sherloflix y comprueba el estado
 
 # Envia el mensaje de telegram con el resultado
 fin=$( date +%s )
