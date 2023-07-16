@@ -10,12 +10,11 @@
 ;; Añadir repositorios
 (require 'package)
 
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
-(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
-(add-to-list 'package-archives '("gnu"   . "https://elpa.gnu.org/packages/") t)
-
-
-
+;;(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)                  ;; No es la versión estable
+;;(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)                       ;; Problemas al instalar Org-Roam
+(add-to-list 'package-archives '("nongnu"   . "https://elpa.nongnu.org/nongnu/") t)
+;;(add-to-list 'package-archives '("gnu"   . "https://elpa.gnu.org/packages/") t)               ;; Cambiado por la versión nongnu
+(add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/") t)
 
 ;; Añadir Dired+
 (add-to-list 'load-path "~/dotfiles/emacs/.emacs.d/dired+/")
@@ -78,7 +77,14 @@
     (setq my-dired-switch (- my-dired-switch))
     (if (= my-dired-switch 1)
       (dired-sort-other my-dired-ls-switches-hide)
-     (dired-sort-other my-dired-ls-switches-show))))))
+      (dired-sort-other my-dired-ls-switches-show))))))
+
+;; Org-roam
+(make-directory "~/org-roam" t)                                                             ;; Crea el directori sino existe
+(setq org-roam-directory (file-truename "~/org-roam"))                                      ;; Establece el directorio para ORGRoam
+(org-roam-db-autosync-mode)                                                                 ;; Sincronizar cache automáticamente
+(setq org-roam-completion-system 'ivy)
+(setq org-roam-completion-everywhere t)
 
 ;; Python
 (elpy-enable)
@@ -145,7 +151,7 @@
  '(org-tags-column -60)
  '(package-selected-packages
    (quote
-    (whole-line-or-region markdown-mode htmlize gnu-elpa-keyring-update elpy)))
+    (ivy vertico whole-line-or-region markdown-mode htmlize gnu-elpa-keyring-update elpy)))
  '(remote-shell-program "ssh")
  '(safe-local-variable-values (quote ((ENCODING . UTF-8) (encoding . utf-8))))
  '(tramp-default-method "ssh")
