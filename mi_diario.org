@@ -347,6 +347,14 @@ Cuando el sensor de la puerta de la galería pierde la conexión hayq ue realiza
 *** nmap
 **** MAC a partir de IP -> sudo nmap -sP -n 192.168.1.200
 *** Ubicación de un comando -> type -a "comando"
+*** Wireguard ([[https://alexpro.sytes.net/cliente-wireguard-linux/][Instrucciones]])
+  Instalar wireguard "sudo apt install wireguard"
+  Instalar resolvconf "sudo apt install resolvconf"
+  Copiar archivo confiuración "sudo mv mivpn.conf /etc/wireguard/"
+  Levantar conexión "sudo wg-quick up mivpn"
+  Desconectar "sudo wg-quick down mivpn"
+  Comprobar conexión "sudo wg"
+
 ** Linux Mint
 *** Cambio entre áreas de trabajo -> Ctrl+Alt+⬆️
 *** Cambio entre aplicaciones utilizando el efecto de exposición -> Ctrl+Alt+⬇️
