@@ -116,6 +116,19 @@
     (("20[0-9]\\{6\\}_.+\\.md\\'" . "Markdown") . ["template.md" autoinsert-yas-expand])    ;; Lanzador para post del blog en markdown
 ))
 
+;; Función para cambio entre diccionarios y configuración de corrección ortográfica
+
+(defun fd-switch-dictionary()
+  (interactive)
+  (let* ((dic ispell-current-dictionary)
+	 (change (if (string= dic "español") "english" "español")))
+    (ispell-change-dictionary change)
+    ))
+
+(setq ispell-dictionary "español")                                                          ;; Establece el diccionario Español pr defecto
+(add-hook 'markdown-mode-hook 'flyspell-mode)                                               ;; Habilita la correción ortográfica para archivos Markdown
+(add-hook 'flyspell-mode-hook 'flyspell-buffer)                                             ;; Corrige el buffer cuando se habilita la corrección
+
 ;; Otros
 (put 'upcase-region 'disabled nil)                                                          ;; Habilita el comando para pasar a mayúsculas
 (put 'erase-buffer 'disabled nil)                                                           ;; Habilita el comando de borrado del buffer
@@ -123,8 +136,7 @@
 (add-hook 'window-setup-hook 'toggle-frame-maximized t)                                     ;; Arrancar emacs maximizado
 ;; (add-to-list 'initial-frame-alist '(fullscreen . maximized))                             ;; Arrancar emacs maximizado
 (add-to-list 'display-buffer-alist '("^\\*shell\\*" . (display-buffer-same-window . nil)))  ;; Mostrar la sesión de terminal en el mismo buffer
-(add-hook 'markdown-mode-hook 'flyspell-mode)                                               ;; Habilita la correción ortográfica para archivos Markdown
-(add-hook 'flyspell-mode-hook 'flyspell-buffer)                                             ;; Corrige el buffer cuando se habilita la corrección
+
 
 
 (custom-set-variables
@@ -216,6 +228,7 @@
 (global-set-key (kbd "<f4>") 'sherblog_edit)
 (global-set-key (kbd "<f5>") 'flyspell-mode)
 (global-set-key (kbd "<f6>") (kbd "C-u C-c C-c"))
+(global-set-key (kbd "<f7>") 'fd-switch-dictionary)    ;; Cambio de diccionario
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 (global-set-key (kbd "C-c r") 'query-replace-regexp)
 
