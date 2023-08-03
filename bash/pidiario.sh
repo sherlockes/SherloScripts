@@ -10,8 +10,9 @@
 #             - Comprueba el estado de varias nubes públicas
 #             - Sincroniza las nubes de Sherloflix
 #             - Comprueba la sincronización de las carpetas
+#             - Sincroniza la web sherblog.pro con una carpeta en Google drive
 #Args: N/A
-#Creation/Update: 20200521/20230521
+#Creation/Update: 20200521/20230803
 #Author: www.sherblog.pro                                                
 #Email: sherlockes@gmail.com                                           
 ###################################################################
@@ -155,7 +156,7 @@ github_repos_update(){
 # Home Assistant - Guarda la configuración en GitHub
 # ---------------------------------------------------------
 ha_config(){
-    echo "Guardando config de HA en GitHub..."
+    echo "Guardando config de HA en GitHub..." 
     mensaje+=$"Guardando config de HA en GitHub . . . . . "
     #ssh root@192.168.10.202 -p 222 'bash -s' < /home/pi/SherloScripts/bash/ha_gitpush.sh
     ssh -T root@192.168.10.202 -p 222 <<'ENDSSH'
@@ -194,6 +195,16 @@ sherloflix_sync(){
 	fi
 	mensaje+=$'\n'
     done
+}
+
+# ----------------------------------------------------------------
+# Sincroniza la web sherblog.pro con un directorio en Google Drive
+# ----------------------------------------------------------------
+sherblog_sync(){
+    echo "Sincronizando la web sherblog.pro..."
+    mensaje+=$"Sincronizando la web sherblog.pro . . . "
+    rclone sync ~/sherblog/ Sherlockes_GD:/sherblog/ --create-empty-src-dirs --exclude "/.git*/**" --exclude "/public/"
+    comprobar $?
 }
 
 ################################
