@@ -2,56 +2,189 @@
 ;; Script Name: init.el                            ;;
 ;; Description: Archivo de configuración de Emacs  ;;
 ;; Args: N/A                                       ;;
-;; Creation/Update: 20200225/20220427              ;; 
+;; Creation/Update: 20200225/20230815              ;; 
 ;; Author: www.sherblog.pro                        ;;                      
 ;; Email: sherlockes@gmail.com                     ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Añadir repositorios
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Archivo ubicado en "~/.emacs" ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; (setq user-dir (expand-file-name "~"))                                       ;; Variable para el directorio de usuario
+;; (setq user-init-file (concat user-dir "/dotfiles/emacs/.emacs.d/init.el"))   ;; Ubicación del archivo de configuración
+;; (load user-init-file)                                                        ;; Carga el archivo de configuración
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Ubicación de directorios ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(setq user-emacs-directory (concat user-dir "/.emacs.d/"))                       ;; Directorio de configuración
+(setq default-directory user-dir)                                                ;; Directorio por defecto
+(setenv "HOME" user-dir)                                                         ;; Directorio HOME
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Configuración externa ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(load-file (concat user-dir "/dotfiles/emacs/.emacs.d/functions.el"))           ;; Carga el archivo externo de funciones
+                                                                                           
+(setq explicit-shell-file-name "/bin/bash")                                     ;; Configura shell-command para permitir alias
+(setq shell-file-name "bash")                                                                 
+(setq explicit-bash.exe-args '("--noediting" "--login" "-ic"))                                                                                        
+(setq shell-command-switch "-ic")                                                                                    
+(setenv "SHELL" shell-file-name)
+
+(setq byte-compile-warnings '(cl-functions))                                    ;; Elimina el warning cl obsoleto
+
+;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Añadir repositorios ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;
+
 (require 'package)
 
-;;(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)                  ;; No es la versión estable
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)                  ;; Melpa, no es la versión estable
+;;(add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/") t)       ;; Melpa estable
 ;;(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)                       ;; Problemas al instalar Org-Roam
 (add-to-list 'package-archives '("nongnu"   . "https://elpa.nongnu.org/nongnu/") t)
 ;;(add-to-list 'package-archives '("gnu"   . "https://elpa.gnu.org/packages/") t)               ;; Cambiado por la versión nongnu
-(add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/") t)
-
-;; Añadir Dired+
-(add-to-list 'load-path "~/dotfiles/emacs/.emacs.d/dired+/")
-(load "dired+.el")
-(require 'dired+)
 
 
-;; Inicializar y actualizar paquetes
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Inicializar y actualizar paquetes ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 (package-initialize)
-;;(package-refresh-contents)
+(setq package-enable-at-startup nil)
+
+
 (when (not package-archive-contents)
   (package-refresh-contents))
 
-;; Añadir Yasnippet
+;;;;;;;;;
+;; Ivy ;;
+;;;;;;;;;
+(my-install-package-if-not-installed 'wgrep)                                                ;; Requiere tener instalado "wgrep"
+(my-install-package-if-not-installed 'ivy)                                                  ;; Instalación del paquete "Ivy"
+(ivy-mode t)                                                                                ;; Activa el modo de autocompletado de Ivy
+
+(my-install-package-if-not-installed 'ox-hugo)
+(with-eval-after-load 'ox
+  (require 'ox-hugo))
+
+;;;;;;;;;;;;;;
+;; Org-roam ;;
+;;;;;;;;;;;;;;
+
+(my-install-package-if-not-installed 'org-roam)
+(my-install-package-if-not-installed 'org-roam-ui)
+
+
+;;(add-to-list 'load-path "/home/sherlockes/Descargas/org-roam-ui")
+;;(require 'org-roam-ui)
+
+(if (file-exists-p "~/org-roam/")                                                           ;; Actualiza el repositorio org-roam o lo clona si no existe
+    (let ((default-directory "~/org-roam"))(shell-command "git pull"))
+  (let ((default-directory "~/"))(shell-command "git clone git@github.com:sherlockes/org-roam.git"))
+)
+
+(if (file-exists-p "~/brain/")                                                              ;; Actualiza el repositorio brain o lo clona si no existe
+    (let ((default-directory "~/brain"))(shell-command "git pull"))
+  (let ((default-directory "~/"))(shell-command "git clone git@gitlab.com:sherlockes/brain.git"))
+)
+
+(setq org-roam-directory (file-truename "~/org-roam"))                                      ;; Establece el directorio para ORGRoam
+(org-roam-db-autosync-mode)                                                                 ;; Sincronizar cache automáticamente
+(setq org-roam-completion-system 'ivy)
+(setq org-roam-completion-everywhere t)
+(setq org-id-extra-files (directory-files-recursively org-roam-directory "\\.org$"))       ;; Habilita la exportación de enlaces hacia Ox-hugo
+
+(defun org-roam-update()                                                                    ;; Actualizar repositorio Org-Roam
+    (interactive)
+    (org-hugo-export-wim-to-md :all-subtrees)                                               ;; Exportar el artículo a md para la web
+    (let ((default-directory "~/org-roam"))
+        (shell-command "git add --all")
+        (shell-command "git commit -m 'Update'")
+        (shell-command "git push")
+    )
+    (let ((default-directory "~/brain"))
+        (shell-command "git add --all")
+        (shell-command "git commit -m 'Update'")
+        (shell-command "git push")
+    )
+)
+
+(defun funcion-al-guardar ()
+  (let ((directorio-org-roam (expand-file-name "org-roam" (getenv "HOME"))))
+    (when (string-prefix-p directorio-org-roam buffer-file-name)
+      (org-roam-update))))
+
+;;(add-hook 'after-save-hook 'funcion-al-guardar)
+
+(add-hook 'after-save-hook (lambda () (when (and (string= (file-name-extension buffer-file-name) "org") (funcion-al-guardar))) nil t))
+
+
+(global-set-key (kbd "C-c n f") 'org-roam-node-find)                                        ;; Buscar o crear un Nodo
+(global-set-key (kbd "C-c n l") 'org-roam-buffer-toggle)                                    ;; Mostrar/Ocultar el Buffer Org-Roam
+(global-set-key (kbd "C-c n i") 'org-roam-node-insert)                                      ;; Insertar un enlace
+(global-set-key (kbd "C-c n t") 'org-roam-tag-add)                                          ;; Añadir un Tag
+(global-set-key (kbd "C-c n a") 'org-roam-alias-add)                                        ;; Añadir un Alias
+(global-set-key (kbd "C-c n o") 'org-id-get-create)                                         ;; Convertir encabezado en nodo
+
+
+;;;;;;;;;;;;;;;;;;;
+;; Añadir Dired+ ;;
+;;;;;;;;;;;;;;;;;;;
+
+(let ((url "https://www.emacswiki.org/emacs/download/dired+.el"))
+  (my-download-file-if-not-exists url (concat user-dir "/.emacs.d/dired+/dired+.el")))
+(add-to-list 'load-path (concat user-dir "/.emacs.d/dired+/"))
+(load "dired+.el")
+(require 'dired+)
+
+;;;;;;;;;;;;;;;;;;;;;;
+;; Añadir Yasnippet ;;
+;;;;;;;;;;;;;;;;;;;;;;
+
+(my-install-package-if-not-installed 'yasnippet)
 (require 'yasnippet)
 (yas-global-mode 1)
 
-;; Directorios por defecto
-(setq user-emacs-directory "/home/sherlockes/dotfiles/emacs/.emacs.d/")                     ;; Directorio de configuración
-(setq default-directory "/home/sherlockes")                                                 ;; Directorio por defecto
-(setenv "HOME" "/home/sherlockes")                                                          ;; Directorio HOME
+;;;;;;;;;;;;;;;;;;;;;
+;; Añadir Markdown ;;
+;;;;;;;;;;;;;;;;;;;;;
 
-;; Crear la copia de seguridad en la papelera en lugar de en la carpeta del archivo.
+(my-install-package-if-not-installed 'markdown-mode)
+(require 'markdown-mode)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Crear la copia de seguridad en la papelera en lugar de en la carpeta del archivo ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 (setq backup-directory-alist `((".*" . ,temporary-file-directory)))
 (setq auto-save-file-name-transforms `((".*" ,temporary-file-directory t)))
 ;;(setq temporary-file-directory "~/.emacs_backup")
 
-;; Ocultar barras y pantalla de inicio
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Ocultar barras y pantalla de inicio ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (tool-bar-mode -1)                                                                          ;; Oculta la barra de herramientas superior
 (tooltip-mode -1)                                                                           ;; Mostrar consejos en la barra inferior
 (menu-bar-mode -1)                                                                          ;; Oculta la barra de menús superior
 (setq inhibit-startup-screen t)                                                             ;; No mostrar la pantalla de bienvenida
 
-;; Modo para copiar la línea completa
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Modo para copiar la línea completa ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(my-install-package-if-not-installed 'whole-line-or-region)
 (whole-line-or-region-global-mode 1)
 
-;; Configuración de Dired
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Configuración de Dired ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 (setq dired-dwim-target t)                                                                  ;; Fija como objetivo el otro buffer con Dired
 (setq dired-listing-switches "-laGh1v --group-directories-first")                           ;; Configuración ls defecto
 (put 'dired-find-alternate-file 'disabled nil)                                              ;; Habilita la "a" en Dired
@@ -79,22 +212,21 @@
       (dired-sort-other my-dired-ls-switches-hide)
       (dired-sort-other my-dired-ls-switches-show))))))
 
-;; Org-roam
-(let ((default-directory "~/")) 
-    (shell-command "git clone https://github.com/sherlockes/org-roam.git"))
-;;(make-directory "~/org-roam" t)                                                             ;; Crea el directorio sino existe
-(setq org-roam-directory (file-truename "~/org-roam"))                                      ;; Establece el directorio para ORGRoam
-(org-roam-db-autosync-mode)                                                                 ;; Sincronizar cache automáticamente
-(setq org-roam-completion-system 'ivy)
-(setq org-roam-completion-everywhere t)
 
-;; Python
+;;;;;;;;;;;;
+;; Python ;;
+;;;;;;;;;;;;
+
+(my-install-package-if-not-installed 'elpy)
 (elpy-enable)
 (setq python-shell-interpreter "python3")
 (setq elpy-rpc-python-command "python3")
 (setq elpy-rpc-virtualenv-path (quote system))
 
-;; Plantillas con Auto-insert
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Plantillas con Auto-insert ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 (auto-insert-mode)                                                                          ;; Habilitar el modo Auto-insert
 (setq auto-insert 'other)                                                                   ;; Lanzar el modo en otra ventana
 (setq auto-insert-directory "~/dotfiles/templates/")                                        ;; Directorio de plantillas
@@ -118,28 +250,23 @@
     (("20[0-9]\\{6\\}_.+\\.md\\'" . "Markdown") . ["template.md" autoinsert-yas-expand])    ;; Lanzador para post del blog en markdown
 ))
 
-;; Función para cambio entre diccionarios y configuración de corrección ortográfica
-
-(defun fd-switch-dictionary()
-  (interactive)
-  (let* ((dic ispell-current-dictionary)
-	 (change (if (string= dic "español") "english" "español")))
-    (ispell-change-dictionary change)
-    ))
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Corrección ortográfica ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (setq ispell-dictionary "español")                                                          ;; Establece el diccionario Español pr defecto
 (add-hook 'markdown-mode-hook 'flyspell-mode)                                               ;; Habilita la correción ortográfica para archivos Markdown
 (add-hook 'flyspell-mode-hook 'flyspell-buffer)                                             ;; Corrige el buffer cuando se habilita la corrección
 
-;; Otros
+;;;;;;;;;;;
+;; Otros ;;
+;;;;;;;;;;;
 (put 'upcase-region 'disabled nil)                                                          ;; Habilita el comando para pasar a mayúsculas
 (put 'erase-buffer 'disabled nil)                                                           ;; Habilita el comando de borrado del buffer
 (global-visual-line-mode t)                                                                 ;; Ajuste de línea
 (add-hook 'window-setup-hook 'toggle-frame-maximized t)                                     ;; Arrancar emacs maximizado
 ;; (add-to-list 'initial-frame-alist '(fullscreen . maximized))                             ;; Arrancar emacs maximizado
 (add-to-list 'display-buffer-alist '("^\\*shell\\*" . (display-buffer-same-window . nil)))  ;; Mostrar la sesión de terminal en el mismo buffer
-
-
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -148,12 +275,11 @@
  ;; If there is more than one, they won't work right.
  '(ansi-color-faces-vector
    [default default default italic underline success warning error])
- '(custom-enabled-themes (quote (wombat)))
+ '(custom-enabled-themes '(wombat))
  '(debug-on-error nil)
  '(delete-selection-mode 1)
  '(ibuffer-formats
-   (quote
-    ((mark modified read-only locked " "
+   '((mark modified read-only locked " "
 	   (name 48 48 :left :elide)
 	   " "
 	   (size 9 -1 :right)
@@ -161,13 +287,29 @@
 	   (mode 16 16 :left :elide))
      (mark " "
 	   (name 16 -1)
-	   " " filename))))
+	   " " filename)))
+ '(org-roam-capture-templates
+   '(("d" "default" plain "%?" :target
+      (file+head "%<%Y%m%d>-${slug}.org"
+        "#+title: ${title}
+#+STARTUP: overview
+#+date: %<%Y-%m-%d>
+#+hugo_custom_front_matter: :thumbnail \"images/image.jpg\"
+#+setupfile: ./setup.conf
+#+hugo_tags: nemo
+#+hugo_categories: apps
+#+hugo_draft: false
+Resumen de la nota
+#+BEGIN_export html
+<!--more-->
+#+END_export
+")
+      :unnarrowed t)))
  '(org-tags-column -60)
  '(package-selected-packages
-   (quote
-    (ivy vertico whole-line-or-region markdown-mode htmlize gnu-elpa-keyring-update elpy)))
+   '(ox-hugo wgrep ivy vertico whole-line-or-region markdown-mode htmlize gnu-elpa-keyring-update elpy))
  '(remote-shell-program "ssh")
- '(safe-local-variable-values (quote ((ENCODING . UTF-8) (encoding . utf-8))))
+ '(safe-local-variable-values '((ENCODING . UTF-8) (encoding . utf-8)))
  '(tramp-default-method "ssh")
  '(tramp-encoding-shell "/bin/bash"))
 
@@ -179,69 +321,15 @@
  )
 
 
-;; Funciones
-
-;; Entorno de desarrollo para sherblog
-(defun sherblog_edit ()
-  (interactive)
-  (mapc 'kill-buffer (buffer-list))                                                         ;; Cierra todos los bufers activos
-  (delete-other-windows nil)                                                                ;; Cierra todas las ventanas
-  (split-window-right 80)                                                                   ;; Parte la pantalla verticalmente en dos
-  (split-window-below)                                                                      ;; Parte la ventana derecha horizontalmente en dos
-  (setq default-directory "/ssh:pi@192.168.10.202:/home/pi/sherblog/")                      ;; Cambia el directorio por defecto a la Raspberry
-  (comint-send-string (shell) "hugoser\n")                                                  ;; Lanza el servidor de Hugo en la Raspberry
-  (other-window 1)                                                                          ;; Cambia el foco a la otra ventana
-  (dired "/ssh:pi@192.168.10.202:/home/pi/sherblog/content/post/")                          ;; Abre el directorio de los Post del Blog
-  (enlarge-window 10)                                                                       ;; Hace un poco mas alta la ventana de los post
-  (browse-url "http://192.168.10.202:1313")                                                 ;; Abre el Blog en el navegador
-)
-
-(defun reiniciar ()
-    (interactive)
-    (mapcar 'kill-buffer (buffer-list))
-    (delete-other-windows)
-    (load-file user-init-file)
-)
-
-(defun emacs-terminal ()                                                                    ;; Función para volver a abrir Emacs en la terminal
-  (suspend-emacs "fg ; emacs -nw")
-)
-
-(defun emacs-x11 ()                                                                         ;; Función para volver a abrir Emacs en escritorio
-  (call-process "sh" nil nil nil "-c" "emacs &")
-)
-
-(defun reiniciar ()                                                                         ;; Función para reiniciar Emacs
-  (interactive)
-  (let ((kill-emacs-hook (
-    append kill-emacs-hook (list
-      (if (display-graphic-p)
-          #'emacs-x11
-        #'emacs-terminal)
-    ))))
-    (save-buffers-kill-emacs)
-  )
-)
-
-(defun org-roam-update()
-    (interactive)
-
-    (let ((default-directory "~/org-roam")) 
-        (shell-command "git add --all")
-        (shell-command "git commit -m 'Update'")
-        (shell-command "git push")
-    )
-)
-
 ;; Accesos directos
 (global-set-key (kbd "<f1>") 'reiniciar)
 ;;(global-set-key (kbd "<f2>") (lambda() (interactive)(find-file "~/Google_Drive/SherloScripts/mi_diario.org")))
-(global-set-key (kbd "<f2>") (lambda() (interactive)(browse-url-emacs "https://raw.githubusercontent.com/sherlockes/SherloScripts/master/mi_diario.org")))
+;;(global-set-key (kbd "<f2>") (lambda() (interactive)(browse-url-emacs "https://raw.githubusercontent.com/sherlockes/SherloScripts/master/mi_diario.org")))
+(global-set-key (kbd "<f2>") (lambda() (interactive)(org-roam-ui-mode t)))
 (global-set-key (kbd "<f4>") 'sherblog_edit)
 (global-set-key (kbd "<f5>") 'flyspell-mode)
 (global-set-key (kbd "<f6>") (kbd "C-u C-c C-c"))
 (global-set-key (kbd "<f7>") 'fd-switch-dictionary)    ;; Cambio de diccionario
-(global-set-key (kbd "<f8>") 'org-roam-update)
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 (global-set-key (kbd "C-c r") 'query-replace-regexp)
 
