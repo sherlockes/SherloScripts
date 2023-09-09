@@ -30,11 +30,11 @@
 
 (load-file (concat user-dir "/dotfiles/emacs/.emacs.d/functions.el"))           ;; Carga el archivo externo de funciones
                                                                                            
-(setq explicit-shell-file-name "/bin/bash")                                     ;; Configura shell-command para permitir alias
-(setq shell-file-name "bash")                                                                 
-(setq explicit-bash.exe-args '("--noediting" "--login" "-ic"))                                                                                        
+;;(setq explicit-shell-file-name "/bin/bash")                                     ;; Configura shell-command para permitir alias
+;;(setq shell-file-name "bash")                                                                 
+;;(setq explicit-bash.exe-args '("--noediting" "--login" "-ic"))                                                                                        
 (setq shell-command-switch "-ic")                                                                                    
-(setenv "SHELL" shell-file-name)
+;;(setenv "SHELL" shell-file-name)
 
 (setq byte-compile-warnings '(cl-functions))                                    ;; Elimina el warning cl obsoleto
 
@@ -290,8 +290,7 @@
 	   " " filename)))
  '(org-roam-capture-templates
    '(("d" "default" plain "%?" :target
-      (file+head "%<%Y%m%d>-${slug}.org"
-        "#+title: ${title}
+      (file+head "%<%Y%m%d>-${slug}.org" "#+title: ${title}
 #+STARTUP: overview
 #+date: %<%Y-%m-%d>
 #+hugo_custom_front_matter: :thumbnail \"images/image.jpg\"
@@ -361,6 +360,8 @@ Resumen de la nota
 
 
 (put 'downcase-region 'disabled nil)
+
+
 
 
 
