@@ -73,16 +73,21 @@
 (with-eval-after-load 'ox
   (require 'ox-hugo))
 
+;;(setq org-hugo-default-static-subdirectory-for-externals "~/brain/static")
+
+;;(setq org-hugo-default-section-directory "notas")
+;;(setq org-hugo-external-file-extensions-allowed-for-copying t)
+
 ;;;;;;;;;;;;;;
 ;; Org-roam ;;
 ;;;;;;;;;;;;;;
 
 (my-install-package-if-not-installed 'org-roam)
-(my-install-package-if-not-installed 'org-roam-ui)
+;;(my-install-package-if-not-installed 'org-roam-ui)
+(add-to-list 'load-path "/home/sherlockes/Descargas/org-roam-ui")
+(require 'org-roam-ui)
 
-
-;;(add-to-list 'load-path "/home/sherlockes/Descargas/org-roam-ui")
-;;(require 'org-roam-ui)
+;;(setq org-roam-ui-sync-theme t)
 
 (if (file-exists-p "~/org-roam/")                                                           ;; Actualiza el repositorio org-roam o lo clona si no existe
     (let ((default-directory "~/org-roam"))(shell-command "git pull"))
