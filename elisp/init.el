@@ -83,23 +83,23 @@
 ;;;;;;;;;;;;;;
 
 (my-install-package-if-not-installed 'org-roam)
-;;(my-install-package-if-not-installed 'org-roam-ui)
-(add-to-list 'load-path "/home/sherlockes/Descargas/org-roam-ui")
+(my-install-package-if-not-installed 'org-roam-ui)
+;;(add-to-list 'load-path "/home/sherlockes/Descargas/org-roam-ui")
 (require 'org-roam-ui)
 
 ;;(setq org-roam-ui-sync-theme t)
 
-(if (file-exists-p "~/org-roam/")                                                           ;; Actualiza el repositorio org-roam o lo clona si no existe
-    (let ((default-directory "~/org-roam"))(shell-command "git pull"))
-  (let ((default-directory "~/"))(shell-command "git clone git@github.com:sherlockes/org-roam.git"))
-)
+;;(if (file-exists-p "~/org-roam/")                                                           ;; Actualiza el repositorio org-roam o lo clona si no existe
+;;    (let ((default-directory "~/org-roam"))(shell-command "git pull"))
+;;  (let ((default-directory "~/"))(shell-command "git clone git@github.com:sherlockes/org-roam.git"))
+;;)
 
 (if (file-exists-p "~/brain/")                                                              ;; Actualiza el repositorio brain o lo clona si no existe
     (let ((default-directory "~/brain"))(shell-command "git pull"))
   (let ((default-directory "~/"))(shell-command "git clone git@gitlab.com:sherlockes/brain.git"))
 )
 
-(setq org-roam-directory (file-truename "~/org-roam"))                                      ;; Establece el directorio para ORGRoam
+(setq org-roam-directory (file-truename "~/brain/content-org"))                             ;; Establece el directorio para ORGRoam
 (org-roam-db-autosync-mode)                                                                 ;; Sincronizar cache automáticamente
 (setq org-roam-completion-system 'ivy)
 (setq org-roam-completion-everywhere t)
@@ -108,20 +108,21 @@
 (defun org-roam-update()                                                                    ;; Actualizar repositorio Org-Roam
     (interactive)
     (org-hugo-export-wim-to-md :all-subtrees)                                               ;; Exportar el artículo a md para la web
-    (let ((default-directory "~/org-roam"))
-        (shell-command "git add --all")
-        (shell-command "git commit -m 'Update'")
-        (shell-command "git push")
-    )
+    ;;(let ((default-directory "~/org-roam"))
+    ;;    (shell-command "git add --all")
+    ;;    (shell-command "git commit -m 'Update'")
+    ;;    (shell-command "git push")
+    ;;)
     (let ((default-directory "~/brain"))
-        (shell-command "git add --all")
-        (shell-command "git commit -m 'Update'")
-        (shell-command "git push")
+        ;;(shell-command "git add --all")
+        ;;(shell-command "git commit -m 'Update'")
+        ;;(shell-command "git push")
+        (shell-command "gitup")
     )
 )
 
 (defun funcion-al-guardar ()
-  (let ((directorio-org-roam (expand-file-name "org-roam" (getenv "HOME"))))
+  (let ((directorio-org-roam (expand-file-name "brain" (getenv "HOME"))))
     (when (string-prefix-p directorio-org-roam buffer-file-name)
       (org-roam-update))))
 
