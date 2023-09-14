@@ -23,6 +23,7 @@
 (setq user-emacs-directory (concat user-dir "/.emacs.d/"))                       ;; Directorio de configuración
 (setq default-directory user-dir)                                                ;; Directorio por defecto
 (setenv "HOME" user-dir)                                                         ;; Directorio HOME
+(setq brain-dir (concat user-dir "/sherlockes.gitlab.io/"))                                     ;; Directorio Org-Roam
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Configuración externa ;;
@@ -73,7 +74,7 @@
 (with-eval-after-load 'ox
   (require 'ox-hugo))
 
-;;(setq org-hugo-default-static-subdirectory-for-externals "~/brain/static")
+;;(setq org-hugo-default-static-subdirectory-for-externals "~/sherlockes.gitlab.io/static")
 
 ;;(setq org-hugo-default-section-directory "notas")
 ;;(setq org-hugo-external-file-extensions-allowed-for-copying t)
@@ -89,48 +90,35 @@
 
 ;;(setq org-roam-ui-sync-theme t)
 
-;;(if (file-exists-p "~/org-roam/")                                                           ;; Actualiza el repositorio org-roam o lo clona si no existe
+;;(if (file-exists-p "~/org-roam/")                                                         ;; Actualiza el repositorio org-roam o lo clona si no existe
 ;;    (let ((default-directory "~/org-roam"))(shell-command "git pull"))
 ;;  (let ((default-directory "~/"))(shell-command "git clone git@github.com:sherlockes/org-roam.git"))
 ;;)
 
-(if (file-exists-p "~/brain/")                                                              ;; Actualiza el repositorio brain o lo clona si no existe
-    (let ((default-directory "~/brain"))(shell-command "git pull"))
-  (let ((default-directory "~/"))(shell-command "git clone git@gitlab.com:sherlockes/brain.git"))
+(if (file-exists-p "~/sherlockes.gitlab.io/")                                               ;; Actualiza el repositorio brain o lo clona si no existe
+    (let ((default-directory "~/sherlockes.gitlab.io"))(shell-command "git pull"))
+  (let ((default-directory "~/"))(shell-command "git clone git@gitlab.com:sherlockes/sherlockes.gitlab.io.git"))
 )
 
-(setq org-roam-directory (file-truename "~/brain/content-org"))                             ;; Establece el directorio para ORGRoam
+(setq org-roam-directory (file-truename "~/sherlockes.gitlab.io/content-org"))                             ;; Establece el directorio para ORGRoam
 (org-roam-db-autosync-mode)                                                                 ;; Sincronizar cache automáticamente
 (setq org-roam-completion-system 'ivy)
 (setq org-roam-completion-everywhere t)
 (setq org-id-extra-files (directory-files-recursively org-roam-directory "\\.org$"))       ;; Habilita la exportación de enlaces hacia Ox-hugo
 
-(defun org-roam-update()                                                                    ;; Actualizar repositorio Org-Roam
-    (interactive)
-    (org-hugo-export-wim-to-md :all-subtrees)                                               ;; Exportar el artículo a md para la web
-    ;;(let ((default-directory "~/org-roam"))
-    ;;    (shell-command "git add --all")
-    ;;    (shell-command "git commit -m 'Update'")
-    ;;    (shell-command "git push")
-    ;;)
-    (let ((default-directory "~/brain"))
-        ;;(shell-command "git add --all")
-        ;;(shell-command "git commit -m 'Update'")
-        ;;(shell-command "git push")
-        (shell-command "gitup")
-    )
+(defun funcion-al-guardar ()                                                                ;; Funión que se ejecuta al guardar archivo de brain-dir
+  (interactive)
+  (if (string= (file-name-extension buffer-file-name) "org")
+    (org-hugo-export-wim-to-md :all-subtrees))                                              ;; Exporta el archivo si es de tipo *.org
+
+  (let ((default-directory "~/sherlockes.gitlab.io"))
+    (shell-command "gitup")                                                                 ;; Actualiza el repositorio git
+  )
 )
 
-(defun funcion-al-guardar ()
-  (let ((directorio-org-roam (expand-file-name "brain" (getenv "HOME"))))
-    (when (string-prefix-p directorio-org-roam buffer-file-name)
-      (org-roam-update))))
+(add-hook 'after-save-hook (lambda () (when (and buffer-file-name (string-prefix-p brain-dir buffer-file-name))(funcion-al-guardar))))
 
-;;(add-hook 'after-save-hook 'funcion-al-guardar)
-
-(add-hook 'after-save-hook (lambda () (when (and (string= (file-name-extension buffer-file-name) "org") (funcion-al-guardar))) nil t))
-
-
+;; Accesos directos de taclado para Org-Roam
 (global-set-key (kbd "C-c n f") 'org-roam-node-find)                                        ;; Buscar o crear un Nodo
 (global-set-key (kbd "C-c n l") 'org-roam-buffer-toggle)                                    ;; Mostrar/Ocultar el Buffer Org-Roam
 (global-set-key (kbd "C-c n i") 'org-roam-node-insert)                                      ;; Insertar un enlace
