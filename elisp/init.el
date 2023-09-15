@@ -2,7 +2,7 @@
 ;; Script Name: init.el                            ;;
 ;; Description: Archivo de configuración de Emacs  ;;
 ;; Args: N/A                                       ;;
-;; Creation/Update: 20200225/20230815              ;; 
+;; Creation/Update: 20200225/20230915              ;; 
 ;; Author: www.sherblog.pro                        ;;                      
 ;; Email: sherlockes@gmail.com                     ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -11,33 +11,28 @@
 ;; Archivo ubicado en "~/.emacs" ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; (setq user-dir (expand-file-name "~"))                                       ;; Variable para el directorio de usuario
-;; (setq user-init-file (concat user-dir "/dotfiles/emacs/.emacs.d/init.el"))   ;; Ubicación del archivo de configuración
-;; (load user-init-file)                                                        ;; Carga el archivo de configuración
-
+;; (setq user-dir (expand-file-name "~"))                                                   ;; Variable para el directorio de usuario
+;; (setq user-init-file (concat user-dir "/dotfiles/emacs/.emacs.d/init.el"))               ;; Ubicación del archivo de configuración
+;; (load user-init-file)                                                                    ;; Carga el archivo de configuración
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Ubicación de directorios ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(setq user-emacs-directory (concat user-dir "/.emacs.d/"))                       ;; Directorio de configuración
-(setq default-directory user-dir)                                                ;; Directorio por defecto
-(setenv "HOME" user-dir)                                                         ;; Directorio HOME
-(setq brain-dir (concat user-dir "/sherlockes.gitlab.io/"))                                     ;; Directorio Org-Roam
+(setq user-emacs-directory (concat user-dir "/.emacs.d/"))                                  ;; Directorio de configuración
+(setq default-directory user-dir)                                                           ;; Directorio por defecto
+(setenv "HOME" user-dir)                                                                    ;; Directorio HOME
+(setq brain-dir (concat user-dir "/sherlockes.gitlab.io/"))                                 ;; Directorio para la exportación de Org-Roam
+(setq brain-roam-dir (concat brain-dir "content-org"))                                      ;; Directorio para las notas en Org-Roam
+(setq brain-repo "git@gitlab.com:sherlockes/sherlockes.gitlab.io.git")                     ;; Repo de la web en gitlab
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Configuración externa ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(load-file (concat user-dir "/dotfiles/emacs/.emacs.d/functions.el"))           ;; Carga el archivo externo de funciones
-                                                                                           
-;;(setq explicit-shell-file-name "/bin/bash")                                     ;; Configura shell-command para permitir alias
-;;(setq shell-file-name "bash")                                                                 
-;;(setq explicit-bash.exe-args '("--noediting" "--login" "-ic"))                                                                                        
-(setq shell-command-switch "-ic")                                                                                    
-;;(setenv "SHELL" shell-file-name)
-
-(setq byte-compile-warnings '(cl-functions))                                    ;; Elimina el warning cl obsoleto
+(load-file (concat user-dir "/dotfiles/emacs/.emacs.d/functions.el"))                       ;; Carga el archivo externo de funciones
+(setq shell-command-switch "-ic")                                                           ;; Configura shell-command para permitir alias
+(setq byte-compile-warnings '(cl-functions))                                                ;; Elimina el warning cl obsoleto
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Añadir repositorios ;;
@@ -45,8 +40,8 @@
 
 (require 'package)
 
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)                  ;; Melpa, no es la versión estable
-;;(add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/") t)       ;; Melpa estable
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)                    ;; Melpa, no es la versión estable
+;;(add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/") t)     ;; Melpa estable
 ;;(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)                       ;; Problemas al instalar Org-Roam
 (add-to-list 'package-archives '("nongnu"   . "https://elpa.nongnu.org/nongnu/") t)
 ;;(add-to-list 'package-archives '("gnu"   . "https://elpa.gnu.org/packages/") t)               ;; Cambiado por la versión nongnu
@@ -59,7 +54,6 @@
 (package-initialize)
 (setq package-enable-at-startup nil)
 
-
 (when (not package-archive-contents)
   (package-refresh-contents))
 
@@ -70,62 +64,58 @@
 (my-install-package-if-not-installed 'ivy)                                                  ;; Instalación del paquete "Ivy"
 (ivy-mode t)                                                                                ;; Activa el modo de autocompletado de Ivy
 
+;;;;;;;;;;;;;
+;; ox-hugo ;;
+;;;;;;;;;;;;;
+
 (my-install-package-if-not-installed 'ox-hugo)
 (with-eval-after-load 'ox
   (require 'ox-hugo))
 
 ;;(setq org-hugo-default-static-subdirectory-for-externals "~/sherlockes.gitlab.io/static")
-
 ;;(setq org-hugo-default-section-directory "notas")
 ;;(setq org-hugo-external-file-extensions-allowed-for-copying t)
+
+;;;;;;;;;;;;;
+;; Counsel ;;
+;;;;;;;;;;;;;
+
+(my-install-package-if-not-installed 'counsel)                                              ;; Requiere tener instalado ripgrep
+(require 'counsel)
+(setq counsel-rg-base-command "rg -S --no-heading --line-number --color never %s .")        ;; Configura el comando rg ejecutable
+
 
 ;;;;;;;;;;;;;;
 ;; Org-roam ;;
 ;;;;;;;;;;;;;;
 
 (my-install-package-if-not-installed 'org-roam)
-(my-install-package-if-not-installed 'org-roam-ui)
-;;(add-to-list 'load-path "/home/sherlockes/Descargas/org-roam-ui")
+;;(my-install-package-if-not-installed 'org-roam-ui)                                        ;; Paquete estandar de org-roam-ui
+(add-to-list 'load-path "/home/sherlockes/Descargas/org-roam-ui")                           ;; Paquete con capacidad de exportar
 (require 'org-roam-ui)
 
-;;(setq org-roam-ui-sync-theme t)
-
-;;(if (file-exists-p "~/org-roam/")                                                         ;; Actualiza el repositorio org-roam o lo clona si no existe
-;;    (let ((default-directory "~/org-roam"))(shell-command "git pull"))
-;;  (let ((default-directory "~/"))(shell-command "git clone git@github.com:sherlockes/org-roam.git"))
-;;)
-
-(if (file-exists-p "~/sherlockes.gitlab.io/")                                               ;; Actualiza el repositorio brain o lo clona si no existe
-    (let ((default-directory "~/sherlockes.gitlab.io"))(shell-command "git pull"))
-  (let ((default-directory "~/"))(shell-command "git clone git@gitlab.com:sherlockes/sherlockes.gitlab.io.git"))
+(if (file-exists-p brain-dir)                                               ;; Actualiza el repositorio brain o lo clona si no existe
+    (let ((default-directory brain-dir))(shell-command "git pull"))
+  (let ((default-directory "~/"))(shell-command (concat "git clone " brain-repo)))
 )
 
-(setq org-roam-directory (file-truename "~/sherlockes.gitlab.io/content-org"))                             ;; Establece el directorio para ORGRoam
+(setq org-roam-directory (file-truename brain-roam-dir))                                    ;; Establece el directorio para ORGRoam
 (org-roam-db-autosync-mode)                                                                 ;; Sincronizar cache automáticamente
 (setq org-roam-completion-system 'ivy)
 (setq org-roam-completion-everywhere t)
-(setq org-id-extra-files (directory-files-recursively org-roam-directory "\\.org$"))       ;; Habilita la exportación de enlaces hacia Ox-hugo
+(setq org-id-extra-files (directory-files-recursively org-roam-directory "\\.org$"))        ;; Habilita la exportación de enlaces hacia Ox-hugo
 
 (defun funcion-al-guardar ()                                                                ;; Funión que se ejecuta al guardar archivo de brain-dir
   (interactive)
   (if (string= (file-name-extension buffer-file-name) "org")
     (org-hugo-export-wim-to-md :all-subtrees))                                              ;; Exporta el archivo si es de tipo *.org
 
-  (let ((default-directory "~/sherlockes.gitlab.io"))
+  (let ((default-directory brain-dir))
     (shell-command "gitup")                                                                 ;; Actualiza el repositorio git
   )
 )
 
 (add-hook 'after-save-hook (lambda () (when (and buffer-file-name (string-prefix-p brain-dir buffer-file-name))(funcion-al-guardar))))
-
-;; Accesos directos de taclado para Org-Roam
-(global-set-key (kbd "C-c n f") 'org-roam-node-find)                                        ;; Buscar o crear un Nodo
-(global-set-key (kbd "C-c n l") 'org-roam-buffer-toggle)                                    ;; Mostrar/Ocultar el Buffer Org-Roam
-(global-set-key (kbd "C-c n i") 'org-roam-node-insert)                                      ;; Insertar un enlace
-(global-set-key (kbd "C-c n t") 'org-roam-tag-add)                                          ;; Añadir un Tag
-(global-set-key (kbd "C-c n a") 'org-roam-alias-add)                                        ;; Añadir un Alias
-(global-set-key (kbd "C-c n o") 'org-id-get-create)                                         ;; Convertir encabezado en nodo
-
 
 ;;;;;;;;;;;;;;;;;;;
 ;; Añadir Dired+ ;;
@@ -250,11 +240,13 @@
 
 (setq ispell-dictionary "español")                                                          ;; Establece el diccionario Español pr defecto
 (add-hook 'markdown-mode-hook 'flyspell-mode)                                               ;; Habilita la correción ortográfica para archivos Markdown
+(add-hook 'org-mode-hook 'flyspell-mode)                                                    ;; Habilita la correción ortográfica para archivos Org-mode
 (add-hook 'flyspell-mode-hook 'flyspell-buffer)                                             ;; Corrige el buffer cuando se habilita la corrección
 
 ;;;;;;;;;;;
 ;; Otros ;;
 ;;;;;;;;;;;
+(put 'downcase-region 'disabled nil)                                                        ;; Habilita el comando para pasar a minúsculas
 (put 'upcase-region 'disabled nil)                                                          ;; Habilita el comando para pasar a mayúsculas
 (put 'erase-buffer 'disabled nil)                                                           ;; Habilita el comando de borrado del buffer
 (global-visual-line-mode t)                                                                 ;; Ajuste de línea
@@ -313,47 +305,30 @@ Resumen de la nota
  ;; If there is more than one, they won't work right.
  )
 
+;;;;;;;;;;;;;;;;;;;;;;;
+;; Ajatos de teclado ;;
+;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Accesos directos
-(global-set-key (kbd "<f1>") 'reiniciar)
-;;(global-set-key (kbd "<f2>") (lambda() (interactive)(find-file "~/Google_Drive/SherloScripts/mi_diario.org")))
-;;(global-set-key (kbd "<f2>") (lambda() (interactive)(browse-url-emacs "https://raw.githubusercontent.com/sherlockes/SherloScripts/master/mi_diario.org")))
-(global-set-key (kbd "<f2>") (lambda() (interactive)(org-roam-ui-mode t)))
-(global-set-key (kbd "<f4>") 'sherblog_edit)
+;; generales
+(global-set-key (kbd "<f1>") 'reiniciar)                                                    ;; Reiniciar emacs
+(global-set-key (kbd "<f2>") (lambda() (interactive)(org-roam-ui-mode t)))                  ;; Lanza Org-roam-ui
+(global-set-key (kbd "<f4>") 'sherblog_edit)                                                ;; Modo de edición del blog
 (global-set-key (kbd "<f5>") 'flyspell-mode)
-(global-set-key (kbd "<f6>") (kbd "C-u C-c C-c"))
-(global-set-key (kbd "<f7>") 'fd-switch-dictionary)    ;; Cambio de diccionario
-(global-set-key (kbd "C-x C-b") 'ibuffer)
+(global-set-key (kbd "<f6>") (kbd "C-u C-c C-c"))                                           ;; Exportar de nuevo
+(global-set-key (kbd "<f7>") 'fd-switch-dictionary)                                         ;; Cambio de diccionario
+
+(global-set-key (kbd "C-x C-b") 'ibuffer)                                                   ;; Cambio de buffer
 (global-set-key (kbd "C-c r") 'query-replace-regexp)
+(global-set-key (kbd "C-c s") 'counsel-rg)                                                  ;; Buscar mediante counsel y ripgrep
 
+;; Org-Roam
+(global-set-key (kbd "C-c n f") 'org-roam-node-find)                                        ;; Buscar o crear un Nodo
+(global-set-key (kbd "C-c n l") 'org-roam-buffer-toggle)                                    ;; Mostrar/Ocultar el Buffer Org-Roam
+(global-set-key (kbd "C-c n i") 'org-roam-node-insert)                                      ;; Insertar un enlace
+(global-set-key (kbd "C-c n t") 'org-roam-tag-add)                                          ;; Añadir un Tag
+(global-set-key (kbd "C-c n a") 'org-roam-alias-add)                                        ;; Añadir un Alias
+(global-set-key (kbd "C-c n o") 'org-id-get-create)                                         ;; Convertir encabezado en nodo
 
-;; -----------------------------------
-(require 'org)
-(require 'org-element)
-
-(defvar yt-iframe-format
-  ;; You may want to change your width and height.
-  (concat "<iframe width=\"440\""
-          " height=\"335\""
-          " src=\"https://www.youtube.com/embed/%s\""
-          " frameborder=\"0\""
-          " allowfullscreen>%s</iframe>"))
-
-(org-add-link-type
- "yt"
- (lambda (handle)
-   (browse-url
-    (concat "https://www.youtube.com/embed/"
-            handle)))
- (lambda (path desc backend)
-   (cl-case backend
-     (html (format yt-iframe-format
-                   path (or desc "")))
-     (latex (format "\href{%s}{%s}"
-                    path (or desc "video"))))))
-
-
-(put 'downcase-region 'disabled nil)
 
 
 
