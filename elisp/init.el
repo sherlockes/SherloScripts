@@ -90,8 +90,8 @@
 ;;;;;;;;;;;;;;
 
 (my-install-package-if-not-installed 'org-roam)
-;;(my-install-package-if-not-installed 'org-roam-ui)                                        ;; Paquete estandar de org-roam-ui
-(add-to-list 'load-path "/home/sherlockes/Descargas/org-roam-ui")                           ;; Paquete con capacidad de exportar
+(my-install-package-if-not-installed 'org-roam-ui)                                        ;; Paquete estandar de org-roam-ui
+;;(add-to-list 'load-path "/home/sherlockes/Descargas/org-roam-ui")                           ;; Paquete con capacidad de exportar
 (require 'org-roam-ui)
 
 (if (file-exists-p brain-dir)                                               ;; Actualiza el repositorio brain o lo clona si no existe
