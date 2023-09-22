@@ -2,7 +2,7 @@
 ;; Script Name: init.el                            ;;
 ;; Description: Archivo de configuración de Emacs  ;;
 ;; Args: N/A                                       ;;
-;; Creation/Update: 20200225/20230915              ;; 
+;; Creation/Update: 20200225/20230921              ;; 
 ;; Author: www.sherblog.pro                        ;;                      
 ;; Email: sherlockes@gmail.com                     ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -24,7 +24,7 @@
 (setenv "HOME" user-dir)                                                                    ;; Directorio HOME
 (setq brain-dir (concat user-dir "/sherlockes.gitlab.io/"))                                 ;; Directorio para la exportación de Org-Roam
 (setq brain-roam-dir (concat brain-dir "content-org"))                                      ;; Directorio para las notas en Org-Roam
-(setq brain-repo "git@gitlab.com:sherlockes/sherlockes.gitlab.io.git")                     ;; Repo de la web en gitlab
+(setq brain-repo "git@gitlab.com:sherlockes/sherlockes.gitlab.io.git")                      ;; Repo de la web en gitlab
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Configuración externa ;;
@@ -72,10 +72,6 @@
 (with-eval-after-load 'ox
   (require 'ox-hugo))
 
-;;(setq org-hugo-default-static-subdirectory-for-externals "~/sherlockes.gitlab.io/static")
-;;(setq org-hugo-default-section-directory "notas")
-;;(setq org-hugo-external-file-extensions-allowed-for-copying t)
-
 ;;;;;;;;;;;;;
 ;; Counsel ;;
 ;;;;;;;;;;;;;
@@ -84,28 +80,24 @@
 (require 'counsel)
 (setq counsel-rg-base-command "rg -S --no-heading --line-number --color never %s .")        ;; Configura el comando rg ejecutable
 
-
 ;;;;;;;;;;;;;;
 ;; Org-roam ;;
 ;;;;;;;;;;;;;;
 
-(my-install-package-if-not-installed 'org-roam)
-(my-install-package-if-not-installed 'org-roam-ui)                                        ;; Paquete estandar de org-roam-ui
-;;(add-to-list 'load-path "/home/sherlockes/Descargas/org-roam-ui")                           ;; Paquete con capacidad de exportar
-(require 'org-roam-ui)
+(my-install-package-if-not-installed 'org-roam)                                             ;; Instala paquete Org-Roam
 
-(if (file-exists-p brain-dir)                                               ;; Actualiza el repositorio brain o lo clona si no existe
+(if (file-exists-p brain-dir)                                                               ;; Actualiza el repositorio brain o lo clona si no existe
     (let ((default-directory brain-dir))(shell-command "git pull"))
   (let ((default-directory "~/"))(shell-command (concat "git clone " brain-repo)))
 )
 
 (setq org-roam-directory (file-truename brain-roam-dir))                                    ;; Establece el directorio para ORGRoam
 (org-roam-db-autosync-mode)                                                                 ;; Sincronizar cache automáticamente
-(setq org-roam-completion-system 'ivy)
-(setq org-roam-completion-everywhere t)
+(setq org-roam-completion-system 'ivy)                                                      ;; Define ivy como sistema de completado
+(setq org-roam-completion-everywhere t)                                                     ;; Completa en cualquier lugar
 (setq org-id-extra-files (directory-files-recursively org-roam-directory "\\.org$"))        ;; Habilita la exportación de enlaces hacia Ox-hugo
 
-(defun funcion-al-guardar ()                                                                ;; Funión que se ejecuta al guardar archivo de brain-dir
+(defun funcion-al-guardar ()                                                                ;; Función que se ejecuta al guardar archivo de brain-dir
   (interactive)
   (if (string= (file-name-extension buffer-file-name) "org")
     (org-hugo-export-wim-to-md :all-subtrees))                                              ;; Exporta el archivo si es de tipo *.org
@@ -116,6 +108,14 @@
 )
 
 (add-hook 'after-save-hook (lambda () (when (and buffer-file-name (string-prefix-p brain-dir buffer-file-name))(funcion-al-guardar))))
+
+;;;;;;;;;;;;;;;;;
+;; Org-roam-ui ;;
+;;;;;;;;;;;;;;;;;
+
+(my-install-package-if-not-installed 'org-roam-ui)                                        ;; Paquete estandar de org-roam-ui
+;;(add-to-list 'load-path "/home/sherlockes/Descargas/org-roam-ui")                           ;; Paquete con capacidad de exportar
+(require 'org-roam-ui)
 
 ;;;;;;;;;;;;;;;;;;;
 ;; Añadir Dired+ ;;
@@ -251,7 +251,6 @@
 (put 'erase-buffer 'disabled nil)                                                           ;; Habilita el comando de borrado del buffer
 (global-visual-line-mode t)                                                                 ;; Ajuste de línea
 (add-hook 'window-setup-hook 'toggle-frame-maximized t)                                     ;; Arrancar emacs maximizado
-;; (add-to-list 'initial-frame-alist '(fullscreen . maximized))                             ;; Arrancar emacs maximizado
 (add-to-list 'display-buffer-alist '("^\\*shell\\*" . (display-buffer-same-window . nil)))  ;; Mostrar la sesión de terminal en el mismo buffer
 
 (custom-set-variables
@@ -318,7 +317,7 @@ Resumen de la nota
 (global-set-key (kbd "<f7>") 'fd-switch-dictionary)                                         ;; Cambio de diccionario
 
 (global-set-key (kbd "C-x C-b") 'ibuffer)                                                   ;; Cambio de buffer
-(global-set-key (kbd "C-c r") 'query-replace-regexp)
+(global-set-key (kbd "C-c r") 'query-replace-regexp)                                        ;; Buscar y reemplazar
 (global-set-key (kbd "C-c s") 'counsel-rg)                                                  ;; Buscar mediante counsel y ripgrep
 
 ;; Org-Roam
@@ -328,9 +327,3 @@ Resumen de la nota
 (global-set-key (kbd "C-c n t") 'org-roam-tag-add)                                          ;; Añadir un Tag
 (global-set-key (kbd "C-c n a") 'org-roam-alias-add)                                        ;; Añadir un Alias
 (global-set-key (kbd "C-c n o") 'org-id-get-create)                                         ;; Convertir encabezado en nodo
-
-
-
-
-
-
