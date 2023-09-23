@@ -1,4 +1,4 @@
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Script Name: init.el                            ;;
 ;; Description: Archivo de configuración de Emacs  ;;
 ;; Args: N/A                                       ;;
@@ -23,6 +23,8 @@
 (setq default-directory user-dir)                                                           ;; Directorio por defecto
 (setenv "HOME" user-dir)                                                                    ;; Directorio HOME
 (setq brain-dir (concat user-dir "/sherlockes.gitlab.io/"))                                 ;; Directorio para la exportación de Org-Roam
+(setq blog-dir (concat user-dir "/sherlockes.github.io/"))                                 ;; Directorio para la Actualizacion del Blog
+(setq blog-repo "git@github.com:sherlockes/sherlockes.github.io.git")
 (setq brain-roam-dir (concat brain-dir "content-org"))                                      ;; Directorio para las notas en Org-Roam
 (setq brain-repo "git@gitlab.com:sherlockes/sherlockes.gitlab.io.git")                      ;; Repo de la web en gitlab
 
@@ -63,6 +65,14 @@
 (my-install-package-if-not-installed 'wgrep)                                                ;; Requiere tener instalado "wgrep"
 (my-install-package-if-not-installed 'ivy)                                                  ;; Instalación del paquete "Ivy"
 (ivy-mode t)                                                                                ;; Activa el modo de autocompletado de Ivy
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Actualización del Blog ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(if (file-exists-p blog-dir)                                                               ;; Actualiza el repositorio brain o lo clona si no existe
+    (let ((default-directory blog-dir))(shell-command "git pull"))
+  (let ((default-directory "~/"))(shell-command (concat "git clone " blog-repo)))
+)
 
 ;;;;;;;;;;;;;
 ;; ox-hugo ;;
@@ -196,6 +206,11 @@
       (dired-sort-other my-dired-ls-switches-hide)
       (dired-sort-other my-dired-ls-switches-show))))))
 
+;;;;;;;;;;;;;;;;;;;
+;; All-the-icons ;;
+;;;;;;;;;;;;;;;;;;;
+(my-install-package-if-not-installed 'all-the-icons-dired)                                        ;; Instala el paquete para mostrar iconos en dired
+(add-hook 'dired-mode-hook 'all-the-icons-dired-mode)                                       ;; Habilita el modo cuando entramos en Dired
 
 ;;;;;;;;;;;;
 ;; Python ;;
