@@ -138,7 +138,7 @@ gdrive_folders_sync(){
 # ---------------------------------------------------------
 github_repos_update(){
     echo "Actualizando repositorios de GitHub..."
-    repo=(SherloScripts sherblog)
+    repo=(SherloScripts)
     for i in "${repo[@]}"
     do
 	mensaje+=$"Actualizar el repositorio $i . . . "
