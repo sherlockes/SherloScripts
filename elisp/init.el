@@ -23,7 +23,7 @@
 (setq default-directory user-dir)                                                           ;; Directorio por defecto
 (setenv "HOME" user-dir)                                                                    ;; Directorio HOME
 (setq brain-dir (concat user-dir "/sherlockes.gitlab.io/"))                                 ;; Directorio para la exportación de Org-Roam
-(setq blog-dir (concat user-dir "/sherlockes.github.io/"))                                 ;; Directorio para la Actualizacion del Blog
+(setq blog-dir (concat user-dir "/sherlockes.github.io/"))                                  ;; Directorio para la Actualizacion del Blog
 (setq blog-repo "git@github.com:sherlockes/sherlockes.github.io.git")
 (setq brain-roam-dir (concat brain-dir "content-org"))                                      ;; Directorio para las notas en Org-Roam
 (setq brain-repo "git@gitlab.com:sherlockes/sherlockes.gitlab.io.git")                      ;; Repo de la web en gitlab
@@ -48,7 +48,6 @@
 (add-to-list 'package-archives '("nongnu"   . "https://elpa.nongnu.org/nongnu/") t)
 ;;(add-to-list 'package-archives '("gnu"   . "https://elpa.gnu.org/packages/") t)               ;; Cambiado por la versión nongnu
 
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Inicializar y actualizar paquetes ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -58,6 +57,103 @@
 
 (when (not package-archive-contents)
   (package-refresh-contents))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Configuración interna ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(ansi-color-faces-vector
+   [default default default italic underline success warning error])
+ '(custom-enabled-themes '(wombat))
+ '(debug-on-error nil)
+ '(delete-selection-mode 1)
+ '(ibuffer-formats
+   '((mark modified read-only locked " "
+	   (name 48 48 :left :elide)
+	   " "
+	   (size 9 -1 :right)
+	   " "
+	   (mode 16 16 :left :elide))
+     (mark " "
+	   (name 16 -1)
+	   " " filename)))
+ '(org-link-elisp-skip-confirm-regexp ".*")
+ '(org-roam-capture-templates
+   '(("d" "default" plain "%?" :target
+      (file+head "%<%Y%m%d>-${slug}.org" "#+title: ${title}
+#+STARTUP: overview
+#+date: %<%Y-%m-%d>
+#+hugo_custom_front_matter: :thumbnail \"images/image.jpg\"
+#+setupfile: ./setup.conf
+#+hugo_tags: nemo
+#+hugo_categories: apps
+#+hugo_draft: false
+Resumen de la nota
+#+BEGIN_export html
+<!--more-->
+#+END_export
+")
+      :unnarrowed t)))
+ '(org-tags-column -60)
+ '(package-selected-packages
+   '(dashboard ox-hugo wgrep ivy vertico whole-line-or-region markdown-mode htmlize gnu-elpa-keyring-update elpy))
+ '(remote-shell-program "ssh")
+ '(safe-local-variable-values '((ENCODING . UTF-8) (encoding . utf-8)))
+ '(tramp-default-method "ssh")
+ '(tramp-encoding-shell "/bin/bash"))
+
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+
+;;;;;;;;;;;;;;;;;;;;;;;;
+;; Archivos recientes ;;
+;;;;;;;;;;;;;;;;;;;;;;;;
+
+(recentf-mode 1)                                                                            ;; Activa el modo recentf para guardar y cargar archivos recientes.
+(setq recentf-max-saved-items 10)                                                           ;; Cantidad de archivos recientes a mostrar
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Ocultar barras y pantalla de inicio ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(tool-bar-mode -1)                                                                          ;; Oculta la barra de herramientas superior
+(tooltip-mode -1)                                                                           ;; Mostrar consejos en la barra inferior
+(menu-bar-mode -1)                                                                          ;; Oculta la barra de menús superior
+(setq inhibit-startup-screen t)                                                             ;; No mostrar la pantalla de bienvenida
+
+;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Arrancar maximizado ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;
+;;(add-hook 'window-setup-hook 'toggle-frame-maximized t)                                   ;; Arrancar emacs maximizado
+;;(add-hook 'window-setup-hook 'maximizar)                                                  ;; Arrancar emacs maximizado
+;; Crear un archivo "earty-init.el" en ".emacs.d" con el siguiente contenido
+;; (push '(fullscreen . maximized) default-frame-alist)
+
+;;;;;;;;;;;;;;;;;;;
+;; All-the-icons ;;
+;;;;;;;;;;;;;;;;;;;
+(my-install-package-if-not-installed 'all-the-icons)
+(my-install-package-if-not-installed 'all-the-icons-dired)                                  ;; Instala el paquete para mostrar iconos en dired
+(add-hook 'dired-mode-hook 'all-the-icons-dired-mode)                                       ;; Habilita el modo cuando entramos en Dired
+
+;;;;;;;;;;;;;;;
+;; Dashboard ;;
+;;;;;;;;;;;;;;;
+(my-install-package-if-not-installed 'dashboard)
+(setq dashboard-icon-type 'all-the-icons)
+(setq dashboard-set-heading-icons t)
+(setq dashboard-set-file-icons t)
+
+(setq dashboard-items '((recents  . 5)
+                        (bookmarks . 10)))
 
 ;;;;;;;;;
 ;; Ivy ;;
@@ -69,10 +165,12 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Actualización del Blog ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(if (file-exists-p blog-dir)                                                               ;; Actualiza el repositorio brain o lo clona si no existe
+(if (file-exists-p blog-dir)                                                                ;; Actualiza el repositorio brain o lo clona si no existe
     (let ((default-directory blog-dir))(shell-command "git pull"))
   (let ((default-directory "~/"))(shell-command (concat "git clone " blog-repo)))
 )
+
+(add-hook 'after-save-hook (lambda () (when (and buffer-file-name (string-prefix-p blog-dir buffer-file-name))(funcion-al-guardar))))
 
 ;;;;;;;;;;;;;
 ;; ox-hugo ;;
@@ -107,7 +205,7 @@
 (setq org-roam-completion-everywhere t)                                                     ;; Completa en cualquier lugar
 (setq org-id-extra-files (directory-files-recursively org-roam-directory "\\.org$"))        ;; Habilita la exportación de enlaces hacia Ox-hugo
 
-(defun funcion-al-guardar ()                                                                ;; Función que se ejecuta al guardar archivo de brain-dir
+(defun funcion-al-guardar-brain ()                                                          ;; Función que se ejecuta al guardar archivo de brain-dir
   (interactive)
   (if (string= (file-name-extension buffer-file-name) "org")
     (org-hugo-export-wim-to-md :all-subtrees))                                              ;; Exporta el archivo si es de tipo *.org
@@ -160,14 +258,6 @@
 (setq auto-save-file-name-transforms `((".*" ,temporary-file-directory t)))
 ;;(setq temporary-file-directory "~/.emacs_backup")
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Ocultar barras y pantalla de inicio ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(tool-bar-mode -1)                                                                          ;; Oculta la barra de herramientas superior
-(tooltip-mode -1)                                                                           ;; Mostrar consejos en la barra inferior
-(menu-bar-mode -1)                                                                          ;; Oculta la barra de menús superior
-(setq inhibit-startup-screen t)                                                             ;; No mostrar la pantalla de bienvenida
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Modo para copiar la línea completa ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -205,12 +295,6 @@
     (if (= my-dired-switch 1)
       (dired-sort-other my-dired-ls-switches-hide)
       (dired-sort-other my-dired-ls-switches-show))))))
-
-;;;;;;;;;;;;;;;;;;;
-;; All-the-icons ;;
-;;;;;;;;;;;;;;;;;;;
-(my-install-package-if-not-installed 'all-the-icons-dired)                                        ;; Instala el paquete para mostrar iconos en dired
-(add-hook 'dired-mode-hook 'all-the-icons-dired-mode)                                       ;; Habilita el modo cuando entramos en Dired
 
 ;;;;;;;;;;;;
 ;; Python ;;
@@ -265,59 +349,7 @@
 (put 'upcase-region 'disabled nil)                                                          ;; Habilita el comando para pasar a mayúsculas
 (put 'erase-buffer 'disabled nil)                                                           ;; Habilita el comando de borrado del buffer
 (global-visual-line-mode t)                                                                 ;; Ajuste de línea
-(add-hook 'window-setup-hook 'toggle-frame-maximized t)                                     ;; Arrancar emacs maximizado
 (add-to-list 'display-buffer-alist '("^\\*shell\\*" . (display-buffer-same-window . nil)))  ;; Mostrar la sesión de terminal en el mismo buffer
-
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(ansi-color-faces-vector
-   [default default default italic underline success warning error])
- '(custom-enabled-themes '(wombat))
- '(debug-on-error nil)
- '(delete-selection-mode 1)
- '(ibuffer-formats
-   '((mark modified read-only locked " "
-	   (name 48 48 :left :elide)
-	   " "
-	   (size 9 -1 :right)
-	   " "
-	   (mode 16 16 :left :elide))
-     (mark " "
-	   (name 16 -1)
-	   " " filename)))
- '(org-roam-capture-templates
-   '(("d" "default" plain "%?" :target
-      (file+head "%<%Y%m%d>-${slug}.org" "#+title: ${title}
-#+STARTUP: overview
-#+date: %<%Y-%m-%d>
-#+hugo_custom_front_matter: :thumbnail \"images/image.jpg\"
-#+setupfile: ./setup.conf
-#+hugo_tags: nemo
-#+hugo_categories: apps
-#+hugo_draft: false
-Resumen de la nota
-#+BEGIN_export html
-<!--more-->
-#+END_export
-")
-      :unnarrowed t)))
- '(org-tags-column -60)
- '(package-selected-packages
-   '(ox-hugo wgrep ivy vertico whole-line-or-region markdown-mode htmlize gnu-elpa-keyring-update elpy))
- '(remote-shell-program "ssh")
- '(safe-local-variable-values '((ENCODING . UTF-8) (encoding . utf-8)))
- '(tramp-default-method "ssh")
- '(tramp-encoding-shell "/bin/bash"))
-
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
 
 ;;;;;;;;;;;;;;;;;;;;;;;
 ;; Ajatos de teclado ;;
@@ -326,7 +358,7 @@ Resumen de la nota
 ;; generales
 (global-set-key (kbd "<f1>") 'reiniciar)                                                    ;; Reiniciar emacs
 (global-set-key (kbd "<f2>") (lambda() (interactive)(org-roam-ui-mode t)))                  ;; Lanza Org-roam-ui
-(global-set-key (kbd "<f4>") 'sherblog_edit)                                                ;; Modo de edición del blog
+(global-set-key (kbd "<f4>") 'brainblog)                                                    ;; Modo de edición del blog
 (global-set-key (kbd "<f5>") 'flyspell-mode)
 (global-set-key (kbd "<f6>") (kbd "C-u C-c C-c"))                                           ;; Exportar de nuevo
 (global-set-key (kbd "<f7>") 'fd-switch-dictionary)                                         ;; Cambio de diccionario
@@ -342,3 +374,8 @@ Resumen de la nota
 (global-set-key (kbd "C-c n t") 'org-roam-tag-add)                                          ;; Añadir un Tag
 (global-set-key (kbd "C-c n a") 'org-roam-alias-add)                                        ;; Añadir un Alias
 (global-set-key (kbd "C-c n o") 'org-id-get-create)                                         ;; Convertir encabezado en nodo
+
+;;
+(split-window-right)
+(dashboard-open)
+
