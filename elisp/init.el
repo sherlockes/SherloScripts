@@ -241,6 +241,7 @@ Resumen de la nota
 
 (my-install-package-if-not-installed 'yasnippet)
 (require 'yasnippet)
+(setq yas-snippet-dirs (list(concat user-dir "/dotfiles/emacs/.emacs.d/snippets")))
 (yas-global-mode 1)
 
 ;;;;;;;;;;;;;;;;;;;;;
