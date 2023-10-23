@@ -101,7 +101,7 @@ Resumen de la nota
       :unnarrowed t)))
  '(org-tags-column -60)
  '(package-selected-packages
-   '(dashboard ox-hugo wgrep ivy vertico whole-line-or-region markdown-mode htmlize gnu-elpa-keyring-update elpy))
+   '(page-break-lines dashboard ox-hugo wgrep ivy vertico whole-line-or-region markdown-mode htmlize gnu-elpa-keyring-update elpy))
  '(remote-shell-program "ssh")
  '(safe-local-variable-values '((ENCODING . UTF-8) (encoding . utf-8)))
  '(tramp-default-method "ssh")
@@ -137,6 +137,13 @@ Resumen de la nota
 ;; Crear un archivo "earty-init.el" en ".emacs.d" con el siguiente contenido
 ;; (push '(fullscreen . maximized) default-frame-alist)
 
+;;;;;;;;;;;;;;;
+;; Saveplace ;;
+;;;;;;;;;;;;;;;
+(my-install-package-if-not-installed 'saveplace)
+(save-place-mode 1)
+(setq save-place-file (expand-file-name ".emacs-places" user-emacs-directory))
+
 ;;;;;;;;;;;;;;;;;;;
 ;; All-the-icons ;;
 ;;;;;;;;;;;;;;;;;;;
@@ -148,12 +155,19 @@ Resumen de la nota
 ;; Dashboard ;;
 ;;;;;;;;;;;;;;;
 (my-install-package-if-not-installed 'dashboard)
+(my-install-package-if-not-installed 'page-break-lines)
+
 (setq dashboard-icon-type 'all-the-icons)
 (setq dashboard-set-heading-icons t)
 (setq dashboard-set-file-icons t)
 
 (setq dashboard-items '((recents  . 5)
                         (bookmarks . 10)))
+
+(setq dashboard-init-info "F1(Reiniciar)    F2(Org-Roam)    F5(Ortografía)    F7(Diccionario)
+RipGrep(C-c s)    Nodo OrgRoam(C-c n f)")
+
+
 
 ;;;;;;;;;
 ;; Ivy ;;
