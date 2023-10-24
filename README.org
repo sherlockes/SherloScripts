@@ -15,6 +15,16 @@ Este archivo en formato org-mode voy escribiendo lo que día a día aprendo y ut
 - Markdown
 - Python
 - Y lo que vaya utilizando...
+** [[https://github.com/sherlockes/SherloScripts/blob/master/bash/test-online.sh][test_online]] (bash)                                 :Bash:
+Todas las horas, la raspberry comprueba el estado de los distintos dispositivos de mis casas mediante un ping a cada uno de ellos, este script tiene que:
+- Obtener la IP local mediante "ip route"
+- Leer un archivo de texto por líneas mediante "read"
+- Asignar cada línea como un valor de una matriz
+- Extraer los distintos campos de cada línea mediante "cut"
+- Comprobar el horario respecto a la hora actual mediante "date" e "if"
+- Comprobar el acceso a un host mediante "ping"
+- Aplicar colores al texto de resultado en consola
+- Enviar el resultado por telegram
 ** [[https://github.com/sherlockes/SherloScripts/blob/master/bash/hugo.sh][hugo.sh]] (bash)                                     :Bash:
 Dentro de las "faenas" diarias que tiene mi raspberry está incluida la actualización de Hugo en caso de que haya una nueva versión. Esto se realiza mediante este script que:
 - Busca si Hugo esta instalado en el sistema

@@ -18,9 +18,6 @@ if [ $carpeta != 'dotfiles' ];then
 fi
 
 
-
-
-
 link_dotfile () {
 
     if [ -d "$2" ]; then
