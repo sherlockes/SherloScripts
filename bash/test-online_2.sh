@@ -115,27 +115,6 @@ while read -r line; do
 		TODO_OK=false
 	    fi
 	    mensaje+=$'\n'
-	elif [ $REMOTE_RANGE = $LOCAL_RANGE ] ; then
-	    if ping -c 1 $REMOTE_IP &> /dev/null
-	    then
-		echo -e "$nombre is ${GREEN}OK${NOCOLOR} @ $REMOTE_IP"
-		mensaje+=$"$nombre is OK @ $REMOTE_IP"
-	    else
-		echo -e "$nombre is ${RED}KO${NOCOLOR} @ $REMOTE_IP"
-		mensaje+=$"$nombre is KO @ $REMOTE_IP --- ATENCION ---"
-		TODO_OK=false
-	    fi
-	    mensaje+=$'\n'
-	elif [ $REMOTE_RANGE != $LOCAL_RANGE ] ; then
-	    if ssh rpi5oz "ping -c 1 $REMOTE_IP" &< /dev/null ; then
-		echo -e "$nombre is ${GREEN}OK${NOCOLOR} @ $REMOTE_IP"
-		mensaje+=$"$nombre is OK @ $REMOTE_IP"
-	    else
-		echo -e "$nombre is ${RED}KO${NOCOLOR} @ $REMOTE_IP"
-		mensaje+=$"$nombre is KO @ $REMOTE_IP --- ATENCION ---"
-		TODO_OK=false
-	    fi
-	    mensaje+=$'\n'
 	fi
     fi
 done <$ssh_config_ruta
