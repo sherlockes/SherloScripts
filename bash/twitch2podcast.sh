@@ -4,7 +4,7 @@
 #Script Name: twitch2podcast.sh
 #Description: Generación de Podcast a partir de canal de Twitch
 #Args: N/A
-#Creation/Update: 20220317/20230420
+#Creation/Update: 20220317/20231030
 #Author: www.sherblog.pro                                             
 #Email: sherlockes@gmail.com                               
 ###################################################################
@@ -51,13 +51,13 @@ buscar_ultimos () {
     local titulo=${2:?Falta el título del canal}
 
     # Obtiene el json de los ultimos vídeos.
-    mensaje+=$'Obteniendo últimos vídeos. . . . . . . . . . . . . '
+    mensaje+=$'Obteniendo últimos vídeos. . . . . . . . . . . . '
     echo "- Obteniendo últimos vídeos de $titulo"
     json=$(python3 $twdl videos $canal -j)
     comprobar $?
 
     # Limitar a 15 videos la lista de descargadoscase 
-    mensaje+=$'Recortando listas de descargados. . . . . . . '
+    mensaje+=$'Recortando listas de descargados. . . . . . '
     echo "- Recortando listas de descargados"
     head -n15 $twitch_dir/$canal/descargados.txt > tmp
     mv tmp $twitch_dir/$canal/descargados.txt
@@ -97,14 +97,14 @@ buscar_ultimos () {
 	    # No sigue comprobando si ya ha visto uno descargado
 	    break
         fi
-	    echo "- El vídeo $id ya ha sido descargado.";
+	    echo "- El vídeo $id ya se ha descargado.";
             mensaje+=$"El vídeo $id ya ha sido descargado."
             mensaje+=$'\n'
-	    # No sigue comprobando si ya ha visto uno descargado
+	    # No sigue comprobando si ya se ha visto uno descargado
 	    break
 	else
 	    echo "- Descargando el audio del vídeo $id.";
-            mensaje+=$"Descargando el audio de $id . . ."
+            mensaje+=$"Descargando el audio de $id. ."
 
             if (( $mins > 10 ))
             then
@@ -140,17 +140,17 @@ convertir_mp3 () {
        local id_ep=$(echo $nombre | awk -F'_' '{print $2}')
 
        echo "- Episodio $id_ep, codificando audio y eliminando silencios"
-       mensaje+=$"Recodificando audio de $id_ep . . . . "
+       mensaje+=$"Recodificando audio de $id_ep. . . "
        ffmpeg -loglevel 24 -i "$file" -af silenceremove=1:0:-50dB "${file%.mkv}.mp3"
        comprobar $?
 
        echo "- Episodio $id_ep, moviendo mp3"
-       mensaje+=$"Moviendo mp3 $id_ep . . . . . . . . . . . ."
+       mensaje+=$"Moviendo mp3 $id_ep. . . . . . . . . . ."
        mv $nombre.mp3 $canal/mp3/$id_ep.mp3
        comprobar $?
 
        echo "- Episodio $id_ep, eliminando el video"
-       mensaje+=$"Eliminando vídeo $id_ep . . . . . . . . . ."
+       mensaje+=$"Eliminando vídeo $id_ep. . . . . . . . ."
        rm $file
        comprobar $?
     done
@@ -256,7 +256,7 @@ subir_contenido () {
     
     # Subiendo archivos a la nube via rclone
     echo "- Subiendo los mp3's al sevidor remoto"
-    mensaje+=$"Subiendo los mp3's al servidor webdav . . ."
+    mensaje+=$"Subiendo mp3's al servidor webdav . . ."
     rclone copy $canal Sherlockes78_UN3_en:twitch/$canal/ --create-empty-src-dirs
 
     comprobar $?
@@ -266,7 +266,7 @@ subir_contenido () {
     find . -type f -name "*.mp3" -delete
 
     # Borrando los archivos de la nube anteriores a 30 días
-    mensaje+=$"Borrando contenido antiguo . . . . . . . . . . . ."
+    mensaje+=$"Borrando mp3's antiguos . . . . . . . . . . . ."
     rclone delete Sherlockes78_UN3_en:twitch/$canal/mp3 --min-age 30d
     comprobar $?
 }
