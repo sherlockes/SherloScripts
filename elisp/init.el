@@ -1,4 +1,4 @@
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Script Name: init.el                            ;;
 ;; Description: Archivo de configuración de Emacs  ;;
 ;; Args: N/A                                       ;;
@@ -28,6 +28,7 @@
 (setq brain-roam-dir (concat brain-dir "content-org"))                                      ;; Directorio para las notas en Org-Roam
 (setq brain-repo "git@gitlab.com:sherlockes/sherlockes.gitlab.io.git")                      ;; Repo de la web en gitlab
 
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Configuración externa ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -47,6 +48,7 @@
 ;;(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)                       ;; Problemas al instalar Org-Roam
 (add-to-list 'package-archives '("nongnu"   . "https://elpa.nongnu.org/nongnu/") t)
 ;;(add-to-list 'package-archives '("gnu"   . "https://elpa.gnu.org/packages/") t)               ;; Cambiado por la versión nongnu
+(add-to-list 'package-archives '( "jcs-elpa" . "https://jcs-emacs.github.io/jcs-elpa/packages/") t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Inicializar y actualizar paquetes ;;
@@ -101,7 +103,7 @@ Resumen de la nota
       :unnarrowed t)))
  '(org-tags-column -60)
  '(package-selected-packages
-   '(page-break-lines dashboard ox-hugo wgrep ivy vertico whole-line-or-region markdown-mode htmlize gnu-elpa-keyring-update elpy))
+   '(gptel page-break-lines dashboard ox-hugo wgrep ivy vertico whole-line-or-region markdown-mode htmlize gnu-elpa-keyring-update elpy))
  '(remote-shell-program "ssh")
  '(safe-local-variable-values '((ENCODING . UTF-8) (encoding . utf-8)))
  '(tramp-default-method "ssh")
@@ -164,9 +166,28 @@ Resumen de la nota
 (setq dashboard-items '((recents  . 5)
                         (bookmarks . 10)))
 
-(setq dashboard-init-info "F1(Reiniciar)    F2(Org-Roam)    F5(Ortografía)    F7(Diccionario)
-RipGrep(C-c s)    Nodo OrgRoam(C-c n f)")
+(setq dashboard-init-info "F1(Reiniciar)   F2(Org-Roam)   F4(HugoServer)   F5(Ortografía)   F7(Diccionario)
+RipGrep(C-c s)    Nodo OrgRoam(C-c n f)  Mostrar ocultos(M-o)")
 
+
+(setq dashboard-set-navigator t)
+;; Format: "(icon title help action face prefix suffix)"
+
+;; Format: "(icon title help action face prefix suffix)"
+(setq dashboard-navigator-buttons
+      `(;; line1
+        ((""
+         "Sherblog"
+         "Browse homepage"
+         (lambda (&rest _) (browse-url "http://www.sherblog.pro")))
+        ("★" "Star" "Show stars" (lambda (&rest _) (show-stars)) warning)
+        ("?" "" "?/h" #'show-help nil "<" ">"))
+         ;; line 2
+        ((""
+          "Linkedin"
+          ""
+          (lambda (&rest _) (browse-url "homepage")))
+         ("⚑" nil "Show flags" (lambda (&rest _) (message "flag")) error))))
 
 
 ;;;;;;;;;
@@ -356,6 +377,7 @@ RipGrep(C-c s)    Nodo OrgRoam(C-c n f)")
 (add-hook 'markdown-mode-hook 'flyspell-mode)                                               ;; Habilita la correción ortográfica para archivos Markdown
 (add-hook 'org-mode-hook 'flyspell-mode)                                                    ;; Habilita la correción ortográfica para archivos Org-mode
 (add-hook 'flyspell-mode-hook 'flyspell-buffer)                                             ;; Corrige el buffer cuando se habilita la corrección
+
 
 ;;;;;;;;;;;
 ;; Otros ;;
