@@ -1,8 +1,8 @@
-0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Script Name: init.el                            ;;
 ;; Description: Archivo de configuración de Emacs  ;;
 ;; Args: N/A                                       ;;
-;; Creation/Update: 20200225/20230921              ;; 
+;; Creation/Update: 20200225/20231031              ;; 
 ;; Author: www.sherblog.pro                        ;;                      
 ;; Email: sherlockes@gmail.com                     ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -163,11 +163,11 @@ Resumen de la nota
 (setq dashboard-set-heading-icons t)
 (setq dashboard-set-file-icons t)
 
-(setq dashboard-items '((recents  . 5)
+(setq dashboard-items '((recents  . 10)
                         (bookmarks . 10)))
 
-(setq dashboard-init-info "F1(Reiniciar)   F2(Org-Roam)   F4(HugoServer)   F5(Ortografía)   F7(Diccionario)
-RipGrep(C-c s)    Nodo OrgRoam(C-c n f)  Mostrar ocultos(M-o)")
+(setq dashboard-init-info "C-ESC(Dashboard)  F1(Reiniciar)  F2(Org-Roam)  F4(HugoServer)  F5(Ortografía)  F7(Diccionario)
+RipGrep(C-c s)    Nodo OrgRoam(C-c n f)  Mostrar ocultos(M-o) Truncate(C-x x t)")
 
 
 (setq dashboard-set-navigator t)
@@ -176,18 +176,19 @@ RipGrep(C-c s)    Nodo OrgRoam(C-c n f)  Mostrar ocultos(M-o)")
 ;; Format: "(icon title help action face prefix suffix)"
 (setq dashboard-navigator-buttons
       `(;; line1
-        ((""
-         "Sherblog"
-         "Browse homepage"
-         (lambda (&rest _) (browse-url "http://www.sherblog.pro")))
-        ("★" "Star" "Show stars" (lambda (&rest _) (show-stars)) warning)
-        ("?" "" "?/h" #'show-help nil "<" ">"))
+        (
+	 ("" "Sherblog" "" (lambda (&rest _) (browse-url "http://www.sherblog.pro")))
+	 ("" "Brainblog" "" (lambda (&rest _) (browse-url "http://www.sherlockes.gitlab.io")))
+         ("★" "Star" "Show stars" (lambda (&rest _) (show-stars)) warning)
+         ("?" "" "?/h" #'show-help nil "<" ">")
+	)
          ;; line 2
-        ((""
-          "Linkedin"
-          ""
-          (lambda (&rest _) (browse-url "homepage")))
-         ("⚑" nil "Show flags" (lambda (&rest _) (message "flag")) error))))
+        (
+	 ("" "F1(Reiniciar)" "" reiniciar)
+         ("⚑" nil "Show flags" (lambda (&rest _) (message "flag")) error)
+	)
+       )
+)
 
 
 ;;;;;;;;;
@@ -403,6 +404,7 @@ RipGrep(C-c s)    Nodo OrgRoam(C-c n f)  Mostrar ocultos(M-o)")
 (global-set-key (kbd "C-x C-b") 'ibuffer)                                                   ;; Cambio de buffer
 (global-set-key (kbd "C-c r") 'query-replace-regexp)                                        ;; Buscar y reemplazar
 (global-set-key (kbd "C-c s") 'counsel-rg)                                                  ;; Buscar mediante counsel y ripgrep
+(global-set-key (kbd "C-<escape>") 'mostrar-dashboard)
 
 ;; Org-Roam
 (global-set-key (kbd "C-c n f") 'org-roam-node-find)                                        ;; Buscar o crear un Nodo
