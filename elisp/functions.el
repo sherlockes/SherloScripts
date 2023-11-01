@@ -1,3 +1,18 @@
+(defun my-split-screen ()
+  "Divide la pantalla en dos mitades y muestra 'Dashboard' a la izquierda y el buffer activo a la derecha."
+  (interactive)
+  (let ((dashboard-buffer (get-buffer "Dashboard")))
+    (if dashboard-buffer
+        (progn
+          (split-window-horizontally)
+          (switch-to-buffer dashboard-buffer)
+          (other-window 1))
+      (message "El buffer 'Dashboard' no está abierto."))))
+
+(global-set-key (kbd "ESC") 'my-split-screen)
+
+
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Función para comprobar si un archivo existe y descargarlo si no está ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
