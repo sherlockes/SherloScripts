@@ -166,7 +166,7 @@ Resumen de la nota
 (setq dashboard-items '((recents  . 10)
                         (bookmarks . 10)))
 
-(setq dashboard-init-info "C-ESC(Dashboard)  F1(Reiniciar)  F2(Org-Roam)  F4(HugoServer)  F5(Ortografía)  F7(Diccionario)
+(setq dashboard-init-info "C-ESC(Dashboard) F1(Reiniciar) F2(Org-Roam) F4(HugoServer) F5(Orto) F7(Dicc) F8(Eval-Py)
 RipGrep(C-c s)    Nodo OrgRoam(C-c n f)  Mostrar ocultos(M-o) Truncate(C-x x t)")
 
 
@@ -400,6 +400,9 @@ RipGrep(C-c s)    Nodo OrgRoam(C-c n f)  Mostrar ocultos(M-o) Truncate(C-x x t)"
 (global-set-key (kbd "<f5>") 'flyspell-mode)
 (global-set-key (kbd "<f6>") (kbd "C-u C-c C-c"))                                           ;; Exportar de nuevo
 (global-set-key (kbd "<f7>") 'fd-switch-dictionary)                                         ;; Cambio de diccionario
+;;(global-set-key (kbd "<f8>") (kbd "C-u C-c C-c"))                                           ;; Evaluar código Python
+(global-set-key (kbd "<f8>") 'eval_or_close_python)
+
 
 (global-set-key (kbd "C-x C-b") 'ibuffer)                                                   ;; Cambio de buffer
 (global-set-key (kbd "C-c r") 'query-replace-regexp)                                        ;; Buscar y reemplazar
