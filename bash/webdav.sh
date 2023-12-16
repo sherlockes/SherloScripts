@@ -10,5 +10,5 @@
 ###################################################################
 
 sleep 30
-rclone serve webdav Sherlockes78_UN3_en: --addr 192.168.10.202:5005 --read-only
+rclone serve webdav Sherlockes78_GD: --addr 192.168.10.210:5005 --read-only
 #rclone serve webdav Sherlockes78_UN_en: --addr 192.168.10.202:5005 --read-only
