@@ -119,9 +119,9 @@ update_initel(){
 gdrive_folders_sync(){
     echo "Sincronizando las carpetas de Google Drive..."
 
-    mensaje+=$'Sincronizando carpeta SherloScripts . . . . '
-    rclone sync -v Sherlockes_GD:/SherloScripts/ /home/pi/SherloScripts/ --exclude "/.git/**"
-    comprobar $?
+    #mensaje+=$'Sincronizando carpeta SherloScripts . . . . '
+    #rclone sync -v Sherlockes_GD:/SherloScripts/ /home/pi/SherloScripts/ --exclude "/.git/**"
+    #comprobar $?
 
     mensaje+=$'Sincronizando carpeta Dotfiles . . . . . . . . . '
     rclone sync -v Sherlockes_GD:/dotfiles/ /home/pi/dotfiles --exclude "/emacs/**"
@@ -211,10 +211,10 @@ sherblog_sync(){
 ####    Script principal    ####
 ################################
 
-hugo_rclone_check # Comprueba el estado de la instalación de Rclone y Hugo
+#hugo_rclone_check # Comprueba el estado de la instalación de Rclone y Hugo
 #rclone_check_remotes # Comprueba si es posible escribir en los remotos de Rclone
 #update_initel # Actualiza la zonfiguración de Emacs
-#gdrive_folders_sync # Sincroniza "SherloScripts", "Dotfiles" y el enlace simbólico de Rclone
+gdrive_folders_sync # Sincroniza "SherloScripts", "Dotfiles" y el enlace simbólico de Rclone
 #github_repos_update # Actualiza los repositorios de "SherloScripts" y "Sherblog"
 #ha_config # Guarda la configuración de Home Assistant
 #clouds_check # Comprueba la disponibilidad de las nubes
