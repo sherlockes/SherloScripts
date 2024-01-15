@@ -5,3 +5,6 @@ youtube-ui.l.google.com
 ytimg.l.google.com
 ytstatic.l.google.com
 youtubei.googleapis.com
+(\.|^)youtube\.com$
+rr[0-9]+[-.]+sn-([a-z0-9]+).googlevideo(.com)?$
+r[0-9]+[-.]+sn-([a-z0-9]+).googlevideo(.com)?$
