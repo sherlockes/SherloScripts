@@ -12,7 +12,7 @@
 #             - Comprueba la sincronización de las carpetas
 #             - Sincroniza la web sherblog.pro con una carpeta en Google drive
 #Args: N/A
-#Creation/Update: 20200521/20230803
+#Creation/Update: 20200521/20240119
 #Author: www.sherblog.pro                                                
 #Email: sherlockes@gmail.com                                           
 ###################################################################
@@ -159,13 +159,9 @@ github_repos_update(){
 ha_config(){
     echo "Guardando config de HA en GitHub..." 
     mensaje+=$"Guardando config de HA en GitHub . . . . . "
-    #ssh root@192.168.10.202 -p 222 'bash -s' < /home/pi/SherloScripts/bash/ha_gitpush.sh
-    ssh -T root@192.168.10.202 -p 222 <<'ENDSSH'
-cd /config
-git add .
-git commit -m "Configuración HA de `date +'%d-%m-%Y %H:%M:%S'`"
-git push -u origin master
-ENDSSH
+    rsync -av root@192.168.10.202:/config/ ~/ha_cfg/
+    cd ~/ha_cfg
+    gitup
     comprobar $?
 }
 
@@ -208,6 +204,7 @@ sherblog_sync(){
     comprobar $?
 }
 
+
 ################################
 ####    Script principal    ####
 ################################
@@ -217,7 +214,7 @@ sherblog_sync(){
 #update_initel # Actualiza la zonfiguración de Emacs
 gdrive_folders_sync # Sincroniza "SherloScripts", "Dotfiles" y el enlace simbólico de Rclone
 #github_repos_update # Actualiza los repositorios de "SherloScripts" y "Sherblog"
-#ha_config # Guarda la configuración de Home Assistant
+ha_config # Guarda la configuración de Home Assistant
 #clouds_check # Comprueba la disponibilidad de las nubes
 #sherloflix_sync # Sincroniza las nubes de Sherloflix y comprueba el estado
 
