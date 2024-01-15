@@ -4,7 +4,7 @@
 :properties:
 :visibility: children
 :end:
-Un cajón desastre para mis scripts en bash, python, elisp...
+Un cajón desastre para todos mis scripts en bash, python, elisp...
 ** [[https://github.com/sherlockes/SherloScripts/blob/master/mi_diario.org][Mi diario en org-mode]] (org-mode)		  :Org_Mode:
 Este archivo en formato org-mode voy escribiendo lo que día a día aprendo y utilizo en cualquiera de las plataformas que empleo. Un cuaderno de bitácora que consultar cuando no me acuerdo de como en su día hice algo
 - emacs
