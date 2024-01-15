@@ -16,9 +16,10 @@
 rclone_check(){
 
     # Arquitectura del procesador
-    bits=$(getconf LONG_BIT)
-    if [ $bits == '64' ];
-    then
+    arch=$(uname -m)
+    if [ $arch == 'aarch64' ]; then
+	bits='arm64'
+    elif [ $arch == 'x86_64' ]; then
 	bits='amd64'
     else
 	bits='arm-v7'
