@@ -10,14 +10,15 @@
 ###################################################################
 
 # Arquitectura del procesador
-    arch=$(uname -m)
+arch=$(uname -m)
 if [ $arch == 'aarch64' ]; then
-        bits='arm64'
-    elif [ $arch == 'x86_64' ]; then
-        bits='amd64'
-    else
-	bits='arm-v7'	
-    fi
+    bits='arm64'
+elif [ $arch == 'x86_64' ]; then
+    bits='amd64'
+else
+    bits='arm-v7'	
+fi
+
 
 hugo_check(){
 
