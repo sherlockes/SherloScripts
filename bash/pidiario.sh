@@ -119,9 +119,10 @@ update_initel(){
 gdrive_folders_sync(){
     echo "Sincronizando las carpetas de Google Drive..."
 
-    #mensaje+=$'Sincronizando carpeta SherloScripts . . . . '
+    mensaje+=$'Sincronizando carpeta SherloScripts . . . . '
     #rclone sync -v Sherlockes_GD:/SherloScripts/ /home/pi/SherloScripts/ --exclude "/.git/**"
-    #comprobar $?
+    rclone sync -v /home/pi/SherloScripts/ Sherlockes_GD:/SherloScripts/ --exclude "/.git/**"
+    comprobar $?
 
     mensaje+=$'Sincronizando carpeta Dotfiles . . . . . . . . . '
     rclone sync -v Sherlockes_GD:/dotfiles/ /home/pi/dotfiles --exclude "/emacs/**"
