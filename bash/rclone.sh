@@ -4,7 +4,7 @@
 # Script Name: rclone.sh
 # Description: Instala, actualiza y copia configuración de rclone
 # Args: N/A
-# Creation/Update: 20200429/20230315
+# Creation/Update: 20200429/20240115
 # Author: www.sherblog.pro                                                
 # Email: sherlockes@gmail.com                                           
 ###################################################################
