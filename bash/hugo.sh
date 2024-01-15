@@ -19,6 +19,7 @@ else
     bits='arm-v7'	
 fi
 
+echo "${bits}"
 
 hugo_check(){
 
