@@ -13,13 +13,10 @@
     arch=$(uname -m)
 if [ $arch == 'aarch64' ]; then
         bits='arm64'
-        echo $bits
     elif [ $arch == 'x86_64' ]; then
         bits='amd64'
-        echo $bits
     else
-	bits='arm-v7'
-        echo $bits	
+	bits='arm-v7'	
     fi
 
 hugo_check(){
@@ -35,6 +32,8 @@ hugo_check(){
 	| grep "\.tar\.gz" \
 	| cut -d ":" -f 2,3 \
 	| tr -d \")
+
+    echo $hugo_latest_path
 
     # Extrae el número de la última version disponible
     nombre_carpeta=$(basename $(dirname $hugo_latest_path))
