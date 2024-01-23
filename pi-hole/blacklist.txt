@@ -6,3 +6,6 @@ ytimg.l.google.com
 ytstatic.l.google.com
 youtubei.googleapis.com
 instagram.com
+tiktok.com
+m.tiktok.com
+t.tiktok.com
