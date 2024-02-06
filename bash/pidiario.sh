@@ -139,7 +139,7 @@ gdrive_folders_sync(){
 # ---------------------------------------------------------
 github_repos_update(){
     echo "Actualizando repositorios de GitHub..."
-    repo=(SherloScripts)
+    repo=(SherloScripts, ha_cfg)
     for i in "${repo[@]}"
     do
 	mensaje+=$"Actualizar el repositorio $i . . . "
@@ -160,8 +160,6 @@ ha_config(){
     echo "Guardando config de HA en GitHub..." 
     mensaje+=$"Guardando config de HA en GitHub . . . . . "
     rsync -av root@192.168.10.202:/config/ ~/ha_cfg/
-    cd ~/ha_cfg
-    gitup
     comprobar $?
 }
 
@@ -213,8 +211,8 @@ sherblog_sync(){
 #rclone_check_remotes # Comprueba si es posible escribir en los remotos de Rclone
 #update_initel # Actualiza la zonfiguración de Emacs
 gdrive_folders_sync # Sincroniza "SherloScripts", "Dotfiles" y el enlace simbólico de Rclone
-#github_repos_update # Actualiza los repositorios de "SherloScripts" y "Sherblog"
 ha_config # Guarda la configuración de Home Assistant
+github_repos_update # Actualiza los repositorios de "SherloScripts" y "Sherblog"
 #clouds_check # Comprueba la disponibilidad de las nubes
 #sherloflix_sync # Sincroniza las nubes de Sherloflix y comprueba el estado
 
