@@ -211,7 +211,7 @@ sherblog_sync(){
 #rclone_check_remotes # Comprueba si es posible escribir en los remotos de Rclone
 #update_initel # Actualiza la zonfiguración de Emacs
 gdrive_folders_sync # Sincroniza "SherloScripts", "Dotfiles" y el enlace simbólico de Rclone
-ha_config # Guarda la configuración de Home Assistant
+ha_config # Guarda configuración de Home Assistant
 github_repos_update # Actualiza los repositorios de "SherloScripts" y "Sherblog"
 #clouds_check # Comprueba la disponibilidad de las nubes
 #sherloflix_sync # Sincroniza las nubes de Sherloflix y comprueba el estado
