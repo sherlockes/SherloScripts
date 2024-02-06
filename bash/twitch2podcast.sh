@@ -11,7 +11,7 @@
 
 CANAL="jordillatzer"
 TITULO="Jordi Llatzer en Twitch"
-SERVIDOR="http://192.168.10.202:5005"
+SERVIDOR="http://192.168.10.210:5005"
 FECHA=$(date)
 
 twitch_dir=~/twitch
