@@ -1,0 +1,831 @@
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:127.0.0.1 - - [02/Nov/2023 10:49:54] "GET /authorization?state=&code=e1bbf0b332121477bbdec8da44ce1786705aad15&scope=read,activity:read_all HTTP/1.1" 200 -
+ * Serving Flask app 'main_2'
+ * Debug mode: off
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:127.0.0.1 - - [02/Nov/2023 10:51:48] "GET /authorization?state=&code=c0a94c916deda368b160289bf3806953bc32f7c7&scope=read,activity:read_all HTTP/1.1" 200 -
+Código de autorización: c0a94c916deda368b160289bf3806953bc32f7c7
+Pulsa Ctrl+C para terminar
+ * Serving Flask app 'main_2'
+ * Debug mode: off
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:127.0.0.1 - - [02/Nov/2023 10:54:20] "GET /authorization?state=&code=6cc1d4ec42be7f0543391e3227fbf4a3e1bfcbc0&scope=read,activity:read_all HTTP/1.1" 200 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:127.0.0.1 - - [02/Nov/2023 10:54:56] "GET /authorization?state=&code=583f43310e3f1dfa0862206a1b80f23da8cee834&scope=read,activity:read_all HTTP/1.1" 200 -
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:werkzeug:127.0.0.1 - - [02/Nov/2023 12:45:16] "[37mGET /authorization?state=&code=57e0d33fc41f30e222d1290f8dc2b3b9d821bf87&scope=read,activity:read_all HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [02/Nov/2023 12:45:17] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:werkzeug:127.0.0.1 - - [02/Nov/2023 12:52:39] "[37mGET /authorization?state=&code=5838c5b44e1cbf6d58baeb232bf280331447db37&scope=read,activity:read_all HTTP/1.1[0m" 200 -
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:werkzeug:127.0.0.1 - - [02/Nov/2023 12:59:05] "[37mGET /authorization?state=&code=9938d413db7807fa950192fabd2ad1c7c9c84e37&scope=read,activity:read_all HTTP/1.1[0m" 200 -
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:werkzeug:127.0.0.1 - - [02/Nov/2023 13:28:22] "[37mGET /authorization?state=&error=access_denied HTTP/1.1[0m" 200 -
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:werkzeug:127.0.0.1 - - [02/Nov/2023 13:45:14] "[37mGET /authorization?state=&code=39fe61977d053cd735ab1a00f6ab74cd7be04ef6&scope=read,activity:read_all HTTP/1.1[0m" 200 -
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:werkzeug:127.0.0.1 - - [02/Nov/2023 13:46:41] "[37mGET /authorization?state=&code=a019e025e5db8b9b8d62b7339c4a9879e34ef4bb&scope=read,activity:read_all HTTP/1.1[0m" 200 -
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:werkzeug:127.0.0.1 - - [02/Nov/2023 13:50:41] "[37mGET /authorization?state=&code=2c0d0292a4856c06443cb792610b1fbc90719b39&scope=read,activity:read_all HTTP/1.1[0m" 200 -
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:werkzeug:127.0.0.1 - - [02/Nov/2023 13:52:29] "[37mGET /authorization?state=&code=53d73550ef35780edd4121c0229e83ace215b69d&scope=read,activity:read_all HTTP/1.1[0m" 200 -
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:werkzeug:127.0.0.1 - - [02/Nov/2023 13:54:20] "[37mGET /authorization?state=&code=6a1287e3dd62087f23baab56ae816bf36b0359ae&scope=read,activity:read_all HTTP/1.1[0m" 200 -
+WARNING:py.warnings:/usr/lib/python3.8/subprocess.py:946: ResourceWarning: subprocess 6593 is still running
+  _warn("subprocess %s is still running" % self.pid,
+
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:werkzeug:127.0.0.1 - - [02/Nov/2023 13:57:58] "[37mGET /authorization?state=&code=a1d52a7dabb8f3f032fc6951ff62b5c724f90edd&scope=read,activity:read_all HTTP/1.1[0m" 200 -
+WARNING:py.warnings:/usr/lib/python3.8/subprocess.py:946: ResourceWarning: subprocess 6721 is still running
+  _warn("subprocess %s is still running" % self.pid,
+
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:stravalib.protocol.ApiV3:GET 'https://www.strava.com/api/v3/athlete/activities' with params {'before': None, 'after': None, 'page': 1, 'per_page': 200}
+ERROR:__main__:Exception on /authorization [GET]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/usr/local/lib/python3.8/dist-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/sherlockes/Temp/strava/src/main_2.py", line 56, in get_authorization_code
+    actividad()
+  File "/home/sherlockes/Temp/strava/src/main_2.py", line 38, in actividad
+    for activity in activities:
+  File "/home/sherlockes/.local/lib/python3.8/site-packages/stravalib/client.py", line 2038, in __next__
+    return self.next()
+  File "/home/sherlockes/.local/lib/python3.8/site-packages/stravalib/client.py", line 2044, in next
+    self._fill_buffer()
+  File "/home/sherlockes/.local/lib/python3.8/site-packages/stravalib/client.py", line 1999, in _fill_buffer
+    raw_results = self.result_fetcher(
+  File "/home/sherlockes/.local/lib/python3.8/site-packages/stravalib/protocol.py", line 437, in get
+    return self._request(
+  File "/home/sherlockes/.local/lib/python3.8/site-packages/stravalib/protocol.py", line 320, in _request
+    self._handle_protocol_error(raw)
+  File "/home/sherlockes/.local/lib/python3.8/site-packages/stravalib/protocol.py", line 364, in _handle_protocol_error
+    raise exc.AccessUnauthorized(msg, response=response)
+stravalib.exc.AccessUnauthorized: Unauthorized: Authorization Error: [{'resource': 'Athlete', 'field': 'access_token', 'code': 'invalid'}]
+INFO:werkzeug:127.0.0.1 - - [02/Nov/2023 13:58:45] "[35m[1mGET /authorization?state=&code=5dea4bd2acc12b046a46527de058795bcbbfa588&scope=read,activity:read_all HTTP/1.1[0m" 500 -
+WARNING:py.warnings:sys:1: ResourceWarning: unclosed <ssl.SSLSocket fd=6, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=('192.168.10.100', 53018), raddr=('18.67.240.97', 443)>
+
+WARNING:py.warnings:/usr/lib/python3.8/subprocess.py:946: ResourceWarning: subprocess 6849 is still running
+  _warn("subprocess %s is still running" % self.pid,
+
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:stravalib.protocol.ApiV3:GET 'https://www.strava.com/api/v3/athlete/activities' with params {'before': None, 'after': None, 'page': 1, 'per_page': 200}
+ERROR:__main__:Exception on /authorization [GET]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/usr/local/lib/python3.8/dist-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/sherlockes/Temp/strava/src/main_2.py", line 58, in get_authorization_code
+    actividad()
+  File "/home/sherlockes/Temp/strava/src/main_2.py", line 40, in actividad
+    for activity in activities:
+  File "/home/sherlockes/.local/lib/python3.8/site-packages/stravalib/client.py", line 2038, in __next__
+    return self.next()
+  File "/home/sherlockes/.local/lib/python3.8/site-packages/stravalib/client.py", line 2044, in next
+    self._fill_buffer()
+  File "/home/sherlockes/.local/lib/python3.8/site-packages/stravalib/client.py", line 1999, in _fill_buffer
+    raw_results = self.result_fetcher(
+  File "/home/sherlockes/.local/lib/python3.8/site-packages/stravalib/protocol.py", line 437, in get
+    return self._request(
+  File "/home/sherlockes/.local/lib/python3.8/site-packages/stravalib/protocol.py", line 320, in _request
+    self._handle_protocol_error(raw)
+  File "/home/sherlockes/.local/lib/python3.8/site-packages/stravalib/protocol.py", line 364, in _handle_protocol_error
+    raise exc.AccessUnauthorized(msg, response=response)
+stravalib.exc.AccessUnauthorized: Unauthorized: Authorization Error: [{'resource': 'Athlete', 'field': 'access_token', 'code': 'invalid'}]
+INFO:werkzeug:127.0.0.1 - - [02/Nov/2023 14:00:41] "[35m[1mGET /authorization?state=&code=b22abbd2b2684e537aec32338d6b48d3acf5a104&scope=read,activity:read_all HTTP/1.1[0m" 500 -
+WARNING:py.warnings:sys:1: ResourceWarning: unclosed <ssl.SSLSocket fd=6, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=('192.168.10.100', 56616), raddr=('18.67.240.90', 443)>
+
+WARNING:py.warnings:/usr/lib/python3.8/subprocess.py:946: ResourceWarning: subprocess 6996 is still running
+  _warn("subprocess %s is still running" % self.pid,
+
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:stravalib.protocol.ApiV3:GET 'https://www.strava.com/api/v3/athlete' with params {}
+ERROR:__main__:Exception on /authorization [GET]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/usr/local/lib/python3.8/dist-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/sherlockes/Temp/strava/src/main_2.py", line 47, in get_authorization_code
+    actividad()
+  File "/home/sherlockes/Temp/strava/src/main_2.py", line 33, in actividad
+    athlete = client.get_athlete() # Get John's full athlete record
+  File "/home/sherlockes/.local/lib/python3.8/site-packages/stravalib/client.py", line 329, in get_athlete
+    raw = self.protocol.get("/athlete")
+  File "/home/sherlockes/.local/lib/python3.8/site-packages/stravalib/protocol.py", line 437, in get
+    return self._request(
+  File "/home/sherlockes/.local/lib/python3.8/site-packages/stravalib/protocol.py", line 320, in _request
+    self._handle_protocol_error(raw)
+  File "/home/sherlockes/.local/lib/python3.8/site-packages/stravalib/protocol.py", line 364, in _handle_protocol_error
+    raise exc.AccessUnauthorized(msg, response=response)
+stravalib.exc.AccessUnauthorized: Unauthorized: Authorization Error: [{'resource': 'Athlete', 'field': 'access_token', 'code': 'invalid'}]
+INFO:werkzeug:127.0.0.1 - - [02/Nov/2023 14:02:48] "[35m[1mGET /authorization?state=&code=2ab2a4ea98727a839aa5d29d65a8ad7b948e94f4&scope=read,activity:read_all HTTP/1.1[0m" 500 -
+WARNING:py.warnings:sys:1: ResourceWarning: unclosed <ssl.SSLSocket fd=6, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=('192.168.10.100', 59270), raddr=('18.67.240.90', 443)>
+
+WARNING:py.warnings:/usr/lib/python3.8/subprocess.py:946: ResourceWarning: subprocess 7131 is still running
+  _warn("subprocess %s is still running" % self.pid,
+
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:stravalib.protocol.ApiV3:POST 'https://www.strava.com/oauth/token' with params {'client_id': '114649', 'client_secret': 'd4cd648ec65ca55d5ee5ef435b7768286f01457f', 'code': '48f157ba94fbe4b10bbb0bc531b1e42f6bfb0ef6', 'grant_type': 'authorization_code'}
+INFO:stravalib.protocol.ApiV3:GET 'https://www.strava.com/api/v3/athlete' with params {}
+WARNING:py.warnings:/usr/local/lib/python3.8/dist-packages/flask/app.py:1936: ResourceWarning: unclosed <ssl.SSLSocket fd=6, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=('192.168.10.100', 44498), raddr=('18.67.240.31', 443)>
+  return self.view_functions[rule.endpoint](**req.view_args)
+
+INFO:werkzeug:127.0.0.1 - - [02/Nov/2023 14:10:16] "[37mGET /authorization?state=&code=48f157ba94fbe4b10bbb0bc531b1e42f6bfb0ef6&scope=read,activity:read_all HTTP/1.1[0m" 200 -
+WARNING:py.warnings:/usr/lib/python3.8/subprocess.py:946: ResourceWarning: subprocess 7265 is still running
+  _warn("subprocess %s is still running" % self.pid,
+
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:stravalib.protocol.ApiV3:POST 'https://www.strava.com/oauth/token' with params {'client_id': '114649', 'client_secret': 'd4cd648ec65ca55d5ee5ef435b7768286f01457f', 'code': '50df7923bf86264b60c6ba9a3a1c0a8df220bea1', 'grant_type': 'authorization_code'}
+INFO:stravalib.protocol.ApiV3:GET 'https://www.strava.com/api/v3/athlete' with params {}
+INFO:werkzeug:127.0.0.1 - - [02/Nov/2023 14:11:19] "[37mGET /authorization?state=&code=50df7923bf86264b60c6ba9a3a1c0a8df220bea1&scope=read,activity:read_all HTTP/1.1[0m" 200 -
+WARNING:py.warnings:/usr/lib/python3.8/subprocess.py:946: ResourceWarning: subprocess 7379 is still running
+  _warn("subprocess %s is still running" % self.pid,
+
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:stravalib.protocol.ApiV3:POST 'https://www.strava.com/oauth/token' with params {'client_id': '114649', 'client_secret': 'd4cd648ec65ca55d5ee5ef435b7768286f01457f', 'code': 'dff1eae3732984c8cc5d4474774ca083d50082a0', 'grant_type': 'authorization_code'}
+INFO:stravalib.protocol.ApiV3:GET 'https://www.strava.com/api/v3/athlete' with params {}
+INFO:werkzeug:127.0.0.1 - - [02/Nov/2023 14:12:31] "[37mGET /authorization?state=&code=dff1eae3732984c8cc5d4474774ca083d50082a0&scope=read,activity:read_all HTTP/1.1[0m" 200 -
+WARNING:py.warnings:/usr/lib/python3.8/subprocess.py:946: ResourceWarning: subprocess 7539 is still running
+  _warn("subprocess %s is still running" % self.pid,
+
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:stravalib.protocol.ApiV3:POST 'https://www.strava.com/oauth/token' with params {'client_id': '114649', 'client_secret': 'd4cd648ec65ca55d5ee5ef435b7768286f01457f', 'code': 'ec9a9866ca015efe2c1dc7b94a9d8bcef5b6b35a', 'grant_type': 'authorization_code'}
+INFO:stravalib.protocol.ApiV3:GET 'https://www.strava.com/api/v3/athlete/activities' with params {'before': None, 'after': 1672531200, 'page': 1, 'per_page': 200}
+INFO:werkzeug:127.0.0.1 - - [02/Nov/2023 14:15:46] "[37mGET /authorization?state=&code=ec9a9866ca015efe2c1dc7b94a9d8bcef5b6b35a&scope=read,activity:read_all HTTP/1.1[0m" 200 -
+WARNING:py.warnings:/usr/lib/python3.8/subprocess.py:946: ResourceWarning: subprocess 7664 is still running
+  _warn("subprocess %s is still running" % self.pid,
+
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:stravalib.protocol.ApiV3:POST 'https://www.strava.com/oauth/token' with params {'client_id': '114649', 'client_secret': 'd4cd648ec65ca55d5ee5ef435b7768286f01457f', 'code': 'cb3f8665bb733132c34f3eb47dc67d1dd19394a9', 'grant_type': 'authorization_code'}
+INFO:stravalib.protocol.ApiV3:GET 'https://www.strava.com/api/v3/athlete/activities' with params {'before': None, 'after': 1672531200, 'page': 1, 'per_page': 200}
+INFO:werkzeug:127.0.0.1 - - [02/Nov/2023 14:17:41] "[37mGET /authorization?state=&code=cb3f8665bb733132c34f3eb47dc67d1dd19394a9&scope=read,activity:read_all HTTP/1.1[0m" 200 -
+WARNING:py.warnings:/usr/lib/python3.8/subprocess.py:946: ResourceWarning: subprocess 7789 is still running
+  _warn("subprocess %s is still running" % self.pid,
+
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:stravalib.protocol.ApiV3:POST 'https://www.strava.com/oauth/token' with params {'client_id': '114649', 'client_secret': 'd4cd648ec65ca55d5ee5ef435b7768286f01457f', 'code': '29b890f001dfb5b29d3aa5e1cab2a80f50bf1440', 'grant_type': 'authorization_code'}
+INFO:stravalib.protocol.ApiV3:GET 'https://www.strava.com/api/v3/athlete/activities' with params {'before': None, 'after': 1672531200, 'page': 1, 'per_page': 200}
+INFO:werkzeug:127.0.0.1 - - [02/Nov/2023 14:24:04] "[37mGET /authorization?state=&code=29b890f001dfb5b29d3aa5e1cab2a80f50bf1440&scope=read,activity:read_all HTTP/1.1[0m" 200 -
+WARNING:py.warnings:/usr/lib/python3.8/subprocess.py:946: ResourceWarning: subprocess 8018 is still running
+  _warn("subprocess %s is still running" % self.pid,
+
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:stravalib.protocol.ApiV3:POST 'https://www.strava.com/oauth/token' with params {'client_id': '114649', 'client_secret': 'd4cd648ec65ca55d5ee5ef435b7768286f01457f', 'code': '9fa9a0fe5ff64c549d7a4e3eec55ae18e16dbbdb', 'grant_type': 'authorization_code'}
+INFO:stravalib.protocol.ApiV3:GET 'https://www.strava.com/api/v3/athlete/activities' with params {'before': None, 'after': 1672531200, 'page': 1, 'per_page': 200}
+INFO:werkzeug:127.0.0.1 - - [02/Nov/2023 14:27:31] "[37mGET /authorization?state=&code=9fa9a0fe5ff64c549d7a4e3eec55ae18e16dbbdb&scope=read,activity:read_all HTTP/1.1[0m" 200 -
+WARNING:py.warnings:/usr/lib/python3.8/subprocess.py:946: ResourceWarning: subprocess 8307 is still running
+  _warn("subprocess %s is still running" % self.pid,
+
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:stravalib.protocol.ApiV3:POST 'https://www.strava.com/oauth/token' with params {'client_id': '114649', 'client_secret': 'd4cd648ec65ca55d5ee5ef435b7768286f01457f', 'code': 'cc256898498391e3dc67b168a2691f38cdae0e24', 'grant_type': 'authorization_code'}
+INFO:stravalib.protocol.ApiV3:GET 'https://www.strava.com/api/v3/athlete/activities' with params {'before': None, 'after': 1672531200, 'page': 1, 'per_page': 200}
+INFO:werkzeug:127.0.0.1 - - [02/Nov/2023 14:28:55] "[37mGET /authorization?state=&code=cc256898498391e3dc67b168a2691f38cdae0e24&scope=read,activity:read_all HTTP/1.1[0m" 200 -
+WARNING:py.warnings:/usr/lib/python3.8/subprocess.py:946: ResourceWarning: subprocess 8579 is still running
+  _warn("subprocess %s is still running" % self.pid,
+
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:stravalib.protocol.ApiV3:POST 'https://www.strava.com/oauth/token' with params {'client_id': '114649', 'client_secret': 'd4cd648ec65ca55d5ee5ef435b7768286f01457f', 'code': 'c5a027129e0030a72f6de45349b14e82d17a6e62', 'grant_type': 'authorization_code'}
+INFO:stravalib.protocol.ApiV3:GET 'https://www.strava.com/api/v3/athlete/activities' with params {'before': None, 'after': 1672531200, 'page': 1, 'per_page': 200}
+INFO:werkzeug:127.0.0.1 - - [02/Nov/2023 14:33:22] "[37mGET /authorization?state=&code=c5a027129e0030a72f6de45349b14e82d17a6e62&scope=read,activity:read_all HTTP/1.1[0m" 200 -
+WARNING:py.warnings:/usr/lib/python3.8/subprocess.py:946: ResourceWarning: subprocess 8769 is still running
+  _warn("subprocess %s is still running" % self.pid,
+
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:stravalib.protocol.ApiV3:POST 'https://www.strava.com/oauth/token' with params {'client_id': '114649', 'client_secret': 'd4cd648ec65ca55d5ee5ef435b7768286f01457f', 'code': '436e64934c067d26d797bd2b218f447dd7f92d43', 'grant_type': 'authorization_code'}
+INFO:stravalib.protocol.ApiV3:GET 'https://www.strava.com/api/v3/athlete/activities' with params {'before': None, 'after': 1672531200, 'page': 1, 'per_page': 200}
+INFO:werkzeug:127.0.0.1 - - [02/Nov/2023 14:40:00] "[37mGET /authorization?state=&code=436e64934c067d26d797bd2b218f447dd7f92d43&scope=read,activity:read_all HTTP/1.1[0m" 200 -
+WARNING:py.warnings:/usr/lib/python3.8/subprocess.py:946: ResourceWarning: subprocess 3929 is still running
+  _warn("subprocess %s is still running" % self.pid,
+
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:stravalib.protocol.ApiV3:POST 'https://www.strava.com/oauth/token' with params {'client_id': '114649', 'client_secret': 'd4cd648ec65ca55d5ee5ef435b7768286f01457f', 'code': 'a50e92367221572fa402884c7203581f6e255976', 'grant_type': 'authorization_code'}
+INFO:stravalib.protocol.ApiV3:GET 'https://www.strava.com/api/v3/athlete/activities' with params {'before': None, 'after': 1672531200, 'page': 1, 'per_page': 200}
+INFO:werkzeug:127.0.0.1 - - [02/Nov/2023 15:39:20] "[37mGET /authorization?state=&code=a50e92367221572fa402884c7203581f6e255976&scope=read,activity:read_all HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [02/Nov/2023 15:39:20] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+WARNING:py.warnings:/usr/lib/python3.8/subprocess.py:946: ResourceWarning: subprocess 4105 is still running
+  _warn("subprocess %s is still running" % self.pid,
+
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+WARNING:py.warnings:/usr/lib/python3.8/subprocess.py:946: ResourceWarning: subprocess 4143 is still running
+  _warn("subprocess %s is still running" % self.pid,
+
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+WARNING:py.warnings:/usr/lib/python3.8/subprocess.py:946: ResourceWarning: subprocess 4176 is still running
+  _warn("subprocess %s is still running" % self.pid,
+
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+WARNING:py.warnings:/usr/lib/python3.8/subprocess.py:946: ResourceWarning: subprocess 4210 is still running
+  _warn("subprocess %s is still running" % self.pid,
+
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:stravalib.protocol.ApiV3:POST 'https://www.strava.com/oauth/token' with params {'client_id': '114649', 'client_secret': 'd4cd648ec65ca55d5ee5ef435b7768286f01457f', 'code': '334f413e54f8e1d390db64472b663ab762156de4', 'grant_type': 'authorization_code'}
+INFO:stravalib.protocol.ApiV3:GET 'https://www.strava.com/api/v3/athlete/activities' with params {'before': None, 'after': 1672531200, 'page': 1, 'per_page': 200}
+INFO:werkzeug:127.0.0.1 - - [02/Nov/2023 15:51:00] "[37mGET /authorization?state=&code=334f413e54f8e1d390db64472b663ab762156de4&scope=read,activity:read_all HTTP/1.1[0m" 200 -
+WARNING:py.warnings:/usr/lib/python3.8/subprocess.py:946: ResourceWarning: subprocess 2385 is still running
+  _warn("subprocess %s is still running" % self.pid,
+
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:stravalib.protocol.ApiV3:POST 'https://www.strava.com/oauth/token' with params {'client_id': '114649', 'client_secret': 'd4cd648ec65ca55d5ee5ef435b7768286f01457f', 'code': 'e31db9f01502e834d0fc3cec0f8d5df9be3846c3', 'grant_type': 'authorization_code'}
+INFO:stravalib.protocol.ApiV3:GET 'https://www.strava.com/api/v3/athlete/activities' with params {'before': None, 'after': 1672531200, 'page': 1, 'per_page': 200}
+INFO:werkzeug:127.0.0.1 - - [02/Nov/2023 17:21:09] "[37mGET /authorization?state=&code=e31db9f01502e834d0fc3cec0f8d5df9be3846c3&scope=read,activity:read_all HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [02/Nov/2023 17:21:10] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+WARNING:py.warnings:/usr/lib/python3.8/subprocess.py:946: ResourceWarning: subprocess 2602 is still running
+  _warn("subprocess %s is still running" % self.pid,
+
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:stravalib.protocol.ApiV3:POST 'https://www.strava.com/oauth/token' with params {'client_id': '114649', 'client_secret': 'd4cd648ec65ca55d5ee5ef435b7768286f01457f', 'code': '5d805cbaf274601c0a8dffaba9f5aa6aa550bb62', 'grant_type': 'authorization_code'}
+INFO:stravalib.protocol.ApiV3:GET 'https://www.strava.com/api/v3/athlete/activities' with params {'before': None, 'after': 1672531200, 'page': 1, 'per_page': 200}
+INFO:werkzeug:127.0.0.1 - - [02/Nov/2023 17:24:15] "[37mGET /authorization?state=&code=5d805cbaf274601c0a8dffaba9f5aa6aa550bb62&scope=read,activity:read_all HTTP/1.1[0m" 200 -
+WARNING:py.warnings:/usr/lib/python3.8/subprocess.py:946: ResourceWarning: subprocess 4959 is still running
+  _warn("subprocess %s is still running" % self.pid,
+
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:stravalib.protocol.ApiV3:POST 'https://www.strava.com/oauth/token' with params {'client_id': '114649', 'client_secret': 'd4cd648ec65ca55d5ee5ef435b7768286f01457f', 'code': '5b9702e5294c61175d4bc8d11222a839a777251b', 'grant_type': 'authorization_code'}
+INFO:stravalib.protocol.ApiV3:GET 'https://www.strava.com/api/v3/athlete/activities' with params {'before': None, 'after': 1672531200, 'page': 1, 'per_page': 200}
+INFO:werkzeug:127.0.0.1 - - [02/Nov/2023 17:50:33] "[37mGET /authorization?state=&code=5b9702e5294c61175d4bc8d11222a839a777251b&scope=read,activity:read_all HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [02/Nov/2023 17:50:33] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+WARNING:py.warnings:/usr/lib/python3.8/subprocess.py:946: ResourceWarning: subprocess 5092 is still running
+  _warn("subprocess %s is still running" % self.pid,
+
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:stravalib.protocol.ApiV3:POST 'https://www.strava.com/oauth/token' with params {'client_id': '114649', 'client_secret': 'd4cd648ec65ca55d5ee5ef435b7768286f01457f', 'code': '37c4774bccd1bc8776451d6bad0680234d5f14c2', 'grant_type': 'authorization_code'}
+INFO:stravalib.protocol.ApiV3:GET 'https://www.strava.com/api/v3/athlete/activities' with params {'before': None, 'after': 1672531200, 'page': 1, 'per_page': 200}
+INFO:werkzeug:127.0.0.1 - - [02/Nov/2023 17:56:46] "[37mGET /authorization?state=&code=37c4774bccd1bc8776451d6bad0680234d5f14c2&scope=read,activity:read_all HTTP/1.1[0m" 200 -
+WARNING:py.warnings:/usr/lib/python3.8/subprocess.py:946: ResourceWarning: subprocess 5221 is still running
+  _warn("subprocess %s is still running" % self.pid,
+
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:stravalib.protocol.ApiV3:POST 'https://www.strava.com/oauth/token' with params {'client_id': '114649', 'client_secret': 'd4cd648ec65ca55d5ee5ef435b7768286f01457f', 'code': '39c55e55e9727a95941a7e949f95f85e4fa2e53b', 'grant_type': 'authorization_code'}
+INFO:stravalib.protocol.ApiV3:GET 'https://www.strava.com/api/v3/athlete/activities' with params {'before': None, 'after': 1672531200, 'page': 1, 'per_page': 200}
+INFO:werkzeug:127.0.0.1 - - [02/Nov/2023 17:57:24] "[37mGET /authorization?state=&code=39c55e55e9727a95941a7e949f95f85e4fa2e53b&scope=read,activity:read_all HTTP/1.1[0m" 200 -
+WARNING:py.warnings:/usr/lib/python3.8/subprocess.py:946: ResourceWarning: subprocess 5340 is still running
+  _warn("subprocess %s is still running" % self.pid,
+
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:stravalib.protocol.ApiV3:POST 'https://www.strava.com/oauth/token' with params {'client_id': '114649', 'client_secret': 'd4cd648ec65ca55d5ee5ef435b7768286f01457f', 'code': '50bdf46a2c1eb70c069d7fd824557215c6bdeb79', 'grant_type': 'authorization_code'}
+INFO:stravalib.protocol.ApiV3:GET 'https://www.strava.com/api/v3/athlete/activities' with params {'before': None, 'after': 1672531200, 'page': 1, 'per_page': 200}
+INFO:werkzeug:127.0.0.1 - - [02/Nov/2023 17:58:59] "[37mGET /authorization?state=&code=50bdf46a2c1eb70c069d7fd824557215c6bdeb79&scope=read,activity:read_all HTTP/1.1[0m" 200 -
+WARNING:py.warnings:/usr/lib/python3.8/subprocess.py:946: ResourceWarning: subprocess 5467 is still running
+  _warn("subprocess %s is still running" % self.pid,
+
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:stravalib.protocol.ApiV3:POST 'https://www.strava.com/oauth/token' with params {'client_id': '114649', 'client_secret': 'd4cd648ec65ca55d5ee5ef435b7768286f01457f', 'code': '44eefa00e40422a297e63871cb96534875c9d139', 'grant_type': 'authorization_code'}
+INFO:stravalib.protocol.ApiV3:GET 'https://www.strava.com/api/v3/athlete/activities' with params {'before': 1704067200, 'after': 1672531200, 'page': 1, 'per_page': 200}
+INFO:werkzeug:127.0.0.1 - - [02/Nov/2023 18:06:03] "[37mGET /authorization?state=&code=44eefa00e40422a297e63871cb96534875c9d139&scope=read,activity:read_all HTTP/1.1[0m" 200 -
+WARNING:py.warnings:/usr/lib/python3.8/subprocess.py:946: ResourceWarning: subprocess 5606 is still running
+  _warn("subprocess %s is still running" % self.pid,
+
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:stravalib.protocol.ApiV3:POST 'https://www.strava.com/oauth/token' with params {'client_id': '114649', 'client_secret': 'd4cd648ec65ca55d5ee5ef435b7768286f01457f', 'code': 'cb291b278cf999993d33664fee6e20c260430a03', 'grant_type': 'authorization_code'}
+INFO:stravalib.protocol.ApiV3:GET 'https://www.strava.com/api/v3/athlete/activities' with params {'before': 1704067200, 'after': 1672531200, 'page': 1, 'per_page': 200}
+INFO:werkzeug:127.0.0.1 - - [02/Nov/2023 18:09:59] "[37mGET /authorization?state=&code=cb291b278cf999993d33664fee6e20c260430a03&scope=read,activity:read_all HTTP/1.1[0m" 200 -
+WARNING:py.warnings:/usr/lib/python3.8/subprocess.py:946: ResourceWarning: subprocess 5730 is still running
+  _warn("subprocess %s is still running" % self.pid,
+
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:stravalib.protocol.ApiV3:POST 'https://www.strava.com/oauth/token' with params {'client_id': '114649', 'client_secret': 'd4cd648ec65ca55d5ee5ef435b7768286f01457f', 'code': '01f389df305772ffffd2704a57e86e86aa061c76', 'grant_type': 'authorization_code'}
+INFO:stravalib.protocol.ApiV3:GET 'https://www.strava.com/api/v3/athlete/activities' with params {'before': 1704067200, 'after': 1672531200, 'page': 1, 'per_page': 200}
+INFO:werkzeug:127.0.0.1 - - [02/Nov/2023 18:10:41] "[37mGET /authorization?state=&code=01f389df305772ffffd2704a57e86e86aa061c76&scope=read,activity:read_all HTTP/1.1[0m" 200 -
+WARNING:py.warnings:/usr/lib/python3.8/subprocess.py:946: ResourceWarning: subprocess 5852 is still running
+  _warn("subprocess %s is still running" % self.pid,
+
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:stravalib.protocol.ApiV3:POST 'https://www.strava.com/oauth/token' with params {'client_id': '114649', 'client_secret': 'd4cd648ec65ca55d5ee5ef435b7768286f01457f', 'code': 'd26a74108f8c71b308efee29fe01a19f65ebb15a', 'grant_type': 'authorization_code'}
+INFO:stravalib.protocol.ApiV3:GET 'https://www.strava.com/api/v3/athlete/activities' with params {'before': 1704067200, 'after': 1672531200, 'page': 1, 'per_page': 200}
+INFO:werkzeug:127.0.0.1 - - [02/Nov/2023 18:13:12] "[37mGET /authorization?state=&code=d26a74108f8c71b308efee29fe01a19f65ebb15a&scope=read,activity:read_all HTTP/1.1[0m" 200 -
+WARNING:py.warnings:/usr/lib/python3.8/subprocess.py:946: ResourceWarning: subprocess 5293 is still running
+  _warn("subprocess %s is still running" % self.pid,
+
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:stravalib.protocol.ApiV3:POST 'https://www.strava.com/oauth/token' with params {'client_id': '114649', 'client_secret': 'd4cd648ec65ca55d5ee5ef435b7768286f01457f', 'code': '01b2efa59746377c2b9e12da7c0a4394fe3632b3', 'grant_type': 'authorization_code'}
+INFO:stravalib.protocol.ApiV3:GET 'https://www.strava.com/api/v3/athlete/activities' with params {'before': 1704067200, 'after': 1672531200, 'page': 1, 'per_page': 200}
+INFO:werkzeug:127.0.0.1 - - [14/Feb/2024 12:37:56] "GET /authorization?state=&code=01b2efa59746377c2b9e12da7c0a4394fe3632b3&scope=read,activity:read_all HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Feb/2024 12:37:56] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+WARNING:py.warnings:/usr/lib/python3.8/subprocess.py:946: ResourceWarning: subprocess 12295 is still running
+  _warn("subprocess %s is still running" % self.pid,
+
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:stravalib.protocol.ApiV3:POST 'https://www.strava.com/oauth/token' with params {'client_id': '114649', 'client_secret': 'd4cd648ec65ca55d5ee5ef435b7768286f01457f', 'code': '924c59b32c5c14b6a8e470f4d1ccf21d4756157d', 'grant_type': 'authorization_code'}
+INFO:stravalib.protocol.ApiV3:GET 'https://www.strava.com/api/v3/athlete/activities' with params {'before': 1704067200, 'after': 1672531200, 'page': 1, 'per_page': 200}
+INFO:werkzeug:127.0.0.1 - - [16/Feb/2024 14:53:11] "GET /authorization?state=&code=924c59b32c5c14b6a8e470f4d1ccf21d4756157d&scope=read,activity:read_all HTTP/1.1" 200 -
+WARNING:py.warnings:/usr/lib/python3.8/subprocess.py:946: ResourceWarning: subprocess 7971 is still running
+  _warn("subprocess %s is still running" % self.pid,
+
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:stravalib.protocol.ApiV3:POST 'https://www.strava.com/oauth/token' with params {'client_id': '114649', 'client_secret': 'd4cd648ec65ca55d5ee5ef435b7768286f01457f', 'code': '68409bdedfa8a1bfd3eab76cca60fa0247d2e067', 'grant_type': 'authorization_code'}
+ERROR:scr_gpx_strava:Exception on /authorization [GET]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/usr/local/lib/python3.8/dist-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "scr_gpx_strava.py", line 106, in get_authorization_code
+    info()
+  File "scr_gpx_strava.py", line 65, in info
+    end_date = datetime.datetime.now()
+AttributeError: type object 'datetime.datetime' has no attribute 'datetime'
+INFO:werkzeug:127.0.0.1 - - [18/Feb/2024 20:09:35] "[35m[1mGET /authorization?state=&code=68409bdedfa8a1bfd3eab76cca60fa0247d2e067&scope=read,activity:read_all HTTP/1.1[0m" 500 -
+WARNING:py.warnings:/usr/lib/python3.8/subprocess.py:946: ResourceWarning: subprocess 8145 is still running
+  _warn("subprocess %s is still running" % self.pid,
+
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:stravalib.protocol.ApiV3:POST 'https://www.strava.com/oauth/token' with params {'client_id': '114649', 'client_secret': 'd4cd648ec65ca55d5ee5ef435b7768286f01457f', 'code': '7c832c3e6f08e790cdd3f5b5e0beaecda5f4dad3', 'grant_type': 'authorization_code'}
+ERROR:scr_gpx_strava:Exception on /authorization [GET]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/usr/local/lib/python3.8/dist-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "scr_gpx_strava.py", line 106, in get_authorization_code
+    info()
+  File "scr_gpx_strava.py", line 65, in info
+    end_date = datetime.datetime.now()
+AttributeError: type object 'datetime.datetime' has no attribute 'datetime'
+INFO:werkzeug:127.0.0.1 - - [18/Feb/2024 20:10:20] "[35m[1mGET /authorization?state=&code=7c832c3e6f08e790cdd3f5b5e0beaecda5f4dad3&scope=read,activity:read_all HTTP/1.1[0m" 500 -
+WARNING:py.warnings:/usr/lib/python3.8/subprocess.py:946: ResourceWarning: subprocess 8441 is still running
+  _warn("subprocess %s is still running" % self.pid,
+
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:stravalib.protocol.ApiV3:POST 'https://www.strava.com/oauth/token' with params {'client_id': '114649', 'client_secret': 'd4cd648ec65ca55d5ee5ef435b7768286f01457f', 'code': '906d203c0e64204d3fd8957e4575559eb98be4a6', 'grant_type': 'authorization_code'}
+ERROR:scr_gpx_strava:Exception on /authorization [GET]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/usr/local/lib/python3.8/dist-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "scr_gpx_strava.py", line 106, in get_authorization_code
+    info()
+  File "scr_gpx_strava.py", line 65, in info
+    end_date = datetime.datetime.now()
+AttributeError: type object 'datetime.datetime' has no attribute 'datetime'
+INFO:werkzeug:127.0.0.1 - - [18/Feb/2024 20:11:39] "[35m[1mGET /authorization?state=&code=906d203c0e64204d3fd8957e4575559eb98be4a6&scope=read,activity:read_all HTTP/1.1[0m" 500 -
+WARNING:py.warnings:/usr/lib/python3.8/subprocess.py:946: ResourceWarning: subprocess 9175 is still running
+  _warn("subprocess %s is still running" % self.pid,
+
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:stravalib.protocol.ApiV3:POST 'https://www.strava.com/oauth/token' with params {'client_id': '114649', 'client_secret': 'd4cd648ec65ca55d5ee5ef435b7768286f01457f', 'code': 'f5f4c4e9cda4bfeb34a2ff31a87dedd288005d8d', 'grant_type': 'authorization_code'}
+ERROR:scr_gpx_strava:Exception on /authorization [GET]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/usr/local/lib/python3.8/dist-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "scr_gpx_strava.py", line 100, in get_authorization_code
+    info()
+  File "scr_gpx_strava.py", line 59, in info
+    end_date = datetime.datetime.now()
+AttributeError: type object 'datetime.datetime' has no attribute 'datetime'
+INFO:werkzeug:127.0.0.1 - - [19/Feb/2024 12:58:42] "[35m[1mGET /authorization?state=&code=f5f4c4e9cda4bfeb34a2ff31a87dedd288005d8d&scope=read,activity:read_all HTTP/1.1[0m" 500 -
+WARNING:py.warnings:/usr/lib/python3.8/subprocess.py:946: ResourceWarning: subprocess 9467 is still running
+  _warn("subprocess %s is still running" % self.pid,
+
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:stravalib.protocol.ApiV3:POST 'https://www.strava.com/oauth/token' with params {'client_id': '114649', 'client_secret': 'd4cd648ec65ca55d5ee5ef435b7768286f01457f', 'code': '0ed82aea59aff59fe6bd89c745252510f55271d6', 'grant_type': 'authorization_code'}
+ERROR:scr_gpx_strava:Exception on /authorization [GET]
+Traceback (most recent call last):
+  File "/home/sherlockes/Temp/strava/lib/python3.8/site-packages/flask/app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/sherlockes/Temp/strava/lib/python3.8/site-packages/flask/app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/sherlockes/Temp/strava/lib/python3.8/site-packages/flask/app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/sherlockes/Temp/strava/lib/python3.8/site-packages/flask/app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "scr_gpx_strava.py", line 100, in get_authorization_code
+    info()
+  File "scr_gpx_strava.py", line 59, in info
+    end_date = datetime.datetime.now()
+AttributeError: type object 'datetime.datetime' has no attribute 'datetime'
+INFO:werkzeug:127.0.0.1 - - [19/Feb/2024 12:59:54] "[35m[1mGET /authorization?state=&code=0ed82aea59aff59fe6bd89c745252510f55271d6&scope=read,activity:read_all HTTP/1.1[0m" 500 -
+WARNING:py.warnings:/usr/lib/python3.8/subprocess.py:946: ResourceWarning: subprocess 10080 is still running
+  _warn("subprocess %s is still running" % self.pid,
+
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:stravalib.protocol.ApiV3:POST 'https://www.strava.com/oauth/token' with params {'client_id': '114649', 'client_secret': 'd4cd648ec65ca55d5ee5ef435b7768286f01457f', 'code': '6f76664d0d8de250487447c7af66d2181ccc684e', 'grant_type': 'authorization_code'}
+ERROR:scr_gpx_strava:Exception on /authorization [GET]
+Traceback (most recent call last):
+  File "/home/sherlockes/Temp/strava/lib/python3.8/site-packages/flask/app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/sherlockes/Temp/strava/lib/python3.8/site-packages/flask/app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/sherlockes/Temp/strava/lib/python3.8/site-packages/flask/app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/sherlockes/Temp/strava/lib/python3.8/site-packages/flask/app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "scr_gpx_strava.py", line 100, in get_authorization_code
+    info()
+  File "scr_gpx_strava.py", line 59, in info
+    end_date = datetime.datetime.now()
+AttributeError: type object 'datetime.datetime' has no attribute 'datetime'
+INFO:werkzeug:127.0.0.1 - - [19/Feb/2024 13:02:19] "[35m[1mGET /authorization?state=&code=6f76664d0d8de250487447c7af66d2181ccc684e&scope=read,activity:read_all HTTP/1.1[0m" 500 -
+WARNING:py.warnings:/usr/lib/python3.8/subprocess.py:946: ResourceWarning: subprocess 13981 is still running
+  _warn("subprocess %s is still running" % self.pid,
+
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:stravalib.protocol.ApiV3:POST 'https://www.strava.com/oauth/token' with params {'client_id': '114649', 'client_secret': 'd4cd648ec65ca55d5ee5ef435b7768286f01457f', 'code': '94e48d1fa30cb38919a97b1c85d5cbb9c0687277', 'grant_type': 'authorization_code'}
+ERROR:scr_gpx_strava:Exception on /authorization [GET]
+Traceback (most recent call last):
+  File "/home/sherlockes/Temp/strava/lib/python3.8/site-packages/flask/app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/sherlockes/Temp/strava/lib/python3.8/site-packages/flask/app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/sherlockes/Temp/strava/lib/python3.8/site-packages/flask/app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/sherlockes/Temp/strava/lib/python3.8/site-packages/flask/app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "scr_gpx_strava.py", line 102, in get_authorization_code
+    info()
+  File "scr_gpx_strava.py", line 63, in info
+    print(f"Buscando las actividades de los últimos {days} días...")
+NameError: name 'days' is not defined
+INFO:werkzeug:127.0.0.1 - - [19/Feb/2024 13:15:50] "[35m[1mGET /authorization?state=&code=94e48d1fa30cb38919a97b1c85d5cbb9c0687277&scope=read,activity:read_all HTTP/1.1[0m" 500 -
+WARNING:py.warnings:/usr/lib/python3.8/subprocess.py:946: ResourceWarning: subprocess 6571 is still running
+  _warn("subprocess %s is still running" % self.pid,
+
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:stravalib.protocol.ApiV3:POST 'https://www.strava.com/oauth/token' with params {'client_id': '114649', 'client_secret': 'd4cd648ec65ca55d5ee5ef435b7768286f01457f', 'code': 'c3c59214ac465be1e238a0db1c94b57eabe75288', 'grant_type': 'authorization_code'}
+INFO:stravalib.protocol.ApiV3:GET 'https://www.strava.com/api/v3/athlete/activities' with params {'before': 1704067200, 'after': 1672531200, 'page': 1, 'per_page': 200}
+INFO:werkzeug:127.0.0.1 - - [19/Feb/2024 13:47:51] "[37mGET /authorization?state=&code=c3c59214ac465be1e238a0db1c94b57eabe75288&scope=read,activity:read_all HTTP/1.1[0m" 200 -
+WARNING:py.warnings:/usr/lib/python3.8/subprocess.py:946: ResourceWarning: subprocess 9942 is still running
+  _warn("subprocess %s is still running" % self.pid,
+
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:stravalib.protocol.ApiV3:POST 'https://www.strava.com/oauth/token' with params {'client_id': '114649', 'client_secret': 'd4cd648ec65ca55d5ee5ef435b7768286f01457f', 'code': '79bf95671899acff0a3f781e9c2f5907306fd3ef', 'grant_type': 'authorization_code'}
+INFO:stravalib.protocol.ApiV3:GET 'https://www.strava.com/api/v3/athlete/activities' with params {'before': 1704067200, 'after': 1672531200, 'page': 1, 'per_page': 200}
+INFO:werkzeug:127.0.0.1 - - [19/Feb/2024 13:59:42] "[37mGET /authorization?state=&code=79bf95671899acff0a3f781e9c2f5907306fd3ef&scope=read,activity:read_all HTTP/1.1[0m" 200 -
+WARNING:py.warnings:/usr/lib/python3.8/subprocess.py:946: ResourceWarning: subprocess 11959 is still running
+  _warn("subprocess %s is still running" % self.pid,
+
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:stravalib.protocol.ApiV3:POST 'https://www.strava.com/oauth/token' with params {'client_id': '114649', 'client_secret': 'd4cd648ec65ca55d5ee5ef435b7768286f01457f', 'code': '92439c3f3e541c5877ec07b9ffa51fe3e19d1752', 'grant_type': 'authorization_code'}
+ERROR:scr_gpx_strava:Exception on /authorization [GET]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/usr/local/lib/python3.8/dist-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "scr_gpx_strava.py", line 117, in get_authorization_code
+    info_xml()
+  File "scr_gpx_strava.py", line 88, in info_xml
+    activities = client.get_activities(after=(datetime.datetime.now() - datetime.timedelta(days=365)))
+AttributeError: type object 'datetime.datetime' has no attribute 'datetime'
+INFO:werkzeug:127.0.0.1 - - [19/Feb/2024 14:08:50] "[35m[1mGET /authorization?state=&code=92439c3f3e541c5877ec07b9ffa51fe3e19d1752&scope=read,activity:read_all HTTP/1.1[0m" 500 -
+WARNING:py.warnings:/usr/lib/python3.8/subprocess.py:946: ResourceWarning: subprocess 12198 is still running
+  _warn("subprocess %s is still running" % self.pid,
+
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:stravalib.protocol.ApiV3:POST 'https://www.strava.com/oauth/token' with params {'client_id': '114649', 'client_secret': 'd4cd648ec65ca55d5ee5ef435b7768286f01457f', 'code': 'cd9725dadde4901e98f0aa96414774b9ae5a98d4', 'grant_type': 'authorization_code'}
+INFO:stravalib.protocol.ApiV3:GET 'https://www.strava.com/api/v3/athlete/activities' with params {'before': 1704067200, 'after': 1672531200, 'page': 1, 'per_page': 200}
+INFO:werkzeug:127.0.0.1 - - [19/Feb/2024 14:09:38] "[37mGET /authorization?state=&code=cd9725dadde4901e98f0aa96414774b9ae5a98d4&scope=read,activity:read_all HTTP/1.1[0m" 200 -
+WARNING:py.warnings:/usr/lib/python3.8/subprocess.py:946: ResourceWarning: subprocess 12659 is still running
+  _warn("subprocess %s is still running" % self.pid,
+
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:stravalib.protocol.ApiV3:POST 'https://www.strava.com/oauth/token' with params {'client_id': '114649', 'client_secret': 'd4cd648ec65ca55d5ee5ef435b7768286f01457f', 'code': 'e2fb93a094ead02ca515cf07cac37ff60d9785a8', 'grant_type': 'authorization_code'}
+INFO:stravalib.protocol.ApiV3:GET 'https://www.strava.com/api/v3/athlete/activities' with params {'before': 1704067200, 'after': 1672531200, 'page': 1, 'per_page': 200}
+INFO:werkzeug:127.0.0.1 - - [19/Feb/2024 14:11:33] "[37mGET /authorization?state=&code=e2fb93a094ead02ca515cf07cac37ff60d9785a8&scope=read,activity:read_all HTTP/1.1[0m" 200 -
+WARNING:py.warnings:/usr/lib/python3.8/subprocess.py:946: ResourceWarning: subprocess 13425 is still running
+  _warn("subprocess %s is still running" % self.pid,
+
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:stravalib.protocol.ApiV3:POST 'https://www.strava.com/oauth/token' with params {'client_id': '114649', 'client_secret': 'd4cd648ec65ca55d5ee5ef435b7768286f01457f', 'code': 'cc15b627fe3edbc34cfd9ef749fb3cf3efa78cdd', 'grant_type': 'authorization_code'}
+INFO:stravalib.protocol.ApiV3:GET 'https://www.strava.com/api/v3/athlete/activities' with params {'before': 1704067200, 'after': 1672531200, 'page': 1, 'per_page': 200}
+INFO:werkzeug:127.0.0.1 - - [19/Feb/2024 14:14:54] "[37mGET /authorization?state=&code=cc15b627fe3edbc34cfd9ef749fb3cf3efa78cdd&scope=read,activity:read_all HTTP/1.1[0m" 200 -
+WARNING:py.warnings:/usr/lib/python3.8/subprocess.py:946: ResourceWarning: subprocess 18344 is still running
+  _warn("subprocess %s is still running" % self.pid,
+
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:stravalib.protocol.ApiV3:POST 'https://www.strava.com/oauth/token' with params {'client_id': '114649', 'client_secret': 'd4cd648ec65ca55d5ee5ef435b7768286f01457f', 'code': '7186168fa3b1b560934b2f531d3c96b07ea7357a', 'grant_type': 'authorization_code'}
+INFO:stravalib.protocol.ApiV3:GET 'https://www.strava.com/api/v3/athlete/activities' with params {'before': 1704067200, 'after': 1672531200, 'page': 1, 'per_page': 200}
+INFO:stravalib.protocol.ApiV3:GET 'https://www.strava.com/api/v3/athlete/activities' with params {'before': 1704067200, 'after': 1672531200, 'page': 1, 'per_page': 200}
+INFO:werkzeug:127.0.0.1 - - [19/Feb/2024 14:39:13] "[37mGET /authorization?state=&code=7186168fa3b1b560934b2f531d3c96b07ea7357a&scope=read,activity:read_all HTTP/1.1[0m" 200 -
+WARNING:py.warnings:/usr/lib/python3.8/subprocess.py:946: ResourceWarning: subprocess 19470 is still running
+  _warn("subprocess %s is still running" % self.pid,
+
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:stravalib.protocol.ApiV3:POST 'https://www.strava.com/oauth/token' with params {'client_id': '114649', 'client_secret': 'd4cd648ec65ca55d5ee5ef435b7768286f01457f', 'code': '48a670a151910b938e9f59bb323ff9340c4004e6', 'grant_type': 'authorization_code'}
+INFO:stravalib.protocol.ApiV3:GET 'https://www.strava.com/api/v3/athlete/activities' with params {'before': 1708353851, 'after': 1672531200, 'page': 1, 'per_page': 200}
+INFO:stravalib.protocol.ApiV3:GET 'https://www.strava.com/api/v3/athlete/activities' with params {'before': 1708353851, 'after': 1672531200, 'page': 1, 'per_page': 200}
+INFO:werkzeug:127.0.0.1 - - [19/Feb/2024 14:44:14] "[37mGET /authorization?state=&code=48a670a151910b938e9f59bb323ff9340c4004e6&scope=read,activity:read_all HTTP/1.1[0m" 200 -
+WARNING:py.warnings:/usr/lib/python3.8/subprocess.py:946: ResourceWarning: subprocess 20910 is still running
+  _warn("subprocess %s is still running" % self.pid,
+
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:stravalib.protocol.ApiV3:POST 'https://www.strava.com/oauth/token' with params {'client_id': '114649', 'client_secret': 'd4cd648ec65ca55d5ee5ef435b7768286f01457f', 'code': '66da7522d5c5b2d724a0c7cb3146d2ee06c6898d', 'grant_type': 'authorization_code'}
+INFO:stravalib.protocol.ApiV3:GET 'https://www.strava.com/api/v3/athlete/activities' with params {'before': 1708354250, 'after': 1672531200, 'page': 1, 'per_page': 200}
+INFO:stravalib.protocol.ApiV3:GET 'https://www.strava.com/api/v3/athlete/activities' with params {'before': 1708354250, 'after': 1672531200, 'page': 1, 'per_page': 200}
+INFO:werkzeug:127.0.0.1 - - [19/Feb/2024 14:51:16] "[37mGET /authorization?state=&code=66da7522d5c5b2d724a0c7cb3146d2ee06c6898d&scope=read,activity:read_all HTTP/1.1[0m" 200 -
+WARNING:py.warnings:/usr/lib/python3.8/subprocess.py:946: ResourceWarning: subprocess 28327 is still running
+  _warn("subprocess %s is still running" % self.pid,
+
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:stravalib.protocol.ApiV3:POST 'https://www.strava.com/oauth/token' with params {'client_id': '114649', 'client_secret': 'd4cd648ec65ca55d5ee5ef435b7768286f01457f', 'code': '5dc2b2723d34d8561729c44c45cfe836c9974ea0', 'grant_type': 'authorization_code'}
+INFO:stravalib.protocol.ApiV3:GET 'https://www.strava.com/api/v3/athlete/activities' with params {'before': 1708357543, 'after': 1672531200, 'page': 1, 'per_page': 200}
+INFO:stravalib.protocol.ApiV3:GET 'https://www.strava.com/api/v3/athlete/activities' with params {'before': 1708357543, 'after': 1672531200, 'page': 1, 'per_page': 200}
+ERROR:scr_xml_gpx_strava:Exception on /authorization [GET]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/usr/local/lib/python3.8/dist-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "scr_xml_gpx_strava.py", line 128, in get_authorization_code
+    info_gpx()
+  File "scr_xml_gpx_strava.py", line 82, in info_gpx
+    with open(f'/home/sherlockes/strava/tracks/{activity_id}.gpx', 'wb') as gpx_file:
+FileNotFoundError: [Errno 2] No such file or directory: '/home/sherlockes/strava/tracks/10752197579.gpx'
+INFO:werkzeug:127.0.0.1 - - [19/Feb/2024 15:45:46] "[35m[1mGET /authorization?state=&code=5dc2b2723d34d8561729c44c45cfe836c9974ea0&scope=read,activity:read_all HTTP/1.1[0m" 500 -
+WARNING:py.warnings:/usr/lib/python3.8/subprocess.py:946: ResourceWarning: subprocess 30011 is still running
+  _warn("subprocess %s is still running" % self.pid,
+
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:stravalib.protocol.ApiV3:POST 'https://www.strava.com/oauth/token' with params {'client_id': '114649', 'client_secret': 'd4cd648ec65ca55d5ee5ef435b7768286f01457f', 'code': '7bc355823431a1d798df36ccec83921ca5ae4357', 'grant_type': 'authorization_code'}
+INFO:stravalib.protocol.ApiV3:GET 'https://www.strava.com/api/v3/athlete/activities' with params {'before': 1708357569, 'after': 1672531200, 'page': 1, 'per_page': 200}
+INFO:stravalib.protocol.ApiV3:GET 'https://www.strava.com/api/v3/athlete/activities' with params {'before': 1708357569, 'after': 1672531200, 'page': 1, 'per_page': 200}
+ERROR:scr_xml_gpx_strava:Exception on /authorization [GET]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/usr/local/lib/python3.8/dist-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "scr_xml_gpx_strava.py", line 128, in get_authorization_code
+    info_gpx()
+  File "scr_xml_gpx_strava.py", line 82, in info_gpx
+    with open(f'/home/sherlockes/strava/tracks/{activity_id}.gpx', 'wb') as gpx_file:
+FileNotFoundError: [Errno 2] No such file or directory: '/home/sherlockes/strava/tracks/10752197579.gpx'
+INFO:werkzeug:127.0.0.1 - - [19/Feb/2024 15:46:12] "[35m[1mGET /authorization?state=&code=7bc355823431a1d798df36ccec83921ca5ae4357&scope=read,activity:read_all HTTP/1.1[0m" 500 -
+WARNING:py.warnings:/usr/lib/python3.8/subprocess.py:946: ResourceWarning: subprocess 30427 is still running
+  _warn("subprocess %s is still running" % self.pid,
+
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:stravalib.protocol.ApiV3:POST 'https://www.strava.com/oauth/token' with params {'client_id': '114649', 'client_secret': 'd4cd648ec65ca55d5ee5ef435b7768286f01457f', 'code': '362ac99bbd121d92d3ed4c725366c91bff0811e8', 'grant_type': 'authorization_code'}
+INFO:stravalib.protocol.ApiV3:GET 'https://www.strava.com/api/v3/athlete/activities' with params {'before': 1708357638, 'after': 1672531200, 'page': 1, 'per_page': 200}
+INFO:stravalib.protocol.ApiV3:GET 'https://www.strava.com/api/v3/athlete/activities' with params {'before': 1708357638, 'after': 1672531200, 'page': 1, 'per_page': 200}
+ERROR:scr_xml_gpx_strava:Exception on /authorization [GET]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/usr/local/lib/python3.8/dist-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "scr_xml_gpx_strava.py", line 128, in get_authorization_code
+    info_gpx()
+  File "scr_xml_gpx_strava.py", line 82, in info_gpx
+    with open(f'/home/sherlockes/strava/tracks/{activity_id}.gpx', 'wb') as gpx_file:
+FileNotFoundError: [Errno 2] No such file or directory: '/home/sherlockes/strava/tracks/10752197579.gpx'
+INFO:werkzeug:127.0.0.1 - - [19/Feb/2024 15:47:25] "[35m[1mGET /authorization?state=&code=362ac99bbd121d92d3ed4c725366c91bff0811e8&scope=read,activity:read_all HTTP/1.1[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [19/Feb/2024 15:47:26] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+WARNING:py.warnings:/usr/lib/python3.8/subprocess.py:946: ResourceWarning: subprocess 30956 is still running
+  _warn("subprocess %s is still running" % self.pid,
+
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:stravalib.protocol.ApiV3:POST 'https://www.strava.com/oauth/token' with params {'client_id': '114649', 'client_secret': 'd4cd648ec65ca55d5ee5ef435b7768286f01457f', 'code': '759091587b9a6058bff1523e5c019c2aa9a2ebeb', 'grant_type': 'authorization_code'}
+INFO:stravalib.protocol.ApiV3:GET 'https://www.strava.com/api/v3/athlete/activities' with params {'before': 1708357705, 'after': 1672531200, 'page': 1, 'per_page': 200}
+INFO:werkzeug:127.0.0.1 - - [19/Feb/2024 15:48:26] "[37mGET /authorization?state=&code=759091587b9a6058bff1523e5c019c2aa9a2ebeb&scope=read,activity:read_all HTTP/1.1[0m" 200 -
+WARNING:py.warnings:/usr/lib/python3.8/subprocess.py:946: ResourceWarning: subprocess 31470 is still running
+  _warn("subprocess %s is still running" % self.pid,
+
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:stravalib.protocol.ApiV3:POST 'https://www.strava.com/oauth/token' with params {'client_id': '114649', 'client_secret': 'd4cd648ec65ca55d5ee5ef435b7768286f01457f', 'code': '5466625e9c1faf77759c5603f1ee5146eada954b', 'grant_type': 'authorization_code'}
+INFO:stravalib.protocol.ApiV3:GET 'https://www.strava.com/api/v3/athlete/activities' with params {'before': 1708357832, 'after': 1672531200, 'page': 1, 'per_page': 200}
+INFO:werkzeug:127.0.0.1 - - [19/Feb/2024 15:50:34] "[37mGET /authorization?state=&code=5466625e9c1faf77759c5603f1ee5146eada954b&scope=read,activity:read_all HTTP/1.1[0m" 200 -
+WARNING:py.warnings:/usr/lib/python3.8/subprocess.py:946: ResourceWarning: subprocess 31620 is still running
+  _warn("subprocess %s is still running" % self.pid,
+
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:stravalib.protocol.ApiV3:POST 'https://www.strava.com/oauth/token' with params {'client_id': '114649', 'client_secret': 'd4cd648ec65ca55d5ee5ef435b7768286f01457f', 'code': '267baa95d3f54644adbb7fbbee77b310f9fa851f', 'grant_type': 'authorization_code'}
+INFO:stravalib.protocol.ApiV3:GET 'https://www.strava.com/api/v3/athlete/activities' with params {'before': 1708357858, 'after': 1672531200, 'page': 1, 'per_page': 200}
+INFO:werkzeug:127.0.0.1 - - [19/Feb/2024 15:51:00] "[37mGET /authorization?state=&code=267baa95d3f54644adbb7fbbee77b310f9fa851f&scope=read,activity:read_all HTTP/1.1[0m" 200 -
+WARNING:py.warnings:/usr/lib/python3.8/subprocess.py:946: ResourceWarning: subprocess 31864 is still running
+  _warn("subprocess %s is still running" % self.pid,
+
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:stravalib.protocol.ApiV3:POST 'https://www.strava.com/oauth/token' with params {'client_id': '114649', 'client_secret': 'd4cd648ec65ca55d5ee5ef435b7768286f01457f', 'code': '149967cf216d8d04f98bf08042e75b770c5715ce', 'grant_type': 'authorization_code'}
+INFO:stravalib.protocol.ApiV3:GET 'https://www.strava.com/api/v3/athlete/activities' with params {'before': 1708357902, 'after': 1672531200, 'page': 1, 'per_page': 200}
+INFO:werkzeug:127.0.0.1 - - [19/Feb/2024 15:51:43] "[37mGET /authorization?state=&code=149967cf216d8d04f98bf08042e75b770c5715ce&scope=read,activity:read_all HTTP/1.1[0m" 200 -
+WARNING:py.warnings:/usr/lib/python3.8/subprocess.py:946: ResourceWarning: subprocess 32806 is still running
+  _warn("subprocess %s is still running" % self.pid,
+
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:stravalib.protocol.ApiV3:POST 'https://www.strava.com/oauth/token' with params {'client_id': '114649', 'client_secret': 'd4cd648ec65ca55d5ee5ef435b7768286f01457f', 'code': 'c69509e2176e5a0daa3cf9f90fbcd4b2617e8ea9', 'grant_type': 'authorization_code'}
+INFO:stravalib.protocol.ApiV3:GET 'https://www.strava.com/api/v3/athlete/activities' with params {'before': 1708358162, 'after': 1672531200, 'page': 1, 'per_page': 200}
+INFO:stravalib.protocol.ApiV3:GET 'https://www.strava.com/api/v3/athlete/activities' with params {'before': 1708358162, 'after': 1672531200, 'page': 1, 'per_page': 200}
+ERROR:scr_xml_gpx_strava:Exception on /authorization [GET]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/usr/local/lib/python3.8/dist-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "scr_xml_gpx_strava.py", line 134, in get_authorization_code
+    info_gpx()
+  File "scr_xml_gpx_strava.py", line 88, in info_gpx
+    with open(f'{ruta_strava} + tracks/{activity_id}.gpx', 'wb') as gpx_file:
+FileNotFoundError: [Errno 2] No such file or directory: '/home/sherlockes/strava/ + tracks/10752197579.gpx'
+INFO:werkzeug:127.0.0.1 - - [19/Feb/2024 15:56:05] "[35m[1mGET /authorization?state=&code=c69509e2176e5a0daa3cf9f90fbcd4b2617e8ea9&scope=read,activity:read_all HTTP/1.1[0m" 500 -
+WARNING:py.warnings:/usr/lib/python3.8/subprocess.py:946: ResourceWarning: subprocess 33161 is still running
+  _warn("subprocess %s is still running" % self.pid,
+
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:stravalib.protocol.ApiV3:POST 'https://www.strava.com/oauth/token' with params {'client_id': '114649', 'client_secret': 'd4cd648ec65ca55d5ee5ef435b7768286f01457f', 'code': '75612ed2d121770d0e3d5eb3b7158a246b2131b2', 'grant_type': 'authorization_code'}
+INFO:stravalib.protocol.ApiV3:GET 'https://www.strava.com/api/v3/athlete/activities' with params {'before': 1708358245, 'after': 1672531200, 'page': 1, 'per_page': 200}
+INFO:stravalib.protocol.ApiV3:GET 'https://www.strava.com/api/v3/athlete/activities' with params {'before': 1708358245, 'after': 1672531200, 'page': 1, 'per_page': 200}
+ERROR:scr_xml_gpx_strava:Exception on /authorization [GET]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/usr/local/lib/python3.8/dist-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "scr_xml_gpx_strava.py", line 134, in get_authorization_code
+    info_gpx()
+  File "scr_xml_gpx_strava.py", line 88, in info_gpx
+    with open(f'{ruta_strava}tracks/{activity_id}.gpx', 'wb') as gpx_file:
+FileNotFoundError: [Errno 2] No such file or directory: '/home/sherlockes/strava/tracks/10752197579.gpx'
+INFO:werkzeug:127.0.0.1 - - [19/Feb/2024 15:57:29] "[35m[1mGET /authorization?state=&code=75612ed2d121770d0e3d5eb3b7158a246b2131b2&scope=read,activity:read_all HTTP/1.1[0m" 500 -
+WARNING:py.warnings:/usr/lib/python3.8/subprocess.py:946: ResourceWarning: subprocess 33373 is still running
+  _warn("subprocess %s is still running" % self.pid,
+
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:stravalib.protocol.ApiV3:POST 'https://www.strava.com/oauth/token' with params {'client_id': '114649', 'client_secret': 'd4cd648ec65ca55d5ee5ef435b7768286f01457f', 'code': 'ea40367744ca15cdf78e9e2eeebe407c6e2a7c35', 'grant_type': 'authorization_code'}
+INFO:stravalib.protocol.ApiV3:GET 'https://www.strava.com/api/v3/athlete/activities' with params {'before': 1708358287, 'after': 1672531200, 'page': 1, 'per_page': 200}
+INFO:stravalib.protocol.ApiV3:GET 'https://www.strava.com/api/v3/athlete/activities' with params {'before': 1708358287, 'after': 1672531200, 'page': 1, 'per_page': 200}
+ERROR:scr_xml_gpx_strava:Exception on /authorization [GET]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/usr/local/lib/python3.8/dist-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "scr_xml_gpx_strava.py", line 134, in get_authorization_code
+    info_gpx()
+  File "scr_xml_gpx_strava.py", line 88, in info_gpx
+    with open(f"{ruta_strava}tracks/{activity_id}.gpx", 'wb') as gpx_file:
+FileNotFoundError: [Errno 2] No such file or directory: '/home/sherlockes/strava/tracks/10752197579.gpx'
+INFO:werkzeug:127.0.0.1 - - [19/Feb/2024 15:58:10] "[35m[1mGET /authorization?state=&code=ea40367744ca15cdf78e9e2eeebe407c6e2a7c35&scope=read,activity:read_all HTTP/1.1[0m" 500 -
+WARNING:py.warnings:/usr/lib/python3.8/subprocess.py:946: ResourceWarning: subprocess 33590 is still running
+  _warn("subprocess %s is still running" % self.pid,
+
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:stravalib.protocol.ApiV3:POST 'https://www.strava.com/oauth/token' with params {'client_id': '114649', 'client_secret': 'd4cd648ec65ca55d5ee5ef435b7768286f01457f', 'code': 'ba0b5ce1e8a8f001470d2347591373dd630eb50b', 'grant_type': 'authorization_code'}
+INFO:stravalib.protocol.ApiV3:GET 'https://www.strava.com/api/v3/athlete/activities' with params {'before': 1708358327, 'after': 1672531200, 'page': 1, 'per_page': 200}
+INFO:stravalib.protocol.ApiV3:GET 'https://www.strava.com/api/v3/athlete/activities' with params {'before': 1708358327, 'after': 1672531200, 'page': 1, 'per_page': 200}
+ERROR:scr_xml_gpx_strava:Exception on /authorization [GET]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/usr/local/lib/python3.8/dist-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "scr_xml_gpx_strava.py", line 134, in get_authorization_code
+    info_gpx()
+  File "scr_xml_gpx_strava.py", line 88, in info_gpx
+    with open(f'/home/sherlockes/strava/tracks/{activity_id}.gpx', 'wb') as gpx_file:
+FileNotFoundError: [Errno 2] No such file or directory: '/home/sherlockes/strava/tracks/10752197579.gpx'
+INFO:werkzeug:127.0.0.1 - - [19/Feb/2024 15:58:49] "[35m[1mGET /authorization?state=&code=ba0b5ce1e8a8f001470d2347591373dd630eb50b&scope=read,activity:read_all HTTP/1.1[0m" 500 -
+WARNING:py.warnings:/usr/lib/python3.8/subprocess.py:946: ResourceWarning: subprocess 33829 is still running
+  _warn("subprocess %s is still running" % self.pid,
+
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:stravalib.protocol.ApiV3:POST 'https://www.strava.com/oauth/token' with params {'client_id': '114649', 'client_secret': 'd4cd648ec65ca55d5ee5ef435b7768286f01457f', 'code': 'd3c62b6ac4b0f0ef6d58da18fe04f5f56e57eb99', 'grant_type': 'authorization_code'}
+INFO:stravalib.protocol.ApiV3:GET 'https://www.strava.com/api/v3/athlete/activities' with params {'before': 1708358375, 'after': 1672531200, 'page': 1, 'per_page': 200}
+INFO:stravalib.protocol.ApiV3:GET 'https://www.strava.com/api/v3/athlete/activities' with params {'before': 1708358375, 'after': 1672531200, 'page': 1, 'per_page': 200}
+INFO:werkzeug:127.0.0.1 - - [19/Feb/2024 16:00:00] "[37mGET /authorization?state=&code=d3c62b6ac4b0f0ef6d58da18fe04f5f56e57eb99&scope=read,activity:read_all HTTP/1.1[0m" 200 -
