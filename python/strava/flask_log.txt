@@ -1,0 +1,26 @@
+WARNING:py.warnings:/usr/lib/python3.8/subprocess.py:946: ResourceWarning: subprocess 11283 is still running
+  _warn("subprocess %s is still running" % self.pid,
+
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:stravalib.protocol.ApiV3:POST 'https://www.strava.com/oauth/token' with params {'client_id': '114649', 'client_secret': 'd4cd648ec65ca55d5ee5ef435b7768286f01457f', 'code': 'b6738337ed8a2fca2189610257d711cbd731b259', 'grant_type': 'authorization_code'}
+INFO:stravalib.protocol.ApiV3:GET 'https://www.strava.com/api/v3/athlete/activities' with params {'before': 1704067200, 'after': 1672531200, 'page': 1, 'per_page': 200}
+ERROR:scr_gpx_strava:Exception on /authorization [GET]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/usr/local/lib/python3.8/dist-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/sherlockes/SherloScripts/python/strava/src/scr_gpx_strava.py", line 98, in get_authorization_code
+    info()
+  File "/home/sherlockes/SherloScripts/python/strava/src/scr_gpx_strava.py", line 76, in info
+    with open(f'tracks/{activity_id}.gpx', 'wb') as gpx_file:
+FileNotFoundError: [Errno 2] No such file or directory: 'tracks/10358952488.gpx'
+INFO:werkzeug:127.0.0.1 - - [16/Feb/2024 14:48:41] "[35m[1mGET /authorization?state=&code=b6738337ed8a2fca2189610257d711cbd731b259&scope=read,activity:read_all HTTP/1.1[0m" 500 -
