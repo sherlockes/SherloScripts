@@ -1,0 +1,384 @@
+WARNING:py.warnings:/usr/lib/python3.8/subprocess.py:946: ResourceWarning: subprocess 7462 is still running
+  _warn("subprocess %s is still running" % self.pid,
+
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:stravalib.protocol.ApiV3:POST 'https://www.strava.com/oauth/token' with params {'client_id': '114649', 'client_secret': 'd4cd648ec65ca55d5ee5ef435b7768286f01457f', 'code': 'ddb78fba1823f26f07b5e6f689485c2ec93460f4', 'grant_type': 'authorization_code'}
+INFO:stravalib.protocol.ApiV3:GET 'https://www.strava.com/api/v3/athlete/activities' with params {'before': 1704067200, 'after': 1672531200, 'page': 1, 'per_page': 200}
+ERROR:scr_gpx_strava:Exception on /authorization [GET]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/usr/local/lib/python3.8/dist-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/sherlockes/SherloScripts/python/strava/src/scr_gpx_strava.py", line 98, in get_authorization_code
+    info()
+  File "/home/sherlockes/SherloScripts/python/strava/src/scr_gpx_strava.py", line 76, in info
+    with open(f'tracks/{activity_id}.gpx', 'wb') as gpx_file:
+FileNotFoundError: [Errno 2] No such file or directory: 'tracks/10358952488.gpx'
+INFO:werkzeug:127.0.0.1 - - [16/Feb/2024 14:32:46] "[35m[1mGET /authorization?state=&code=ddb78fba1823f26f07b5e6f689485c2ec93460f4&scope=read,activity:read_all HTTP/1.1[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [16/Feb/2024 14:32:47] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+WARNING:py.warnings:/usr/lib/python3.8/subprocess.py:946: ResourceWarning: subprocess 7587 is still running
+  _warn("subprocess %s is still running" % self.pid,
+
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:stravalib.protocol.ApiV3:POST 'https://www.strava.com/oauth/token' with params {'client_id': '114649', 'client_secret': 'd4cd648ec65ca55d5ee5ef435b7768286f01457f', 'code': 'b6cc28f51a5cb8edbe7506290af7b9aa6aa8c7e4', 'grant_type': 'authorization_code'}
+ERROR:scr_gpx_strava:Exception on /authorization [GET]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/usr/local/lib/python3.8/dist-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/sherlockes/SherloScripts/python/strava/src/scr_gpx_strava.py", line 106, in get_authorization_code
+    info()
+  File "/home/sherlockes/SherloScripts/python/strava/src/scr_gpx_strava.py", line 65, in info
+    end_date = datetime.datetime.now()
+AttributeError: type object 'datetime.datetime' has no attribute 'datetime'
+INFO:werkzeug:127.0.0.1 - - [18/Feb/2024 20:08:30] "[35m[1mGET /authorization?state=&code=b6cc28f51a5cb8edbe7506290af7b9aa6aa8c7e4&scope=read,activity:read_all HTTP/1.1[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [18/Feb/2024 20:08:30] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+WARNING:py.warnings:/usr/lib/python3.8/subprocess.py:946: ResourceWarning: subprocess 7640 is still running
+  _warn("subprocess %s is still running" % self.pid,
+
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:stravalib.protocol.ApiV3:POST 'https://www.strava.com/oauth/token' with params {'client_id': '114649', 'client_secret': 'd4cd648ec65ca55d5ee5ef435b7768286f01457f', 'code': 'bbce104a2a689a5f2d53c031a2cd2c1dffdc492b', 'grant_type': 'authorization_code'}
+ERROR:scr_gpx_strava:Exception on /authorization [GET]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/usr/local/lib/python3.8/dist-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/sherlockes/SherloScripts/python/strava/src/scr_gpx_strava.py", line 106, in get_authorization_code
+    info()
+  File "/home/sherlockes/SherloScripts/python/strava/src/scr_gpx_strava.py", line 65, in info
+    end_date = datetime.datetime.now()
+AttributeError: type object 'datetime.datetime' has no attribute 'datetime'
+INFO:werkzeug:127.0.0.1 - - [19/Feb/2024 12:53:49] "[35m[1mGET /authorization?state=&code=bbce104a2a689a5f2d53c031a2cd2c1dffdc492b&scope=read,activity:read_all HTTP/1.1[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [19/Feb/2024 12:53:50] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+WARNING:py.warnings:/usr/lib/python3.8/subprocess.py:946: ResourceWarning: subprocess 8354 is still running
+  _warn("subprocess %s is still running" % self.pid,
+
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:stravalib.protocol.ApiV3:POST 'https://www.strava.com/oauth/token' with params {'client_id': '114649', 'client_secret': 'd4cd648ec65ca55d5ee5ef435b7768286f01457f', 'code': 'e510868019299bf658b47408cba7589dbada51b2', 'grant_type': 'authorization_code'}
+ERROR:scr_gpx_strava:Exception on /authorization [GET]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/usr/local/lib/python3.8/dist-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/sherlockes/SherloScripts/python/strava/src/scr_gpx_strava.py", line 99, in get_authorization_code
+    info()
+  File "/home/sherlockes/SherloScripts/python/strava/src/scr_gpx_strava.py", line 58, in info
+    end_date = datetime.datetime.now()
+AttributeError: type object 'datetime.datetime' has no attribute 'datetime'
+INFO:werkzeug:127.0.0.1 - - [19/Feb/2024 12:56:20] "[35m[1mGET /authorization?state=&code=e510868019299bf658b47408cba7589dbada51b2&scope=read,activity:read_all HTTP/1.1[0m" 500 -
+WARNING:py.warnings:/usr/lib/python3.8/subprocess.py:946: ResourceWarning: subprocess 8840 is still running
+  _warn("subprocess %s is still running" % self.pid,
+
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:stravalib.protocol.ApiV3:POST 'https://www.strava.com/oauth/token' with params {'client_id': '114649', 'client_secret': 'd4cd648ec65ca55d5ee5ef435b7768286f01457f', 'code': '9fc6ee1891fb1fd5ff43765e0824ac16f9774bd8', 'grant_type': 'authorization_code'}
+ERROR:scr_gpx_strava:Exception on /authorization [GET]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/usr/local/lib/python3.8/dist-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/sherlockes/SherloScripts/python/strava/src/scr_gpx_strava.py", line 100, in get_authorization_code
+    info()
+  File "/home/sherlockes/SherloScripts/python/strava/src/scr_gpx_strava.py", line 59, in info
+    end_date = datetime.datetime.now()
+AttributeError: type object 'datetime.datetime' has no attribute 'datetime'
+INFO:werkzeug:127.0.0.1 - - [19/Feb/2024 12:57:39] "[35m[1mGET /authorization?state=&code=9fc6ee1891fb1fd5ff43765e0824ac16f9774bd8&scope=read,activity:read_all HTTP/1.1[0m" 500 -
+WARNING:py.warnings:/usr/lib/python3.8/subprocess.py:946: ResourceWarning: subprocess 10591 is still running
+  _warn("subprocess %s is still running" % self.pid,
+
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:stravalib.protocol.ApiV3:POST 'https://www.strava.com/oauth/token' with params {'client_id': '114649', 'client_secret': 'd4cd648ec65ca55d5ee5ef435b7768286f01457f', 'code': '39f283f4ea3ca373c0fe5458a4d5632aac3e1130', 'grant_type': 'authorization_code'}
+ERROR:scr_gpx_strava:Exception on /authorization [GET]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/usr/local/lib/python3.8/dist-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/sherlockes/SherloScripts/python/strava/src/scr_gpx_strava.py", line 101, in get_authorization_code
+    info()
+  File "/home/sherlockes/SherloScripts/python/strava/src/scr_gpx_strava.py", line 59, in info
+    end_date = datetime.datetime.now()
+AttributeError: type object 'datetime.datetime' has no attribute 'datetime'
+INFO:werkzeug:127.0.0.1 - - [19/Feb/2024 13:04:25] "[35m[1mGET /authorization?state=&code=39f283f4ea3ca373c0fe5458a4d5632aac3e1130&scope=read,activity:read_all HTTP/1.1[0m" 500 -
+WARNING:py.warnings:/usr/lib/python3.8/subprocess.py:946: ResourceWarning: subprocess 10847 is still running
+  _warn("subprocess %s is still running" % self.pid,
+
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:stravalib.protocol.ApiV3:POST 'https://www.strava.com/oauth/token' with params {'client_id': '114649', 'client_secret': 'd4cd648ec65ca55d5ee5ef435b7768286f01457f', 'code': '194ec2dcd61a5201f7bcd998c925cffb2594b1d6', 'grant_type': 'authorization_code'}
+ERROR:scr_gpx_strava:Exception on /authorization [GET]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/usr/local/lib/python3.8/dist-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/sherlockes/SherloScripts/python/strava/src/scr_gpx_strava.py", line 101, in get_authorization_code
+    info()
+  File "/home/sherlockes/SherloScripts/python/strava/src/scr_gpx_strava.py", line 60, in info
+    end_date = datetime.datetime.now()
+AttributeError: type object 'datetime.datetime' has no attribute 'datetime'
+INFO:werkzeug:127.0.0.1 - - [19/Feb/2024 13:05:06] "[35m[1mGET /authorization?state=&code=194ec2dcd61a5201f7bcd998c925cffb2594b1d6&scope=read,activity:read_all HTTP/1.1[0m" 500 -
+WARNING:py.warnings:/usr/lib/python3.8/subprocess.py:946: ResourceWarning: subprocess 11118 is still running
+  _warn("subprocess %s is still running" % self.pid,
+
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:stravalib.protocol.ApiV3:POST 'https://www.strava.com/oauth/token' with params {'client_id': '114649', 'client_secret': 'd4cd648ec65ca55d5ee5ef435b7768286f01457f', 'code': 'bac1c63ace501b19f7435a0b605f33a1aa26e77f', 'grant_type': 'authorization_code'}
+ERROR:scr_gpx_strava:Exception on /authorization [GET]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/usr/local/lib/python3.8/dist-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/sherlockes/SherloScripts/python/strava/src/scr_gpx_strava.py", line 101, in get_authorization_code
+    info()
+  File "/home/sherlockes/SherloScripts/python/strava/src/scr_gpx_strava.py", line 60, in info
+    end_date = datetime.datetime.now()
+AttributeError: type object 'datetime.datetime' has no attribute 'datetime'
+INFO:werkzeug:127.0.0.1 - - [19/Feb/2024 13:05:54] "[35m[1mGET /authorization?state=&code=bac1c63ace501b19f7435a0b605f33a1aa26e77f&scope=read,activity:read_all HTTP/1.1[0m" 500 -
+WARNING:py.warnings:/usr/lib/python3.8/subprocess.py:946: ResourceWarning: subprocess 11387 is still running
+  _warn("subprocess %s is still running" % self.pid,
+
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:stravalib.protocol.ApiV3:POST 'https://www.strava.com/oauth/token' with params {'client_id': '114649', 'client_secret': 'd4cd648ec65ca55d5ee5ef435b7768286f01457f', 'code': 'df3c25bfdca3430371688798da3c7a064a44c9bc', 'grant_type': 'authorization_code'}
+ERROR:scr_gpx_strava:Exception on /authorization [GET]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/usr/local/lib/python3.8/dist-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/sherlockes/SherloScripts/python/strava/src/scr_gpx_strava.py", line 102, in get_authorization_code
+    info()
+  File "/home/sherlockes/SherloScripts/python/strava/src/scr_gpx_strava.py", line 60, in info
+    end_date = datetime.datetime.now()
+AttributeError: type object 'datetime.datetime' has no attribute 'datetime'
+INFO:werkzeug:127.0.0.1 - - [19/Feb/2024 13:06:30] "[35m[1mGET /authorization?state=&code=df3c25bfdca3430371688798da3c7a064a44c9bc&scope=read,activity:read_all HTTP/1.1[0m" 500 -
+WARNING:py.warnings:/usr/lib/python3.8/subprocess.py:946: ResourceWarning: subprocess 11685 is still running
+  _warn("subprocess %s is still running" % self.pid,
+
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:stravalib.protocol.ApiV3:POST 'https://www.strava.com/oauth/token' with params {'client_id': '114649', 'client_secret': 'd4cd648ec65ca55d5ee5ef435b7768286f01457f', 'code': 'bd60f034982933c2b85dce825a9cf7e7afba960e', 'grant_type': 'authorization_code'}
+ERROR:scr_gpx_strava:Exception on /authorization [GET]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/usr/local/lib/python3.8/dist-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/sherlockes/SherloScripts/python/strava/src/scr_gpx_strava.py", line 102, in get_authorization_code
+    info()
+  File "/home/sherlockes/SherloScripts/python/strava/src/scr_gpx_strava.py", line 59, in info
+    print(datetime.datetime.now())
+AttributeError: type object 'datetime.datetime' has no attribute 'datetime'
+INFO:werkzeug:127.0.0.1 - - [19/Feb/2024 13:07:27] "[35m[1mGET /authorization?state=&code=bd60f034982933c2b85dce825a9cf7e7afba960e&scope=read,activity:read_all HTTP/1.1[0m" 500 -
+WARNING:py.warnings:/usr/lib/python3.8/subprocess.py:946: ResourceWarning: subprocess 12138 is still running
+  _warn("subprocess %s is still running" % self.pid,
+
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:stravalib.protocol.ApiV3:POST 'https://www.strava.com/oauth/token' with params {'client_id': '114649', 'client_secret': 'd4cd648ec65ca55d5ee5ef435b7768286f01457f', 'code': 'fbac735623330876063f5c358aceccb8100e8ee2', 'grant_type': 'authorization_code'}
+INFO:stravalib.protocol.ApiV3:GET 'https://www.strava.com/api/v3/athlete/activities' with params {'before': 1708348129, 'after': 1676812129, 'page': 1, 'per_page': 200}
+ERROR:scr_gpx_strava:Exception on /authorization [GET]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/usr/local/lib/python3.8/dist-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/sherlockes/SherloScripts/python/strava/src/scr_gpx_strava.py", line 103, in get_authorization_code
+    info()
+  File "/home/sherlockes/SherloScripts/python/strava/src/scr_gpx_strava.py", line 81, in info
+    with open(f'tracks/{activity_id}.gpx', 'wb') as gpx_file:
+FileNotFoundError: [Errno 2] No such file or directory: 'tracks/10752197579.gpx'
+INFO:werkzeug:127.0.0.1 - - [19/Feb/2024 13:08:50] "[35m[1mGET /authorization?state=&code=fbac735623330876063f5c358aceccb8100e8ee2&scope=read,activity:read_all HTTP/1.1[0m" 500 -
+WARNING:py.warnings:/usr/lib/python3.8/subprocess.py:946: ResourceWarning: subprocess 13336 is still running
+  _warn("subprocess %s is still running" % self.pid,
+
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:stravalib.protocol.ApiV3:POST 'https://www.strava.com/oauth/token' with params {'client_id': '114649', 'client_secret': 'd4cd648ec65ca55d5ee5ef435b7768286f01457f', 'code': '90653bb2d853a4d343456204bac43cdd77289473', 'grant_type': 'authorization_code'}
+ERROR:scr_gpx_strava:Exception on /authorization [GET]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/usr/local/lib/python3.8/dist-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/sherlockes/SherloScripts/python/strava/src/scr_gpx_strava.py", line 107, in get_authorization_code
+    info()
+  File "/home/sherlockes/SherloScripts/python/strava/src/scr_gpx_strava.py", line 65, in info
+    start_date = datetime(year, 1, 1)
+TypeError: 'module' object is not callable
+INFO:werkzeug:127.0.0.1 - - [19/Feb/2024 13:13:58] "[35m[1mGET /authorization?state=&code=90653bb2d853a4d343456204bac43cdd77289473&scope=read,activity:read_all HTTP/1.1[0m" 500 -
+WARNING:py.warnings:/usr/lib/python3.8/subprocess.py:946: ResourceWarning: subprocess 13631 is still running
+  _warn("subprocess %s is still running" % self.pid,
+
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:stravalib.protocol.ApiV3:POST 'https://www.strava.com/oauth/token' with params {'client_id': '114649', 'client_secret': 'd4cd648ec65ca55d5ee5ef435b7768286f01457f', 'code': '573701731d7467c8b599d41a992b4878b800a1fc', 'grant_type': 'authorization_code'}
+ERROR:scr_gpx_strava:Exception on /authorization [GET]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/usr/local/lib/python3.8/dist-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/sherlockes/SherloScripts/python/strava/src/scr_gpx_strava.py", line 102, in get_authorization_code
+    info()
+  File "/home/sherlockes/SherloScripts/python/strava/src/scr_gpx_strava.py", line 63, in info
+    print(f"Buscando las actividades de los últimos {days} días...")
+NameError: name 'days' is not defined
+INFO:werkzeug:127.0.0.1 - - [19/Feb/2024 13:14:49] "[35m[1mGET /authorization?state=&code=573701731d7467c8b599d41a992b4878b800a1fc&scope=read,activity:read_all HTTP/1.1[0m" 500 -
+WARNING:py.warnings:/usr/lib/python3.8/subprocess.py:946: ResourceWarning: subprocess 6123 is still running
+  _warn("subprocess %s is still running" % self.pid,
+
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:stravalib.protocol.ApiV3:POST 'https://www.strava.com/oauth/token' with params {'client_id': '114649', 'client_secret': 'd4cd648ec65ca55d5ee5ef435b7768286f01457f', 'code': 'ff899806c94de3eb3a4ba13a4f4dfdd4c308f00c', 'grant_type': 'authorization_code'}
+INFO:stravalib.protocol.ApiV3:GET 'https://www.strava.com/api/v3/athlete/activities' with params {'before': 1704067200, 'after': 1672531200, 'page': 1, 'per_page': 200}
+ERROR:scr_gpx_strava:Exception on /authorization [GET]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/usr/local/lib/python3.8/dist-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/sherlockes/SherloScripts/python/strava/src/scr_gpx_strava.py", line 102, in get_authorization_code
+    info()
+  File "/home/sherlockes/SherloScripts/python/strava/src/scr_gpx_strava.py", line 80, in info
+    with open(f'tracks/{activity_id}.gpx', 'wb') as gpx_file:
+FileNotFoundError: [Errno 2] No such file or directory: 'tracks/10358952488.gpx'
+INFO:werkzeug:127.0.0.1 - - [19/Feb/2024 13:46:17] "[35m[1mGET /authorization?state=&code=ff899806c94de3eb3a4ba13a4f4dfdd4c308f00c&scope=read,activity:read_all HTTP/1.1[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [19/Feb/2024 13:46:17] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+WARNING:py.warnings:/usr/lib/python3.8/subprocess.py:946: ResourceWarning: subprocess 9067 is still running
+  _warn("subprocess %s is still running" % self.pid,
+
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:stravalib.protocol.ApiV3:POST 'https://www.strava.com/oauth/token' with params {'client_id': '114649', 'client_secret': 'd4cd648ec65ca55d5ee5ef435b7768286f01457f', 'code': '20697e22a78e2ef8cef17f0be66bfbad1d3d4664', 'grant_type': 'authorization_code'}
+INFO:stravalib.protocol.ApiV3:GET 'https://www.strava.com/api/v3/athlete/activities' with params {'before': 1704067200, 'after': 1672531200, 'page': 1, 'per_page': 200}
+ERROR:scr_gpx_strava:Exception on /authorization [GET]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/usr/local/lib/python3.8/dist-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/sherlockes/SherloScripts/python/strava/src/scr_gpx_strava.py", line 102, in get_authorization_code
+    info()
+  File "/home/sherlockes/SherloScripts/python/strava/src/scr_gpx_strava.py", line 80, in info
+    with open(f'tracks/{activity_id}.gpx', 'wb') as gpx_file:
+FileNotFoundError: [Errno 2] No such file or directory: 'tracks/10358952488.gpx'
+INFO:werkzeug:127.0.0.1 - - [19/Feb/2024 13:56:14] "[35m[1mGET /authorization?state=&code=20697e22a78e2ef8cef17f0be66bfbad1d3d4664&scope=read,activity:read_all HTTP/1.1[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [19/Feb/2024 13:56:14] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
