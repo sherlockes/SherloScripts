@@ -10,16 +10,14 @@
 import requests
 from flask import Flask, request
 from dotenv import load_dotenv
-#import datetime
 from datetime import datetime
-#from datetime import timedelta
 import webbrowser
 import logging
 from stravalib.client import Client
 import os
 
 # Ruta para guardar los archivos
-ruta_strava='/home/sherlockes/strava/'
+ruta_strava = '/home/sherlockes/strava/'
 
 # Configura el registro a un archivo
 log_filename = "flask_log.txt"
