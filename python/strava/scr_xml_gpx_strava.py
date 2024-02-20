@@ -16,8 +16,11 @@ import logging
 from stravalib.client import Client
 import os
 
+usuario = os.getlogin()  # Obtener el nombre de usuario activo
+ruta_strava = os.path.join("/home", usuario, "strava")
+
 # Ruta para guardar los archivos
-ruta_strava = '/home/sherlockes/strava/'
+#ruta_strava = '/home/sherlockes/strava/'
 
 # Configura el registro a un archivo
 log_filename = ruta_strava + "flask_log.txt"
