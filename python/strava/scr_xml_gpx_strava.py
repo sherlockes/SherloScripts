@@ -18,6 +18,7 @@ import os
 
 usuario = os.getlogin()  # Obtener el nombre de usuario activo
 ruta_strava = os.path.join("/home", usuario, "strava")
+print(ruta_strava)
 
 # Ruta para guardar los archivos
 #ruta_strava = '/home/sherlockes/strava/'
