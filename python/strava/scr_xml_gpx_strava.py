@@ -16,12 +16,9 @@ import logging
 from stravalib.client import Client
 import os
 
+# Ruta para guardar los archivos
 usuario = os.getlogin()  # Obtener el nombre de usuario activo
 ruta_strava = os.path.join("/home", usuario, "strava/")
-print(ruta_strava)
-
-# Ruta para guardar los archivos
-#ruta_strava = '/home/sherlockes/strava/'
 
 # Configura el registro a un archivo
 log_filename = ruta_strava + "flask_log.txt"
@@ -89,6 +86,7 @@ def info_gpx():
                     print(f"Archivo GPX de la actividad {activity_id} descargado.")
             else:
                 print(f"Error al descargar {activity_id}. Error: {response.status_code}")
+
 
 # Configura tu cliente Stravalib para generar un xml con las actividaes del último año
 def info_xml():
