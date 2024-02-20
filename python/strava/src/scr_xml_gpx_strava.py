@@ -33,10 +33,7 @@ load_dotenv(ruta_archivo_env)
 
 year = 2023  # Cambia este año al que desees obtener
 start_date = datetime(year, 1, 1)
-#end_date = datetime(year+1, 1, 1)
 end_date = datetime.now()
-print(start_date)
-print(end_date)
 
 # Variables para las llaves de Strava
 client_id = os.getenv('CLIENT_ID')
