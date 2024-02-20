@@ -4,8 +4,8 @@
 # Description: Descarga actividades de Strava
 # Args: N/A
 # Creation/Update: 20231102/20231104
-# Author: www.sherblog.pro                                                
-# Email: sherlockes@gmail.com                                           
+# Author: www.sherblog.pro
+# Email: sherlockes@gmail.com
 ##################################################################
 import requests
 from flask import Flask, request
@@ -20,7 +20,7 @@ import os
 ruta_strava = '/home/sherlockes/strava/'
 
 # Configura el registro a un archivo
-log_filename = "flask_log.txt"
+log_filename = ruta_strava + "flask_log.txt"
 logging.basicConfig(filename=log_filename, level=logging.INFO)
 
 # Carga las variables del archivo ".env" con el siguiente contenido
