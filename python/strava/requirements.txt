@@ -1,4 +1,4 @@
-Flask==1.1.2
+Flask==2.2.5
 stravalib==1.4
 python-dotenv==1.0.0
 requests==2.27.1
