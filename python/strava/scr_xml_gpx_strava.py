@@ -32,7 +32,7 @@ logging.basicConfig(filename=log_filename, level=logging.INFO)
 ruta_archivo_env = ruta_strava + '.env'
 load_dotenv(ruta_archivo_env)
 
-year = 2023  # Cambia este año al que desees obtener
+year = 2023
 start_date = datetime(year, 1, 1)
 end_date = datetime.now()
 
