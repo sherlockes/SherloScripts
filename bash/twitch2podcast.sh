@@ -112,11 +112,12 @@ buscar_ultimos () {
 		#$twdl download -q audio_only --auth-token huimxzjg56hs2xxlhx8zsj3wggej6n $id;
 		$twdl download -q audio_only $id;
 		resultado=$?
-		comprobar resultado
+		comprobar $resultado
 		echo $resultado
 
-		if [ resultado -ne 0 ]; then
+		if [ $resultado -ne 0 ]; then
 		    # No se ha descargado correctamente, pasa al siguiente
+		    echo "El audio no se ha descargado correctamente"
 		    break
 		fi
             else
