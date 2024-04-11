@@ -72,14 +72,15 @@ comprobar(){
 
 buscar_ultimos_yt(){
     # Valores de argumentos
-    local canal=${1:?Falta el nombre del canal}
+    local nombre=${1:?Falta el nombre del canal}
+    local url=${2:?Falta el nombre del canal}
     local videos
     local id
     local duracion
 
     # Obtiene el json de los ultimos vídeos.
     mensaje+=$'Obteniendo últimos vídeos . . . . . . . . . . . . .'
-    echo "- Buscando últimos vídeos de $canal"
+    echo "- Buscando últimos vídeos de $nombre en $canal"
 }
 
 ################################
@@ -95,5 +96,5 @@ while IFS= read -r linea; do
     url=$(echo "$linea" | cut -d ',' -f 2)
     #echo "Nombre del canal: $nombre"
     #echo "URL del canal: $url"
-    buscar_ultimos_yt "$nombre"
+    buscar_ultimos_yt "$nombre" "$url"
 done < "$archivo_canales"
