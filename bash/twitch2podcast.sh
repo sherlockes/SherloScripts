@@ -104,7 +104,7 @@ buscar_ultimos () {
 	    break
 	else
 	    echo "- Descargando el audio del vídeo $id.";
-            mensaje+=$"Descargando el audio de $id. ."
+            mensaje+=$"Descargando audio de $id. ."
 
             if (( $mins > 10 ))
             then
