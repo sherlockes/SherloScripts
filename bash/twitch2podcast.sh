@@ -114,6 +114,13 @@ buscar_ultimos () {
 		resultado=$?
 		comprobar resultado
 		echo $resultado
+
+		if [ resultado -ne 0 ]; then
+		    # No se ha descargado correctamente
+		    break
+		fi
+
+		
 		exit
             else
 		echo "- El archivo sólo tiene $mins minutos, no se descarga."
