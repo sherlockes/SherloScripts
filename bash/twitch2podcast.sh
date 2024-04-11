@@ -116,12 +116,9 @@ buscar_ultimos () {
 		echo $resultado
 
 		if [ resultado -ne 0 ]; then
-		    # No se ha descargado correctamente
+		    # No se ha descargado correctamente, pasa al siguiente
 		    break
 		fi
-
-		
-		exit
             else
 		echo "- El archivo sólo tiene $mins minutos, no se descarga."
 		mensaje+=$"El archivo sólo tiene $mins minutos, no se descarga."
