@@ -15,6 +15,9 @@
 
 RUTA=~/temp
 
+# Ruta al archivo YAML
+canales_yaml="~/yt2pcst/canales.yaml"
+
 
 ################################
 ####      Dependencias      ####
@@ -39,8 +42,8 @@ fi
 
 
 # Leer nombres y URLs de los canales de YouTube desde el archivo YAML
-nombres=$(yq eval '.canales[].nombre' archivo.yaml)
-urls=$(yq eval '.canales[].url' archivo.yaml)
+nombres=$(yq eval '.canales[].nombre' $canales_yaml)
+urls=$(yq eval '.canales[].url' $canales_yaml)
 
 # Mostrar los nombres y URLs
 echo "Nombres de canales:"
