@@ -113,7 +113,7 @@ buscar_ultimos () {
 		$twdl download -q audio_only $id;
 		resultado=$?
 		comprobar resultado
-		echo resultado
+		echo $resultado
 		exit
             else
 		echo "- El archivo sólo tiene $mins minutos, no se descarga."
