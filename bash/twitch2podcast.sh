@@ -110,8 +110,10 @@ buscar_ultimos () {
             then
 		# Descarga el audio en formato mkv
 		#$twdl download -q audio_only --auth-token huimxzjg56hs2xxlhx8zsj3wggej6n $id;
-        $twdl download -q audio_only $id;
-		comprobar $?
+		$twdl download -q audio_only $id;
+		resultado=$?
+		comprobar resultado
+		echo resultado
             else
 		echo "- El archivo sólo tiene $mins minutos, no se descarga."
 		mensaje+=$"El archivo sólo tiene $mins minutos, no se descarga."
