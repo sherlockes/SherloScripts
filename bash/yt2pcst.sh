@@ -15,19 +15,15 @@
 
 RUTA=~/temp
 
-# Ruta al archivo YAML
-canales_yaml="~/yt2pcst/canales.yaml"
+# Ruta al archivo de canales
+archivo_canales="~/yt2pcst/canales.txt"
 
 
 ################################
 ####      Dependencias      ####
 ################################
 
-# Instalar yq si no está instalado
-if ! command -v yq &> /dev/null; then
-    echo "Instalando yq..."
-    sudo apt-get install yq -y
-fi
+
 
 
 ################################
@@ -41,12 +37,10 @@ fi
 ################################
 
 
-# Leer nombres y URLs de los canales de YouTube desde el archivo YAML
-nombres=$(yq eval '.canales[].nombre' $canales_yaml)
-urls=$(yq eval '.canales[].url' $canales_yaml)
-
-# Mostrar los nombres y URLs
-echo "Nombres de canales:"
-echo "$nombres"
-echo "URLs de canales:"
-echo "$urls"
+# Leer nombres y URLs de los canales de YouTube desde el archivo de texto
+while IFS= read -r linea; do
+    nombre=$(echo "$linea" | cut -d ',' -f 1)
+    url=$(echo "$linea" | cut -d ',' -f 2)
+    echo "Nombre del canal: $nombre"
+    echo "URL del canal: $url"
+done < "$archivo_canales"
