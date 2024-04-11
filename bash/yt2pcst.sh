@@ -87,7 +87,7 @@ buscar_ultimos_yt(){
 ################################
 
 # Comprobar dependencias
-dependencias
+#dependencias
 
 # Leer nombres y URLs de los canales de YouTube desde el archivo de texto
 while IFS= read -r linea; do
