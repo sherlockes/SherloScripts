@@ -286,7 +286,7 @@ cd $twitch_dir
 echo "- Corriendo en $twitch_dir"
 
 # Comprobar la instalación de twitch-dl en el directorio
-. ~/SherloScripts/bash/twitch-dl.sh && check
+#. ~/SherloScripts/bash/twitch-dl.sh && check
 
 # Buscar nuevos videos y convertirlos a mp3
 buscar_ultimos "$CANAL" "$TITULO"
