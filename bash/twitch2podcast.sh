@@ -113,7 +113,6 @@ buscar_ultimos () {
 		$twdl download -q audio_only $id;
 		resultado=$?
 		comprobar $resultado
-		echo $resultado
 
 		if [ $resultado -ne 0 ]; then
 		    # No se ha descargado correctamente, pasa al siguiente
