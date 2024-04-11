@@ -2,7 +2,7 @@
 
 ###################################################################
 #Script Name: yt2pcst.sh
-#Description: Descripción
+#Description: Generación de un poscast a partir de canales de youtube
 #Args: N/A
 #Creation/Update: 20240411/20240411
 #Author: www.sherblog.pro                                             
@@ -20,11 +20,11 @@ RUTA=~/temp
 ####      Dependencias      ####
 ################################
 
-# Crea la RUTA de descarga si no existe
-if [[ ! -e $RUTA ]]; then mkdir $RUTA; fi
-
-# Instala xmllint si no está disponible
-if ! which xmllint >/dev/null; then sudo apt install -y libxml2-utils; fi
+# Instalar yq si no está instalado
+if ! command -v yq &> /dev/null; then
+    echo "Instalando yq..."
+    sudo apt-get install yq -y
+fi
 
 
 ################################
@@ -38,3 +38,12 @@ if ! which xmllint >/dev/null; then sudo apt install -y libxml2-utils; fi
 ################################
 
 
+# Leer nombres y URLs de los canales de YouTube desde el archivo YAML
+nombres=$(yq eval '.canales[].nombre' archivo.yaml)
+urls=$(yq eval '.canales[].url' archivo.yaml)
+
+# Mostrar los nombres y URLs
+echo "Nombres de canales:"
+echo "$nombres"
+echo "URLs de canales:"
+echo "$urls"
