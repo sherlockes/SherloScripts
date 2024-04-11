@@ -16,7 +16,7 @@
 RUTA=~/temp
 
 # Ruta al archivo de canales
-archivo_canales="~/yt2pcst/canales.txt"
+archivo_canales="/home/sherlockes/yt2pcst/canales.txt"
 
 
 ################################
