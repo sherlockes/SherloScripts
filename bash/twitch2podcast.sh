@@ -101,7 +101,7 @@ buscar_ultimos () {
             mensaje+=$"El vídeo $id ya ha sido descargado."
             mensaje+=$'\n'
 	    # No sigue comprobando si ya se ha visto uno descargado
-	    break
+	    continue
 	else
 	    echo "- Descargando el audio del vídeo $id.";
             mensaje+=$"Descargando audio de $id. ."
@@ -117,7 +117,7 @@ buscar_ultimos () {
 		if [ $resultado -ne 0 ]; then
 		    # No se ha descargado correctamente, pasa al siguiente
 		    echo "El audio no se ha descargado correctamente"
-		    break
+		    continue
 		fi
             else
 		echo "- El archivo sólo tiene $mins minutos, no se descarga."
