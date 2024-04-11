@@ -79,7 +79,7 @@ buscar_ultimos_yt(){
 
     # Obtiene el json de los ultimos vídeos.
     mensaje+=$'Obteniendo últimos vídeos . . . . . . . . . . . . .'
-    echo "- Buscando últimos vídeos de $CANAL_NOMBRE"
+    echo "- Buscando últimos vídeos de $canal"
 }
 
 ################################
