@@ -81,6 +81,28 @@ buscar_ultimos_yt(){
     # Obtiene el json de los ultimos vídeos.
     mensaje+=$'Obteniendo últimos vídeos . . . . . . . . . . . . .'
     echo "- Buscando últimos vídeos de $nombre en $url"
+
+    mapfile -t videos < <( yt-dlp --flat-playlist --print "%(id)s/%(duration)s" --playlist-end 10 $CANAL_YT )
+
+    comprobar $?
+
+
+    for video in ${videos[@]}
+    do
+	id=$( echo "$video" |cut -d\/ -f1 )
+	duracion=$( echo "$video" |cut -d\/ -f2 )
+	duracion=${duracion%??}
+
+	# Comprueba si el archivo es de más de 10'
+	if (( $duracion > 600 )) && ! grep -q $id "$DESCARGADOS"; then
+	    # Descargando el episodio
+	    descargar_video_yt $id
+	    comprobar $?
+	else
+	    echo "- El episodio $id es corto o ya descargado"
+	fi
+	
+    done
 }
 
 ################################
