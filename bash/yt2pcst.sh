@@ -95,5 +95,5 @@ while IFS= read -r linea; do
     url=$(echo "$linea" | cut -d ',' -f 2)
     #echo "Nombre del canal: $nombre"
     #echo "URL del canal: $url"
-    buscar_ultimos_yt ~nombre
+    buscar_ultimos_yt $nombre
 done < "$archivo_canales"
