@@ -20,7 +20,7 @@ yt2pcst_dir="$HOME/yt2pcst"
 archivo_canales="$yt2pcst_dir/canales.txt"
 
 # Episodios ya descargados
-DESCARGADOS="$yt2pcst_dir/descargados_yt.txt"
+DESCARGADOS="$yt2pcst_dir/descargados.txt"
 
 
 ################################
@@ -75,7 +75,7 @@ comprobar(){
 #   Buscar los últimos vídeos de un canal no descargados   #
 #----------------------------------------------------------#
 
-buscar_ultimos_yt(){
+buscar_ultimos(){
     # Valores de argumentos
     local nombre=${1:?Falta el nombre del canal}
     local url=${2:?Falta el nombre del canal}
@@ -101,13 +101,29 @@ buscar_ultimos_yt(){
 	# Comprueba si el archivo es de más de 10'
 	if (( $duracion > 600 )) && ! grep -q $id "$DESCARGADOS"; then
 	    # Descargando el episodio
-	    descargar_video_yt $id
+	    descargar_video $id
 	    comprobar $?
 	else
 	    echo "- El episodio $id es corto o ya descargado"
 	fi
 	
     done
+}
+
+#----------------------------------------------------------#
+#       Descargar un vídeo de Youtube a partir del ID      #
+#----------------------------------------------------------#
+descargar_video_yt(){
+    local id=${1:?Falta el id del video}
+    local url="https://www.youtube.com/watch?v=$id"
+
+    yt-dlp -o "%(id)s.%(ext)s" --extract-audio --audio-format mp3 $url
+
+    if [ $? -eq 0 ]; then
+	# Añadiendo el episodio descargado a la lista
+	echo -e "- Añadiendo a la lista de episodios descargados"
+	echo $id | cat - $DESCARGADOS > temp && mv temp $DESCARGADOS
+    fi
 }
 
 ################################
@@ -123,5 +139,5 @@ while IFS= read -r linea; do
     url=$(echo "$linea" | cut -d ',' -f 2)
     #echo "Nombre del canal: $nombre"
     #echo "URL del canal: $url"
-    buscar_ultimos_yt "$nombre" "$url"
+    buscar_ultimos "$nombre" "$url"
 done < "$archivo_canales"
