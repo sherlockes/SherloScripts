@@ -209,6 +209,57 @@ END_ITEM
     mv item.xml items.xml
 }
 
+#----------------------------------------------------------#
+#                    Actualizar el feed                    #
+#----------------------------------------------------------#
+# (Coge la info de
+actualizar_feed () {
+    # Valores de argumentos
+    local servidor=${1:?Falta el servidor del feed}
+    local canal=${2:?Falta el nombre del canal}
+
+    cd $yt2pcst_dir
+
+    # Comprueba si hay algún mp3 en la carpeta del canal, si no hay sale de la función
+    if [ ! -e ./mp3/*.mp3 ]; then return; fi
+    
+    # Encabezado del feed
+    echo "- Insertando el encabezado del feed"
+
+    cat > feed.xml <<END_HEADER
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"
+  xmlns:atom="http://www.w3.org/2005/Atom"
+  xmlns:content="http://purl.org/rss/1.0/modules/content/"
+  xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd">
+  <channel>
+    <atom:link href="$servidor/twitch/$canal/feed.xml" rel="self" type="application/rss+xml"/>
+    <title>$TITULO</title>
+    <description>Un podcast creado por Sherlockes a partir del canal de $TITULO</description>
+    <copyright>Copyright 2022 Sherlockes</copyright>
+    <language>es</language>
+    <pubDate>$FECHA</pubDate>
+    <lastBuildDate>$FECHA</lastBuildDate>
+    <image>
+      <link>https://sherblog.es</link>
+      <title>Youtube2Podcast</title>
+      <url>$servidor/youtube/artwork.jpg</url>
+    </image>
+    <link>https://www.sherblog.es</link>
+END_HEADER
+
+    # Añadir lista de episodios al feed
+    echo "- Añadiendo lista de episodios al feed"
+    cat items.xml >> feed.xml
+
+    # Añadiendo el pie del feed
+    echo "- Añadiendo el pie del feed"
+    cat >> feed.xml <<END
+  </channel>
+</rss>
+END
+}
+
 ################################
 ####    Script principal    ####
 ################################
@@ -226,3 +277,16 @@ while IFS= read -r linea; do
     #echo "URL del canal: $url"
     buscar_ultimos "$nombre" "$url"
 done < "$archivo_canales"
+
+# Actualizar el feed  y subir contenido si hay nuevos vídeos
+if ls ./mp3/*.mp3 1> /dev/null 2>&1; then
+    mensaje+=$'Actualizando el Feed . . . . . . . . . . . . . . . . '
+    actualizar_feed "$SERVIDOR" "$CANAL" "$TITULO"
+    comprobar $?
+
+    mensaje+=$"Subiendo los mp3's al servidor webdav . . ."
+    subir_contenido "$CANAL"
+    comprobar $?
+else
+    mensaje+=$'No hay nuevo contenido para el Podcast.'
+fi
