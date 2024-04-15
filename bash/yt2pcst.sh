@@ -263,14 +263,14 @@ subir_contenido () {
     
     # Subiendo archivos a la nube via rclone
     echo "- Subiendo los mp3's al servidor remoto"
-    rclone copy $yt2pcst_dir Sherlockes78_UN3_en:youtube/ --create-empty-src-dirs
+    rclone copy $yt2pcst_dir Sherlockes78_GD:youtube/ --create-empty-src-dirs
 
     # Eliminando audio y video local
     echo "- Eliminando audios locales"
     find . -type f -name "*.mp3" -delete
 
     # Borrando los archivos de la nube anteriores a 30 días
-    rclone delete Sherlockes78_UN3_en:youtube/mp3 --min-age 30d
+    rclone delete Sherlockes78_GD:youtube/mp3 --min-age 30d
 }
 ################################
 ####    Script principal    ####
