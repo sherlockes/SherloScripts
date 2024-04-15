@@ -142,7 +142,7 @@ tag(){
     echo -e "- Taggeando y moviendo el audio."
 
     # Poniendo título al audio
-    id3v2 -t "$titulo" -a "$CANAL_NOMBRE" -A "Youtube2Podcast" -- "$id.mp3"
+    id3v2 -t "$titulo" -a "$artista" -A "Youtube2Podcast" -- "$id.mp3"
 
     # Añadir el item al listado del feed
     anadir_item "$id.mp3"
