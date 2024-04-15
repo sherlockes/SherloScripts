@@ -113,7 +113,7 @@ buscar_ultimos(){
 #----------------------------------------------------------#
 #       Descargar un vídeo de Youtube a partir del ID      #
 #----------------------------------------------------------#
-descargar_video_yt(){
+descargar_video(){
     local id=${1:?Falta el id del video}
     local url="https://www.youtube.com/watch?v=$id"
 
