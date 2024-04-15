@@ -119,7 +119,7 @@ buscar_ultimos(){
 
 	    echo "- Taggeando el vídeo $id"
 	    mensaje+=$"Taggeando vídeo $id . . . . . . "
-	    tag $id $nombre
+	    tag $id "$nombre"
 	    comprobar $?
 	else
 	    echo "- El episodio $id es corto o ya descargado"
