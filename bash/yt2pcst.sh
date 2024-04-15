@@ -24,7 +24,7 @@ archivo_canales="$yt2pcst_dir/canales.txt"
 # Episodios ya descargados
 DESCARGADOS="$yt2pcst_dir/descargados.txt"
 
-SERVIDOR="http://192.168.10.202:5005"
+SERVIDOR="http://192.168.10.210:5005"
 
 notificacion=~/SherloScripts/bash/telegram.sh
 inicio=$( date +%s )
