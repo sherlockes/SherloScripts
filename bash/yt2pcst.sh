@@ -87,7 +87,7 @@ buscar_ultimos(){
     mensaje+=$'Obteniendo últimos vídeos . . . . . . . . . . . . .'
     echo "- Buscando últimos vídeos de $nombre en $url"
 
-    mapfile -t videos < <( yt-dlp --flat-playlist --print "%(id)s/%(duration)s" --playlist-end 10 $url )
+    mapfile -t videos < <( yt-dlp --flat-playlist --print "%(id)s/%(duration)s" --playlist-end 2 $url )
 
     comprobar $?
 
@@ -129,6 +129,8 @@ descargar_video(){
 ################################
 ####    Script principal    ####
 ################################
+
+cd $yt2pcst_dir
 
 # Comprobar dependencias
 #dependencias
