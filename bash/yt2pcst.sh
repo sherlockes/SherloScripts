@@ -218,9 +218,6 @@ actualizar_feed () {
     local servidor=${1:?Falta el servidor del feed}
 
     cd $yt2pcst_dir
-
-    # Comprueba si hay algún mp3 en la carpeta del canal, si no hay sale de la función
-    if [ ! -e ./mp3/*.mp3 ]; then return; fi
     
     # Encabezado del feed
     echo "- Insertando el encabezado del feed"
@@ -300,7 +297,7 @@ if ls ./mp3/*.mp3 1> /dev/null 2>&1; then
     comprobar $?
 
     mensaje+=$"Subiendo los mp3's al servidor webdav . . ."
-    subir_contenido "$CANAL"
+    subir_contenido
     comprobar $?
 else
     mensaje+=$'No hay nuevo contenido para el Podcast.'
