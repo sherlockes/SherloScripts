@@ -102,7 +102,7 @@ buscar_ultimos(){
     mensaje+=$'Obteniendo últimos vídeos . . . . . . . . . . . . .'
     echo "- Buscando últimos vídeos de $nombre en $url"
 
-    mapfile -t videos < <( yt-dlp --flat-playlist --print "%(id)s/%(duration)s" --playlist-end 2 $url )
+    mapfile -t videos < <( yt-dlp --flat-playlist --print "%(id)s/%(duration)s" --playlist-end 4 $url )
 
     comprobar $?
 
