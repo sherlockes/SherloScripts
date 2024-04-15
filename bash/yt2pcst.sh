@@ -199,7 +199,7 @@ anadir_item(){
       <description>$TIT_EP</description>
       <pubDate>$FEC_EP</pubDate>
       <author>$ART_EP</author>
-      <content:encoded><![CDATA[<p>Episodio descargado de $servicio.</p>]]></content:encoded>
+      <content:encoded><![CDATA[<p>Episodio descargado de Youtube.</p>]]></content:encoded>
       <enclosure length="$LEN_EP" type="audio/mpeg" url="$SERVIDOR/youtube/mp3/$ID_EP.mp3"/>
     </item>
 END_ITEM
@@ -216,7 +216,6 @@ END_ITEM
 actualizar_feed () {
     # Valores de argumentos
     local servidor=${1:?Falta el servidor del feed}
-    local canal=${2:?Falta el nombre del canal}
 
     cd $yt2pcst_dir
 
@@ -260,6 +259,22 @@ END_HEADER
 END
 }
 
+#----------------------------------------------------------#
+#               Subir contenido actualizado                #
+#----------------------------------------------------------#
+subir_contenido () {
+    
+    # Subiendo archivos a la nube via rclone
+    echo "- Subiendo los mp3's al servidor remoto"
+    rclone copy $yt2pcst_dir Sherlockes78_UN3_en:youtube/ --create-empty-src-dirs
+
+    # Eliminando audio y video local
+    echo "- Eliminando audios locales"
+    find . -type f -name "*.mp3" -delete
+
+    # Borrando los archivos de la nube anteriores a 30 días
+    rclone delete Sherlockes78_UN3_en:youtube/mp3 --min-age 30d
+}
 ################################
 ####    Script principal    ####
 ################################
@@ -281,7 +296,7 @@ done < "$archivo_canales"
 # Actualizar el feed  y subir contenido si hay nuevos vídeos
 if ls ./mp3/*.mp3 1> /dev/null 2>&1; then
     mensaje+=$'Actualizando el Feed . . . . . . . . . . . . . . . . '
-    actualizar_feed "$SERVIDOR" "$CANAL" "$TITULO"
+    actualizar_feed "$SERVIDOR"
     comprobar $?
 
     mensaje+=$"Subiendo los mp3's al servidor webdav . . ."
@@ -290,3 +305,11 @@ if ls ./mp3/*.mp3 1> /dev/null 2>&1; then
 else
     mensaje+=$'No hay nuevo contenido para el Podcast.'
 fi
+
+# Envia el mensaje de telegram con el resultado
+fin=$( date +%s )
+let duracion=$fin-$inicio
+mensaje+=$'- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n'
+mensaje+=$"Duración del Script:  $duracion segundos"
+
+$notificacion "$mensaje"
