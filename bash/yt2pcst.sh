@@ -2,7 +2,7 @@
 
 ###################################################################
 #Script Name: yt2pcst.sh
-#Description: Generación de un poscast a partir de canales de youtube
+#Description: Generación de un podcast a partir de canales de youtube
 #Args: N/A
 #Creation/Update: 20240411/20240415
 #Author: www.sherblog.pro                                             
@@ -13,6 +13,8 @@
 ####       Variables        ####
 ################################
 
+PATH="/home/pi/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+
 # Carpeta para guardar los archivos
 yt2pcst_dir="$HOME/yt2pcst"
 
@@ -21,6 +23,17 @@ archivo_canales="$yt2pcst_dir/canales.txt"
 
 # Episodios ya descargados
 DESCARGADOS="$yt2pcst_dir/descargados.txt"
+
+notificacion=~/SherloScripts/bash/telegram.sh
+inicio=$( date +%s )
+
+mensaje=$'Actualizar Youtube via <a href="https://raw.githubusercontent.com/sherlockes/SherloScripts/master/bash/yt2pc.sh">yt2pc.sh</a>\n'
+mensaje+=$'- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n'
+
+
+echo "######################################"
+echo "## Youtube to Podcast by Sherlockes ##"
+echo "######################################"
 
 
 ################################
