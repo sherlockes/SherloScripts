@@ -4,7 +4,7 @@
 #Script Name: yt2pcst.sh
 #Description: Generación de un poscast a partir de canales de youtube
 #Args: N/A
-#Creation/Update: 20240411/20240411
+#Creation/Update: 20240411/20240415
 #Author: www.sherblog.pro                                             
 #Email: sherlockes@gmail.com                               
 ###################################################################
@@ -13,9 +13,14 @@
 ####       Variables        ####
 ################################
 
+# Carpeta para guardar los archivos
+yt2pcst_dir="$HOME/yt2pcst"
 
 # Ruta al archivo de canales
-archivo_canales="$HOME/yt2pcst/canales.txt"
+archivo_canales="$yt2pcst_dir/canales.txt"
+
+# Episodios ya descargados
+DESCARGADOS="$yt2pcst_dir/descargados_yt.txt"
 
 
 ################################
