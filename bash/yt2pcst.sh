@@ -24,6 +24,8 @@ archivo_canales="$yt2pcst_dir/canales.txt"
 # Episodios ya descargados
 DESCARGADOS="$yt2pcst_dir/descargados.txt"
 
+SERVIDOR="http://192.168.10.202:5005"
+
 notificacion=~/SherloScripts/bash/telegram.sh
 inicio=$( date +%s )
 
@@ -198,7 +200,7 @@ anadir_item(){
       <pubDate>$FEC_EP</pubDate>
       <author>$ART_EP</author>
       <content:encoded><![CDATA[<p>Episodio descargado de $servicio.</p>]]></content:encoded>
-      <enclosure length="$LEN_EP" type="audio/mpeg" url="$SERVIDOR/twitch/$canal/mp3/$ID_EP.mp3"/>
+      <enclosure length="$LEN_EP" type="audio/mpeg" url="$SERVIDOR/youtube/mp3/$ID_EP.mp3"/>
     </item>
 END_ITEM
 
