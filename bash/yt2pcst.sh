@@ -25,7 +25,7 @@ if [ ! -d "$yt2pcst_dir" ]; then
     echo "La carpeta contenedora no existe. Creando carpetas y portada..."
     mkdir -p "$yt2pcst_dir"
     mkdir -p "$yt2pcst_dir/mp3"
-    wget -O "$yt2pcst_dir/artwork.jpg" "https://placekitten.com/400/400"
+    wget -O "$yt2pcst_dir/artwork.jpg" "https://picsum.photos/400/400"
 fi
 
 # Episodios ya descargados
