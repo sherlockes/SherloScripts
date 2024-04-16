@@ -24,6 +24,7 @@ yt2pcst_dir="$HOME/yt2pcst"
 if [ ! -d "$yt2pcst_dir" ]; then
     echo "La carpeta contenedora no existe. Creando la carpeta..."
     mkdir -p "$yt2pcst_dir"
+    mkdir -p "$yt2pcst_dir/mp3"   
 fi
 
 # Episodios ya descargados
