@@ -19,7 +19,7 @@ PATH="/home/pi/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbi
 inicio=$( date +%s )
 
 # Número de vídeos a descargar de cada canal
-num_videos=8
+num_videos=6
 
 # Carpeta para guardar los archivos y comprobación de su existencia
 yt2pcst_dir="$HOME/yt2pcst"
