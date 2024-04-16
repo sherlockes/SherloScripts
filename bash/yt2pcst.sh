@@ -20,6 +20,7 @@ inicio=$( date +%s )
 
 # Número de vídeos a descargar de cada canal
 num_videos=10
+num_descargas=2
 
 # Carpeta para guardar los archivos y comprobación de su existencia
 yt2pcst_dir="$HOME/yt2pcst"
@@ -341,6 +342,7 @@ if ls ./mp3/*.mp3 1> /dev/null 2>&1; then
     comprobar $?
 else
     mensaje+=$'No hay nuevo contenido para el Podcast.'
+    mensaje+=$'\n'
 fi
 
 # Envia el mensaje de telegram con el resultado
