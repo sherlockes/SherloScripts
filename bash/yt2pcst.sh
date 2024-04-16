@@ -51,7 +51,7 @@ if [ ! -f "$archivo_canales" ]; then
 fi
 
 # Limitar el archivo descargados
-num_canales=$(wc -l < archivo.txt)
+num_canales=$(wc -l < $archivo_canales)
 limite=$((num_canales * 20))
 head -n $limite $DESCARGADOS > temp.txt && mv temp.txt $DESCARGADOS
 
