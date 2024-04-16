@@ -31,7 +31,7 @@ fi
 DESCARGADOS="$yt2pcst_dir/descargados.txt"
 
 if [ ! -f "$DESCARGADOS" ]; then
-    echo "El archivo DESCARGADOS no existe. Creando el archivo..."
+    echo "El archivo de descargados no existe. Creando el archivo..."
     touch "$DESCARGADOS"
 fi
 
