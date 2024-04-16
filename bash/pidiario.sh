@@ -159,7 +159,7 @@ github_repos_update(){
 ha_config(){
     echo "Guardando config de HA en GitHub..." 
     mensaje+=$"Guardando config de HA en GitHub . . . . . "
-    rsync -av root@192.168.10.202:/config/ ~/ha_cfg/
+    rsync -av sherlockes@192.168.10.202:/config/ ~/ha_cfg/
     comprobar $?
 }
 
