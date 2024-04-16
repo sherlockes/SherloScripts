@@ -151,7 +151,7 @@ buscar_ultimos(){
 	    comprobar $?
 	else
 	    echo "- El episodio $id es corto o ya descargado"
-	    if (( $duracion < 1200 )); then
+	    if (( $duracion < 1201 )) && ! grep -q $id "$DESCARGADOS"; then
 		echo -e "- Añadiendo $id corto a descargados"
 		echo $id | cat - $DESCARGADOS > temp && mv temp $DESCARGADOS
 	    fi
