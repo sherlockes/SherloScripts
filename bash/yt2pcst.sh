@@ -18,6 +18,9 @@ PATH="/home/pi/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbi
 # Hora de inicio del Script
 inicio=$( date +%s )
 
+# Número de vídeos a descargar de cada canal
+num_videos=6
+
 # Carpeta para guardar los archivos y comprobación de su existencia
 yt2pcst_dir="$HOME/yt2pcst"
 
@@ -46,6 +49,11 @@ if [ ! -f "$archivo_canales" ]; then
     echo "He creado un canal de ejemplo, rellenalo a tu gusto y vuelve a lanzar el script"
     exit 0
 fi
+
+# Limitar el archivo descargados
+num_canales=$(wc -l < archivo.txt)
+limite=$((num_canales * 20))
+head -n $limite $DESCARGADOS > temp.txt && mv temp.txt $DESCARGADOS
 
 # Ruta del servidor webdav donde estarán alojados los episodios
 SERVIDOR="http://192.168.10.210:5005"
@@ -119,7 +127,7 @@ buscar_ultimos(){
     mensaje+=$'Obteniendo últimos vídeos . . . . . . . . . . . . .'
     echo "- Buscando últimos vídeos de $nombre en $url"
 
-    mapfile -t videos < <( yt-dlp --flat-playlist --print "%(id)s/%(duration)s" --playlist-end 8 $url )
+    mapfile -t videos < <( yt-dlp --flat-playlist --print "%(id)s/%(duration)s" --playlist-end $num_videos $url )
 
     comprobar $?
 
