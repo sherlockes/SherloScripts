@@ -154,6 +154,7 @@ buscar_ultimos(){
 	    if (( $duracion < 1200 )); then
 		echo -e "- Añadiendo $id corto a descargados"
 		echo $id | cat - $DESCARGADOS > temp && mv temp $DESCARGADOS
+	    fi
 	fi
 	
     done
