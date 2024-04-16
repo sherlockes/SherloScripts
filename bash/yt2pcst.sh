@@ -140,6 +140,8 @@ buscar_ultimos(){
 	# Comprueba si el archivo es de más de 10'
 	if (( $duracion > 1200 )) && ! grep -q $id "$DESCARGADOS"; then
 	    # Descargando el episodio
+	    mensaje+=$'Descargando $id . . . . . . . .'
+	    echo "- Descargando el vídeo $id"
 	    descargar_video $id
 	    comprobar $?
 
