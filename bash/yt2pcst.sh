@@ -136,6 +136,7 @@ buscar_ultimos(){
 	id=$( echo "$video" |cut -d\/ -f1 )
 	duracion=$( echo "$video" |cut -d\/ -f2 )
 	duracion=${duracion%??}
+	echo $duración
 
 	# Comprueba si el archivo es de más de 10'
 	if (( $duracion > 600 )) && ! grep -q $id "$DESCARGADOS"; then
