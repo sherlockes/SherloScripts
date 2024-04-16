@@ -57,14 +57,16 @@ dependencias(){
     if command -v id3v2 >/dev/null 2>&1 ; then
 	echo "Versión de id3v2: $(id3v2 --version | head -n 1)"
     else
-	echo "ATENCION: id3v2 no está disponible"
+	echo "ATENCION: id3v2 no está disponible, se intenta instalar"
+	sudo apt install id3v2
     fi
 
     # ffmpeg
     if command -v ffmpeg >/dev/null 2>&1 ; then
 	echo "Versión de ffmpeg: $(ffmpeg -version | grep 'ffmpeg version' | sed 's/ffmpeg version \([-0-9.]*\).*/\1/')"
     else
-	echo "ATENCION: ffmpeg no está disponible"
+	echo "ATENCION: ffmpeg no está disponible, se intenta instalar"
+	sudo apt install ffmpeg
     fi
 }
 
