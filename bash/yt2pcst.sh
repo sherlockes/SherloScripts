@@ -19,7 +19,7 @@ PATH="/home/pi/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbi
 inicio=$( date +%s )
 
 # Número de vídeos a comprobar de cada canal
-num_videos=10
+num_videos=20
 
 # Número de vídeos a descargar de cada canal
 num_max_descargas=2
@@ -174,9 +174,15 @@ descargar_video(){
     yt-dlp -o "%(id)s.%(ext)s" --extract-audio --audio-format mp3 $url
 
     if [ $? -eq 0 ]; then
+	$num_descargas=$num_descargas+1
 	# Añadiendo el episodio descargado a la lista
 	echo -e "- Añadiendo a la lista de episodios descargados"
 	echo $id | cat - $DESCARGADOS > temp && mv temp $DESCARGADOS
+
+	# Verificar si se ha alcanzado el número deseado de descargas
+	if [ $num_descargas -eq $num_max_descargas ]; then
+            break  # Salir del bucle
+	fi
     fi
 }
 
