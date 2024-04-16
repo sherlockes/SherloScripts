@@ -15,28 +15,41 @@
 
 PATH="/home/pi/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 
-# Carpeta para guardar los archivos
+# Hora de inicio del Script
+inicio=$( date +%s )
+
+# Carpeta para guardar los archivos y comprobación de su existencia
 yt2pcst_dir="$HOME/yt2pcst"
 
-# Ruta al archivo de canales
-archivo_canales="$yt2pcst_dir/canales.txt"
+if [ ! -d "$yt2pcst_dir" ]; then
+    echo "La carpeta contenedora no existe. Creando la carpeta..."
+    mkdir -p "$yt2pcst_dir"
+fi
 
 # Episodios ya descargados
 DESCARGADOS="$yt2pcst_dir/descargados.txt"
 
+if [ ! -f "$DESCARGADOS" ]; then
+    echo "El archivo DESCARGADOS no existe. Creando el archivo..."
+    touch "$DESCARGADOS"
+fi
+
+# Ruta al archivo de canales
+archivo_canales="$yt2pcst_dir/canales.txt"
+
+if [ ! -f "$archivo_canales" ]; then
+    echo "El archivo de canales no existe. Creando el archivo..."
+    touch "$archivo_canales"
+    echo "Jordi LLatzer,https://www.youtube.com/@jordillatzer/videos" > $archivo_canales
+    echo "He creado un canal de ejemplo, rellenalo a tu gusto y vuelve a lanzar el script"
+    exit 0
+fi
+
+# Ruta del servidor webdav donde estarán alojados los episodios
 SERVIDOR="http://192.168.10.210:5005"
 
+# Ubicación del script para mandar notificaciones a telegram
 notificacion=~/SherloScripts/bash/telegram.sh
-inicio=$( date +%s )
-
-mensaje=$'Actualizar Youtube via <a href="https://raw.githubusercontent.com/sherlockes/SherloScripts/master/bash/yt2pc.sh">yt2pc.sh</a>\n'
-mensaje+=$'- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n'
-
-
-echo "######################################"
-echo "## Youtube to Podcast by Sherlockes ##"
-echo "######################################"
-
 
 ################################
 ####      Dependencias      ####
@@ -277,6 +290,16 @@ subir_contenido () {
 ################################
 ####    Script principal    ####
 ################################
+
+
+
+mensaje=$'Actualizar Youtube via <a href="https://raw.githubusercontent.com/sherlockes/SherloScripts/master/bash/yt2pc.sh">yt2pc.sh</a>\n'
+mensaje+=$'- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n'
+
+
+echo "######################################"
+echo "## Youtube to Podcast by Sherlockes ##"
+echo "######################################"
 
 cd $yt2pcst_dir
 
