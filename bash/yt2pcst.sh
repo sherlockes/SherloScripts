@@ -52,8 +52,7 @@ fi
 
 # Limitar el archivo descargados
 num_canales=$(wc -l < $archivo_canales)
-limite=$((num_canales * 20))
-head -n $limite $DESCARGADOS > temp.txt && mv temp.txt $DESCARGADOS
+head -n 300 $DESCARGADOS > temp.txt && mv temp.txt $DESCARGADOS
 
 # Ruta del servidor webdav donde estarán alojados los episodios
 SERVIDOR="http://192.168.10.210:5005"
