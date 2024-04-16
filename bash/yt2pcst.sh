@@ -18,9 +18,12 @@ PATH="/home/pi/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbi
 # Hora de inicio del Script
 inicio=$( date +%s )
 
-# Número de vídeos a descargar de cada canal
+# Número de vídeos a comprobar de cada canal
 num_videos=10
-num_descargas=2
+
+# Número de vídeos a descargar de cada canal
+num_max_descargas=2
+num_descargas=0
 
 # Carpeta para guardar los archivos y comprobación de su existencia
 yt2pcst_dir="$HOME/yt2pcst"
