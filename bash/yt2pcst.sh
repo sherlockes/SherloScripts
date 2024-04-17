@@ -19,7 +19,7 @@ PATH="/home/pi/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbi
 inicio=$( date +%s )
 
 # Número de vídeos a comprobar de cada canal
-num_videos=25
+num_videos=28
 
 # Número de vídeos máximo a descargar en total
 num_max_descargas=2
