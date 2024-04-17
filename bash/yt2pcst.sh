@@ -339,7 +339,6 @@ while IFS= read -r linea; do
     #echo "Nombre del canal: $nombre"
     #echo "URL del canal: $url"
     buscar_ultimos "$nombre" "$url"
-    sleep 20
 done < "$archivo_canales"
 
 # Actualizar el feed  y subir contenido si hay nuevos vídeos
