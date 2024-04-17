@@ -94,6 +94,14 @@ dependencias(){
 	echo "ATENCION: ffmpeg no está disponible, se intenta instalar"
 	sudo apt install -y ffmpeg
     fi
+
+    # rclone
+    if command -v rclone >/dev/null 2>&1 ; then
+	echo "Versión de rclone: $(rclone version | grep 'rclone')"
+    else
+	echo "ATENCION: rclone no está disponible, se intenta instalar"
+	sudo -v ; curl https://rclone.org/install.sh | sudo bash
+    fi
 }
 
 
