@@ -174,7 +174,7 @@ descargar_video(){
 
     if [ $? -eq 0 ]; then
 	# Incrementa en 1 las descargas realizadas
-	(($num_descargas++)) 
+	num_descargas=$((num_descargas + 1))
 	# Añadiendo el episodio descargado a la lista
 	echo -e "- Añadiendo a la lista de episodios descargados"
 	echo -e "- Descargados $num_descargas de $num_max_descargas"
