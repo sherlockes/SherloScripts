@@ -19,7 +19,7 @@ PATH="/home/pi/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbi
 inicio=$( date +%s )
 
 # Número de vídeos a comprobar de cada canal
-num_videos=12
+num_videos=13
 
 # Número de vídeos máximo a descargar en total
 num_max_descargas=2
@@ -153,7 +153,7 @@ buscar_ultimos(){
 	    tag $id "$nombre"
 	    comprobar $?
 	else
-	    echo "- El episodio $id es corto o ya descargado"
+	    echo "- El episodio $id ($duracion sg) es corto o ya descargado"
 	    if (( $duracion < 1201 )) && ! grep -q $id "$DESCARGADOS"; then
 		echo -e "- Añadiendo $id corto a descargados"
 		echo $id | cat - $DESCARGADOS > temp && mv temp $DESCARGADOS
