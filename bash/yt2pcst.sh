@@ -127,7 +127,7 @@ buscar_ultimos(){
     local duracion
 
     # Obtiene el json de los ultimos vídeos.
-    mensaje+=$'Buscando vídeos de $nombre . . . . . . . . .'
+    mensaje+=$"Buscando vídeos de $nombre . . . . . . . . ."
     echo "- Buscando últimos vídeos de $nombre en $url"
 
     mapfile -t videos < <( yt-dlp --flat-playlist --print "%(id)s/%(duration)s" --playlist-end $num_videos $url )
