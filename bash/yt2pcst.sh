@@ -127,7 +127,7 @@ buscar_ultimos(){
     local duracion
 
     # Obtiene el json de los ultimos vídeos.
-    mensaje+=$'Obteniendo últimos vídeos . . . . . . . . . . . . .'
+    mensaje+=$'Buscando vídeos de $nombre . . . . . . . . .'
     echo "- Buscando últimos vídeos de $nombre en $url"
 
     mapfile -t videos < <( yt-dlp --flat-playlist --print "%(id)s/%(duration)s" --playlist-end $num_videos $url )
@@ -174,14 +174,16 @@ descargar_video(){
     yt-dlp -o "%(id)s.%(ext)s" --extract-audio --audio-format mp3 $url
 
     if [ $? -eq 0 ]; then
-	$num_descargas=$num_descargas+1
+	$num_descargas=$num_descargas+1 
 	# Añadiendo el episodio descargado a la lista
 	echo -e "- Añadiendo a la lista de episodios descargados"
+	echo -e "- Descargados $num_descargas de $num_max_descargas"
 	echo $id | cat - $DESCARGADOS > temp && mv temp $DESCARGADOS
 
 	# Verificar si se ha alcanzado el número deseado de descargas
 	if [ $num_descargas -eq $num_max_descargas ]; then
             break  # Salir del bucle
+	    echo "Ya vale de descargas"
 	fi
     fi
 }
