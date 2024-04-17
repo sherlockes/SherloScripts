@@ -127,7 +127,7 @@ buscar_ultimos(){
     local duracion
 
     # Obtiene el json de los ultimos vídeos.
-    mensaje+=$"Buscando vídeos de $nombre . . . . . . ."
+    mensaje+=$"Buscando vídeos $nombre. . . . . ."
     echo "- Buscando últimos vídeos de $nombre en $url"
 
     mapfile -t videos < <( yt-dlp --flat-playlist --print "%(id)s/%(duration)s" --playlist-end $num_videos $url )
@@ -143,13 +143,13 @@ buscar_ultimos(){
 	# Comprueba si el archivo es de más de 10'
 	if (( $duracion > 1200 )) && ! grep -q $id "$DESCARGADOS"; then
 	    # Descargando el episodio
-	    mensaje+=$"Descargando $id . . . . . . . ."
+	    mensaje+=$"Descargando $id . . . . . . . . ."
 	    echo "- Descargando el vídeo $id"
 	    descargar_video $id
 	    comprobar $?
 
 	    echo "- Taggeando el vídeo $id"
-	    mensaje+=$"Taggeando vídeo $id . . . . . . "
+	    mensaje+=$"Taggeando vídeo $id. . . . . . . "
 	    tag $id "$nombre"
 	    comprobar $?
 	else
@@ -304,7 +304,7 @@ END
 subir_contenido () {
     
     # Subiendo archivos a la nube via rclone
-    echo "- Subiendo los mp3's al servidor remoto"
+    echo "- Subiendo mp3's al servidor remoto"
     rclone copy $yt2pcst_dir Sherlockes78_GD:youtube/ --create-empty-src-dirs
 
     # Eliminando audio y video local
@@ -348,7 +348,7 @@ if ls ./mp3/*.mp3 1> /dev/null 2>&1; then
     actualizar_feed "$SERVIDOR"
     comprobar $?
 
-    mensaje+=$"Subiendo los mp3's al servidor webdav . . ."
+    mensaje+=$"Subiendo mp3's al servidor webdav . . . ."
     subir_contenido
     comprobar $?
 else
