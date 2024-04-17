@@ -19,7 +19,7 @@ PATH="/home/pi/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbi
 inicio=$( date +%s )
 
 # Número de vídeos a comprobar de cada canal
-num_videos=20
+num_videos=22
 
 # Número de vídeos máximo a descargar en total
 num_max_descargas=2
@@ -127,7 +127,7 @@ buscar_ultimos(){
     local duracion
 
     # Obtiene el json de los ultimos vídeos.
-    mensaje+=$"Buscando vídeos de $nombre . . . . . . . . ."
+    mensaje+=$"Buscando vídeos de $nombre . . . . . . ."
     echo "- Buscando últimos vídeos de $nombre en $url"
 
     mapfile -t videos < <( yt-dlp --flat-playlist --print "%(id)s/%(duration)s" --playlist-end $num_videos $url )
@@ -173,7 +173,8 @@ descargar_video(){
     yt-dlp -o "%(id)s.%(ext)s" --extract-audio --audio-format mp3 $url
 
     if [ $? -eq 0 ]; then
-	$num_descargas=$num_descargas+1 
+	# Incrementa en 1 las descargas realizadas
+	(($num_descargas++)) 
 	# Añadiendo el episodio descargado a la lista
 	echo -e "- Añadiendo a la lista de episodios descargados"
 	echo -e "- Descargados $num_descargas de $num_max_descargas"
