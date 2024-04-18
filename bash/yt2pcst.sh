@@ -97,7 +97,8 @@ dependencias(){
 
     # rclone
     if command -v rclone >/dev/null 2>&1 ; then
-	echo "Versión de rclone: $(rclone version | grep 'rclone')"
+	echo "Versión de rclone: $(rclone version | grep 'rclone' | sed 's/[^0-9.]*\([0-9.]*\).*/\1/'
+)"
     else
 	echo "ATENCION: rclone no está disponible, se intenta instalar"
 	sudo -v ; curl https://rclone.org/install.sh | sudo bash
