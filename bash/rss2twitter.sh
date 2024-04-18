@@ -4,7 +4,7 @@
 #Script Name: rss2twiter.sh
 #Description: Generación de Tweet cuando hay un nuevo post del blog
 #Args: N/A
-#Creation/Update: 20220326/20221217
+#Creation/Update: 20220326/20220418
 #Author: www.sherblog.pro                                             
 #Email: sherlockes@gmail.com                               
 ###################################################################
@@ -14,7 +14,7 @@
 ################################
 
 RUTA=~/temp
-RSS_URL="https://sherblog.pro/index.xml"
+RSS_URL="https://sherblog.es/index.xml"
 TWEETSH_URL="https://raw.githubusercontent.com/piroor/tweet.sh/trunk/tweet.sh"
 INSTANCIA="https://emacs.ch"
 
