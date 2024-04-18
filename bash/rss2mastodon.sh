@@ -4,7 +4,7 @@
 #Script Name: rss2mastodon.sh
 #Description: Generación de Toot cuando hay un nuevo post del blog
 #Args: N/A
-#Creation/Update: 20221213/20221213
+#Creation/Update: 20221213/20240418
 #Author: www.sherblog.pro                                             
 #Email: sherlockes@gmail.com                               
 ###################################################################
@@ -14,7 +14,7 @@
 ################################
 
 RUTA=~/temp
-RSS_URL="https://sherblog.pro/index.xml"
+RSS_URL="https://sherblog.es/index.xml"
 INSTANCIA="https://emacs.ch"
 
 # Carga los parámetros del archivo de configuración en el directorio de usuario
@@ -57,8 +57,6 @@ then
     curl --fail --silent --show-error $RSS_URL --output $RUTA/rss.xml
     LINK_ACTUAL=$(obtener_xml $RUTA/rss.xml "item" "link" "1")
 
-
-    
     # Compara el ultimo link con el actual
     if [[ $LINK_ULTIMO != $LINK_ACTUAL ]]
     then
