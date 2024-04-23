@@ -191,8 +191,8 @@ descargar_video(){
 
 	# Verificar si se ha alcanzado el número deseado de descargas
 	if [ $num_descargas -eq $num_max_descargas ]; then
-            break  # Salir del bucle
 	    echo "Ya vale de descargas"
+	    break  # Salir del bucle
 	fi
     fi
 }
