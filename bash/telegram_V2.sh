@@ -13,28 +13,35 @@
 ####       Variables        ####
 ################################
 
-RUTA=~/temp
 
 
 ################################
 ####      Dependencias      ####
 ################################
 
-# Crea la RUTA de descarga si no existe
-if [[ ! -e $RUTA ]]; then mkdir $RUTA; fi
-
-# Instala xmllint si no está disponible
-if ! which xmllint >/dev/null; then sudo apt install -y libxml2-utils; fi
-
 
 ################################
 ####       Funciones        ####
 ################################
 
+msg_instr() {
+    texto_instr="$1"
+}
+
+msg_resul() {
+    texto_resul="$1"
+
+    total_caracteres=$(expr length "$texto_instr")
+    total_caracteres=$(expr $total_caracteres + $(expr length "$texto_resul")) 
+
+    echo "El número total de caracteres es: $total_caracteres"
+
+}
 
 
 ################################
 ####    Script principal    ####
 ################################
 
-
+# Carga los parámetros del archivo de configuración en el directorio de usuario
+. ~/config.conf
