@@ -51,10 +51,19 @@ concatenar_con_puntos() {
         # Construye la cadena con puntos intercalados
         puntos=$(printf '%.0s.' $(seq 1 $longitud_total))
         resultado="$texto_instr$puntos$texto_resul\n"
+	mensaje="$mensaje$resultado"
         echo "$resultado"
     else
         echo "Las cadenas son demasiado largas para alcanzar una longitud total de 50 caracteres."
     fi
+}
+
+send_msg() {
+    URL="https://api.telegram.org/bot$TOKEN/sendMessage?parse_mode=html"
+
+    $mensaje="$mensaje\`"
+    curl -s -X POST $URL -d chat_id=$CHAT_ID -d text="$mensaje"
+
 }
 
 
