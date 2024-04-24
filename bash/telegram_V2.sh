@@ -50,7 +50,7 @@ concatenar_con_puntos() {
     if (( longitud_total >= 0 )); then
         # Construye la cadena con puntos intercalados
         puntos=$(printf '%.0s.' $(seq 1 $longitud_total))
-        resultado="\```$texto_instr$puntos$texto_resul\```"
+        resultado="```$texto_instr$puntos$texto_resul```"
 	mensaje+="$resultado"
 	mensaje+=$'\n'
         echo "$resultado"
