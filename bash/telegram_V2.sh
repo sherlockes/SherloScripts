@@ -44,7 +44,7 @@ msg_resul() {
 concatenar_con_puntos() {
    
     # Calcula cuántos puntos se deben añadir entre las dos cadenas
-    longitud_total=$((max_len - ${#texto_instr} - ${#texto_resul}))
+    longitud_total=$((50 - ${#texto_instr} - ${#texto_resul}))
     
     # Asegura que la longitud total sea mayor o igual a 0
     if (( longitud_total >= 0 )); then
