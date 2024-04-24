@@ -13,6 +13,7 @@
 ####       Variables        ####
 ################################
 
+mensaje=""
 
 
 ################################
@@ -35,8 +36,32 @@ msg_resul() {
     total_caracteres=$(expr $total_caracteres + $(expr length "$texto_resul")) 
 
     echo "El número total de caracteres es: $total_caracteres"
+    concatenar_con_puntos
 
 }
+
+concatenar_con_puntos() {
+   
+    # Calcula cuántos puntos se deben añadir entre las dos cadenas
+    longitud_total=$((50 - ${#texto_instr} - ${#texto_resul}))
+    
+    # Asegura que la longitud total sea mayor o igual a 0
+    if (( longitud_total >= 0 )); then
+        # Construye la cadena con puntos intercalados
+        puntos=$(printf '%.0s.' $(seq 1 $longitud_total))
+        resultado="$texto_instr$puntos$texto_resul"
+        echo "$resultado"
+    else
+        echo "Las cadenas son demasiado largas para alcanzar una longitud total de 50 caracteres."
+    fi
+}
+
+# Ejemplo de uso
+texto_instr="Hola"
+texto_resul="Mundo"
+resultado_final=$(concatenar_con_puntos "$texto_instr" "$texto_resul")
+echo "El resultado es: $resultado_final"
+
 
 
 ################################
