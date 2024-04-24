@@ -10,5 +10,8 @@ msg_resul "Adios"
 msg_instr "iNTERRUMPIENDO A LA VACA"
 msg_resul "error"
 
+msg_instr "iNTERRUMPIENDO A LA VACA"
+msg_resul "..."
+
 send_msg
 
