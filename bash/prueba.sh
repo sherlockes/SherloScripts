@@ -11,3 +11,4 @@ msg_instr "iNTERRUMPIENDO A LA VACA"
 msg_resul "error"
 
 send_msg
+
