@@ -43,6 +43,46 @@ msg_resul() {
 
 }
 
+msg_title() {
+    texto_title="$1"
+
+    rellenar_texto
+}
+
+
+rellenar_texto() {
+    texto="$texto_title"
+    longitud=${#texto}
+    
+    # Calcula cuántos caracteres se necesitan agregar a cada lado
+    caracteres_restantes=$((35 - longitud))
+    caracteres_por_lado=$((caracteres_restantes / 2))
+
+    # Rellena el texto con espacios
+    texto_rellenado=$(printf "%-${caracteres_por_lado}s%s%${caracteres_por_lado}s" "" "$texto" "")
+
+    echo "$texto_rellenado"
+}
+
+
+concatenar_con_puntos_2() {
+   
+    # Calcula cuántos puntos se deben añadir entre las dos cadenas
+    longitud_total=$((max_len - ${#texto_title}))
+    
+    # Asegura que la longitud total sea mayor o igual a 0
+    if (( longitud_total >= 0 )); then
+        # Construye la cadena con puntos intercalados
+        puntos=$(printf '%.0s.' $(seq 1 $longitud_total))
+        resultado="$texto_instr$puntos$texto_resul"
+	mensaje+="$resultado"
+	mensaje+=$'\n'
+        echo "$resultado"
+    else
+        echo "Las cadenas son demasiado largas para alcanzar una longitud total de 35 caracteres."
+    fi
+}
+
 concatenar_con_puntos() {
    
     # Calcula cuántos puntos se deben añadir entre las dos cadenas
