@@ -9,3 +9,6 @@ msg_resul "Adios"
 
 msg_instr "Hola Mundo de los enanos"
 msg_resul "Adios"
+
+msg_instr "LLamando a la función que come bichos"
+msg_resul "Error"
