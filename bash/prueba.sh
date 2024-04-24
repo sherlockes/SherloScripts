@@ -1,15 +1,8 @@
 #!/bin/bash
 
-shopt -s nullglob
+# Incluye el archivo que contiene la función
+source telegram_V2.sh
 
-for ext in jpg jpeg png gif; do 
-  files=( *."$ext" )
-  printf 'Número de imágenes %s : %d\n' "$ext" "${#files[@]}"
-
-  # now we can loop over all the files having the current extension
-  for f in "${files[@]}"; do
-    # anything else you like with these files
-    :
-  done 
-
-done
+# Llama a la función
+msg_instr "Hola Mundo"
+msg_resul "Adios"
