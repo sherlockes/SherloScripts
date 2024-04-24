@@ -60,13 +60,17 @@ concatenar_con_puntos() {
 }
 
 send_msg() {
-    URL="https://api.telegram.org/bot$TOKEN/sendMessage?parse_mode=html"
-    mensaje="```
-Este es un texto monoespaciado.
-Puedes incluir código aquí.
-```"
-    #mensaje+=$"\`"
-    curl -s -d POST $URL -d chat_id=$CHAT_ID -d text="$mensaje"
+
+	# URL para enviar mensaje
+	url="https://api.telegram.org/bot$TOKEN/sendMessage"
+
+	mensaje="```Este es un texto monoespaciado.Puedes incluir código aquí.```"
+	
+	# Parámetros del mensaje
+	parametros="chat_id=$CHAT_ID&text=$mensaje&parse_mode=Markdown"
+
+	# Envío del mensaje utilizando curl
+	curl -s -d "$parametros" "$url" > /dev/null
 
 }
 
