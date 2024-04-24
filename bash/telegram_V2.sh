@@ -13,7 +13,7 @@
 ####       Variables        ####
 ################################
 
-mensaje=""
+mensaje="\`"
 
 max_len=50
 
@@ -64,7 +64,7 @@ send_msg() {
 	# URL para enviar mensaje
 	url="https://api.telegram.org/bot$TOKEN/sendMessage"
 
-	mensaje="\`Este es un texto monoespaciado.Puedes incluir código aquí.\`"
+	mensaje+=$"\`"
 	
 	# Parámetros del mensaje
 	parametros="chat_id=$CHAT_ID&text=$mensaje&parse_mode=Markdown"
