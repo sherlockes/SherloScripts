@@ -7,4 +7,7 @@ source telegram_V2.sh
 msg_instr "Hola Mundo"
 msg_resul "Adios"
 
+msg_instr "iNTERRUMPIENDO A LA VACA"
+msg_resul "error"
+
 send_msg
