@@ -62,7 +62,7 @@ concatenar_con_puntos() {
 send_msg() {
     URL="https://api.telegram.org/bot$TOKEN/sendMessage?parse_mode=html"
 
-    mensaje+=$'\`'
+    mensaje+=$"\`"
     curl -s -X POST $URL -d chat_id=$CHAT_ID -d text="$mensaje"
 
 }
