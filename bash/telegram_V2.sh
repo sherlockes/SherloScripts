@@ -13,7 +13,7 @@
 ####       Variables        ####
 ################################
 
-mensaje="\`"
+mensaje=""
 
 max_len=50
 
@@ -50,7 +50,7 @@ concatenar_con_puntos() {
     if (( longitud_total >= 0 )); then
         # Construye la cadena con puntos intercalados
         puntos=$(printf '%.0s.' $(seq 1 $longitud_total))
-        resultado="$texto_instr$puntos$texto_resul"
+        resultado="\`$texto_instr$puntos$texto_resul\`"
 	mensaje+="$resultado"
 	mensaje+=$'\n'
         echo "$resultado"
@@ -62,7 +62,7 @@ concatenar_con_puntos() {
 send_msg() {
     URL="https://api.telegram.org/bot$TOKEN/sendMessage?parse_mode=html"
 
-    mensaje+=$"\`"
+    #mensaje+=$"\`"
     curl -s -X POST $URL -d chat_id=$CHAT_ID -d text="$mensaje"
 
 }
