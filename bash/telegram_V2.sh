@@ -13,7 +13,10 @@
 ####       Variables        ####
 ################################
 
+# Inicio del mensaje para que sea monoespaciado
 mensaje="\`"
+
+# Longitud máxima por línea
 max_len=35
 
 ################################
@@ -54,7 +57,7 @@ concatenar_con_puntos() {
 	mensaje+=$'\n'
         echo "$resultado"
     else
-        echo "Las cadenas son demasiado largas para alcanzar una longitud total de 50 caracteres."
+        echo "Las cadenas son demasiado largas para alcanzar una longitud total de 35 caracteres."
     fi
 }
 
