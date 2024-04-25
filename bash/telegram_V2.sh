@@ -46,6 +46,9 @@ tele_msg_resul() {
 tele_msg_title() {
 
     texto="$1"
+
+    # Lo pasamos a mayúsculas y calculamos longitud
+    texto="${texto^^}"
     longitud=${#texto}
     
     # Calcula cuántos caracteres se necesitan agregar a cada lado
