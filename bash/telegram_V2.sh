@@ -62,9 +62,8 @@ rellenar_texto() {
     guiones_por_lado=$(printf "%-${caracteres_por_lado}s" "")
     texto_rellenado="${guiones_por_lado// /-}$texto${guiones_por_lado// /-}"
 
-    mensaje+="$resultado"
+    mensaje+="$texto_rellenado"
     mensaje+=$'\n'
-    echo "$texto_rellenado"
 }
 
 
