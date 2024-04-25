@@ -58,8 +58,9 @@ rellenar_texto() {
     caracteres_restantes=$((35 - longitud))
     caracteres_por_lado=$((caracteres_restantes / 2))
 
-    # Rellena el texto con espacios
-    texto_rellenado=$(printf "%-${caracteres_por_lado}s%s%${caracteres_por_lado}s" "" "$texto" "")
+    # Rellena el texto con guiones
+    guiones_por_lado=$(printf "%-${caracteres_por_lado}s" "")
+    texto_rellenado="${guiones_por_lado// /-}$texto${guiones_por_lado// /-}"
 
     mensaje+="$resultado"
     mensaje+=$'\n'
