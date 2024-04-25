@@ -61,6 +61,8 @@ rellenar_texto() {
     # Rellena el texto con espacios
     texto_rellenado=$(printf "%-${caracteres_por_lado}s%s%${caracteres_por_lado}s" "" "$texto" "")
 
+    mensaje+="$resultado"
+    mensaje+=$'\n'
     echo "$texto_rellenado"
 }
 
