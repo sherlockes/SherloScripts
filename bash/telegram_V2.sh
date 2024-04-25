@@ -49,7 +49,7 @@ tele_msg_title() {
     longitud=${#texto}
     
     # Calcula cuántos caracteres se necesitan agregar a cada lado
-    caracteres_restantes=$((35 - longitud))
+    caracteres_restantes=$((max_len - longitud))
     caracteres_por_lado=$((caracteres_restantes / 2))
 
     # Rellena el texto con guiones
