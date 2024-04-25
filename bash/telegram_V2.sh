@@ -64,7 +64,7 @@ tele_msg_title() {
     # Generar una cadena de guiones de longitud max_len
     guiones_adicionales=$(printf "%-${max_len}s" "")
     guiones_adicionales="${guiones_adicionales// /-}"
-    gujiones_adicinales="-----------------------------------"
+    gujiones_adicinales='-----------------------------------'
 
     # Introduce el título entre dos líneas de guiones
     mensaje+="$guiones_adicionales"
