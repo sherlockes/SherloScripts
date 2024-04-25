@@ -4,7 +4,7 @@
 source telegram_V2.sh
 
 # Llama a la función
-tele_msg_title "Un título pra un texto"
+tele_msg_title "Un título para un texto"
 
 
 tele_msg_instr "Hola Mundo"
