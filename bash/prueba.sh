@@ -6,7 +6,7 @@ source telegram_V2.sh
 # Llama a la función
 tele_msg_title "Un título para un texto"
 
-artista="Pedro Sanchez"
+artista="Pedro Sanchez y sus amigos"
 
 tele_msg_instr "Descargando de $artista"
 tele_msg_resul "ok"
