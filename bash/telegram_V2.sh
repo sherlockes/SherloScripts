@@ -74,7 +74,7 @@ tele_msg_title() {
     mensaje+="$texto_rellenado"
     mensaje+=$'\n'
     mensaje+="$guiones_adicionales"
-    mensaje+='\n'
+    mensaje+=$'\n'
 }
 
 
