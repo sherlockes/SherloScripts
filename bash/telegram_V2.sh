@@ -56,22 +56,10 @@ tele_msg_title() {
     guiones_por_lado=$(printf "%-${caracteres_por_lado}s" "")
     texto_rellenado="${guiones_por_lado// /-}$texto${guiones_por_lado// /-}"
 
-    mensaje+="$texto_rellenado"
-    mensaje+=$'\n'
-}
-
-
-rellenar_texto() {
-    texto="$texto_title"
-    longitud=${#texto}
-    
-    # Calcula cuántos caracteres se necesitan agregar a cada lado
-    caracteres_restantes=$((max_len - longitud))
-    caracteres_por_lado=$((caracteres_restantes / 2))
-
-    # Rellena el texto con guiones
-    guiones_por_lado=$(printf "%-${caracteres_por_lado}s" "")
-    texto_rellenado="${guiones_por_lado// /-}$texto${guiones_por_lado// /-}"
+    # Si la longitud total es menor que 35, agrega un guion adicional al final
+    if (( ${#texto_rellenado} < 35 )); then
+        texto_rellenado="$texto_rellenado-"
+    fi
 
     mensaje+="$texto_rellenado"
     mensaje+=$'\n'
