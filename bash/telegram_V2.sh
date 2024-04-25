@@ -92,6 +92,7 @@ concatenar_con_puntos() {
 	mensaje+=$'\n'
         echo "$resultado"
     else
+	resultado="$texto_instr$puntos$texto_resul"
 	resultado="${resultado:0:max_len}"
 	mensaje+="$resultado"
 	mensaje+=$'\n'
