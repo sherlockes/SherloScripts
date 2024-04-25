@@ -57,7 +57,7 @@ tele_msg_title() {
     texto_rellenado="${guiones_por_lado// /-}$texto${guiones_por_lado// /-}"
 
     # Si la longitud total es menor que 35, agrega un guion adicional al final
-    if (( ${#texto_rellenado} < 35 )); then
+    if (( ${#texto_rellenado} < $max_len )); then
         texto_rellenado="$texto_rellenado-"
     fi
 
