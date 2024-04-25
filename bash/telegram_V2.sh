@@ -92,6 +92,9 @@ concatenar_con_puntos() {
 	mensaje+=$'\n'
         echo "$resultado"
     else
+	resultado="${resultado:0:max_len}"
+	mensaje+="$resultado"
+	mensaje+=$'\n'
         echo "Las cadenas son demasiado largas para alcanzar una longitud total de 35 caracteres."
     fi
 }
