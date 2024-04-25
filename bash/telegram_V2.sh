@@ -2,9 +2,9 @@
 
 ###################################################################
 #Script Name: telegram_V2.sh
-#Description: Descripción
+#Description: Envía mensaje a telegrám calculando la longitud de línea
 #Args: N/A
-#Creation/Update: 20240424/20240424
+#Creation/Update: 20240424/20240425
 #Author: www.sherblog.pro                                             
 #Email: sherlockes@gmail.com                               
 ###################################################################
