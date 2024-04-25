@@ -4,14 +4,16 @@
 source telegram_V2.sh
 
 # Llama a la función
-msg_instr "Hola Mundo"
-msg_resul "Adios"
+tele_msg_title "Un título pra un texto"
 
-msg_instr "iNTERRUMPIENDO A LA VACA"
-msg_resul "error"
+tele_msg_instr "Hola Mundo"
+tele_msg_resul "Adios"
 
-msg_instr "iNTERRUMPIENDO A LA VACA"
-msg_resul "..."
+tele_msg_instr "iNTERRUMPIENDO A LA VACA"
+tele_msg_resul "error"
 
-send_msg
+tele_msg_instr "iNTERRUMPIENDO A LA VACA"
+tele_msg_resul "..."
+
+tele_send_msg
 
