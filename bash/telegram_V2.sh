@@ -28,11 +28,11 @@ max_len=35
 ####       Funciones        ####
 ################################
 
-msg_instr() {
+tele_msg_instr() {
     texto_instr="$1"
 }
 
-msg_resul() {
+tele_msg_resul() {
     texto_resul="$1"
 
     total_caracteres=$(expr length "$texto_instr")
@@ -43,7 +43,7 @@ msg_resul() {
 
 }
 
-msg_title() {
+tele_msg_title() {
     texto_title="$1"
 
     rellenar_texto
@@ -65,24 +65,6 @@ rellenar_texto() {
 }
 
 
-concatenar_con_puntos_2() {
-   
-    # Calcula cuántos puntos se deben añadir entre las dos cadenas
-    longitud_total=$((max_len - ${#texto_title}))
-    
-    # Asegura que la longitud total sea mayor o igual a 0
-    if (( longitud_total >= 0 )); then
-        # Construye la cadena con puntos intercalados
-        puntos=$(printf '%.0s.' $(seq 1 $longitud_total))
-        resultado="$texto_instr$puntos$texto_resul"
-	mensaje+="$resultado"
-	mensaje+=$'\n'
-        echo "$resultado"
-    else
-        echo "Las cadenas son demasiado largas para alcanzar una longitud total de 35 caracteres."
-    fi
-}
-
 concatenar_con_puntos() {
    
     # Calcula cuántos puntos se deben añadir entre las dos cadenas
@@ -101,7 +83,7 @@ concatenar_con_puntos() {
     fi
 }
 
-send_msg() {
+tele_send_msg() {
 
 	# URL para enviar mensaje
 	url="https://api.telegram.org/bot$TOKEN/sendMessage"
