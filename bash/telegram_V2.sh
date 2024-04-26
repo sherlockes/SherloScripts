@@ -122,7 +122,7 @@ tele_end(){
     # Calcula la duración del script
     end_time=$( date +%s )
     let duration=$end_time-$init_time
-    tele_msg_hr
+    tele_hr
     tele_msg_instr "Duración del script:"
     tele_msg_resul "$duration segundos"
 
