@@ -123,6 +123,11 @@ tele_end() {
     tele_msg_instr "Duración del script:"
     tele_msg_resul "$duration sg"
 
+    # Nombre del script
+    script_name=$(basename "$0")
+    tele_msg_instr "Script name::"
+    tele_msg_resul "$script_name"
+
     # Envía el mensaje
     tele_send_msg
 }
