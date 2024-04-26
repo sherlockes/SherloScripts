@@ -116,9 +116,9 @@ dependencias(){
 comprobar(){
 
     if [ $1 -eq 0 ]; then
-	tele_msg_resul " ok"
+	tele_msg_resul "ok"
     else
-	tele_msg_resul " ERROR"
+	tele_msg_resul "KO"
     fi
 }
 
