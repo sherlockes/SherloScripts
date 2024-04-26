@@ -62,8 +62,6 @@ tele_msg_resul() {
 
     total_caracteres=$(expr length "$texto_instr")
     total_caracteres=$(expr $total_caracteres + $(expr length "$texto_resul")) 
-
-    echo "El número total de caracteres es: $total_caracteres"
     concatenar_con_puntos
 
 }
@@ -109,13 +107,11 @@ concatenar_con_puntos() {
         resultado="$texto_instr$puntos$texto_resul"
 	mensaje+="$resultado"
 	mensaje+=$'\n'
-        echo "$resultado"
     else
 	resultado="$texto_instr$puntos$texto_resul"
 	resultado="${resultado:0:max_len}"
 	mensaje+="$resultado"
 	mensaje+=$'\n'
-        echo "Las cadenas son demasiado largas para alcanzar una longitud total de 35 caracteres."
     fi
 }
 
