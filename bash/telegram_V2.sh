@@ -23,6 +23,14 @@ max_len=35
 ####      Dependencias      ####
 ################################
 
+# Archivo "~/config.conf"
+# TOKEN="XXXXXXXX:XXXXXXXXXXXXXXXXXXXXXXXX"
+# CHAT_ID="-XXXXXXXXXXXXX"
+
+if [ ! -e ~/config.conf ]; then
+    echo "Advertencia: El archivo ~/config.conf no existe."
+fi
+
 
 ################################
 ####       Funciones        ####
