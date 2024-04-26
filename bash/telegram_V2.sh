@@ -7,13 +7,14 @@
 #Creation/Update: 20240424/20240425
 #Author: www.sherblog.pro                                             
 #Email: sherlockes@gmail.com                               
-###################################################################
 #
 # Funciones:
 # - tele_msg_title "Titulo" -> Título entre líneas de guiones
 # - tele_msg_instr "Descrip" -> Identifica el proceso a realizar
 # - tele_msg_resul "Result" -> Resultado del proceso
 # - tele_end -> Envía el mensaje
+###################################################################
+
 
 ################################
 ####       Variables        ####
