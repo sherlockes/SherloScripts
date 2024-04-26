@@ -87,12 +87,14 @@ tele_msg_title() {
     guiones_adicionales=${guiones_adicionales// /-}
     
     # Introduce el título entre dos líneas de guiones
-    mensaje+="$guiones_adicionales"
-    mensaje+=$'\n'
+    #mensaje+="$guiones_adicionales"
+    #mensaje+=$'\n'
+    tele_hr
     mensaje+="$texto_rellenado"
     mensaje+=$'\n'
-    mensaje+="$guiones_adicionales"
-    mensaje+=$'\n'
+    tele_hr
+    #mensaje+="$guiones_adicionales"
+    #mensaje+=$'\n'
 }
 
 
@@ -124,7 +126,7 @@ tele_end(){
     let duration=$end_time-$init_time
     tele_hr
     tele_msg_instr "Duración del script:"
-    tele_msg_resul "$duration segundos"
+    tele_msg_resul "$duration sg"
 
     # Envía el mensaje
     tele_send_msg
