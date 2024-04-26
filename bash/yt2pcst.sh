@@ -340,7 +340,9 @@ echo "######################################"
 cd $yt2pcst_dir
 
 # Comprobar dependencias
+tele_msg_instr "Check dependencies "
 dependencias
+comprobar $?
 
 # Leer nombres y URLs de los canales de YouTube desde el archivo de texto
 while IFS= read -r linea; do
