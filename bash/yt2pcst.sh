@@ -13,6 +13,9 @@
 ####       Variables        ####
 ################################
 
+# Ubicación del script para mandar notificaciones a telegram
+source telegram_V2.sh
+
 PATH="/home/pi/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 
 # Hora de inicio del Script
@@ -60,9 +63,6 @@ head -n 300 $DESCARGADOS > temp.txt && mv temp.txt $DESCARGADOS
 
 # Ruta del servidor webdav donde estarán alojados los episodios
 SERVIDOR="http://192.168.10.210:5005"
-
-# Ubicación del script para mandar notificaciones a telegram
-source telegram_V2.sh
 
 ################################
 ####      Dependencias      ####
