@@ -11,7 +11,7 @@
 # Funciones:
 # - tele_msg_title "Titulo" -> Título entre líneas de guiones
 # - tele_msg_instr "Descrip" -> Identifica el proceso a realizar
-# - tele_check $?
+# - tele_check $? -> Comprueba la salida del último comando
 # - tele_msg_resul "Result" -> Resultado del proceso
 # - tele_end -> Envía el mensaje
 ###################################################################
