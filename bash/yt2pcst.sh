@@ -62,7 +62,7 @@ head -n 300 $DESCARGADOS > temp.txt && mv temp.txt $DESCARGADOS
 SERVIDOR="http://192.168.10.210:5005"
 
 # Ubicación del script para mandar notificaciones a telegram
-notificacion=~/SherloScripts/bash/telegram_V2.sh
+source telegram_V2.sh
 
 ################################
 ####      Dependencias      ####
@@ -367,3 +367,4 @@ fi
 
 # Envia el mensaje de telegram con el resultado
 tele_end
+case 
