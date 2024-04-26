@@ -337,7 +337,7 @@ echo "######################################"
 echo "## Youtube to Podcast by Sherlockes ##"
 echo "######################################"
 
-tele_msg_title "Un título para un texto"
+tele_msg_title "From youtube to podcast"
 
 cd $yt2pcst_dir
 
