@@ -145,7 +145,7 @@ github_repos_update(){
     repo=(SherloScripts, ha_cfg)
     for i in "${repo[@]}"
     do
-	tele_msg_instr "Actualizar el repo $i"
+	tele_msg_instr "Update $i repo"
 	echo "Actualizando el repositorio $i"
 	cd ~/$i
 
