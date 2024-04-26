@@ -117,7 +117,6 @@ concatenar_con_puntos() {
 
 tele_end() {
     # Calcula la duración del script
-    echo "Enviando mensaje final"
     end_time=$( date +%s )
     let duration=$end_time-$init_time
     tele_hr
@@ -150,6 +149,9 @@ tele_send_msg() {
 
 	# Envío del mensaje utilizando curl
 	curl -s -d "$parametros" "$url" > /dev/null
+
+	echo "Enviando mensaje final"
+	
 
 }
 
