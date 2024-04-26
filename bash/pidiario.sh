@@ -46,12 +46,12 @@ hugo_rclone_check(){
     echo "Actualizando Hugo..."
     tele_msg_instr "Actualización de Hugo"
     . /home/pi/SherloScripts/bash/hugo.sh
-    comprobar $?
+    tele_check $?
 
     echo "Actualizando Rclone"
     tele_msg_instr "Actualización de Rclone"
     . /home/pi/SherloScripts/bash/rclone.sh && rclone_check
-    comprobar $?
+    tele_check $?
 }
 
 # -------------------------------------------------------
@@ -62,7 +62,7 @@ rclone_check_remotes(){
     tele_msg_instr "Actualizando configuración Rclone"
     ln -sf ~/dotfiles/rclone/rclone.conf ~/.config/rclone/rclone.conf
     #cp ~/dotfiles/rclone/rclone.conf ~/.config/rclone
-    comprobar $?
+    tele_check $?
     
     tele_msg_instr "Disponibilidad de nubes"
     tele_mst_resul "..."
@@ -113,7 +113,7 @@ update_initel(){
     echo "Actualizando el archivo init.el..."
     tele_msg_instr "Actualizando el archivo init.el"
     rclone sync -vv Sherlockes_GD:/dotfiles/emacs/.emacs.d/ Sherlockes_GD:/SherloScripts/elisp/ --include "/init.el"
-    comprobar $?
+    tele_check $?
 }
 
 # ---------------------------------------------------------
@@ -125,15 +125,15 @@ gdrive_folders_sync(){
     tele_msg_instr "Sync SherloScripts Folder"
     #rclone sync -v Sherlockes_GD:/SherloScripts/ /home/pi/SherloScripts/ --exclude "/.git/**"
     rclone sync -v /home/pi/SherloScripts/ Sherlockes_GD:/SherloScripts/ --exclude "/.git/**"
-    comprobar $?
+    tele_check $?
 
    tele_msg_instr "Sync Dotfiles folder"
     rclone sync -v Sherlockes_GD:/dotfiles/ /home/pi/dotfiles --exclude "/emacs/**"
-    comprobar $?
+    tele_check $?
 
     tele_msg_instr "Update link rclone config"
     ln -sf /home/pi/dotfiles/rclone/rclone.conf /home/pi/.config/rclone/rclone.conf
-    comprobar $?
+    tele_check $?
 }
 
 
@@ -152,7 +152,7 @@ github_repos_update(){
 	git add --all
 	git commit -m "Update"
 	git push
-	comprobar $?
+	tele_check $?
     done
 }
 
@@ -163,7 +163,7 @@ ha_config(){
     echo "Guardando config de HA en GitHub..." 
     tele_msg_instr "Save HS config in GitHub"
     rsync -av sherlockes@192.168.10.202:/config/ ~/ha_cfg/
-    comprobar $?
+    tele_check $?
 }
 
 # --------------------------------------------------------------------------
@@ -173,7 +173,7 @@ sherloflix_sync(){
     echo "Sincronizando las nubes de Sherloflix..."
     tele_msg_instr "SherloFlix sinc"
     timeout 3h rclone sync ${unidades[0]}: ${unidades[1]}: --transfers 2 --tpslimit 8 --bwlimit 10M -P --exclude "/twitch/**"
-    comprobar $?
+    tele_check $?
 
     echo "Comprobando sincronización de las nubes de Sherloflix..."
 
@@ -202,7 +202,7 @@ sherblog_sync(){
     echo "Sincronizando la web sherblog.pro..."
     tele_msg_instr "Sincronizando la web sherblog.es"
     rclone sync ~/sherblog/ Sherlockes_GD:/sherblog/ --create-empty-src-dirs --exclude "/.git*/**" --exclude "/public/"
-    comprobar $?
+    tele_check $?
 }
 
 
