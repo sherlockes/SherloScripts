@@ -329,8 +329,8 @@ subir_contenido () {
 
 
 
-mensaje=$'Actualizar Youtube via <a href="https://raw.githubusercontent.com/sherlockes/SherloScripts/master/bash/yt2pc.sh">yt2pc.sh</a>\n'
-mensaje+=$'- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n'
+#mensaje=$'Actualizar Youtube via <a href="https://raw.githubusercontent.com/sherlockes/SherloScripts/master/bash/yt2pc.sh">yt2pc.sh</a>\n'
+#mensaje+=$'- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n'
 
 
 echo "######################################"
