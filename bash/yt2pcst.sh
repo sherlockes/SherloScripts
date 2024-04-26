@@ -137,7 +137,7 @@ buscar_ultimos(){
     # Obtiene el json de los ultimos vídeos.
     tele_msg_instr "$nombre videos"
     
-    echo "- Buscando últimos vídeos de $nombre en $url"
+    echo "- Buscando vídeos de $nombre en $url"
 
     mapfile -t videos < <( yt-dlp --flat-playlist --print "%(id)s/%(duration)s" --playlist-end $num_videos $url )
 
