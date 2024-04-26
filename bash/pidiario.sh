@@ -22,8 +22,10 @@ carpetas=(pelis series) # No se incluye la carpeta twitch
 notificacion=~/SherloScripts/bash/telegram.sh
 inicio=$( date +%s )
 
-mensaje=$'Faenas diarias de Rpi mediante <a href="https://raw.githubusercontent.com/sherlockes/SherloScripts/master/bash/pidiario.sh">pidiario.sh</a>\n'
-mensaje+=$'- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n'
+# Incluye el archivo que contiene la función para mensajes a Telegram
+source telegram_V2.sh
+
+tele_msg_title "  Faenas diarias de rpi  "
 
 #----------------------------------------------------------
 # Función para comprobar la salida
@@ -31,11 +33,10 @@ mensaje+=$'- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 comprobar(){
 
     if [ $1 -eq 0 ]; then
-	mensaje+=$'OK'
+	tele_msg_resul "ok"
     else
-	mensaje+=$'ERROR'
+	tele_msg_resul "KO"
     fi
-    mensaje+=$'\n'
 }
 
 # ---------------------------------------------------------
@@ -43,12 +44,12 @@ comprobar(){
 # ---------------------------------------------------------
 hugo_rclone_check(){
     echo "Actualizando Hugo..."
-    mensaje+=$'Actualización de Hugo . . . . . . . . . . . . . . . . '
+    tele_msg_instr "Actualización de Hugo"
     . /home/pi/SherloScripts/bash/hugo.sh
     comprobar $?
 
     echo "Actualizando Rclone"
-    mensaje+=$'Actualización de Rclone . . . . . . . . . . . . . . . '
+    tele_msg_instr "Actualización de Rclone"
     . /home/pi/SherloScripts/bash/rclone.sh && rclone_check
     comprobar $?
 }
@@ -58,12 +59,13 @@ hugo_rclone_check(){
 # -------------------------------------------------------
 rclone_check_remotes(){
     # Crea el enlace a la configuración de Rclon en Dotfiles
-    mensaje+=$'Actualizando configuración Rclone . . . . '
+    tele_msg_instr "Actualizando configuración Rclone"
     ln -sf ~/dotfiles/rclone/rclone.conf ~/.config/rclone/rclone.conf
     #cp ~/dotfiles/rclone/rclone.conf ~/.config/rclone
     comprobar $?
     
-    mensaje+=$'Disponibilidad de nubes\n'
+    tele_msg_instr "Disponibilidad de nubes"
+    tele_mst_resul "..."
     remotos=( $(rclone listremotes) )
     for remoto in "${remotos[@]}"
     do
@@ -74,32 +76,33 @@ rclone_check_remotes(){
 	    continue
 	fi
 
-	mensaje+=$" -$remoto (W). . "
+	tele_msg_instr"-$remoto (W)"
 	rclone mkdir $remoto:test
 
 	if [ $? -eq 0 ]; then
-	    mensaje+=$'OK'
+	    tele_msg_resul "ok"
 	    echo "Es posible crear un directorio en $remoto"
 	    rclone rmdir $remoto:test
 	else
-	    mensaje+=$'ERROR'
+	    tele_msg_resul "KO"
 	    echo "No es posible crear un directorio en $remoto"
 	fi
 	mensaje+=$'\n'
 
-	mensaje+=$" -$remoto (R). . "
+	tele_msg_instr "-$remoto (R)"
 	rclone -v size $remoto:
 
 	if [ $? -eq 0 ]; then
 	    echo "OK"
-	    mensaje+=$'OK'
+	   tele_msg_resul "ok"
 	else
 	    echo "KO"
-	    mensaje+=$'ERROR'
+	    tele_msg_resul "KO"
+	    
 	    $notificacion "$mensaje"
 	    exit 0
 	fi
-	mensaje+=$'\n'
+	#mensaje+=$'\n'
     done
 }
 
@@ -108,7 +111,7 @@ rclone_check_remotes(){
 # ---------------------------------------------------------
 update_initel(){
     echo "Actualizando el archivo init.el..."
-    mensaje+=$'Actualizando el archivo init.el . . . . . . . . . '
+    tele_msg_instr "Actualizando el archivo init.el"
     rclone sync -vv Sherlockes_GD:/dotfiles/emacs/.emacs.d/ Sherlockes_GD:/SherloScripts/elisp/ --include "/init.el"
     comprobar $?
 }
@@ -119,16 +122,16 @@ update_initel(){
 gdrive_folders_sync(){
     echo "Sincronizando las carpetas de Google Drive..."
 
-    mensaje+=$'Sincronizando carpeta SherloScripts . . . . '
+    tele_msg_instr "Sincronizando carpeta SherloScripts"
     #rclone sync -v Sherlockes_GD:/SherloScripts/ /home/pi/SherloScripts/ --exclude "/.git/**"
     rclone sync -v /home/pi/SherloScripts/ Sherlockes_GD:/SherloScripts/ --exclude "/.git/**"
     comprobar $?
 
-    mensaje+=$'Sincronizando carpeta Dotfiles . . . . . . . . . '
+   tele_msg_instr "Sincronizando carpeta Dotfiles"
     rclone sync -v Sherlockes_GD:/dotfiles/ /home/pi/dotfiles --exclude "/emacs/**"
     comprobar $?
 
-    mensaje+=$'Actualizando link rclone config. . . . . . . . '
+    tele_msg_instr "Actualizando link rclone config"
     ln -sf /home/pi/dotfiles/rclone/rclone.conf /home/pi/.config/rclone/rclone.conf
     comprobar $?
 }
@@ -142,7 +145,7 @@ github_repos_update(){
     repo=(SherloScripts, ha_cfg)
     for i in "${repo[@]}"
     do
-	mensaje+=$"Actualizar el repositorio $i . . . "
+	tele_msg_instr "Actualizar el repo $i"
 	echo "Actualizando el repositorio $i"
 	cd ~/$i
 
@@ -158,7 +161,7 @@ github_repos_update(){
 # ---------------------------------------------------------
 ha_config(){
     echo "Guardando config de HA en GitHub..." 
-    mensaje+=$"Guardando config de HA en GitHub . . . . . "
+    tele_msg_instr "Save HS config in GitHub"
     rsync -av sherlockes@192.168.10.202:/config/ ~/ha_cfg/
     comprobar $?
 }
@@ -168,7 +171,7 @@ ha_config(){
 # --------------------------------------------------------------------------
 sherloflix_sync(){
     echo "Sincronizando las nubes de Sherloflix..."
-    mensaje+=$"SherloFlix sinc. .  . ."
+    tele_msg_instr "SherloFlix sinc"
     timeout 3h rclone sync ${unidades[0]}: ${unidades[1]}: --transfers 2 --tpslimit 8 --bwlimit 10M -P --exclude "/twitch/**"
     comprobar $?
 
@@ -177,15 +180,15 @@ sherloflix_sync(){
     for u in "${carpetas[@]}"
     do
 	echo "Comprobando sincronización de $u..."
-	mensaje+=$"Sincronización de $u . . . . . . . . . . . . . "
+	tele_msg_instr "Sincronización de $u"
 	diferencias=$( rclone check ${unidades[0]}:/$u ${unidades[1]}:/$u --size-only 2>&1 | grep 'differences found' | cut -d ":" -f 6 | cut -d " " -f 2 )
 
 	if [ $diferencias -ne 0 ];
 	then
 	    echo "La sincronización de las $u de las nubes no es correcta."
-	    mensaje+=$'ERROR'
+	    tele_msg_resul "KO"
 	else
-	    mensaje+=$'OK'
+	    tele_msg_instr "ok"
 	    echo "La sincronización de $u es correcta."
 	fi
 	mensaje+=$'\n'
@@ -197,7 +200,7 @@ sherloflix_sync(){
 # ----------------------------------------------------------------
 sherblog_sync(){
     echo "Sincronizando la web sherblog.pro..."
-    mensaje+=$"Sincronizando la web sherblog.pro . . . "
+    tele_msg_instr "Sincronizando la web sherblog.es"
     rclone sync ~/sherblog/ Sherlockes_GD:/sherblog/ --create-empty-src-dirs --exclude "/.git*/**" --exclude "/public/"
     comprobar $?
 }
@@ -217,9 +220,4 @@ github_repos_update # Actualiza los repositorios de "SherloScripts" y "Sherblog"
 #sherloflix_sync # Sincroniza las nubes de Sherloflix y comprueba el estado
 
 # Envia el mensaje de telegram con el resultado
-fin=$( date +%s )
-let duracion=$fin-$inicio
-mensaje+=$'- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n'
-mensaje+=$"Duración del Script:  $duracion segundos"
-
-$notificacion "$mensaje"
+tele_end
