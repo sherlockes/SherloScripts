@@ -115,8 +115,9 @@ concatenar_con_puntos() {
     fi
 }
 
-tele_end(){
+tele_end() {
     # Calcula la duración del script
+    echo "Enviando mensaje final"
     end_time=$( date +%s )
     let duration=$end_time-$init_time
     tele_hr
@@ -127,7 +128,7 @@ tele_end(){
     tele_send_msg
 }
 
-tele_hr(){
+tele_hr() {
     # Generar una cadena de guiones de longitud max_len
     linea_guiones=$(printf "%-${max_len}s" "")
     linea_guiones=${guiones_adicionales// /-}
