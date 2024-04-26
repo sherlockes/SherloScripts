@@ -122,16 +122,16 @@ update_initel(){
 gdrive_folders_sync(){
     echo "Sincronizando las carpetas de Google Drive..."
 
-    tele_msg_instr "Sincronizando carpeta SherloScripts"
+    tele_msg_instr "Sync SherloScripts Folder"
     #rclone sync -v Sherlockes_GD:/SherloScripts/ /home/pi/SherloScripts/ --exclude "/.git/**"
     rclone sync -v /home/pi/SherloScripts/ Sherlockes_GD:/SherloScripts/ --exclude "/.git/**"
     comprobar $?
 
-   tele_msg_instr "Sincronizando carpeta Dotfiles"
+   tele_msg_instr "Sync Dotfiles folder"
     rclone sync -v Sherlockes_GD:/dotfiles/ /home/pi/dotfiles --exclude "/emacs/**"
     comprobar $?
 
-    tele_msg_instr "Actualizando link rclone config"
+    tele_msg_instr "Update link rclone config"
     ln -sf /home/pi/dotfiles/rclone/rclone.conf /home/pi/.config/rclone/rclone.conf
     comprobar $?
 }
