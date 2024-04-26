@@ -19,5 +19,5 @@ tele_msg_resul "..."
 
 
 
-tele_send_msg
+tele_end
 
