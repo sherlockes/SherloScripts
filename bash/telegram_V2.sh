@@ -13,6 +13,9 @@
 ####       Variables        ####
 ################################
 
+# Hora de inicio
+init_time=$( date +%s )
+
 # Inicio del mensaje para que sea monoespaciado
 mensaje="\`"
 
@@ -114,6 +117,19 @@ concatenar_con_puntos() {
         echo "Las cadenas son demasiado largas para alcanzar una longitud total de 35 caracteres."
     fi
 }
+
+tele_end(){
+    # Calcula la duración del script
+    end_time=$( date +%s )
+    let duration=$end_time-$init_time
+    tele_msg_title "-----"
+    tele_msg_instr "Duración del script:"
+    tele_msg_resul "$duration segundos"
+
+    # Envía el mensaje
+    tele_send_msg
+}
+
 
 tele_send_msg() {
 
