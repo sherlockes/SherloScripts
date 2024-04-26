@@ -23,7 +23,7 @@ notificacion=~/SherloScripts/bash/telegram.sh
 inicio=$( date +%s )
 
 # Incluye el archivo que contiene la función para mensajes a Telegram
-source telegram_V2.sh
+source ~/SherloScripts/bash/telegram_V2.sh
 
 tele_msg_title "  Faenas diarias de rpi  "
 
