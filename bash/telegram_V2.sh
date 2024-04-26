@@ -28,7 +28,8 @@ max_len=35
 # CHAT_ID="-XXXXXXXXXXXXX"
 
 if [ ! -e ~/config.conf ]; then
-    echo "Advertencia: El archivo ~/config.conf no existe."
+    echo "Atención: El archivo ~/config.conf no existe."
+    exit
 fi
 
 
