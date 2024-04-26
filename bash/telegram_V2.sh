@@ -135,7 +135,7 @@ tele_hr(){
     linea_guiones=$(printf "%-${max_len}s" "")
     linea_guiones=${guiones_adicionales// /-}
     
-    mensaje+="$guiones_adicionales"
+    mensaje+="$linea_guiones"
     mensaje+=$'\n'
 }
 
