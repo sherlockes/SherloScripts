@@ -162,7 +162,7 @@ github_repos_update(){
 ha_config(){
     echo "Guardando config de HA en GitHub..." 
     tele_msg_instr "Save HS config in GitHub"
-    rsync -av root@192.168.10.202:/config/ ~/ha_cfg/
+    scp -r root@192.168.10.202:/config/ ~/ha_cfg/
     tele_check $?
 }
 
