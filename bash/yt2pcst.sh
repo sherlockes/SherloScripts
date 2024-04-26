@@ -62,7 +62,7 @@ head -n 300 $DESCARGADOS > temp.txt && mv temp.txt $DESCARGADOS
 SERVIDOR="http://192.168.10.210:5005"
 
 # Ubicación del script para mandar notificaciones a telegram
-notificacion=~/SherloScripts/bash/telegram.sh
+notificacion=~/SherloScripts/bash/telegram_V2.sh
 
 ################################
 ####      Dependencias      ####
@@ -116,11 +116,10 @@ dependencias(){
 comprobar(){
 
     if [ $1 -eq 0 ]; then
-	mensaje+=$'OK'
+	tele_msg_resul " ok"
     else
-	mensaje+=$'ERROR'
+	tele_msg_resul " ERROR"
     fi
-    mensaje+=$'\n'
 }
 
 #----------------------------------------------------------#
@@ -136,7 +135,8 @@ buscar_ultimos(){
     local duracion
 
     # Obtiene el json de los ultimos vídeos.
-    mensaje+=$"Buscando vídeos $nombre. . . . . ."
+    tele_msg_instr "Find $nombre video "
+    
     echo "- Buscando últimos vídeos de $nombre en $url"
 
     mapfile -t videos < <( yt-dlp --flat-playlist --print "%(id)s/%(duration)s" --playlist-end $num_videos $url )
@@ -152,13 +152,13 @@ buscar_ultimos(){
 	# Comprueba si el archivo es de más de 10'
 	if (( $duracion > 1200 )) && ! grep -q $id "$DESCARGADOS"; then
 	    # Descargando el episodio
-	    mensaje+=$"Descargando $id . . . . . . . . ."
+	    tele_msg_instr "Download $id "
 	    echo "- Descargando el vídeo $id"
 	    descargar_video $id
 	    comprobar $?
 
 	    echo "- Taggeando el vídeo $id"
-	    mensaje+=$"Taggeando vídeo $id. . . . . . . "
+	    tele_msg_instr "Tag $id "
 	    tag $id "$nombre"
 	    comprobar $?
 	else
@@ -353,22 +353,17 @@ done < "$archivo_canales"
 
 # Actualizar el feed  y subir contenido si hay nuevos vídeos
 if ls ./mp3/*.mp3 1> /dev/null 2>&1; then
-    mensaje+=$'Actualizando el Feed . . . . . . . . . . . . . . . . '
+    tele_msg_instr "Feed update "
     actualizar_feed "$SERVIDOR"
     comprobar $?
 
-    mensaje+=$"Subiendo mp3's al servidor webdav . . . ."
+    tele_msg_instr "Upload mp3's to server "
     subir_contenido
     comprobar $?
 else
-    mensaje+=$'No hay nuevo contenido para el Podcast.'
-    mensaje+=$'\n'
+    tele_msg_instr "No new content "
+    tele_msg_resul "..."
 fi
 
 # Envia el mensaje de telegram con el resultado
-fin=$( date +%s )
-let duracion=$fin-$inicio
-mensaje+=$'- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n'
-mensaje+=$"Duración del Script:  $duracion segundos"
-
-$notificacion "$mensaje"
+tele_end
