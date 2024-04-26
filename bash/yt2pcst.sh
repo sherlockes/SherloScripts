@@ -135,7 +135,7 @@ buscar_ultimos(){
     local duracion
 
     # Obtiene el json de los ultimos vídeos.
-    tele_msg_instr "Find $nombre video "
+    tele_msg_instr "$nombre videos"
     
     echo "- Buscando últimos vídeos de $nombre en $url"
 
