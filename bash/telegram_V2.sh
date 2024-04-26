@@ -32,6 +32,12 @@ if [ ! -e ~/config.conf ]; then
     exit
 fi
 
+if ! command -v curl &> /dev/null; then
+    echo "Atención: El comando 'curl' no está disponible en este equipo, se instala."
+    sudo apt update  # Actualiza la lista de paquetes
+    sudo apt install curl  # Instala el paquete curl
+fi
+
 
 ################################
 ####       Funciones        ####
