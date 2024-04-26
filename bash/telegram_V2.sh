@@ -11,6 +11,7 @@
 # Funciones:
 # - tele_msg_title "Titulo" -> Título entre líneas de guiones
 # - tele_msg_instr "Descrip" -> Identifica el proceso a realizar
+# - tele_check $?
 # - tele_msg_resul "Result" -> Resultado del proceso
 # - tele_end -> Envía el mensaje
 ###################################################################
@@ -55,6 +56,14 @@ fi
 
 tele_msg_instr() {
     texto_instr="$1"
+}
+
+tele_check() {
+    if [ $1 -eq 0 ]; then
+	tele_msg_resul "ok"
+    else
+	tele_msg_resul "KO"
+    fi
 }
 
 tele_msg_resul() {
