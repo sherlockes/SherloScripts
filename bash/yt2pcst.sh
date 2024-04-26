@@ -337,12 +337,14 @@ echo "######################################"
 echo "## Youtube to Podcast by Sherlockes ##"
 echo "######################################"
 
+tele_msg_title "Un título para un texto"
+
 cd $yt2pcst_dir
 
 # Comprobar dependencias
-tele_msg_instr "Check dependencies "
-dependencias
-comprobar $?
+#tele_msg_instr "Check dependencies "
+#dependencias
+#comprobar $?
 
 # Leer nombres y URLs de los canales de YouTube desde el archivo de texto
 while IFS= read -r linea; do
