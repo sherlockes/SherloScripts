@@ -143,7 +143,8 @@ tele_send_msg() {
 	url="https://api.telegram.org/bot$TOKEN/sendMessage"
 
 	mensaje+=$"\`"
-	
+
+	echo $mensaje
 	# Parámetros del mensaje
 	parametros="chat_id=$CHAT_ID&text=$mensaje&parse_mode=Markdown"
 
