@@ -130,10 +130,10 @@ tele_end() {
 tele_hr() {
     # Generar una cadena de guiones de longitud max_len
     linea_guiones=$(printf "%-${max_len}s" "")
-    linea_guiones=${guiones_adicionales// /-}
+    linea_guiones=${linea_guiones// /-}
 
-    #mensaje+="$linea_guiones"
-    mensaje+="----------------------------------"
+    mensaje+="$linea_guiones"
+    #mensaje+="-----------------------------------"
     mensaje+=$'\n'
 }
 
