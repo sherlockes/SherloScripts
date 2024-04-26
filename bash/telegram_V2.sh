@@ -8,6 +8,12 @@
 #Author: www.sherblog.pro                                             
 #Email: sherlockes@gmail.com                               
 ###################################################################
+#
+# Funciones:
+# - tele_msg_title "Titulo" -> Título entre líneas de guiones
+# - tele_msg_instr "Descrip" -> Identifica el proceso a realizar
+# - tele_msg_resul "Result" -> Resultado del proceso
+# - tele_end -> Envía el mensaje
 
 ################################
 ####       Variables        ####
@@ -81,20 +87,12 @@ tele_msg_title() {
     if (( ${#texto_rellenado} < $max_len )); then
         texto_rellenado="$texto_rellenado-"
     fi
-
-    # Generar una cadena de guiones de longitud max_len
-    guiones_adicionales=$(printf "%-${max_len}s" "")
-    guiones_adicionales=${guiones_adicionales// /-}
     
     # Introduce el título entre dos líneas de guiones
-    #mensaje+="$guiones_adicionales"
-    #mensaje+=$'\n'
     tele_hr
     mensaje+="$texto_rellenado"
     mensaje+=$'\n'
     tele_hr
-    #mensaje+="$guiones_adicionales"
-    #mensaje+=$'\n'
 }
 
 
