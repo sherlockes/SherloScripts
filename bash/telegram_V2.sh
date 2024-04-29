@@ -27,9 +27,9 @@ init_time=$( date +%s )
 nombre_script=$(basename "$0")
 nombre_host=$(hostname)
 
-
 # Inicio del mensaje para que sea monoespaciado
 mensaje="\`$nombre_script in $nombre_host"
+mensaje+=$'\n'
 
 # Longitud máxima por línea
 max_len=35
