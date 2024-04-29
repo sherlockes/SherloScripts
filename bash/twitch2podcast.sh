@@ -4,7 +4,7 @@
 #Script Name: twitch2podcast.sh
 #Description: Generación de Podcast a partir de canal de Twitch
 #Args: N/A
-#Creation/Update: 20220317/20231030
+#Creation/Update: 20220317/20240429
 #Author: www.sherblog.pro                                             
 #Email: sherlockes@gmail.com                               
 ###################################################################
