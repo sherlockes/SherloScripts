@@ -101,7 +101,7 @@ buscar_ultimos () {
 	    continue
 	else
 	    echo "- Descargando el audio del vídeo $id.";
-            mtele_msg_instr "Download $id audio"
+            tele_msg_instr "Download $id audio"
 
             if (( $mins > 10 ))
             then
