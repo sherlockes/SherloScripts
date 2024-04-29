@@ -119,8 +119,8 @@ buscar_ultimos () {
 		fi
             else
 		echo "- El archivo sólo tiene $mins minutos, no se descarga."
-		mensaje+=$"El archivo sólo tiene $mins minutos, no se descarga."
-		mensaje+=$'\n'
+		tele_msg_instr "Archivo de sólo $mins minutos."
+		tele_msg_resul "..."
             fi
 
 	    # Añade el archivo al principio de la lista de descargados
@@ -137,27 +137,27 @@ buscar_ultimos () {
 convertir_mp3 () {
     local canal=${1:?Falta el nombre del canal}
     echo "- Buscando archivos para convertir en $canal"
-    mensaje+=$"Buscando archivos en $canal . . . ."
-    mensaje+=$'\n'
+    tele_msg_instr "Search $canal files"
+    tele_msg_resul "..."
 
     for file in ./*.mkv; do
        local nombre=$(basename $file .mkv)
        local id_ep=$(echo $nombre | awk -F'_' '{print $2}')
 
        echo "- Episodio $id_ep, codificando audio y eliminando silencios"
-       mensaje+=$"Recodificando audio de $id_ep. . . "
+       tele_msg_instr "Recode $id_ep audio"
        ffmpeg -loglevel 24 -i "$file" -af silenceremove=1:0:-50dB "${file%.mkv}.mp3"
-       comprobar $?
+       tele_check $?
 
        echo "- Episodio $id_ep, moviendo mp3"
-       mensaje+=$"Moviendo mp3 $id_ep. . . . . . . . . . ."
+       tele_msg_instr "Move $id_ep mp3"
        mv $nombre.mp3 $canal/mp3/$id_ep.mp3
-       comprobar $?
+       tele_check $?
 
        echo "- Episodio $id_ep, eliminando el video"
-       mensaje+=$"Eliminando vídeo $id_ep. . . . . . . . ."
+       tele_msg_instr "Delete $id_ep video"
        rm $file
-       comprobar $?
+       tele_check $?
     done
 }
 #----------------------------------------------------------#
@@ -261,19 +261,19 @@ subir_contenido () {
     
     # Subiendo archivos a la nube via rclone
     echo "- Subiendo los mp3's al sevidor remoto"
-    mensaje+=$"Subiendo mp3's al servidor webdav . . ."
+    tele_msg_instr "Upload mp3 to server"
     rclone copy $canal Sherlockes78_GD:twitch/$canal/ --create-empty-src-dirs
 
-    comprobar $?
+    tele_check $?
 
     # Eliminando audio y video local
     echo "- Eliminando audios locales"
     find . -type f -name "*.mp3" -delete
 
     # Borrando los archivos de la nube anteriores a 30 días
-    mensaje+=$"Borrando mp3's antiguos . . . . . . . . . . . ."
+    tele_msg_instr "Delete older mp3s"
     rclone delete Sherlockes78_GD:twitch/$canal/mp3 --min-age 30d
-    comprobar $?
+    tele_check $?
 }
 
 
@@ -305,15 +305,10 @@ if ls ./$CANAL/mp3/*.mp3 1> /dev/null 2>&1; then
     subir_contenido "$CANAL"
 else
     echo "- No hay nuevo contenido."
-    mensaje+=$"No hay nuevo contenido que añadir al feed"
-    mensaje+=$'\n'
+    tele_msg_instr "No new content"
+    tele_msg_resul "..."
 fi
 
 
 # Envia el mensaje de telegram con el resultado
-fin=$( date +%s )
-let duracion=$fin-$inicio
-mensaje+=$'- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n'
-mensaje+=$"Duración del Script:  $duracion segundos"
-
-$notificacion "$mensaje"
+tele_end
