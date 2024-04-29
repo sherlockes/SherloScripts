@@ -17,11 +17,8 @@ FECHA=$(date)
 twitch_dir=~/twitch
 twdl=$twitch_dir/twitch-dl.pyz
 
-notificacion=~/SherloScripts/bash/telegram.sh
-inicio=$( date +%s )
-
-mensaje=$'Actualizar Twitch desde <a href="https://raw.githubusercontent.com/sherlockes/SherloScripts/master/bash/twitch2podcast.sh">twitch2podcast.sh</a>\n'
-mensaje+=$'- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n'
+# Incluye el archivo de mensajes de Telegram
+source ~/SherloScripts/bash/telegram_V2.sh
 
 ###############
 ## Funciones ##
@@ -51,13 +48,13 @@ buscar_ultimos () {
     local titulo=${2:?Falta el título del canal}
 
     # Obtiene el json de los ultimos vídeos.
-    mensaje+=$'Obteniendo últimos vídeos. . . . . . . . . . . . '
+    tele_msg_instr "Search last videos"
     echo "- Obteniendo últimos vídeos de $titulo"
     json=$(python3 $twdl videos $canal -j)
-    comprobar $?
+    tele_check $?
 
     # Limitar a 15 videos la lista de descargadoscase 
-    mensaje+=$'Recortando listas de descargados. . . . . . '
+    tele_msg_instr "Trim downloaded list"
     echo "- Recortando listas de descargados"
     head -n15 $twitch_dir/$canal/descargados.txt > tmp
     mv tmp $twitch_dir/$canal/descargados.txt
@@ -65,8 +62,8 @@ buscar_ultimos () {
     # Limitar a 15 videos la lista de items
     head -n150 $twitch_dir/$canal/items.xml > tmp
     mv tmp $twitch_dir/$canal/items.xml
-    comprobar $?
-
+    tele_check $?
+    
     # Busca sobre los ultimos diez videos
     for i in {0..9}
     do
@@ -76,8 +73,8 @@ buscar_ultimos () {
 	
 	if [[ $(date +%s) < $publicado ]]
 	then
-	    mensaje+=$"El vídeo $id está en emisión."
-            mensaje+=$'\n'
+	    tele_msg_instr "El vídeo $id está en emisión"
+            tele_msg_resul "..."
 	    continue
 	fi
 	
@@ -92,27 +89,28 @@ buscar_ultimos () {
         if [ $i -eq 0 ]
         then
             echo "- No hay nuevos vídeos.";
-            mensaje+=$"No hay nuevos vídeos."
-            mensaje+=$'\n'
+            tele_msg_instr "No hay nuevos vídeos"
+            tele_msg_resul "..."
 	    # No sigue comprobando si ya ha visto uno descargado
 	    break
         fi
 	    echo "- El vídeo $id ya se ha descargado.";
-            mensaje+=$"El vídeo $id ya ha sido descargado."
-            mensaje+=$'\n'
+            tele_msg_instr "El vídeo $id ya ha sido descargado."
+            tele_msg_resul "..."
 	    # No sigue comprobando si ya se ha visto uno descargado
 	    continue
 	else
 	    echo "- Descargando el audio del vídeo $id.";
-            mensaje+=$"Descargando audio de $id. ."
+            mtele_msg_instr "Download $id audio"
 
             if (( $mins > 10 ))
             then
 		# Descarga el audio en formato mkv
 		#$twdl download -q audio_only --auth-token huimxzjg56hs2xxlhx8zsj3wggej6n $id;
 		$twdl download -q audio_only $id;
-		resultado=$?
-		comprobar $resultado
+		tele_check $?
+		#resultado=$?
+		#comprobar $resultado
 
 		if [ $resultado -ne 0 ]; then
 		    # No se ha descargado correctamente, pasa al siguiente
