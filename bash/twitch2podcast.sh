@@ -70,6 +70,10 @@ buscar_ultimos () {
 	# Si el vídeo a comenzado hace menos de 3 horas pasa al siguiente
 	publicado=$(echo "$json" | jq ".videos[$i].publishedAt" | cut -c2- | rev | cut -c2- | rev)
 	publicado=$(date -d "$publicado+3 hours" +%s)
+
+	# obtiene la identificación y minutos de duración del último vídeo
+	id=$(echo "$json" | jq ".videos[$i].id" | cut -c2- | rev | cut -c2- | rev)
+	mins=$(expr $(echo "$json" | jq ".videos[$i].lengthSeconds") / 60)
 	
 	if [[ $(date +%s) < $publicado ]]
 	then
@@ -78,10 +82,6 @@ buscar_ultimos () {
 	    continue
 	fi
 	
-	# obtiene la identificación y minutos de duración del último vídeo
-	id=$(echo "$json" | jq ".videos[$i].id" | cut -c2- | rev | cut -c2- | rev)
-	mins=$(expr $(echo "$json" | jq ".videos[$i].lengthSeconds") / 60)
-
 	# Comprobar si el archivo ya ha sido descargado
 	if grep -q $id $twitch_dir/$canal/descargados.txt
 	then
@@ -95,7 +95,7 @@ buscar_ultimos () {
 	    break
         fi
 	    echo "- El vídeo $id ya se ha descargado.";
-            tele_msg_instr "El vídeo $id ya ha sido descargado."
+            tele_msg_instr "Video $id already downloaded"
             tele_msg_resul "..."
 	    # No sigue comprobando si ya se ha visto uno descargado
 	    continue
@@ -284,6 +284,8 @@ subir_contenido () {
 echo "#####################################"
 echo "## Twitch to Podcast by Sherlockes ##"
 echo "#####################################"
+
+tele_msg_title "From twitch to podcast"
 
 cd $twitch_dir
 echo "- Corriendo en $twitch_dir"
