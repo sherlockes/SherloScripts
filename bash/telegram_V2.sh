@@ -24,8 +24,12 @@
 # Hora de inicio
 init_time=$( date +%s )
 
+nombre_script=$(basename "$0")
+nombre_host=$(hostname)
+
+
 # Inicio del mensaje para que sea monoespaciado
-mensaje="\`"
+mensaje="\`$nombre_script in $nombre_host"
 
 # Longitud máxima por línea
 max_len=35
@@ -173,5 +177,5 @@ tele_send_msg() {
 # Carga los parámetros del archivo de configuración en el directorio de usuario
 . ~/config.conf
 
-nombre_script=$(basename "$0")
+
 echo "El nombre del archivo del script es: $nombre_script"
