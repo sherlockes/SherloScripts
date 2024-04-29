@@ -6,7 +6,10 @@
 #Args: N/A
 #Creation/Update: 20240424/20240426
 #Author: www.sherblog.pro                                             
-#Email: sherlockes@gmail.com                               
+#Email: sherlockes@gmail.com
+#
+# # Incluye el archivo en el script
+# source ~/SherloScripts/bash/telegram_V2.sh
 #
 # Funciones:
 # - tele_msg_title "Titulo" -> Título entre líneas de guiones
