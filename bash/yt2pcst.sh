@@ -13,13 +13,10 @@
 ####       Variables        ####
 ################################
 
-# Ubicación del script para mandar notificaciones a telegram
-source telegram_V2.sh
-
 PATH="/home/pi/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 
-# Hora de inicio del Script
-inicio=$( date +%s )
+# Ubicación del script para mandar notificaciones a telegram
+source ~/SherloScripts/bash/telegram_V2.sh
 
 # Número de vídeos a comprobar de cada canal
 num_videos=20
