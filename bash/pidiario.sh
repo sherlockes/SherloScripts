@@ -142,7 +142,7 @@ gdrive_folders_sync(){
 # ---------------------------------------------------------
 github_repos_update(){
     echo "Actualizando repositorios de GitHub..."
-    repo=(SherloScripts, ha_cfg)
+    repo=(SherloScripts,ha_cfg)
     for i in "${repo[@]}"
     do
 	tele_msg_instr "Update $i repo"
