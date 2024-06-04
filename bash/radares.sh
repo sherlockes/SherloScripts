@@ -9,7 +9,7 @@
 #Author: www.sherblog.pro                                                
 #Email: sherlockes@gmail.com                                           
 ###################################################################
-
+set -x
 
 # ----------------------------------
 # Definición de variables
