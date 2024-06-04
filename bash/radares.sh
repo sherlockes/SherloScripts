@@ -9,7 +9,7 @@
 #Author: www.sherblog.pro                                                
 #Email: sherlockes@gmail.com                                           
 ###################################################################
-set -x
+
 
 # ----------------------------------
 # Definición de variables
@@ -49,7 +49,8 @@ download(){
 unzip(){
     tele_msg_instr "Unzipping files"
     #unzip $carpeta/radares_1.zip -d $carpeta/
-    unzip $carpeta
+    cd $carpeta
+    unzip
     
     echo "Hola mundo"
     rm -rf $carpeta/PoiLoader
