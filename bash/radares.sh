@@ -48,7 +48,9 @@ download(){
 
 unzip(){
     tele_msg_instr "Unzipping files"
-    unzip $carpeta/radares_1.zip -d $carpeta/
+    #unzip $carpeta/radares_1.zip -d $carpeta/
+    unzip $carpeta
+    
     echo "Hola mundo"
     rm -rf $carpeta/PoiLoader
     cp $carpeta/'garminvelocidad 3xx-5xx-6xx, Zumo, StreetPilot c550, 2720, 2820, 7200 y 7500'/*.csv $carpeta
