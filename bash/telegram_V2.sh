@@ -4,7 +4,7 @@
 #Script Name: telegram_V2.sh
 #Description: Envía mensaje a telegrám calculando la longitud de línea
 #Args: N/A
-#Creation/Update: 20240424/20240426
+#Creation/Update: 20240424/20240604
 #Author: www.sherblog.pro                                             
 #Email: sherlockes@gmail.com
 #
@@ -35,7 +35,7 @@ mensaje="\`$nombre_script in $nombre_host"
 mensaje+=$'\n'
 
 # Longitud máxima por línea
-max_len=35
+max_len=34
 
 ################################
 ####      Dependencias      ####
@@ -154,7 +154,6 @@ tele_hr() {
     linea_guiones=${linea_guiones// /-}
 
     mensaje+="$linea_guiones"
-    #mensaje+="-----------------------------------"
     mensaje+=$'\n'
 }
 
