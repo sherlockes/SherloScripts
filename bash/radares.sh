@@ -10,14 +10,11 @@
 #Email: sherlockes@gmail.com                                           
 ###################################################################
 
-set -e
 
 # ----------------------------------
 # Definición de variables
 # ----------------------------------
 carpeta=~/radares
-mensaje=$'Actualización de radares desde www.todo-poi.es\n'
-mensaje+=$'----------------------------------------------------------------------\n'
 
 # Ubicación del script para mandar notificaciones a telegram
 source ~/SherloScripts/bash/telegram_V2.sh
