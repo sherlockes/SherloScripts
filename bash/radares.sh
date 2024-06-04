@@ -14,6 +14,8 @@
 # Definición de variables
 # ----------------------------------
 carpeta=~/radares
+PATH="/home/pi/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+
 
 # Ubicación del script para mandar notificaciones a telegram
 source ~/SherloScripts/bash/telegram_V2.sh
