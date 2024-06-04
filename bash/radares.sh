@@ -95,8 +95,8 @@ clear(){
 
 
 #### Script principal ####
-download
-comprobar $?
+#download
+#comprobar $?
 unzip
 comprobar $?
 join
