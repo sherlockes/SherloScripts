@@ -50,7 +50,7 @@ buscar_ultimos () {
     # Obtiene el json de los ultimos vídeos.
     tele_msg_instr "Search last videos"
     echo "- Obteniendo últimos vídeos de $titulo"
-    json=$(python3 $twdl videos $canal -j)
+    json=$(python3 $twdl videos $canal --json)
     tele_check $?
 
     # Limitar a 15 videos la lista de descargadoscase 
