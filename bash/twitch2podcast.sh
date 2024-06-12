@@ -209,7 +209,7 @@ END_HEADER
 	ID_EP=$(basename $file .mp3)
 	
 	# Obteniendo info a partir de la ID
-	json=$(python3 $twdl info $ID_EP -j)
+	json=$(python3 $twdl info $ID_EP -json)
 	FEC_EP=$(echo "$json" | jq ".publishedAt" | cut -c2- | rev | cut -c2- | rev)
 	FEC_EP=$(date -d $FEC_EP +"%Y-%m-%dT%H:%M:%S%:z")
 	FEC_EP=$(date --date "$FEC_EP-2 hours" "+%a, %d %b %Y %T %Z")
