@@ -47,7 +47,7 @@ if [ ! -f "$DESCARGADOS" ]; then
     touch "$DESCARGADOS"
 fi
 
-# Ruta al archivo de canales
+# Ruta al archivo de canales (Importante una línea en blano después del último canal¡¡¡¡)
 archivo_canales="$yt2pcst_dir/canales.txt"
 
 if [ ! -f "$archivo_canales" ]; then
