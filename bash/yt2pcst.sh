@@ -4,7 +4,7 @@
 #Script Name: yt2pcst.sh
 #Description: Generación de un podcast a partir de canales de youtube
 #Args: N/A
-#Creation/Update: 20240411/20240506
+#Creation/Update: 20240411/20240707
 #Author: www.sherblog.pro                                             
 #Email: sherlockes@gmail.com                               
 ###################################################################
@@ -35,6 +35,10 @@ if [ ! -d "$yt2pcst_dir" ]; then
     wget -O "$yt2pcst_dir/artwork.jpg" "https://picsum.photos/400/400"
 fi
 
+# Ruta del servidor webdav donde estarán alojados los episodios
+SERVIDOR="http://192.168.10.210:5005"
+SERVIDOR="homezgz.ddns.net"
+
 # Episodios ya descargados
 DESCARGADOS="$yt2pcst_dir/descargados.txt"
 
@@ -58,8 +62,6 @@ fi
 num_canales=$(wc -l < $archivo_canales)
 head -n 300 $DESCARGADOS > temp.txt && mv temp.txt $DESCARGADOS
 
-# Ruta del servidor webdav donde estarán alojados los episodios
-SERVIDOR="http://192.168.10.210:5005"
 
 ################################
 ####      Dependencias      ####
