@@ -19,10 +19,10 @@ PATH="/home/pi/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbi
 source ~/SherloScripts/bash/telegram_V2.sh
 
 # Número de vídeos a comprobar de cada canal
-num_videos=20
+num_videos=5
 
 # Número de vídeos máximo a descargar en total
-num_max_descargas=2
+num_max_descargas=10
 num_descargas=0
 
 # Carpeta para guardar los archivos y comprobación de su existencia
