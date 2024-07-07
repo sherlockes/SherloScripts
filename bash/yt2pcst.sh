@@ -147,7 +147,7 @@ buscar_ultimos(){
 	# Verificar si se ha alcanzado el número deseado de descargas
 	if [ $num_descargas -eq $num_max_descargas ]; then
 	    echo "Ya vale de descargas"
-	    break  # Salir del bucle
+	    #break  # Salir del bucle
 	fi
 
 	id=$( echo "$video" |cut -d\/ -f1 )
