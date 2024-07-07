@@ -5,7 +5,7 @@
 #Description: Generación de un podcast a partir de canales de youtube
 #Args: N/A
 #Creation/Update: 20240411/20240707
-#Author: www.sherblog.pro                                             
+#Author: www.sherblog.es                                             
 #Email: sherlockes@gmail.com                               
 ###################################################################
 
