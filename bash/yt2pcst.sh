@@ -144,6 +144,12 @@ buscar_ultimos(){
 
     for video in ${videos[@]}
     do
+	# Verificar si se ha alcanzado el número deseado de descargas
+	if [ $num_descargas -eq $num_max_descargas ]; then
+	    echo "Ya vale de descargas"
+	    break  # Salir del bucle
+	fi
+
 	id=$( echo "$video" |cut -d\/ -f1 )
 	duracion=$( echo "$video" |cut -d\/ -f2 )
 	duracion=${duracion%??}
@@ -187,12 +193,6 @@ descargar_video(){
 	echo -e "- Añadiendo a la lista de episodios descargados"
 	echo -e "- Descargados $num_descargas de $num_max_descargas"
 	echo $id | cat - $DESCARGADOS > temp && mv temp $DESCARGADOS
-
-	# Verificar si se ha alcanzado el número deseado de descargas
-	if [ $num_descargas -eq $num_max_descargas ]; then
-	    echo "Ya vale de descargas"
-	    break  # Salir del bucle
-	fi
     fi
 }
 
