@@ -144,36 +144,34 @@ buscar_ultimos(){
 
     for video in ${videos[@]}
     do
-	# Verificar si se ha alcanzado el número deseado de descargas
-	if [ $num_descargas -eq $num_max_descargas ]; then
-	    echo "Ya vale de descargas"
-	    #break  # Salir del bucle
-	fi
-
 	id=$( echo "$video" |cut -d\/ -f1 )
 	duracion=$( echo "$video" |cut -d\/ -f2 )
 	duracion=${duracion%??}
 	
-	# Comprueba si el archivo es de más de 10'
-	if (( $duracion > 1200 )) && ! grep -q $id "$DESCARGADOS"; then
-	    # Descargando el episodio
-	    tele_msg_instr "Download $id "
-	    echo "- Descargando el vídeo $id"
-	    descargar_video $id
-	    comprobar $?
-
-	    echo "- Taggeando el vídeo $id"
-	    tele_msg_instr "Tag $id "
-	    tag $id "$nombre"
-	    comprobar $?
+	# Verificar si se ha alcanzado el número deseado de descargas
+	if [ $num_descargas -eq $num_max_descargas ]; then
+	    echo "Ya vale de descargas"
+	    tele_msg_instr "Ya se han descargado 2 archivos "
+	    tele_msg_resul "..."
 	else
-	    echo "- El episodio $id ($duracion sg) es corto o ya descargado"
-	    if (( $duracion < 1201 )) && ! grep -q $id "$DESCARGADOS"; then
-		# echo -e "- Añadiendo $id corto a descargados"
+	    # Comprueba si el archivo es de más de 10' y no se ha descargado
+	    if (( $duracion > 1200 )) && ! grep -q $id "$DESCARGADOS"; then
+		# Descargando el episodio
+		tele_msg_instr "Download $id "
+		echo "- Descargando el vídeo $id"
+		descargar_video $id
+		comprobar $?
+
+		echo "- Taggeando el vídeo $id"
+		tele_msg_instr "Tag $id "
+		tag $id "$nombre"
+		comprobar $?
+	    elif (( $duracion < 1201 )) && ! grep -q $id "$DESCARGADOS"; then
+		# El episodio es corto, se añade a los descargados
+		echo "- El episodio $id ($duracion sg) es corto"
 		echo $id | cat - $DESCARGADOS > temp && mv temp $DESCARGADOS
 	    fi
 	fi
-	
     done
 }
 
@@ -349,8 +347,6 @@ comprobar $?
 while IFS= read -r linea; do
     nombre=$(echo "$linea" | cut -d ',' -f 1)
     url=$(echo "$linea" | cut -d ',' -f 2)
-    #echo "Nombre del canal: $nombre"
-    #echo "URL del canal: $url"
     buscar_ultimos "$nombre" "$url"
 done < "$archivo_canales"
 
