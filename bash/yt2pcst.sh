@@ -39,6 +39,14 @@ fi
 SERVIDOR="http://192.168.10.210:5005"
 SERVIDOR="homezgz.ddns.net:5005"
 
+tele_msg_instr "Servidor de alojamiento"
+if ping -c 1 $REMOTE_IP &> /dev/null
+then
+    tele_msg_resul "OK"
+else
+    tele_msg_resul "KO"
+fi
+
 # Episodios ya descargados
 DESCARGADOS="$yt2pcst_dir/descargados.txt"
 
