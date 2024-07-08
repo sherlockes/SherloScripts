@@ -36,11 +36,10 @@ if [ ! -d "$yt2pcst_dir" ]; then
 fi
 
 # Ruta del servidor webdav donde estarán alojados los episodios
-SERVIDOR="http://192.168.10.210:5005"
 SERVIDOR="homezgz.ddns.net:5005"
 
 tele_msg_instr "Servidor de alojamiento"
-if ping -c 1 $REMOTE_IP &> /dev/null
+if ping -c 1 $SERVIDOR &> /dev/null
 then
     tele_msg_resul "OK"
 else
