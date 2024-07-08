@@ -22,7 +22,7 @@ source ~/SherloScripts/bash/telegram_V2.sh
 num_videos=5
 
 # Número de vídeos máximo a descargar en total
-num_max_descargas=10
+num_max_descargas=2
 num_descargas=0
 
 # Carpeta para guardar los archivos y comprobación de su existencia
