@@ -4,7 +4,7 @@
 #Script Name: yt2pcst.sh
 #Description: Generación de un podcast a partir de canales de youtube
 #Args: N/A
-#Creation/Update: 20240411/20240707
+#Creation/Update: 20240411/20240708
 #Author: www.sherblog.es                                             
 #Email: sherlockes@gmail.com                               
 ###################################################################
@@ -37,7 +37,7 @@ fi
 
 # Ruta del servidor webdav donde estarán alojados los episodios
 SERVIDOR="http://192.168.10.210:5005"
-SERVIDOR="homezgz.ddns.net"
+SERVIDOR="homezgz.ddns.net:5005"
 
 # Episodios ya descargados
 DESCARGADOS="$yt2pcst_dir/descargados.txt"
