@@ -15,7 +15,7 @@
 
 RUTA=~/temp
 RSS_URL="https://sherblog.es/index.xml"
-INSTANCIA="https://emacs.ch"
+INSTANCIA="https://mas.to"
 
 # Carga los parámetros del archivo de configuración en el directorio de usuario
 . ~/config.conf
