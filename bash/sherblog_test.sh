@@ -9,23 +9,45 @@
 #Email: sherlockes@gmail.com                               
 ###################################################################
 
+set -e  # Detener el script en caso de error
+
+echo "=== Configuración del entorno de pruebas para Hugo ==="
+
 ################################
 ####       Variables        ####
 ################################
 
-RUTA=~/temp
-
+REPO_URL="https://github.com/sherlockes/sherlockes.github.io.git"
+TEST_DIR="$HOME/hugo-test"
 
 ################################
 ####      Dependencias      ####
 ################################
 
-# Crea la RUTA de descarga si no existe
-if [[ ! -e $RUTA ]]; then mkdir $RUTA; fi
+# Crear la carpeta de pruebas o borrar si existe
+if [ -d "$TEST_DIR" ]; then
+    echo "La carpeta $TEST_DIR ya existe. Se borrará su contenido."
+    read -p "¿Estás seguro de que deseas continuar? (s/n): " CONFIRM
+    if [[ "$CONFIRM" != "s" ]]; then
+        echo "Operación cancelada."
+        exit 1
+    fi
+    rm -rf "$TEST_DIR"/*
+else
+    echo "Creando la carpeta $TEST_DIR..."
+    mkdir -p "$TEST_DIR"
+fi
 
-# Instala xmllint si no está disponible
-if ! which xmllint >/dev/null; then sudo apt install -y libxml2-utils; fi
-
+# Comprobar si Hugo está instalado
+if ! command -v hugo &> /dev/null; then
+    echo "Hugo no está instalado. Instalándolo..."
+    sudo apt update
+    sudo apt install -y hugo
+else
+    echo "Hugo ya está instalado. Comprobando actualizaciones..."
+    sudo apt update
+    sudo apt install --only-upgrade -y hugo
+fi
 
 ################################
 ####       Funciones        ####
@@ -37,4 +59,19 @@ if ! which xmllint >/dev/null; then sudo apt install -y libxml2-utils; fi
 ####    Script principal    ####
 ################################
 
+# Clonar el repositorio
+echo "Clonando el repositorio en $TEST_DIR..."
+git clone "$REPO_URL" "$TEST_DIR"
+
+# Eliminar el origen de Git
+echo "Eliminando el origen de Git del entorno de pruebas..."
+cd "$TEST_DIR"
+git remote remove origin
+rm -rf .git
+
+# Iniciar el servidor de desarrollo de Hugo con fast render deshabilitado
+echo "Iniciando el servidor de desarrollo de Hugo (fast render deshabilitado)..."
+hugo server -D --disableFastRender --bind "0.0.0.0" --baseURL "http://localhost:1313"
+
+echo "=== Entorno de pruebas configurado con éxito ==="
 
