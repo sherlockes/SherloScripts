@@ -19,6 +19,7 @@ echo "=== Configuración del entorno de pruebas para Hugo ==="
 
 REPO_URL="https://github.com/sherlockes/sherlockes.github.io.git"
 TEST_DIR="$HOME/hugo-test"
+HUGO_SCRIPT="./hugo.sh"
 
 ################################
 ####      Dependencias      ####
@@ -39,14 +40,10 @@ else
 fi
 
 # Comprobar si Hugo está instalado
-if ! command -v hugo &> /dev/null; then
-    echo "Hugo no está instalado. Instalándolo..."
-    sudo apt update
-    sudo apt install -y hugo
+if [[ -f "$HUGO_SCRIPT" ]]; then
+    source "$HUGO_SCRIPT"
 else
-    echo "Hugo ya está instalado. Comprobando actualizaciones..."
-    sudo apt update
-    sudo apt install --only-upgrade -y hugo
+    echo "Error: El archivo $HUGO_SCRIPT no se encuentra en el directorio actual."
 fi
 
 ################################
