@@ -33,7 +33,7 @@ if [ -d "$TEST_DIR" ]; then
         echo "Operación cancelada."
         exit 1
     fi
-    rm -rf "$TEST_DIR"/*
+    rm -rf "$TEST_DIR"/* "$TEST_DIR"/.[!.]* "$TEST_DIR"/..?*
 else
     echo "Creando la carpeta $TEST_DIR..."
     mkdir -p "$TEST_DIR"
