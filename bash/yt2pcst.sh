@@ -4,7 +4,7 @@
 #Script Name: yt2pcst.sh
 #Description: Generación de un podcast a partir de canales de youtube
 #Args: N/A
-#Creation/Update: 20240411/20240708
+#Creation/Update: 20240411/20250129
 #Author: www.sherblog.es                                             
 #Email: sherlockes@gmail.com                               
 ###################################################################
