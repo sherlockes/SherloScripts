@@ -231,7 +231,10 @@ anadir_item(){
     #local ID_EP="${track%.*}"
     local ID_EP=$id
     
-    local TIT_EP=$(ffprobe -loglevel error -show_entries format_tags=title -of default=noprint_wrappers=1:nokey=1 -- $file)
+    # local TIT_EP=$(ffprobe -loglevel error -show_entries format_tags=title -of default=noprint_wrappers=1:nokey=1 -- $file)
+
+    local TIT_EP=$(ffprobe -loglevel error -show_entries format_tags=title -of default=noprint_wrappers=1:nokey=1 -- "$file" | tr -cd '[:print:]' | awk '{$1=$1};1')
+
 
     # Sanitizar título
     # TIT_EP=$(echo "$TIT_EP" | sed 's/[^a-zA-Z0-9_\-.\ ]//g')
