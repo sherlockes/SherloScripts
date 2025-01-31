@@ -4,7 +4,7 @@
 #Script Name: yt2pcst.sh
 #Description: Generación de un podcast a partir de canales de youtube
 #Args: N/A
-#Creation/Update: 20240411/20250130
+#Creation/Update: 20240411/20250131
 #Author: www.sherblog.es                                             
 #Email: sherlockes@gmail.com                               
 ###################################################################
@@ -234,7 +234,7 @@ anadir_item(){
     local TIT_EP=$(ffprobe -loglevel error -show_entries format_tags=title -of default=noprint_wrappers=1:nokey=1 -- $file)
 
     # Sanitizar título
-    TIT_EP=$(echo "$TIT_EP" | sed 's/[^a-zA-Z0-9_\-.\ ]//g')
+    # TIT_EP=$(echo "$TIT_EP" | sed 's/[^a-zA-Z0-9_\-.\ ]//g')
     
     local ART_EP=$(ffprobe -loglevel error -show_entries format_tags=artist -of default=noprint_wrappers=1:nokey=1 -- $file)
 
