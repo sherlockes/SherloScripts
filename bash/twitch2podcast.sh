@@ -5,8 +5,8 @@
 #Description: Generación de Podcast a partir de canal de Twitch
 #Args: N/A
 #Creation/Update: 20220317/20250205
-#Author: www.sherblog.pro                                             
-#Email: sherlockes@gmail.com                               
+#Author: www.sherblog.es
+#Email: sherlockes@gmail.com                        
 ###################################################################
 
 CANAL="jordillatzer"
