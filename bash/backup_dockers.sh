@@ -36,7 +36,7 @@ BACKUP_PATH="/tmp/$BACKUP_NAME"
 ################################
 # Comprimir la carpeta
 echo "Comprimiendo $FOLDER_TO_BACKUP en $BACKUP_PATH..."
-tar -czf "$BACKUP_PATH" -C "$(dirname "$FOLDER_TO_BACKUP")" "$(basename "$FOLDER_TO_BACKUP")"
+sudo tar -czf "$BACKUP_PATH" -C "$FOLDER_TO_BACKUP" .
 
 # Subir a rclone
 echo "Subiendo $BACKUP_NAME a $REMOTE_NAME:$REMOTE_PATH..."
@@ -45,7 +45,7 @@ rclone copy "$BACKUP_PATH" "$REMOTE_NAME:$REMOTE_PATH/"
 # Verificar si la subida fue exitosa
 if [ $? -eq 0 ]; then
     echo "Backup subido con éxito."
-    rm "$BACKUP_PATH"
+    sudo rm "$BACKUP_PATH"
 else
     echo "Error en la subida del backup."
 fi
