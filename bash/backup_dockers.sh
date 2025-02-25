@@ -14,7 +14,7 @@
 ################################
 
 FOLDER_TO_BACKUP="~/dockers"  # Cambia esta ruta
-REMOTE_NAME="mega"
+REMOTE_NAME="Sherlockes_Mega"
 REMOTE_PATH="backup_dockers"
 TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
 BACKUP_NAME="backup_$(basename "$FOLDER_TO_BACKUP")_$TIMESTAMP.tar.gz"
