@@ -13,18 +13,17 @@
 ####       Variables        ####
 ################################
 
-RUTA=~/temp
+FOLDER_TO_BACKUP="~/dockers"  # Cambia esta ruta
+REMOTE_NAME="mega"
+REMOTE_PATH="backup_dockers"
+TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
+BACKUP_NAME="backup_$(basename "$FOLDER_TO_BACKUP")_$TIMESTAMP.tar.gz"
+BACKUP_PATH="/tmp/$BACKUP_NAME"
 
 
 ################################
 ####      Dependencias      ####
 ################################
-
-# Crea la RUTA de descarga si no existe
-if [[ ! -e $RUTA ]]; then mkdir $RUTA; fi
-
-# Instala xmllint si no está disponible
-if ! which xmllint >/dev/null; then sudo apt install -y libxml2-utils; fi
 
 
 ################################
@@ -32,9 +31,24 @@ if ! which xmllint >/dev/null; then sudo apt install -y libxml2-utils; fi
 ################################
 
 
-
 ################################
 ####    Script principal    ####
 ################################
+# Comprimir la carpeta
+echo "Comprimiendo $FOLDER_TO_BACKUP en $BACKUP_PATH..."
+tar -czf "$BACKUP_PATH" -C "$(dirname "$FOLDER_TO_BACKUP")" "$(basename "$FOLDER_TO_BACKUP")"
+
+# Subir a rclone
+echo "Subiendo $BACKUP_NAME a $REMOTE_NAME:$REMOTE_PATH..."
+rclone copy "$BACKUP_PATH" "$REMOTE_NAME:$REMOTE_PATH/"
+
+# Verificar si la subida fue exitosa
+if [ $? -eq 0 ]; then
+    echo "Backup subido con éxito."
+    rm "$BACKUP_PATH"
+else
+    echo "Error en la subida del backup."
+fi
+
 
 
