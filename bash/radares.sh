@@ -123,7 +123,7 @@ download_and_unzip() {
 
     # Descomprimir el archivo en ~/radares/
     echo "Descomprimiendo el archivo en $output_dir..."
-    unzip -o "$output_file" -d "$output_dir"
+    unzip -o "$HOME/radares.zip" -d "$HOME/radares"
 
     # Verificar si la extracción fue exitosa
     if [[ $? -ne 0 ]]; then
