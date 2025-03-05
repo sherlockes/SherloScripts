@@ -73,7 +73,6 @@ download_and_unzip() {
 curl "https://www.todo-poi.es/radar/GARMIN_RADARES/garminvelocidad%203xx-5xx-6xx,%20Zumo,%20StreetPilot%20c550,%202720,%202820,%207200%20y%207500.zip" -o $carpeta/radares_1.zip
 
 curl "https://www.todo-poi.es/radar/GARMIN_RADARES/garmintipo%203xx-5xx-6xx,%20Zumo,%20StreetPilot%20c550,%202720,%202820,%207200%20y%207500.zip" -o $carpeta/radares_2.zip
-}
 
 unzip "$carpeta/radares_1.zip" -d "$carpeta"
 unzip "$carpeta/radares_2.zip" -d "$carpeta"
