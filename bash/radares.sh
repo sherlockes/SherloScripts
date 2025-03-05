@@ -18,7 +18,7 @@ carpeta=~/radares
 
 
 # Ubicación del script para mandar notificaciones a telegram
-#source ~/SherloScripts/bash/telegram_V2.sh
+source ~/SherloScripts/bash/telegram_V2.sh
 
 #----------------------------------------------------------#
 #                   Comprobar la salida                    #
@@ -123,6 +123,7 @@ download_and_unzip() {
 
     # Descomprimir el archivo en ~/radares/
     echo "Descomprimiendo el archivo en $output_dir..."
+    sleep 1
     unzip "$output_file" -d "$output_dir"
 
     # Verificar si la extracción fue exitosa
