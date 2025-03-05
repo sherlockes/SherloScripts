@@ -49,9 +49,10 @@ download(){
 
 unzip(){
     tele_msg_instr "Unzipping files"
+    echo "hola undo"
     unzip $carpeta/radares_1.zip -d $carpeta/
     cd $carpeta
-    echo "hola undo"
+    
     unzip
     echo "adios"
     echo "Hola mundo"
