@@ -4,7 +4,7 @@
 #Script Name: Radares
 #Description: Descarga de radares y copia a Google Drive
 #Args: N/A
-#Creation/Update: 20191112/20240604
+#Creation/Update: 20191112/20250305
 #Author: www.sherblog.pro                                                
 #Email: sherlockes@gmail.com                                           
 ###################################################################
@@ -90,7 +90,7 @@ rename(){
 
 sync(){
     tele_msg_instr "Syncing files"
-    rclone sync $carpeta Sherlockes_GD:Radares
+    rclone sync $carpeta Sherlockes78_GD:Radares
 }
 
 clear(){
