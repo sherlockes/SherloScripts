@@ -46,7 +46,7 @@ download_and_unzip() {
 
     # Descomprimir el archivo en ~/radares/
     echo "Descomprimiendo el archivo en $output_dir..."
-    unzip -o "$HOME/radares.zip" -d "$HOME/radares"
+    unzip "$output_file" -d "$output_dir"
 
     # Verificar si la extracción fue exitosa
     if [[ $? -ne 0 ]]; then
@@ -54,15 +54,7 @@ download_and_unzip() {
         return 1
     fi
 
-    # Si hay otro ZIP dentro, descomprimirlo también
-    inner_zip=$(find "$output_dir" -type f -name "*.zip")
-    if [[ -n "$inner_zip" ]]; then
-        echo "Encontrado un ZIP dentro: $inner_zip"
-        unzip -o "$inner_zip" -d "$output_dir"
-        rm "$inner_zip"  # Eliminar el ZIP interno después de extraerlo
-    fi
-
-    # Eliminar el archivo ZIP principal después de la extracción (opcional)
+    # Eliminar el archivo ZIP después de la extracción (opcional)
     rm "$output_file"
 
     echo "Descarga y descompresión completadas exitosamente en $output_dir."
@@ -70,6 +62,7 @@ download_and_unzip() {
 
 # Llamar a la función
 download_and_unzip
+
 
 
 
