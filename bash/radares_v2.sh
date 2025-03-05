@@ -20,17 +20,13 @@ RUTA=~/temp
 ####      Dependencias      ####
 ################################
 
-# Crea la RUTA de descarga si no existe
-if [[ ! -e $RUTA ]]; then mkdir $RUTA; fi
-
-# Instala xmllint si no está disponible
-if ! which xmllint >/dev/null; then sudo apt install -y libxml2-utils; fi
 
 
 ################################
 ####       Funciones        ####
 ################################
 
+unzip -o "$HOME/radares.zip" -d "$HOME/radares"
 
 
 ################################
