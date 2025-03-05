@@ -49,7 +49,7 @@ download(){
 
 unzip(){
     tele_msg_instr "Unzipping files"
-    #unzip $carpeta/radares_1.zip -d $carpeta/
+    unzip $carpeta/radares_1.zip -d $carpeta/
     cd $carpeta
     unzip
     
