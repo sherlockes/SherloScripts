@@ -51,6 +51,7 @@ unzip(){
     #tele_msg_instr "Unzipping files"
     #echo "hola undo"
     unzip $carpeta/radares_1.zip -d $carpeta/
+    echo "hola"
     cd $carpeta
     
     #unzip
