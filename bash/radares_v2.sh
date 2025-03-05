@@ -77,7 +77,13 @@ curl "https://www.todo-poi.es/radar/GARMIN_RADARES/garminvelocidad%203xx-5xx-6xx
 
 curl "https://www.todo-poi.es/radar/GARMIN_RADARES/garmintipo%203xx-5xx-6xx,%20Zumo,%20StreetPilot%20c550,%202720,%202820,%207200%20y%207500.zip" -o $carpeta/radares_2.zip
 
-unzip -jo "$carpeta/radares_1.zip" -d "$carpeta"
-unzip -jo "$carpeta/radares_2.zip" -d "$carpeta"
+unzip -o "$carpeta/radares_1.zip" -d "$carpeta"
+unzip -o "$carpeta/radares_2.zip" -d "$carpeta"
 
+rm -rf $carpeta/PoiLoader
+cp $carpeta/'garminvelocidad 3xx-5xx-6xx, Zumo, StreetPilot c550, 2720, 2820, 7200 y 7500'/*.csv $carpeta
+rm -rf $carpeta/'garminvelocidad 3xx-5xx-6xx, Zumo, StreetPilot c550, 2720, 2820, 7200 y 7500'
 
+cp $carpeta/'garmintipo 3xx-5xx-6xx, Zumo, StreetPilot c550, 2720, 2820, 7200 y 7500'/*.csv $carpeta
+rm -rf $carpeta/'garmintipo 3xx-5xx-6xx, Zumo, StreetPilot c550, 2720, 2820, 7200 y 7500'
+rm $carpeta/radares_*.zip
