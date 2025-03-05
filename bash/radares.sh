@@ -18,7 +18,7 @@ carpeta=~/radares
 
 
 # Ubicación del script para mandar notificaciones a telegram
-source ~/SherloScripts/bash/telegram_V2.sh
+#source ~/SherloScripts/bash/telegram_V2.sh
 
 #----------------------------------------------------------#
 #                   Comprobar la salida                    #
