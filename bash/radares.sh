@@ -108,16 +108,16 @@ clear(){
 download
 comprobar $?
 unzip_all
-#comprobar $?
-#join
-#comprobar $?
-#rename
-#comprobar $?
-#sync
-#comprobar $?
-#clear
-#comprobar $?
+comprobar $?
+join
+comprobar $?
+rename
+comprobar $?
+sync
+comprobar $?
+clear
+comprobar $?
 
 
 # Envia el mensaje de telegram con el resultado
-#tele_end
+tele_end
