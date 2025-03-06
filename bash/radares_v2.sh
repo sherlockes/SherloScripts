@@ -99,7 +99,10 @@ unzip(){
 
 clear
 download
-unzip
+
+
+unzip -o "$carpeta/radares_1.zip" -d "$carpeta"
+unzip -o "$carpeta/radares_2.zip" -d "$carpeta"
 
 
 
