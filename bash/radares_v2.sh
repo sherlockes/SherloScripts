@@ -91,6 +91,7 @@ unzip(){
 clear
 download
 which unzip
+alias | grep unzip
 /bin/unzip -o -j "$HOME/radares/*.zip" -d "$HOME/radares"
 find "$HOME/radares" -type f ! -name "*.csv" -delete
 
