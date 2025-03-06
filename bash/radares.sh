@@ -23,14 +23,6 @@ source ~/SherloScripts/bash/telegram_V2.sh
 #----------------------------------------------------------#
 #                   Comprobar la salida                    #
 #----------------------------------------------------------#
-comprobar(){
-
-    if [ $1 -eq 0 ]; then
-	tele_msg_resul "ok"
-    else
-	tele_msg_resul "KO"
-    fi
-}
 
 call_check(){
     "$1" # Ejecuta la función pasada como argumento
@@ -49,10 +41,7 @@ mkdir $carpeta
 
 download(){
     tele_msg_instr "Downloading files"
-    #curl 'https://www.todo-poi.es/radar/GARMIN_RADARES/garminvelocidad 3xx-5xx-6xx, Zumo, StreetPilot c550, 2720, 2820, 7200 y 7500.zip' -o $carpeta/radares_1.zip
     curl "https://www.todo-poi.es/radar/GARMIN_RADARES/garminvelocidad%203xx-5xx-6xx,%20Zumo,%20StreetPilot%20c550,%202720,%202820,%207200%20y%207500.zip" -o $carpeta/radares_1.zip
-
-    #curl 'https://www.todo-poi.es/radar/GARMIN_RADARES/garmintipo 3xx-5xx-6xx, Zumo, StreetPilot c550, 2720, 2820, 7200 y 7500.zip' -o $carpeta/radares_2.zip
 
     curl "https://www.todo-poi.es/radar/GARMIN_RADARES/garmintipo%203xx-5xx-6xx,%20Zumo,%20StreetPilot%20c550,%202720,%202820,%207200%20y%207500.zip" -o $carpeta/radares_2.zip
 }
