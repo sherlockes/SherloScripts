@@ -33,7 +33,7 @@ comprobar(){
 }
 
 call_check(){
-    "S1" # Ejecuta la función pasada como argumento
+    "$1" # Ejecuta la función pasada como argumento
     if [ $1 -eq 0 ]; then
 	tele_msg_resul "ok"
     else
