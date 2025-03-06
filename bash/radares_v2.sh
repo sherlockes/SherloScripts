@@ -83,8 +83,8 @@ download(){
 }
 
 unzip(){
-    unzip -o -j "$carpeta"/*.zip -d "$carpeta"
-    find "$carpeta" -type f ! -name "*.csv" -delete
+    unzip -o -j "$HOME/radares/*.zip" -d "$HOME/radares"
+    find "$HOME/radares" -type f ! -name "*.csv" -delete
 }
 
 
