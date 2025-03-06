@@ -32,6 +32,15 @@ comprobar(){
     fi
 }
 
+call_check(){
+    "S1" # Ejecuta la función pasada como argumento
+    if [ $1 -eq 0 ]; then
+	tele_msg_resul "ok"
+    else
+	tele_msg_resul "KO"
+    fi
+}
+
 # ----------------------------------
 # Crear la carpeta local
 # ----------------------------------
@@ -89,18 +98,12 @@ clear(){
 
 
 #### Script principal ####
-download
-comprobar $?
-unzip_all
-comprobar $?
-join
-comprobar $?
-rename
-comprobar $?
-sync
-comprobar $?
-clear
-comprobar $?
+call_check download
+call_check unzip_all
+call_check join
+call_check rename
+call_check sync
+call_check clear
 
 
 # Envia el mensaje de telegram con el resultado
