@@ -82,19 +82,15 @@ download(){
     curl "https://www.todo-poi.es/radar/GARMIN_RADARES/garmintipo%203xx-5xx-6xx,%20Zumo,%20StreetPilot%20c550,%202720,%202820,%207200%20y%207500.zip" -o $carpeta/radares_2.zip
 }
 
-unzip(){
-    unzip -o -j "$HOME/radares/*.zip" -d "$HOME/radares"
-    find "$HOME/radares" -type f ! -name "*.csv" -delete
+unzip_all(){
+    unzip -o -j "$carpeta/*.zip" -d "$carpeta"
+    find "$carpeta" -type f ! -name "*.csv" -delete
 }
 
 
 clear
 download
-which unzip
-alias | grep unzip
-echo $PATH
-/bin/unzip -o -j "$HOME/radares/*.zip" -d "$HOME/radares"
-find "$HOME/radares" -type f ! -name "*.csv" -delete
+unzip_all
 
 
 
