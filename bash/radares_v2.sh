@@ -83,26 +83,15 @@ download(){
 }
 
 unzip(){
-    unzip -o "$carpeta/radares_1.zip" -d "$carpeta"
-    unzip -o "$carpeta/radares_2.zip" -d "$carpeta"
-
-    rm -rf $carpeta/PoiLoader
-    cp $carpeta/'garminvelocidad 3xx-5xx-6xx, Zumo, StreetPilot c550, 2720, 2820, 7200 y 7500'/*.csv $carpeta
-    rm -rf $carpeta/'garminvelocidad 3xx-5xx-6xx, Zumo, StreetPilot c550, 2720, 2820, 7200 y 7500'
-
-    cp $carpeta/'garmintipo 3xx-5xx-6xx, Zumo, StreetPilot c550, 2720, 2820, 7200 y 7500'/*.csv $carpeta
-    rm -rf $carpeta/'garmintipo 3xx-5xx-6xx, Zumo, StreetPilot c550, 2720, 2820, 7200 y 7500'
-    rm $carpeta/radares_*.zip
-
+    unzip -o -j "$carpeta"/*.zip -d "$carpeta"
+    find "$carpeta" -type f ! -name "*.csv" -delete
 }
 
 
 clear
 download
 
-
-unzip -o "$carpeta/radares_1.zip" -d "$carpeta"
-unzip -o "$carpeta/radares_2.zip" -d "$carpeta"
+unzip
 
 
 
