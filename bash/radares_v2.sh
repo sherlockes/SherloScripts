@@ -83,7 +83,7 @@ download(){
 }
 
 unzip_all(){
-    unzip -o -j "$carpeta/*.zip" -d "$carpeta"
+    /bin/unzip -o -j "$carpeta/*.zip" -d "$carpeta"
     find "$carpeta" -type f ! -name "*.csv" -delete
 }
 
