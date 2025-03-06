@@ -4,7 +4,7 @@
 #Script Name: radares_v2.sh
 #Description: Descripción
 #Args: N/A
-#Creation/Update: 20250305/20250305
+#Creation/Update: 20250305/20250306
 #Author: www.sherblog.pro                                             
 #Email: sherlockes@gmail.com                               
 ###################################################################
@@ -70,12 +70,22 @@ download_and_unzip() {
 ####    Script principal    ####
 ################################
 
-rm -rf $carpeta
-mkdir $carpeta
 
-curl "https://www.todo-poi.es/radar/GARMIN_RADARES/garminvelocidad%203xx-5xx-6xx,%20Zumo,%20StreetPilot%20c550,%202720,%202820,%207200%20y%207500.zip" -o $carpeta/radares_1.zip
+clear(){
+    rm -rf $carpeta
+    mkdir $carpeta
+}
 
-curl "https://www.todo-poi.es/radar/GARMIN_RADARES/garmintipo%203xx-5xx-6xx,%20Zumo,%20StreetPilot%20c550,%202720,%202820,%207200%20y%207500.zip" -o $carpeta/radares_2.zip
+download(){
+    curl "https://www.todo-poi.es/radar/GARMIN_RADARES/garminvelocidad%203xx-5xx-6xx,%20Zumo,%20StreetPilot%20c550,%202720,%202820,%207200%20y%207500.zip" -o $carpeta/radares_1.zip
+
+    curl "https://www.todo-poi.es/radar/GARMIN_RADARES/garmintipo%203xx-5xx-6xx,%20Zumo,%20StreetPilot%20c550,%202720,%202820,%207200%20y%207500.zip" -o $carpeta/radares_2.zip
+}
+
+
+clear
+
+
 
 unzip -o "$carpeta/radares_1.zip" -d "$carpeta"
 unzip -o "$carpeta/radares_2.zip" -d "$carpeta"
