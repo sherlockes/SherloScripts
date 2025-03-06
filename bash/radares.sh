@@ -95,7 +95,7 @@ rename(){
 
 sync(){
     tele_msg_instr "Syncing files"
-    rclone sync $carpeta Sherlockes78_GD:Radares
+    rclone sync $carpeta Sherlockes78_GD:radares
 }
 
 clear(){
