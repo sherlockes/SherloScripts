@@ -84,7 +84,7 @@ download(){
 
 
 clear
-
+download
 
 
 unzip -o "$carpeta/radares_1.zip" -d "$carpeta"
