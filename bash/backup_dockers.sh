@@ -24,15 +24,19 @@ PASSWORD_FILE="/home/sherlockes/.restic-password"
 
 # Copiar la carpeta del docker intrubot en RPI
 echo "Copiando Intrubot config desde RPI"
-rsync -avz --progress --recursive --mkpath pi@192.168.10.210:/home/pi/dockers/i>
+rsync -avz --progress --recursive --mkpath pi@192.168.10.210:/home/pi/dockers/intrubot/ /home/sherlockes/dockers/intrubot
 
 # Realizar backup
 echo "Iniciando backup de ~/dockers: $(date)"
-sudo -E restic -r $REPO --password-file $PASSWORD_FILE backup ~/dockers --exclu>
+sudo -E restic -r $REPO --password-file $PASSWORD_FILE backup ~/dockers --exclude="*.mp3" --exclude="*.mp4"
 
 # Política de retención (opcional)
 echo "Aplicando política de retención"
-sudo -E restic -r $REPO --password-file $PASSWORD_FILE forget --keep-daily 7 -->
+sudo -E restic -r $REPO --password-file $PASSWORD_FILE forget --keep-daily 7 --keep-weekly 4 --keep-monthly 6 --prune
+
+echo "Backup completado: $(date)"
+
+
 
 
 
