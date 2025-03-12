@@ -28,7 +28,7 @@ rsync -avz --progress --recursive --mkpath pi@192.168.10.210:/home/pi/dockers/in
 
 # Realizar backup
 echo "Iniciando backup de ~/dockers: $(date)"
-sudo -E restic -r $REPO --password-file $PASSWORD_FILE backup ~/dockers --exclude="*.mp3" --exclude="*.mp4"
+sudo -E restic -r $REPO --password-file $PASSWORD_FILE backup /home/sherlockes/dockers --exclude="*.mp3" --exclude="*.mp4"
 
 # Política de retención (opcional)
 echo "Aplicando política de retención"
