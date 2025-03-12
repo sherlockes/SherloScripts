@@ -37,8 +37,3 @@ sudo -E restic -r $REPO --password-file $PASSWORD_FILE forget --keep-daily 7 --k
 echo "Backup completado: $(date)"
 
 
-
-
-
-
-
