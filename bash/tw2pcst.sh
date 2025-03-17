@@ -91,7 +91,7 @@ buscar_ultimos () {
             tele_msg_instr "No hay nuevos vídeos"
             tele_msg_resul "..."
 	    # No sigue comprobando si ya ha visto uno descargado
-	    break
+	    continue
         fi
 	    echo "- El vídeo $id ya se ha descargado.";
             tele_msg_instr "Video $id already downloaded"
