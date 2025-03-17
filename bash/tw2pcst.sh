@@ -71,6 +71,8 @@ buscar_ultimos () {
 	# obtiene la identificación y minutos de duración del último vídeo
 	id=$(echo "$json" | jq ".videos[$i].id" | cut -c2- | rev | cut -c2- | rev)
 	mins=$(expr $(echo "$json" | jq ".videos[$i].lengthSeconds") / 60)
+
+	echo $id
 	
 	if [[ $(date +%s) < $publicado ]]
 	then
@@ -112,17 +114,19 @@ buscar_ultimos () {
 		    # No se ha descargado correctamente, pasa al siguiente
 		    echo "El audio no se ha descargado correctamente"
 		    continue
+		else
+		    # Añade el archivo al principio de la lista de descargados
+		    #echo $id >> $twitch_dir/$canal/descargados.txt;
+		    echo $id | cat - $twitch_dir/$canal/descargados.txt > temp && mv temp $twitch_dir/$canal/descargados.txt
 		fi
             else
 		echo "- El archivo sólo tiene $mins minutos, no se descarga."
 		tele_msg_instr "Archivo de sólo $mins minutos."
 		tele_msg_resul "..."
-            fi
 
-	    # Añade el archivo al principio de la lista de descargados
-	#echo $id >> $twitch_dir/$canal/descargados.txt;
-	echo $id | cat - $twitch_dir/$canal/descargados.txt > temp && mv temp $twitch_dir/$canal/descargados.txt
-	
+		# Añade el archivo al principio de la lista de descargados
+		echo $id | cat - $twitch_dir/$canal/descargados.txt > temp && mv temp $twitch_dir/$canal/descargados.txt
+            fi
 	fi
     done
 }
