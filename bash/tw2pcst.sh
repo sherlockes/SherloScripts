@@ -147,7 +147,7 @@ convertir_mp3 () {
 
        echo "- Episodio $id_ep, codificando audio y eliminando silencios"
        tele_msg_instr "Recode $id_ep audio"
-       ffmpeg -loglevel 24 -i "$file" -af silenceremove=1:0:-50dB "${file%.mkv}.mp3"
+       ffmpeg -y -loglevel 24 -i "$file" -af silenceremove=1:0:-50dB "${file%.mkv}.mp3"
        tele_check $?
 
        echo "- Episodio $id_ep, moviendo mp3"
