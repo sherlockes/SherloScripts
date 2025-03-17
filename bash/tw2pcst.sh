@@ -122,11 +122,6 @@ buscar_ultimos () {
 		    echo "Error detectado en la descarga."
 		    continue
 		    # Acciones en caso de error general
-		elif
-		    # No se ha descargado correctamente, pasa al siguiente
-		    echo "El audio no se ha descargado correctamente"
-		    comprobar $?
-		    continue
 		else
 		    # Añade el archivo al principio de la lista de descargados
 		    #echo $id >> $twitch_dir/$canal/descargados.txt;
