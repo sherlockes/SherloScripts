@@ -4,7 +4,7 @@
 #Script Name: yt2pcst.sh
 #Description: Generación de un podcast a partir de canales de youtube
 #Args: N/A
-#Creation/Update: 20240411/20250131
+#Creation/Update: 20240411/20250317
 #Author: www.sherblog.es                                             
 #Email: sherlockes@gmail.com                               
 ###################################################################
@@ -19,11 +19,14 @@ PATH="/home/pi/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbi
 source ~/SherloScripts/bash/telegram_V2.sh
 
 # Número de vídeos a comprobar de cada canal
-num_videos=5
+num_videos="${NUM_VIDEOS:-5}"
 
 # Número de vídeos máximo a descargar en total
-num_max_descargas=2
+num_max_descargas="${NUM_MAX_DESCARGAS:-2}"
 num_descargas=0
+
+# Carpeta remota donde guardar el contenido
+RCLONE_REMOTE_PATH="${RCLONE_REMOTE_PATH:-Sherlockes78_GD:youtube/}"
 
 # Carpeta para guardar los archivos y comprobación de su existencia
 yt2pcst_dir="$HOME/yt2pcst"
@@ -36,7 +39,7 @@ if [ ! -d "$yt2pcst_dir" ]; then
 fi
 
 # Ruta del servidor webdav donde estarán alojados los episodios
-SERVIDOR="homezgz.ddns.net:5005"
+SERVIDOR="${SERVIDOR:-homezgz.ddns.net:5005}"
 
 tele_msg_instr "Servidor de alojamiento"
 if ping -c 1 $SERVIDOR &> /dev/null
@@ -162,7 +165,7 @@ buscar_ultimos(){
 	    tele_msg_resul "..."
 	else
 	    # Comprueba si el archivo es de más de 10' y no se ha descargado
-	    if (( $duracion > 1200 )) && ! grep -q $id "$DESCARGADOS"; then
+	    if (( $duracion > 1200 )) && ! grep -F -x -q -- "$id" "$DESCARGADOS"; then
 		# Descargando el episodio
 		tele_msg_instr "Download $id "
 		echo "- Descargando el vídeo $id"
@@ -173,10 +176,10 @@ buscar_ultimos(){
 		tele_msg_instr "Tag $id "
 		tag $id "$nombre"
 		comprobar $?
-	    elif (( $duracion < 1201 )) && ! grep -q $id "$DESCARGADOS"; then
+	    elif (( $duracion < 1201 )) && ! grep -F -x -q -- "$id" "$DESCARGADOS"; then
 		# El episodio es corto, se añade a los descargados
 		echo "- El episodio $id ($duracion sg) es corto"
-		echo $id | cat - $DESCARGADOS > temp && mv temp $DESCARGADOS
+		echo "$id" | cat - $DESCARGADOS > temp && mv temp $DESCARGADOS
 	    fi
 	fi
     done
@@ -197,7 +200,7 @@ descargar_video(){
 	# Añadiendo el episodio descargado a la lista
 	echo -e "- Añadiendo a la lista de episodios descargados"
 	echo -e "- Descargados $num_descargas de $num_max_descargas"
-	echo $id | cat - $DESCARGADOS > temp && mv temp $DESCARGADOS
+	echo "$id" | cat - $DESCARGADOS > temp && mv temp $DESCARGADOS
     fi
 }
 
@@ -325,7 +328,7 @@ subir_contenido () {
     
     # Subiendo archivos a la nube via rclone
     echo "- Subiendo mp3's al servidor remoto"
-    rclone copy $yt2pcst_dir Sherlockes78_GD:youtube/ --create-empty-src-dirs
+    rclone copy $yt2pcst_dir "$RCLONE_REMOTE_PATH" --create-empty-src-dirs
 
     # Eliminando audio y video local
     echo "- Eliminando audios locales"
