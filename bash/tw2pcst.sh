@@ -106,7 +106,7 @@ buscar_ultimos () {
 		twitch-dl download -q audio_only $id;
 		comprobar $?
 		resultado=$?
-		#comprobar $resultado
+		comprobar $resultado
 
 		if [ $resultado -ne 0 ]; then
 		    # No se ha descargado correctamente, pasa al siguiente
