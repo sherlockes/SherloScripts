@@ -141,8 +141,8 @@ convertir_mp3 () {
     tele_msg_resul "..."
 
     for file in ./*.mkv; do
-       #local nombre=$(basename $file .mkv)
-       local nombre=$(basename "$file" .mkv | tr -cd '[:print:]' | awk '{$1=$1};1')
+       local nombre=$(basename $file .mkv)
+       #local nombre=$(basename "$file" .mkv | tr -cd '[:print:]' | awk '{$1=$1};1')
        local id_ep=$(echo $nombre | awk -F'_' '{print $2}')
 
        echo "- Episodio $id_ep, codificando audio y eliminando silencios"
