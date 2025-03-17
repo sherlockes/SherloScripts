@@ -71,8 +71,6 @@ buscar_ultimos () {
 	# obtiene la identificación y minutos de duración del último vídeo
 	id=$(echo "$json" | jq ".videos[$i].id" | cut -c2- | rev | cut -c2- | rev)
 	mins=$(expr $(echo "$json" | jq ".videos[$i].lengthSeconds") / 60)
-
-	echo $id
 	
 	if [[ $(date +%s) < $publicado ]]
 	then
