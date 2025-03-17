@@ -116,9 +116,11 @@ buscar_ultimos () {
 
 		if echo "$output" | grep -q "403 Forbidden"; then
 		    echo "Error: Acceso prohibido a la descarga."
+		    continue
 		    # Acciones en caso de error
 		elif echo "$output" | grep -iq "error"; then
 		    echo "Error detectado en la descarga."
+		    continue
 		    # Acciones en caso de error general
 		elif
 		    # No se ha descargado correctamente, pasa al siguiente
