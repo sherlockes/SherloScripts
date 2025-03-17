@@ -66,7 +66,7 @@ buscar_ultimos () {
     do
 	# Si el vídeo a comenzado hace menos de 3 horas pasa al siguiente
 	publicado=$(echo "$json" | jq ".videos[$i].publishedAt" | cut -c2- | rev | cut -c2- | rev)
-	publicado=$(date -d "$publicado+4 days" +%s)
+	publicado=$(date -d "$publicado+3 hours" +%s)
 
 	# obtiene la identificación y minutos de duración del último vídeo
 	id=$(echo "$json" | jq ".videos[$i].id" | cut -c2- | rev | cut -c2- | rev)
@@ -105,13 +105,22 @@ buscar_ultimos () {
             if (( $mins > 10 ))
             then
 		# Descarga el audio en formato mkv
-		twitch-dl download -q audio_only $id;
+		#twitch-dl download -q audio_only $id;
 		#comprobar $?
 		#resultado=$?
 		#echo "la salida es $?"
 		#comprobar $resultado
 
-		if [ $? -eq 0 ]; then
+		output=$(twitch-dl download -q audio_only "$id" 2>&1)  # Capturar la salida y errores
+		echo "$output"  # Imprimir la salida por depuración
+
+		if echo "$output" | grep -q "403 Forbidden"; then
+		    echo "Error: Acceso prohibido a la descarga."
+		    # Acciones en caso de error
+		elif echo "$output" | grep -iq "error"; then
+		    echo "Error detectado en la descarga."
+		    # Acciones en caso de error general
+		elif
 		    # No se ha descargado correctamente, pasa al siguiente
 		    echo "El audio no se ha descargado correctamente"
 		    comprobar $?
