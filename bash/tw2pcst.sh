@@ -29,13 +29,10 @@ source ~/SherloScripts/bash/telegram_V2.sh
 comprobar(){
 
     if [ $1 -eq 0 ]; then
-	mensaje+=$'OK'
+	tele_msg_resul "ok"
     else
-	mensaje+=$'ERROR'
-	$notificacion "$mensaje"
-	#exit 0
+	tele_msg_resul "KO"
     fi
-    mensaje+=$'\n'
 }
 
 #----------------------------------------------------------#
@@ -50,7 +47,8 @@ buscar_ultimos () {
     tele_msg_instr "Search last videos"
     echo "- Obteniendo últimos vídeos de $titulo"
     json=$(twitch-dl videos $canal --json)
-    tele_check $?
+
+    comprobar $?
 
     # Limitar a 15 videos la lista de descargadoscase 
     tele_msg_instr "Trim downloaded list"
@@ -61,7 +59,7 @@ buscar_ultimos () {
     # Limitar a 15 videos la lista de items
     head -n150 $twitch_dir/$canal/items.xml > tmp
     mv tmp $twitch_dir/$canal/items.xml
-    tele_check $?
+    comprobar $?
     
     # Busca sobre los ultimos diez videos
     for i in {0..9}
@@ -106,8 +104,8 @@ buscar_ultimos () {
             then
 		# Descarga el audio en formato mkv
 		twitch-dl download -q audio_only $id;
-		tele_check $?
-		#resultado=$?
+		comprobar $?
+		resultado=$?
 		#comprobar $resultado
 
 		if [ $resultado -ne 0 ]; then
