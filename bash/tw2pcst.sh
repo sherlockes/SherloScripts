@@ -108,6 +108,7 @@ buscar_ultimos () {
 		twitch-dl download -q audio_only $id;
 		comprobar $?
 		resultado=$?
+		echo "la salida es $?"
 		comprobar $resultado
 
 		if [ $resultado -ne 0 ]; then
@@ -117,6 +118,7 @@ buscar_ultimos () {
 		else
 		    # Añade el archivo al principio de la lista de descargados
 		    #echo $id >> $twitch_dir/$canal/descargados.txt;
+		    echo "El audio se ha descargado correctemente"
 		    echo $id | cat - $twitch_dir/$canal/descargados.txt > temp && mv temp $twitch_dir/$canal/descargados.txt
 		fi
             else
