@@ -4,7 +4,7 @@
 #Script Name: tw2pcst.sh
 #Description: Generación de Podcast a partir de canal de Twitch
 #Args: N/A
-#Creation/Update: 20220317/20250317
+#Creation/Update: 20220317/20250318
 #Author: www.sherblog.es
 #Email: sherlockes@gmail.com                        
 ###################################################################
@@ -66,13 +66,13 @@ buscar_ultimos () {
     do
 	# Si el vídeo a comenzado hace menos de 3 horas pasa al siguiente
 	publicado=$(echo "$json" | jq ".videos[$i].publishedAt" | cut -c2- | rev | cut -c2- | rev)
-	publicado=$(date -d "$publicado+3 hours" +%s)
+	publicado=$(date -d "$publicado + 3 hours" +%s)
 
 	# obtiene la identificación y minutos de duración del último vídeo
 	id=$(echo "$json" | jq ".videos[$i].id" | cut -c2- | rev | cut -c2- | rev)
 	mins=$(expr $(echo "$json" | jq ".videos[$i].lengthSeconds") / 60)
 	
-	if [[ $(date +%s) < $publicado ]]
+        if [[ $(date + %s) -lt $publicado ]]
 	then
 	    tele_msg_instr "El vídeo $id está en emisión"
             tele_msg_resul "..."
@@ -80,7 +80,7 @@ buscar_ultimos () {
 	fi
 	
 	# Comprobar si el archivo ya ha sido descargado
-	if grep -q $id $twitch_dir/$canal/descargados.txt
+	if grep -q "$id" "$twitch_dir/$canal/descargados.txt"
 	then
 	    
         if [ $i -eq 0 ]
