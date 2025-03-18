@@ -28,7 +28,7 @@ source ~/SherloScripts/bash/telegram_V2.sh
 #----------------------------------------------------------#
 comprobar(){
 
-    if [ $1 -eq 0 ]; then
+    if [[ $1 -eq 0 ]]; then
 	tele_msg_resul "ok"
     else
 	tele_msg_resul "KO"
@@ -83,7 +83,7 @@ buscar_ultimos () {
 	if grep -q "$id" "$twitch_dir/$canal/descargados.txt"
 	then
 	    
-        if [ $i -eq 0 ]
+        if [[ $i -eq 0 ]]
         then
             echo "- No hay nuevos vídeos.";
             tele_msg_instr "No hay nuevos vídeos"
@@ -116,18 +116,16 @@ buscar_ultimos () {
 
 		if echo "$output" | grep -q "403 Forbidden"; then
 		    echo "Error: Acceso prohibido a la descarga."
-		    continue
 		    # Acciones en caso de error
 		elif echo "$output" | grep -iq "error"; then
 		    echo "Error detectado en la descarga."
-		    continue
 		    # Acciones en caso de error general
 		else
 		    # Añade el archivo al principio de la lista de descargados
-		    #echo $id >> $twitch_dir/$canal/descargados.txt;
 		    echo "El audio se ha descargado correctemente"
 		    comprobar $?
-		    echo $id | cat - $twitch_dir/$canal/descargados.txt > temp && mv temp $twitch_dir/$canal/descargados.txt
+		    echo "$id" | tee -a "$twitch_dir/$canal/descargados.txt" > /dev/null
+		    #echo $id | cat - $twitch_dir/$canal/descargados.txt > temp && mv temp $twitch_dir/$canal/descargados.txt
 		fi
             else
 		echo "- El archivo sólo tiene $mins minutos, no se descarga."
