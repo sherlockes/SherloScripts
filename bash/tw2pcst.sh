@@ -66,10 +66,7 @@ buscar_ultimos () {
     do
 	# Si el vídeo a comenzado hace menos de 3 horas pasa al siguiente
 	publicado=$(echo "$json" | jq ".videos[$i].publishedAt" | cut -c2- | rev | cut -c2- | rev)
-	echo $publicado
 	publicado=$(date -d "$publicado + 3 hours" +%s)
-	echo $(date +%s)
-	echo $publicado
 	
 	# obtiene la identificación y minutos de duración del último vídeo
 	id=$(echo "$json" | jq ".videos[$i].id" | cut -c2- | rev | cut -c2- | rev)
