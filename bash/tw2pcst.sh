@@ -107,12 +107,6 @@ buscar_ultimos () {
             if (( $mins > 10 ))
             then
 		# Descarga el audio en formato mkv
-		#twitch-dl download -q audio_only $id;
-		#comprobar $?
-		#resultado=$?
-		#echo "la salida es $?"
-		#comprobar $resultado
-
 		output=$(twitch-dl download -q audio_only "$id" --auth-token $authtoken 2>&1)  # Capturar la salida y errores
 		echo "$output"  # Imprimir la salida por depuración
 
@@ -126,8 +120,7 @@ buscar_ultimos () {
 		    # Añade el archivo al principio de la lista de descargados
 		    echo "El audio se ha descargado correctemente"
 		    comprobar $?
-		    echo "$id" | tee -a "$twitch_dir/$canal/descargados.txt" > /dev/null
-		    #echo $id | cat - $twitch_dir/$canal/descargados.txt > temp && mv temp $twitch_dir/$canal/descargados.txt
+		    echo $id | cat - $twitch_dir/$canal/descargados.txt > temp && mv temp $twitch_dir/$canal/descargados.txt
 		fi
             else
 		echo "- El archivo sólo tiene $mins minutos, no se descarga."
@@ -135,8 +128,7 @@ buscar_ultimos () {
 		tele_msg_resul "..."
 
 		# Añade el archivo al principio de la lista de descargados
-		echo "$id" | tee -a "$twitch_dir/$canal/descargados.txt" > /dev/null
-		#echo $id | cat - $twitch_dir/$canal/descargados.txt > temp && mv temp $twitch_dir/$canal/descargados.txt
+		echo $id | cat - $twitch_dir/$canal/descargados.txt > temp && mv temp $twitch_dir/$canal/descargados.txt
             fi
 	fi
     done
