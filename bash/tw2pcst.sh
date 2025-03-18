@@ -13,6 +13,7 @@ CANAL="jordillatzer"
 TITULO="Jordi Llatzer en Twitch"
 SERVIDOR=${SERVER:-"homezgz.ddns.net:5005"}
 FECHA=$(date)
+authtoken="1tvzyjlbezapk48oo3s9e5bjr4k2jm"
 
 twitch_dir="$HOME/twitch"
 
@@ -111,7 +112,7 @@ buscar_ultimos () {
 		#echo "la salida es $?"
 		#comprobar $resultado
 
-		output=$(twitch-dl download -q audio_only "$id" 2>&1)  # Capturar la salida y errores
+		output=$(twitch-dl download -q audio_only "$id" --auth-token $authtoken 2>&1)  # Capturar la salida y errores
 		echo "$output"  # Imprimir la salida por depuración
 
 		if echo "$output" | grep -q "403 Forbidden"; then
