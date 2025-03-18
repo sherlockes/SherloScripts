@@ -74,7 +74,7 @@ buscar_ultimos () {
 	id=$(echo "$json" | jq ".videos[$i].id" | cut -c2- | rev | cut -c2- | rev)
 	mins=$(expr $(echo "$json" | jq ".videos[$i].lengthSeconds") / 60)
 	
-        if [[ $(date + %s) -lt $publicado ]]
+        if [[ $(date +%s) -lt $publicado ]]
 	then
 	    tele_msg_instr "El vídeo $id está en emisión"
             tele_msg_resul "..."
