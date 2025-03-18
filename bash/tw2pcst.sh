@@ -14,7 +14,7 @@ TITULO="Jordi Llatzer en Twitch"
 SERVIDOR=${SERVER:-"homezgz.ddns.net:5005"}
 FECHA=$(date)
 
-authtoken="${AUTH_TOKEN:1tvzyjlbezapk48oo3s9e5bjr4k2jm}"
+authtoken="${AUTH_TOKEN:-1tvzyjlbezapk48oo3s9e5bjr4k2jm}"
 
 twitch_dir="$HOME/twitch"
 
