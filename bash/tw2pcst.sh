@@ -4,7 +4,7 @@
 #Script Name: tw2pcst.sh
 #Description: Generación de Podcast a partir de canal de Twitch
 #Args: N/A
-#Creation/Update: 20220317/20250318
+#Creation/Update: 20220317/20250321
 #Author: www.sherblog.es
 #Email: sherlockes@gmail.com                        
 ###################################################################
@@ -52,7 +52,7 @@ buscar_ultimos () {
 
     comprobar $?
 
-    # Limitar a 15 videos la lista de descargadoscase 
+    # Limitar a 15 videos la lista de descargados
     tele_msg_instr "Trim downloaded list"
     echo "- Recortando listas de descargados"
     head -n15 $twitch_dir/$canal/descargados.txt > tmp
