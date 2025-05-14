@@ -14,6 +14,7 @@
 ################################
 
 ACTION="$1"
+GROUP_NAME="$2"
 URL="https://raw.githubusercontent.com/sherlockes/SherloScripts/refs/heads/master/pi-hole/regex_blocklist.txt"
 TMP_LIST="/tmp/youtube_blocklist.txt"
 DB="/etc/pihole/gravity.db"
@@ -23,7 +24,20 @@ DB="/etc/pihole/gravity.db"
 ####      Dependencias      ####
 ################################
 
+# Verificar dependencias
+REQUIRED_CMDS=("curl" "sqlite3" "pihole" "sudo")
+for cmd in "${REQUIRED_CMDS[@]}"; do
+    if ! command -v "$cmd" >/dev/null 2>&1; then
+        echo "Error: '$cmd' no está instalado o no está en el PATH."
+        exit 1
+    fi
+done
 
+# Verificar permisos de base de datos
+if ! sudo test -r "$DB"; then
+    echo "Error: No se puede leer la base de datos $DB"
+    exit 1
+fi
 
 ################################
 ####       Funciones        ####
@@ -35,8 +49,9 @@ DB="/etc/pihole/gravity.db"
 ####    Script principal    ####
 ################################
 
+# Verificar acción
 if [[ "$ACTION" != "block" && "$ACTION" != "unblock" ]]; then
-    echo "Uso: $0 block|unblock"
+    echo "Uso: $0 block|unblock [nombre_del_grupo]"
     exit 1
 fi
 
@@ -46,50 +61,56 @@ curl -s -o "$TMP_LIST" "$URL" || {
     exit 1
 }
 
+# Si se pasó nombre de grupo, obtener o crear ID
+GROUP_ID=""
+if [[ -n "$GROUP_NAME" ]]; then
+    GROUP_ID=$(sudo sqlite3 "$DB" "SELECT id FROM 'group' WHERE name = '$GROUP_NAME';")
+    if [[ -z "$GROUP_ID" ]]; then
+        echo "Creando grupo '$GROUP_NAME'"
+        sudo sqlite3 "$DB" "INSERT INTO 'group' (enabled, name) VALUES (1, '$GROUP_NAME');"
+        GROUP_ID=$(sudo sqlite3 "$DB" "SELECT id FROM 'group' WHERE name = '$GROUP_NAME';")
+    fi
+fi
+
 while read line; do
     [[ "$line" =~ ^#.*$ || -z "$line" ]] && continue
 
     if [[ "$line" == regex:* ]]; then
-        REGEX="${line#regex:}"
+        ENTRY="${line#regex:}"
+        TYPE=3
+    else
+        ENTRY="$line"
+        TYPE=1
+    fi
 
-        if [[ "$ACTION" == "block" ]]; then
-            # Verificar si ya existe
-            EXISTS=$(sudo sqlite3 "$DB" "SELECT COUNT(*) FROM domainlist WHERE type=3 AND domain = '$REGEX';")
-            if [[ "$EXISTS" -eq 0 ]]; then
-                echo "Añadiendo regex: $REGEX"
-                sudo pihole --regex "$REGEX"
-            else
-                echo "Ya existe regex: $REGEX"
+    if [[ "$ACTION" == "block" ]]; then
+        EXISTS=$(sudo sqlite3 "$DB" "SELECT COUNT(*) FROM domainlist WHERE type=$TYPE AND domain = '$ENTRY';")
+        if [[ "$EXISTS" -eq 0 ]]; then
+            echo "Añadiendo: $ENTRY"
+            sudo sqlite3 "$DB" "INSERT INTO domainlist (type, domain, enabled) VALUES ($TYPE, '$ENTRY', 1);"
+            ENTRY_ID=$(sudo sqlite3 "$DB" "SELECT last_insert_rowid();")
+            if [[ -n "$GROUP_ID" ]]; then
+                sudo sqlite3 "$DB" "INSERT INTO domainlist_by_group (domainlist_id, group_id) VALUES ($ENTRY_ID, $GROUP_ID);"
             fi
         else
-            echo "Eliminando regex: $REGEX"
-            sudo sqlite3 "$DB" "DELETE FROM domainlist WHERE type=3 AND domain = '$REGEX';"
+            echo "Ya existe: $ENTRY"
         fi
     else
-        DOMAIN="$line"
-
-        if [[ "$ACTION" == "block" ]]; then
-            EXISTS=$(sudo sqlite3 "$DB" "SELECT COUNT(*) FROM domainlist WHERE type=1 AND domain = '$DOMAIN';")
-            if [[ "$EXISTS" -eq 0 ]]; then
-                echo "Añadiendo dominio: $DOMAIN"
-                sudo pihole deny "$DOMAIN"
-            else
-                echo "Ya existe dominio: $DOMAIN"
-            fi
-        else
-            echo "Eliminando dominio: $DOMAIN"
-            sudo sqlite3 "$DB" "DELETE FROM domainlist WHERE type=1 AND domain = '$DOMAIN';"
-        fi
+        echo "Eliminando: $ENTRY"
+        ENTRY_IDs=$(sudo sqlite3 "$DB" "SELECT id FROM domainlist WHERE type=$TYPE AND domain = '$ENTRY';")
+        for ID in $ENTRY_IDs; do
+            sudo sqlite3 "$DB" "DELETE FROM domainlist_by_group WHERE domainlist_id = $ID;"
+            sudo sqlite3 "$DB" "DELETE FROM domainlist WHERE id = $ID;"
+        done
     fi
 done < "$TMP_LIST"
 
-# Recargar listas si se ha hecho "unblock"
 if [[ "$ACTION" == "unblock" ]]; then
     sudo pihole reloadlists
 fi
 
-# Limpiar temporal
 rm -f "$TMP_LIST"
+
 
 
 
