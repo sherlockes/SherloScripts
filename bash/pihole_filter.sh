@@ -54,7 +54,7 @@ while read line; do
 
         if [[ "$ACTION" == "block" ]]; then
             # Verificar si ya existe
-            EXISTS=$(sqlite3 "$DB" "SELECT COUNT(*) FROM domainlist WHERE type=3 AND domain = '$REGEX';")
+            EXISTS=$(sudo sqlite3 "$DB" "SELECT COUNT(*) FROM domainlist WHERE type=3 AND domain = '$REGEX';")
             if [[ "$EXISTS" -eq 0 ]]; then
                 echo "Añadiendo regex: $REGEX"
                 sudo pihole --regex "$REGEX"
@@ -69,7 +69,7 @@ while read line; do
         DOMAIN="$line"
 
         if [[ "$ACTION" == "block" ]]; then
-            EXISTS=$(sqlite3 "$DB" "SELECT COUNT(*) FROM domainlist WHERE type=1 AND domain = '$DOMAIN';")
+            EXISTS=$(sudo sqlite3 "$DB" "SELECT COUNT(*) FROM domainlist WHERE type=1 AND domain = '$DOMAIN';")
             if [[ "$EXISTS" -eq 0 ]]; then
                 echo "Añadiendo dominio: $DOMAIN"
                 sudo pihole deny "$DOMAIN"
