@@ -4,8 +4,9 @@
 regex:(^|\.)youtube\.com$
 regex:(^|\.)ytimg\.com$
 regex:(^|\.)googlevideo\.com$
+regex:(^|\.)youtu\.be$
+regex:(^|\.)yt3\.ggpht\.com$
 regex:(^|\.)youtubei\.googleapis\.com$
 regex:(^|\.)youtube.googleapis.com$
 regex:(^|\.)yt\d\.ggpht\.com$
 regex:(^|\.)youtube-nocookie\.com$
-
