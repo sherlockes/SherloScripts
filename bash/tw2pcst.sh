@@ -4,7 +4,7 @@
 #Script Name: tw2pcst.sh
 #Description: Generación de Podcast a partir de canal de Twitch
 #Args: N/A
-#Creation/Update: 20220317/20250321
+#Creation/Update: 20220317/20250805
 #Author: www.sherblog.es
 #Email: sherlockes@gmail.com                        
 ###################################################################
@@ -143,7 +143,7 @@ convertir_mp3 () {
     tele_msg_instr "Search $canal files"
     tele_msg_resul "..."
 
-    for file in ./*.mkv; do
+    for file in ./*.mp4 ./*.mkv; do
        local nombre=$(basename $file .mkv)
        #local nombre=$(basename "$file" .mkv | tr -cd '[:print:]' | awk '{$1=$1};1')
        local id_ep=$(echo $nombre | awk -F'_' '{print $2}')
@@ -301,7 +301,7 @@ echo "- Corriendo en $twitch_dir"
 buscar_ultimos "$CANAL" "$TITULO"
 
 # Convertir a mp3 los vídeos descargados (Si los hay)
-if ls ./*.mkv 1> /dev/null 2>&1; then
+if ls ./*.mp4 ./*.mkv 1> /dev/null 2>&1; then
     convertir_mp3 "$CANAL"
 fi
 
