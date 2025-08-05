@@ -301,7 +301,7 @@ echo "- Corriendo en $twitch_dir"
 buscar_ultimos "$CANAL" "$TITULO"
 
 # Convertir a mp3 los vídeos descargados (Si los hay)
-if ls ./*.mp4 ./*.mkv 1> /dev/null 2>&1; then
+if ls ./*.mp4 1> /dev/null 2>&1; then
     convertir_mp3 "$CANAL"
     echo "Convirtiendo archivos mp4 o mkv"
 fi
