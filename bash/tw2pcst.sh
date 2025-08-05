@@ -143,7 +143,7 @@ convertir_mp3 () {
     tele_msg_instr "Search $canal files"
     tele_msg_resul "..."
 
-    for file in ./*.mp4 ./*.mkv; do
+    for file in ./*.mp4; do
        local nombre=$(basename $file .mkv)
        #local nombre=$(basename "$file" .mkv | tr -cd '[:print:]' | awk '{$1=$1};1')
        local id_ep=$(echo $nombre | awk -F'_' '{print $2}')
