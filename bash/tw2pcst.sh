@@ -303,6 +303,7 @@ buscar_ultimos "$CANAL" "$TITULO"
 # Convertir a mp3 los vídeos descargados (Si los hay)
 if ls ./*.mp4 ./*.mkv 1> /dev/null 2>&1; then
     convertir_mp3 "$CANAL"
+    echo "Convirtiendo archivos mp4 o mkv"
 fi
 
 # Actualizar el feed y sube el nuevo contenido (Si lo hay)
