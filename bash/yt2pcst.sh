@@ -4,7 +4,7 @@
 #Script Name: yt2pcst.sh
 #Description: Generación de un podcast a partir de canales de youtube
 #Args: N/A
-#Creation/Update: 20240411/20250317
+#Creation/Update: 20240411/20250805
 #Author: www.sherblog.es                                             
 #Email: sherlockes@gmail.com                               
 ###################################################################
@@ -234,13 +234,12 @@ anadir_item(){
     #local ID_EP="${track%.*}"
     local ID_EP=$id
     
-    # local TIT_EP=$(ffprobe -loglevel error -show_entries format_tags=title -of default=noprint_wrappers=1:nokey=1 -- $file)
+    local TIT_EP=$(ffprobe -loglevel error -show_entries format_tags=title -of default=noprint_wrappers=1:nokey=1 -- $file)
 
-    local TIT_EP=$(ffprobe -loglevel error -show_entries format_tags=title -of default=noprint_wrappers=1:nokey=1 -- "$file" | tr -cd '[:print:]' | awk '{$1=$1};1')
-
+    #local TIT_EP=$(ffprobe -loglevel error -show_entries format_tags=title -of default=noprint_wrappers=1:nokey=1 -- "$file" | tr -cd '[:print:]' | awk '{$1=$1};1')
 
     # Sanitizar título
-    # TIT_EP=$(echo "$TIT_EP" | sed 's/[^a-zA-Z0-9_\-.\ ]//g')
+    TIT_EP=$(echo "$TIT_EP" | iconv -f utf-8 -t ascii//TRANSLIT | sed 's/[^a-zA-Z0-9 ]//g')
     
     local ART_EP=$(ffprobe -loglevel error -show_entries format_tags=artist -of default=noprint_wrappers=1:nokey=1 -- $file)
 
