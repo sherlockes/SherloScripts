@@ -56,7 +56,7 @@ mensaje+=$'- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 ####       Funciones        ####
 ################################
 
-comprobar_horario () {
+comprobar_horario_bak () {
 
     AHORA=$(date +%H)
     INI=$1
@@ -73,6 +73,26 @@ comprobar_horario () {
     fi
     
 }
+
+
+comprobar_horario() {
+    local ini="$1"
+    local fin="$2"
+    local hora_actual
+    hora_actual=$(date +%H)
+
+    # Si alguno no es numérico, fuera de horario
+    [[ "$ini" =~ ^[0-9]+$ && "$fin" =~ ^[0-9]+$ ]] || return 1
+
+    if (( ini <= fin )); then
+        # Rango normal, ej: 8-14
+        (( hora_actual >= ini && hora_actual < fin )) && return 0 || return 1
+    else
+        # Rango que cruza medianoche, ej: 22-2
+        (( hora_actual >= ini || hora_actual < fin )) && return 0 || return 1
+    fi
+}
+
 
 ################################
 ####    Script principal    ####
