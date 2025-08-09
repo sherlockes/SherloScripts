@@ -102,7 +102,7 @@ while read -r line; do
 	if comprobar_horario "$HORA_INI" "$HORA_FIN"; then
 	    echo "$nombre ✅ Está dentro del horario"
 	else
-	    echo "⛔ Fuera de horario"
+	    echo "$nombre ⛔ Fuera de horario"
 	fi
 
 
