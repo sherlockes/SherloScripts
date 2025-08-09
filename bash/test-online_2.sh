@@ -4,7 +4,7 @@
 #Script Name: test-online.sh
 #Description: Comprueba que dispositivos estan online a partir del ssh config
 #Args: N/A
-#Creation/Update: 20230206/20230209
+#Creation/Update: 20230206/20250809
 #Author: www.sherblog.pro                                             
 #Email: sherlockes@gmail.com                               
 ###################################################################
@@ -92,6 +92,7 @@ while read -r line; do
     if [ "${newarr[0]}" = 'Host' ]; then
 	
 	nombre="${newarr[1]}"
+	echo $nombre
 
 	HORARIO="${newarr[-1]}"
 	HORA_INI=$(echo "$HORARIO" | cut -d '-' -f 1)
