@@ -56,7 +56,7 @@ mensaje+=$'- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 ####       Funciones        ####
 ################################
 
-comprobar_horario_bak () {
+comprobar_horario() {
 
     AHORA=$(date +%H)
     INI=$1
@@ -72,25 +72,6 @@ comprobar_horario_bak () {
 	return 1
     fi
     
-}
-
-
-comprobar_horario() {
-    local ini="$1"
-    local fin="$2"
-    local hora_actual
-    hora_actual=$(date +%H)
-
-    # Si alguno no es numérico, fuera de horario
-    [[ "$ini" =~ ^[0-9]+$ && "$fin" =~ ^[0-9]+$ ]] || return 1
-
-    if (( ini <= fin )); then
-        # Rango normal, ej: 8-14
-        (( hora_actual >= ini && hora_actual < fin )) && return 0 || return 1
-    else
-        # Rango que cruza medianoche, ej: 22-2
-        (( hora_actual >= ini || hora_actual < fin )) && return 0 || return 1
-    fi
 }
 
 
@@ -118,8 +99,13 @@ while read -r line; do
 	HORA_INI=$(echo "$HORARIO" | cut -d '-' -f 1)
 	HORA_FIN=$(echo "$HORARIO" | cut -d '-' -f 2)
 
-	resultado="$(comprobar_horario "$HORA_INI" "$HORA_FIN")"
-	echo "La función devolvió: $resultado"
+
+	if comprobar_horario "$HORA_INI" "$HORA_FIN"; then
+	    echo "✅ Está dentro del horario"
+	else
+	    echo "⛔ Fuera de horario"
+	fi
+
 
 	
     fi
