@@ -93,7 +93,6 @@ while read -r line; do
     if [ "${newarr[0]}" = 'Host' ]; then
 	
 	nombre="${newarr[1]}"
-	echo $nombre
 
 	HORARIO="${newarr[-1]}"
 	HORA_INI=$(echo "$HORARIO" | cut -d '-' -f 1)
@@ -101,7 +100,7 @@ while read -r line; do
 
 
 	if comprobar_horario "$HORA_INI" "$HORA_FIN"; then
-	    echo "✅ Está dentro del horario"
+	    echo "$nombre ✅ Está dentro del horario"
 	else
 	    echo "⛔ Fuera de horario"
 	fi
