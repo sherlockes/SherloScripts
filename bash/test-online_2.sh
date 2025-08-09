@@ -98,7 +98,7 @@ while read -r line; do
 	HORA_INI=$(echo "$HORARIO" | cut -d '-' -f 1)
 	HORA_FIN=$(echo "$HORARIO" | cut -d '-' -f 2)
 
-	echo comprobar_horario $HORA_INI $HORA_FIN
+	echo $(comprobar_horario $HORA_INI $HORA_FIN)
 	
     fi
 
