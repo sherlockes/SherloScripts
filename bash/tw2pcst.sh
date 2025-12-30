@@ -4,7 +4,7 @@
 #Script Name: tw2pcst.sh
 #Description: Generación de Podcast a partir de canal de Twitch
 #Args: N/A
-#Creation/Update: 20220317/20250805
+#Creation/Update: 20220317/20251230
 #Author: www.sherblog.es
 #Email: sherlockes@gmail.com                        
 ###################################################################
@@ -14,7 +14,7 @@ TITULO="Jordi Llatzer en Twitch"
 SERVIDOR=${SERVER:-"homezgz.ddns.net:5005"}
 FECHA=$(date)
 
-authtoken="${AUTH_TOKEN:-1tvzyjlbezapk48oo3s9e5bjr4k2jm}"
+authtoken="${AUTH_TOKEN:t2xgoiw1neylxeyplvip74wpb69rwj}"
 
 twitch_dir="$HOME/twitch"
 
