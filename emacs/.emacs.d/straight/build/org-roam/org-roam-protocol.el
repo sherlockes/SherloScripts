@@ -1,1 +1,0 @@
-/home/sherlockes/.emacs.d/straight/repos/org-roam/extensions/org-roam-protocol.el
