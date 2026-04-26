@@ -224,6 +224,11 @@
   :bind
   (("C-s" . swiper)))
 
+(global-set-key (kbd "C-c r") #'query-replace-regexp)
+(global-set-key (kbd "C-c s") #'counsel-rg)
+(setq counsel-rg-base-command
+      "rg -S --no-heading --line-number --color never %s .")
+
 ;;;;;;;;;;;;;;;;;;;;;
 ;;;  Tema visual  ;;;
 ;;;;;;;;;;;;;;;;;;;;;
