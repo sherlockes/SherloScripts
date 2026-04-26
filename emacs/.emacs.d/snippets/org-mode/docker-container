@@ -1,0 +1,44 @@
+# name: Docker container template
+# key: docker
+# --
+** Info
+$1
+
+** Uso
+$2
+
+** Enlace
+$3
+
+** Variables de entorno
+- $4 :: $5
+
+** Volúmenes
+- $6 → $7
+
+** Red
+$8
+
+** Seguridad
+⚠️ $9
+
+** docker-compose.yml
+#+begin_src yaml
+$10
+#+end_src
+
+** Gestión
+#+begin_src bash
+docker compose up -d
+docker compose logs -f $11
+docker compose restart $11
+#+end_src
+
+** Backup / Persistencia
+$12
+
+** Notas
+$13
+
+** Ver también
+$0

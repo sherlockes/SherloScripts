@@ -2,40 +2,20 @@
 ;; Script Name: init.el                            ;;
 ;; Description: Archivo de configuración de Emacs  ;;
 ;; Args: N/A                                       ;;
-;; Creation/Update: 20200225/20231031              ;; 
-;; Author: www.sherblog.pro                        ;;                      
+;; Creation/Update: 20200225/20260421              ;; 
+;; Author: www.sherblog.es                         ;;                      
 ;; Email: sherlockes@gmail.com                     ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; Antes de arrancar emacs con esta configuración hay que copiar las llaves ssh del puesto donde se esté arrancando emacs a Gitlab y Github
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Archivo ubicado en "~/.emacs" ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; (setq user-dir (expand-file-name "~"))                                                   ;; Variable para el directorio de usuario
-;; (setq user-init-file (concat user-dir "/dotfiles/emacs/.emacs.d/init.el"))               ;; Ubicación del archivo de configuración
-;; (load user-init-file)                                                                    ;; Carga el archivo de configuración
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Ubicación de directorios ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(setq user-emacs-directory (concat user-dir "/.emacs.d/"))                                  ;; Directorio de configuración
-(setq default-directory user-dir)                                                           ;; Directorio por defecto
-(setenv "HOME" user-dir)                                                                    ;; Directorio HOME
-(setq brain-dir (concat user-dir "/sherlockes.gitlab.io/"))                                 ;; Directorio para la exportación de Org-Roam
-(setq blog-dir (concat user-dir "/sherlockes.github.io/"))                                  ;; Directorio para la Actualizacion del Blog
-(setq blog-repo "git@github.com:sherlockes/sherlockes.github.io.git")
-(setq brain-roam-dir (concat brain-dir "content-org"))                                      ;; Directorio para las notas en Org-Roam
-(setq brain-repo "git@gitlab.com:sherlockes/sherlockes.gitlab.io.git")                      ;; Repo de la web en gitlab
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Configuración externa ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(load-file (concat user-dir "/dotfiles/emacs/.emacs.d/functions.el"))                       ;; Carga el archivo externo de funciones
-(setq shell-command-switch "-ic")                                                           ;; Configura shell-command para permitir alias
-(setq byte-compile-warnings '(cl-functions))                                                ;; Elimina el warning cl obsoleto
+;; (setq user-dir (expand-file-name "~"))
+;; (setq user-init-file (concat user-dir "/dotfiles/emacs/.emacs.d/init.el"))
+;; (load user-init-file)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Añadir repositorios ;;
@@ -43,11 +23,10 @@
 
 (require 'package)
 
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)                    ;; Melpa, no es la versión estable
-;;(add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/") t)     ;; Melpa estable
-;;(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)                       ;; Problemas al instalar Org-Roam
+(setq package-enable-at-startup nil)
+
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 (add-to-list 'package-archives '("nongnu"   . "https://elpa.nongnu.org/nongnu/") t)
-;;(add-to-list 'package-archives '("gnu"   . "https://elpa.gnu.org/packages/") t)               ;; Cambiado por la versión nongnu
 (add-to-list 'package-archives '( "jcs-elpa" . "https://jcs-emacs.github.io/jcs-elpa/packages/") t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -55,10 +34,53 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (package-initialize)
-(setq package-enable-at-startup nil)
 
-(when (not package-archive-contents)
+(setq package-archive-priorities
+      '(("melpa" . 20)
+        ("nongnu" . 10)
+        ("gnu" . 5)
+        ("jcs-elpa" . 0)))
+
+(unless package-archive-contents
   (package-refresh-contents))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Ubicación de directorios ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; Directorios de configuración, por defecto y HOME
+(setq user-emacs-directory (concat user-dir "/.emacs.d/"))
+(setq default-directory user-dir)
+(setenv "HOME" user-dir)
+
+;; Directorio para repo SherloScripts
+(setq script-dir (concat user-dir "/SherloScripts/"))
+(setq script-repo "git@github.com:sherlockes/SherloScripts.git")
+
+;; Directorio para la Actualizacion del Blog
+(setq blog-dir (concat user-dir "/sherlockes.github.io/"))
+(setq blog-repo "git@github.com:sherlockes/sherlockes.github.io.git")
+
+;; Directorio para la exportación de Org-Roam
+(setq brain-dir (concat user-dir "/brain/"))
+(setq brain-repo "git@github.com:sherlockes/brain.git")
+(setq brain-roam-dir (concat brain-dir "org-files"))
+
+;; Ubicación del archivo de favoritos
+(setq bookmark-default-file "~/dotfiles/emacs/.emacs.d/bookmarks")
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Configuración externa ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; Carga el archivo externo de funciones
+(load-file (concat user-dir "/dotfiles/emacs/.emacs.d/functions.el"))
+
+;; Configura shell-command para permitir alias y elimina el warning cl obsoleto
+(setq shell-command-switch "-ic")
+(setq byte-compile-warnings '(cl-functions))
+
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Configuración interna ;;
@@ -74,6 +96,8 @@
  '(custom-enabled-themes '(wombat))
  '(debug-on-error nil)
  '(delete-selection-mode 1)
+ '(exec-path
+   '("/home/sherlockes/.local/bin" "/usr/local/sbin" "/usr/local/bin" "/usr/sbin" "/usr/bin" "/sbin" "/bin" "/usr/games" "/usr/local/games" "/snap/bin" "/usr/lib/emacs/28.1/x86_64-linux-gnu" "/usr/bin/python"))
  '(ibuffer-formats
    '((mark modified read-only locked " "
 	   (name 48 48 :left :elide)
@@ -84,26 +108,16 @@
      (mark " "
 	   (name 16 -1)
 	   " " filename)))
+ '(org-babel-load-languages '((shell . t) (python . t) (emacs-lisp . t)))
  '(org-link-elisp-skip-confirm-regexp ".*")
  '(org-roam-capture-templates
    '(("d" "default" plain "%?" :target
-      (file+head "%<%Y%m%d>-${slug}.org" "#+title: ${title}
-#+STARTUP: overview
-#+date: %<%Y-%m-%d>
-#+hugo_custom_front_matter: :thumbnail \"images/image.jpg\"
-#+setupfile: ./setup.conf
-#+hugo_tags: nemo
-#+hugo_categories: apps
-#+hugo_draft: false
-Resumen de la nota
-#+BEGIN_export html
-<!--more-->
-#+END_export
-")
+      (file+head "${slug}.org" "#+title: ${title}\12#+STARTUP: overview\12#+date: %<%Y-%m-%d>\12#+filetags: :tag_1:tag_2:")
       :unnarrowed t)))
  '(org-tags-column -60)
  '(package-selected-packages
-   '(gptel page-break-lines dashboard ox-hugo wgrep ivy vertico whole-line-or-region markdown-mode htmlize gnu-elpa-keyring-update elpy))
+   '(web-mode org-roam counsel swiper yaml-mode all-the-icons spaceline-all-the-icons yasnippet org-roam-ui gptel page-break-lines dashboard ox-hugo wgrep ivy vertico whole-line-or-region markdown-mode htmlize gnu-elpa-keyring-update))
+ '(python-shell-interpreter "/usr/bin/python3\12")
  '(remote-shell-program "ssh")
  '(safe-local-variable-values '((ENCODING . UTF-8) (encoding . utf-8)))
  '(tramp-default-method "ssh")
@@ -114,99 +128,123 @@ Resumen de la nota
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(web-mode-current-element-highlight-face ((t (:background "#e2e8f0" :foreground "#000000" :weight bold)))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Archivos recientes ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;
 
-(recentf-mode 1)                                                                            ;; Activa el modo recentf para guardar y cargar archivos recientes.
-(setq recentf-max-saved-items 10)                                                           ;; Cantidad de archivos recientes a mostrar
+;; Activa modo y nº de archivos a mostrar
+(recentf-mode 1)
+(setq recentf-max-saved-items 10)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Ocultar barras y pantalla de inicio ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(tool-bar-mode -1)                                                                          ;; Oculta la barra de herramientas superior
-(tooltip-mode -1)                                                                           ;; Mostrar consejos en la barra inferior
-(menu-bar-mode -1)                                                                          ;; Oculta la barra de menús superior
-(setq inhibit-startup-screen t)                                                             ;; No mostrar la pantalla de bienvenida
+
+(tool-bar-mode -1)
+(tooltip-mode -1)
+(menu-bar-mode -1)
+(setq inhibit-startup-screen t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Arrancar maximizado ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;
-;;(add-hook 'window-setup-hook 'toggle-frame-maximized t)                                   ;; Arrancar emacs maximizado
-;;(add-hook 'window-setup-hook 'maximizar)                                                  ;; Arrancar emacs maximizado
-;; Crear un archivo "earty-init.el" en ".emacs.d" con el siguiente contenido
-;; (push '(fullscreen . maximized) default-frame-alist)
+
+(add-to-list 'initial-frame-alist '(fullscreen . maximized))
 
 ;;;;;;;;;;;;;;;
 ;; Saveplace ;;
 ;;;;;;;;;;;;;;;
+
 (my-install-package-if-not-installed 'saveplace)
 (save-place-mode 1)
 (setq save-place-file (expand-file-name ".emacs-places" user-emacs-directory))
 
-;;;;;;;;;;;;;;;;;;;
-;; All-the-icons ;;
-;;;;;;;;;;;;;;;;;;;
-(my-install-package-if-not-installed 'all-the-icons)
-(my-install-package-if-not-installed 'all-the-icons-dired)                                  ;; Instala el paquete para mostrar iconos en dired
-(add-hook 'dired-mode-hook 'all-the-icons-dired-mode)                                       ;; Habilita el modo cuando entramos en Dired
+;;;;;;;;;;;;;;
+;; Web-mode ;;
+;;;;;;;;;;;;;;
+
+(my-install-package-if-not-installed 'web-mode)
+
+;; Asociar extensiones de archivo
+(add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.css\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.js\\'" . web-mode))
+
+;; Configurar el resaltado que tú quieres
+(setq web-mode-enable-current-element-highlight t)
+
+;; Opcional: Cambiar el color del resaltado para que se vea claro
+;; Aquí lo ponemos con un fondo gris suave, puedes cambiar el color
+
 
 ;;;;;;;;;;;;;;;
 ;; Dashboard ;;
 ;;;;;;;;;;;;;;;
+
 (my-install-package-if-not-installed 'dashboard)
 (my-install-package-if-not-installed 'page-break-lines)
 
-(setq dashboard-icon-type 'all-the-icons)
-(setq dashboard-set-heading-icons t)
-(setq dashboard-set-file-icons t)
+(setq dashboard-set-navigator t)
 
 (setq dashboard-items '((recents  . 10)
                         (bookmarks . 10)))
 
-(setq dashboard-init-info "C-ESC(Dashboard) F1(Reiniciar) F2(Org-Roam) F4(HugoServer) F5(Orto) F7(Dicc) F8(Eval-Py)
-RipGrep(C-c s)    Nodo OrgRoam(C-c n f)  Mostrar ocultos(M-o) Truncate(C-x x t)")
+(setq dashboard-init-info "F1(Reboot) F2(Org-Roam) F4(HugoSer) F5(Orto) F7(Dicc) F8(Eval-Py)
+RipGrep(C-c s) Nodo OrgRoam(C-c n f) Mostrar ocultos(M-o) Truncate(C-x x t)")
 
-
-(setq dashboard-set-navigator t)
-;; Format: "(icon title help action face prefix suffix)"
-
-;; Format: "(icon title help action face prefix suffix)"
 (setq dashboard-navigator-buttons
       `(;; line1
         (
-	 ("" "Sherblog" "" (lambda (&rest _) (browse-url "http://www.sherblog.pro")))
-	 ("" "Brainblog" "" (lambda (&rest _) (browse-url "http://www.sherlockes.gitlab.io")))
-         ("★" "Star" "Show stars" (lambda (&rest _) (show-stars)) warning)
-         ("?" "" "?/h" #'show-help nil "<" ">")
-	)
-         ;; line 2
-        (
-	 ("" "F1(Reiniciar)" "" reiniciar)
-         ("⚑" nil "Show flags" (lambda (&rest _) (message "flag")) error)
-	)
+	        ("" "C-Esc (Init)" "" (lambda (&rest _) (mostrar-dashboard)))
+            ("" "Sherblog" "" (lambda (&rest _) (browse-url "http://www.sherblog.es")))
+	        ("" "My Brain" "" (lambda (&rest _) (browse-url "http://www.sherblog.es/brain")))
+	    )
        )
 )
 
+(with-eval-after-load 'dashboard
+  (advice-add 'widget-backward :around
+              (lambda (orig-fun &rest args)
+                (ignore-errors (apply orig-fun args)))))
 
-;;;;;;;;;
-;; Ivy ;;
-;;;;;;;;;
-(my-install-package-if-not-installed 'wgrep)                                                ;; Requiere tener instalado "wgrep"
-(my-install-package-if-not-installed 'ivy)                                                  ;; Instalación del paquete "Ivy"
-(ivy-mode t)                                                                                ;; Activa el modo de autocompletado de Ivy
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Ivy + Swiper (Requieren wgrep) ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(my-install-package-if-not-installed 'wgrep)
+(my-install-package-if-not-installed 'ivy)
+(my-install-package-if-not-installed 'swiper)
+
+(setq ivy-use-virtual-buffers t)
+(setq enable-recursive-minibuffers t)
+(global-set-key "\C-s" 'swiper)
+(setq swiper-stay-on-quit t)
+(ivy-mode 1)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Actualización del Blog ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(if (file-exists-p blog-dir)                                                                ;; Actualiza el repositorio brain o lo clona si no existe
-    (let ((default-directory blog-dir))(shell-command "git pull"))
+
+;; Actualiza el directorio o lo clona si no existe
+(if (file-exists-p blog-dir)
+    (let ((default-directory blog-dir))(call-process "git" nil nil nil "pull"))
   (let ((default-directory "~/"))(shell-command (concat "git clone " blog-repo)))
 )
 
 (add-hook 'after-save-hook (lambda () (when (and buffer-file-name (string-prefix-p blog-dir buffer-file-name))(funcion-al-guardar))))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Actualización del SherloScripts ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(if (file-exists-p script-dir)                                                                ;; Actualiza el repositorio brain o lo clona si no existe
+    (let ((default-directory script-dir))(call-process "git" nil nil nil "pull"))
+  (let ((default-directory "~/"))(shell-command (concat "git clone " script-repo)))
+)
+
+(add-hook 'after-save-hook (lambda () (when (and buffer-file-name (string-prefix-p script-dir buffer-file-name))(funcion-al-guardar))))
 
 ;;;;;;;;;;;;;
 ;; ox-hugo ;;
@@ -224,48 +262,63 @@ RipGrep(C-c s)    Nodo OrgRoam(C-c n f)  Mostrar ocultos(M-o) Truncate(C-x x t)"
 (require 'counsel)
 (setq counsel-rg-base-command "rg -S --no-heading --line-number --color never %s .")        ;; Configura el comando rg ejecutable
 
-;;;;;;;;;;;;;;
-;; Org-roam ;;
-;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; CONFIGURACIÓN ORG-ROAM  ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(my-install-package-if-not-installed 'org-roam)                                             ;; Instala paquete Org-Roam
+(setq org-roam-database-connector 'sqlite)
 
-(if (file-exists-p brain-dir)                                                               ;; Actualiza el repositorio brain o lo clona si no existe
-    (let ((default-directory brain-dir))(shell-command "git pull"))
+;; Actualiza el directorio o lo clona si no existe
+(if (file-exists-p blog-dir)
+    (let ((default-directory brain-dir))(call-process "git" nil nil nil "pull"))
   (let ((default-directory "~/"))(shell-command (concat "git clone " brain-repo)))
 )
 
-(setq org-roam-directory (file-truename brain-roam-dir))                                    ;; Establece el directorio para ORGRoam
-(org-roam-db-autosync-mode)                                                                 ;; Sincronizar cache automáticamente
-(setq org-roam-completion-system 'ivy)                                                      ;; Define ivy como sistema de completado
-(setq org-roam-completion-everywhere t)                                                     ;; Completa en cualquier lugar
-(setq org-id-extra-files (directory-files-recursively org-roam-directory "\\.org$"))        ;; Habilita la exportación de enlaces hacia Ox-hugo
+;; 1. Instalación
+(unless (package-installed-p 'org-roam)
+  (package-install 'org-roam))
 
-(defun funcion-al-guardar-brain ()                                                          ;; Función que se ejecuta al guardar archivo de brain-dir
-  (interactive)
-  (if (string= (file-name-extension buffer-file-name) "org")
-    (org-hugo-export-wim-to-md :all-subtrees))                                              ;; Exporta el archivo si es de tipo *.org
+;; Gestión del repositorio Brain (Rutas relativas a tu usuario)
+(setq brain-dir (expand-file-name "~/brain" user-emacs-directory))
+(setq brain-roam-dir (concat brain-dir "/org-files"))
 
-  (let ((default-directory brain-dir))
-    (shell-command "gitup")                                                                 ;; Actualiza el repositorio git
-  )
-)
 
-(add-hook 'after-save-hook (lambda () (when (and buffer-file-name (string-prefix-p brain-dir buffer-file-name))(funcion-al-guardar))))
 
-;;;;;;;;;;;;;;;;;
-;; Org-roam-ui ;;
-;;;;;;;;;;;;;;;;;
+;; Directorios y DB
+(setq org-roam-directory (file-truename brain-roam-dir))
+(setq org-roam-db-location (expand-file-name "org-files/org-roam.db" brain-dir))
 
-(my-install-package-if-not-installed 'org-roam-ui)                                        ;; Paquete estandar de org-roam-ui
-;;(add-to-list 'load-path "/home/sherlockes/Descargas/org-roam-ui")                           ;; Paquete con capacidad de exportar
-(require 'org-roam-ui)
+;; Modos y Completado
+(org-roam-db-autosync-mode)
+(setq org-id-extra-files (directory-files-recursively org-roam-directory "\.org$"))
+(setq org-roam-completion-everywhere t)
+(setq org-id-link-to-org-use-id t)
+(setq org-export-with-broken-links 'mark)
+
+;; Hook al guardar
+(defun my/org-roam-push-changes ()
+  "Sincroniza la DB, añade, hace commit y sube los cambios automáticamente."
+  (when (and (buffer-file-name)
+             (string-prefix-p (expand-file-name org-roam-directory) (buffer-file-name)))
+    (let ((default-directory org-roam-directory))
+      ;; 1. Sincronizamos la base de datos primero
+      (org-roam-db-sync)
+      ;; 2. Ejecutamos Git (incluyendo el .db actualizado)
+      (shell-command "git add . && git commit -m 'Auto-update notas y DB' && git push")
+      (message "Notas y DB sincronizadas con GitHub"))))
+
+(add-hook 'after-save-hook #'my/org-roam-push-changes)
+
+;;;;;;;;;;;;;;;;;;;;
+;; Añadir htmlize ;;
+;;;;;;;;;;;;;;;;;;;;
+(my-install-package-if-not-installed 'htmlize)
 
 ;;;;;;;;;;;;;;;;;;;
 ;; Añadir Dired+ ;;
 ;;;;;;;;;;;;;;;;;;;
 
-(let ((url "https://www.emacswiki.org/emacs/download/dired+.el"))
+(let ((url "https://raw.githubusercontent.com/emacsmirror/dired-plus/master/dired+.el"))
   (my-download-file-if-not-exists url (concat user-dir "/.emacs.d/dired+/dired+.el")))
 (add-to-list 'load-path (concat user-dir "/.emacs.d/dired+/"))
 (load "dired+.el")
@@ -286,6 +339,18 @@ RipGrep(C-c s)    Nodo OrgRoam(C-c n f)  Mostrar ocultos(M-o) Truncate(C-x x t)"
 
 (my-install-package-if-not-installed 'markdown-mode)
 (require 'markdown-mode)
+
+;; Activar outline-minor-mode
+(add-hook 'markdown-mode-hook 'outline-minor-mode)
+;; Actualizar fecha al guardar
+;;(add-hook 'markdown-mode-hook #'add-markdown-save-hook)
+
+;;;;;;;;;;;;;;;;;;;;;;
+;; Añadir Yaml-Mode ;;
+;;;;;;;;;;;;;;;;;;;;;;
+
+(my-install-package-if-not-installed 'yaml-mode)
+(require 'yaml-mode)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Crear la copia de seguridad en la papelera en lugar de en la carpeta del archivo ;;
@@ -336,12 +401,21 @@ RipGrep(C-c s)    Nodo OrgRoam(C-c n f)  Mostrar ocultos(M-o) Truncate(C-x x t)"
 ;;;;;;;;;;;;
 ;; Python ;;
 ;;;;;;;;;;;;
+(my-install-package-if-not-installed 'eglot)
+(add-hook 'python-mode-hook 'eglot-ensure)
+;; NECESARIO npm install -g pyright
 
-(my-install-package-if-not-installed 'elpy)
-(elpy-enable)
-(setq python-shell-interpreter "python3")
-(setq elpy-rpc-python-command "python3")
-(setq elpy-rpc-virtualenv-path (quote system))
+;;(my-install-package-if-not-installed 'elpy)
+;;(elpy-enable)
+;;(setq python-shell-interpreter "/usr/local/bin/python3")
+;;(setq python-shell-interpreter "python3")
+;;(setq elpy-rpc-python-command "/usr/local/bin/python3")
+;;(setq elpy-rpc-virtualenv-path (quote system))
+(setq org-src-fontify-natively t)
+(setq org-confirm-babel-evaluate nil)
+;;(setq python-shell-interpreter "ipython" python-shell-interpreter-args "-i --simple-prompt")
+(setq org-babel-python-command "python3")
+(setq python-shell-interpreter "python3" python-shell-interpreter-args "-i")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Plantillas con Auto-insert ;;
@@ -368,7 +442,37 @@ RipGrep(C-c s)    Nodo OrgRoam(C-c n f)  Mostrar ocultos(M-o) Truncate(C-x x t)"
 (setq auto-insert-alist '(
     (("\\.sh\\'" . "Shell script") . ["template.sh" autoinsert-yas-expand])                 ;; Lanzador para reación de scripts en Bash
     (("20[0-9]\\{6\\}_.+\\.md\\'" . "Markdown") . ["template.md" autoinsert-yas-expand])    ;; Lanzador para post del blog en markdown
-))
+    ))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Funciones para categorías y tags de los artículos del blog ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defun my-hugo-extract-metadata (type)
+  "Busca metadatos (categories o tags) en Hugo, silencia errores y unifica en minúsculas."
+  (let* ((posts-path (expand-file-name "content/post" blog-dir))
+         ;; 1. tr '[:upper:]' '[:lower:]' convierte todo a minúsculas
+         ;; 2. 2>/dev/null intenta silenciar errores de shell
+         (cmd (format "grep -rPh -A 10 '^%s:' %s 2>/dev/null | grep '^  - \"' | sed -n 's/.*\"\\(.*\\)\".*/\\1/p' | tr '[:upper:]' '[:lower:]' | sort -u" 
+                      type posts-path))
+         (raw-output (shell-command-to-string cmd))
+         (lines (split-string raw-output "\n" t)))
+    ;; Filtro extra de seguridad: eliminar cualquier línea que contenga "bash:" 
+    ;; o que empiece por mensajes de error conocidos.
+    (seq-filter (lambda (line) 
+                  (not (or (string-match-p "bash:" line)
+                           (string-match-p "ioctl" line)
+                           (string-match-p "control de trabajos" line))))
+                lines)))
+
+(defun my-blog-select-categories-dynamic ()
+  "Selector dinámico de categorías."
+  (completing-read "Categoría: " (my-hugo-extract-metadata "categories")))
+
+(defun my-blog-select-tags-dynamic ()
+  "Selector múltiple dinámico de etiquetas."
+  (let ((choices (completing-read-multiple "Etiquetas (SEP CON COMA): " (my-hugo-extract-metadata "tags"))))
+    (mapconcat (lambda (x) (concat "\n  - \"" x "\"")) choices "")))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Corrección ortográfica ;;
@@ -383,11 +487,21 @@ RipGrep(C-c s)    Nodo OrgRoam(C-c n f)  Mostrar ocultos(M-o) Truncate(C-x x t)"
 ;;;;;;;;;;;
 ;; Otros ;;
 ;;;;;;;;;;;
+
 (put 'downcase-region 'disabled nil)                                                        ;; Habilita el comando para pasar a minúsculas
 (put 'upcase-region 'disabled nil)                                                          ;; Habilita el comando para pasar a mayúsculas
 (put 'erase-buffer 'disabled nil)                                                           ;; Habilita el comando de borrado del buffer
 (global-visual-line-mode t)                                                                 ;; Ajuste de línea
 (add-to-list 'display-buffer-alist '("^\\*shell\\*" . (display-buffer-same-window . nil)))  ;; Mostrar la sesión de terminal en el mismo buffer
+
+;; No exportar subindices en ORG-Mode
+(setq org-export-with-sub-superscripts '{})
+
+;; Compatibilidad de ivy con tags de org-roam
+(setq org-roam-completion-everywhere t)
+(setq org-roam-db-node-include-function 
+      (lambda () 
+        (not (member "trash" (org-get-tags)))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;
 ;; Ajatos de teclado ;;
@@ -400,9 +514,8 @@ RipGrep(C-c s)    Nodo OrgRoam(C-c n f)  Mostrar ocultos(M-o) Truncate(C-x x t)"
 (global-set-key (kbd "<f5>") 'flyspell-mode)
 (global-set-key (kbd "<f6>") (kbd "C-u C-c C-c"))                                           ;; Exportar de nuevo
 (global-set-key (kbd "<f7>") 'fd-switch-dictionary)                                         ;; Cambio de diccionario
-;;(global-set-key (kbd "<f8>") (kbd "C-u C-c C-c"))                                           ;; Evaluar código Python
 (global-set-key (kbd "<f8>") 'eval_or_close_python)
-
+(global-set-key (kbd "<f9>") 'org-babel-execute-buffer)
 
 (global-set-key (kbd "C-x C-b") 'ibuffer)                                                   ;; Cambio de buffer
 (global-set-key (kbd "C-c r") 'query-replace-regexp)                                        ;; Buscar y reemplazar
@@ -420,4 +533,5 @@ RipGrep(C-c s)    Nodo OrgRoam(C-c n f)  Mostrar ocultos(M-o) Truncate(C-x x t)"
 ;;
 (split-window-right)
 (dashboard-open)
+
 

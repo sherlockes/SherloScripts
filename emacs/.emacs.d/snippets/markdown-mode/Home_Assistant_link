@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: Link a Home Assistant
+# key: [Home
+# --
+[Home Assistant]: https://www.home-assistant.io
