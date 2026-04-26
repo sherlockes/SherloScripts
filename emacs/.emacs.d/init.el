@@ -572,6 +572,7 @@ RipGrep(C-c s) Nodo OrgRoam(C-c n f) Mostrar ocultos(M-o) Truncate(C-x x t)"
   (whole-line-or-region-global-mode 1))
 
 (global-visual-line-mode 1)
+(delete-selection-mode 1)
 
 (global-set-key (kbd "C-x C-b") #'ibuffer)
 (global-set-key (kbd "C-c r") #'replace-regexp)
