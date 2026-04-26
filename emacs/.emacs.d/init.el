@@ -677,6 +677,22 @@ RipGrep(C-c s) Nodo OrgRoam(C-c n f) Mostrar ocultos(M-o) Truncate(C-x x t)"
           (when (re-search-forward "^date:[ \t]*\"?[0-9-]+\"?$" nil t)
             (replace-match (concat "date: \"" today-iso "\"") t t)))
 
+	;; ------------------------------------------------------------
+	;; Emacs Lisp
+	;; Creation/Update: 20260426/20260426
+	;; ------------------------------------------------------------
+	(when (string= ext "el")
+	  (goto-char (point-min))
+	  (when (re-search-forward
+		 "^;;; Creation/Update:[ \t]*\\([0-9]\\{8\\}\\)/\\([0-9]\\{8\\}\\)$"
+		 nil t)
+	    (replace-match
+	     (concat ";;; Creation/Update: "
+		     (match-string 1)
+		     "/"
+		     today-compact)
+	     t t)))
+
         ;; ------------------------------------------------------------
         ;; Org mode
         ;; #+date: <2024-01-01>
