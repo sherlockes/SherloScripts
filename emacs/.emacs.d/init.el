@@ -4,7 +4,7 @@
 ;;; File Name: init.el
 ;;; Description: Configuración personal de Emacs
 ;;; Args: N/A
-;;; Creation/Update: 20260424/20260426
+;;; Creation/Update: 20260424/20260425
 ;;; Author: www.sherblog.es
 ;;; Email: sherlockes@gmail.com
 ;;; ###################################################################
