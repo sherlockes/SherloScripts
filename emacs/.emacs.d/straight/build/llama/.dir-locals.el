@@ -1,1 +1,0 @@
-/home/sherlockes/.emacs.d/straight/repos/llama/.dir-locals.el
