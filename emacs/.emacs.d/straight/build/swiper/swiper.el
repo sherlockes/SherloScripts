@@ -1,0 +1,1 @@
+/home/sherlockes/.emacs.d/straight/repos/swiper/swiper.el
