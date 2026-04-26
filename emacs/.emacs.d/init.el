@@ -59,6 +59,7 @@
 (savehist-mode 1)
 (recentf-mode 1)
 (save-place-mode 1)
+(setq save-place-file (expand-file-name ".emacs-places" user-emacs-directory))
 
 (setq history-length 100)
 (setq recentf-max-saved-items 100)
