@@ -90,12 +90,16 @@
   (expand-file-name "org-files" my/brain-dir)
   "Directorio de notas org-roam.")
 
+(defvar my/emacs-config-dir
+  (expand-file-name "~/SherloScripts/emacs/.emacs.d/")
+  "Directorio compartido de configuración de Emacs.")
+
 (defvar my/snippets-dir
-  (expand-file-name "~/dotfiles/emacs/.emacs.d/snippets/")
+  (expand-file-name "snippets/" my/emacs-config-dir)
   "Directorio de snippets personales.")
 
 (defvar my/bookmarks-file
-  (expand-file-name "~/dotfiles/emacs/.emacs.d/bookmarks")
+  (expand-file-name "bookmarks" my/emacs-config-dir)
   "Archivo de bookmarks de Emacs.")
 
 (setq bookmark-default-file my/bookmarks-file)
