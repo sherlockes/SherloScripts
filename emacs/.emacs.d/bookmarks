@@ -11,7 +11,8 @@
 ("Descargas"
  (filename . "~/Descargas/"))
 ("init.el"
- (filename . "~/dotfiles/emacs/.emacs.d/init.el"))
+ (filename . "~/SherloScripts/emacs/.emacs.d/init.el")
+ (last-modified 27118 13333 726836 598000))
 ("Temp"
  (filename . "~/Temp/"))
 ("Rpi"
