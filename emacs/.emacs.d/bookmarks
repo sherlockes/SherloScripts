@@ -1,0 +1,21 @@
+;;;; Emacs Bookmark Format Version 1;;;; -*- coding: utf-8-emacs; mode: lisp-data -*-
+;;; This format is meant to be slightly human-readable;
+;;; nevertheless, you probably don't want to edit it.
+;;; -*- End Of Bookmark File Format Version Stamp -*-
+(("Blog"
+ (filename . "~/sherlockes.github.io/content/"))
+("Brain (Org-Roam)"
+ (filename . "~/brain/org-files/"))
+("SherloScripts"
+ (filename . "~/SherloScripts/"))
+("Descargas"
+ (filename . "~/Descargas/"))
+("init.el"
+ (filename . "~/dotfiles/emacs/.emacs.d/init.el"))
+("Temp"
+ (filename . "~/Temp/"))
+("Rpi"
+ (filename . "/ssh:rpiz:/home/pi/"))
+("Uber"
+ (filename . "/ssh:uberz:/home/sherlockes/dockers/"))
+)

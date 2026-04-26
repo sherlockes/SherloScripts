@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: script
+# key: script
+# --
+#!/bin/bash
+
+###################################################################
+# Script Name: ${1:`(upcase (file-name-nondirectory (or (buffer-file-name) "")))`}
+# Description: ${2:ESCRIBIR}
+# Args: N/A
+# Creation/Update: `(format-time-string "%Y%m%d")`/`(format-time-string "%Y%m%d")`
+# Author: www.sherblog.es
+# Email: sherlockes@gmail.com
+###################################################################
+
+$0
