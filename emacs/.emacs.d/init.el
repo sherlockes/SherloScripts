@@ -1,4 +1,13 @@
-;;; init.el --- Configuración limpia Emacs 27.1 -*- lexical-binding: t; -*-
+;;; init.el --- Configuración limpia Emacs 30.2 -*- lexical-binding: t; -*-
+
+;;; ###################################################################
+;;; File Name: init.el
+;;; Description: Configuración personal de Emacs
+;;; Args: N/A
+;;; Creation/Update: 20260424/20260426
+;;; Author: www.sherblog.es
+;;; Email: sherlockes@gmail.com
+;;; ###################################################################
 
 ;;; Rendimiento inicial
 (setq gc-cons-threshold (* 50 1000 1000))
