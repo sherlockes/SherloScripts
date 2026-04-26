@@ -717,7 +717,9 @@ RipGrep(C-c s) Nodo OrgRoam(C-c n f) Mostrar ocultos(M-o) Truncate(C-x x t)"
                            (file-name-nondirectory buffer-file-name))))
           (call-process "git" nil "*my-git-auto*" t "add" ".")
           (call-process "git" nil "*my-git-auto*" t "commit" "-m" msg)
-          (call-process "git" nil "*my-git-auto*" t "push"))))))
+          (call-process "git" nil "*my-git-auto*" t "push")
+          (message "Git push realizado en %s"
+                   (file-name-nondirectory repo)))))))
 
 (add-hook 'after-save-hook #'my/git-auto-commit-push)
 
