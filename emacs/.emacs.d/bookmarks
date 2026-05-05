@@ -2,7 +2,13 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("Blog"
+(("org-capture-last-stored"
+ (filename . "~/brain/org-files/20260505231253-intrubot_docker.org")
+ (front-context-string . "\n** Info\nIntruBo")
+ (rear-context-string . "5-05 mar 23:12]\n")
+ (position . 181)
+ (last-modified 27130 24536 142064 253000))
+("Blog"
  (filename . "~/sherlockes.github.io/content/"))
 ("Brain (Org-Roam)"
  (filename . "~/brain/org-files/"))
