@@ -217,6 +217,7 @@
   :config
   (ivy-mode 1)
   (setq ivy-use-virtual-buffers t
+	ivy-read-action-function #'ivy-hydra-read-action
         ivy-count-format "(%d/%d) "
         enable-recursive-minibuffers t))
 
@@ -460,6 +461,15 @@
   (setq org-roam-node-display-template
 	(concat "${title:*} " (propertize "${tags:10}" 'face 'org-tag)))
 
+  (defun my/org-roam-refresh-tags-list ()
+  "Actualiza la lista de tags globales desde la DB de Roam."
+  (setq org-tag-alist 
+        (mapcar (lambda (tag) (cons tag nil))
+                (org-roam-db-query [:select :distinct [tag] :from tags]))))
+
+  ;; Ejecutar la actualización antes de pedir tags
+  (advice-add 'org-roam-tag-add :before #'my/org-roam-refresh-tags-list)
+  
   (org-roam-db-autosync-mode 1)
   (message "Org-roam cargado correctamente desde %s" org-roam-directory))
 
