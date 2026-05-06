@@ -484,7 +484,7 @@
          :target
          (file+head
           "${slug}.org"
-          "#+title: ${title}\n#+created: %U\n#+lastmod: %U\n\n")
+          "#+title: ${title}\n#+STARTUP: overview\n#+date: %<%Y-%m-%d>\n#+filetags: apps\n\n")
          :unnarrowed t)))
 
 ;;;;;;;;;;;;;;;;;
