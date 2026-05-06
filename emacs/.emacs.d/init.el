@@ -448,6 +448,7 @@
   :demand t
   :init
   (setq org-roam-directory (file-truename my/brain-roam-dir)
+	org-roam-db-location (expand-file-name "org-roam.db" my/brain-dir)
         org-roam-completion-everywhere t)
   :bind
   (("C-c n l" . org-roam-buffer-toggle)
@@ -462,9 +463,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Org-roam avanzado ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(setq org-roam-db-location
-      (expand-file-name "org-roam.db" my/brain-dir))
 
 (setq org-id-extra-files
       (when (file-directory-p my/brain-roam-dir)
