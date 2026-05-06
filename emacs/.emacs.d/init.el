@@ -488,6 +488,17 @@
           "#+title: ${title}\n#+STARTUP: overview\n#+date: <%<%Y-%m-%d>>\n#+filetags: %^g\n\n")
          :unnarrowed t)))
 
+(defun my/show-all-org-roam-tags ()
+  "Muestra una lista de todos los tags en la DB de Roam usando Ivy."
+  (interactive)
+  (let* ((tags (mapcar #'car (org-roam-db-query [:select :distinct [tag] :from tags])))
+         (selected-tag (ivy-read "Tags existentes: " tags)))
+    (when selected-tag
+      (insert ":" selected-tag ":")
+      (message "Tag insertado: %s" selected-tag))))
+
+(global-set-key (kbd "C-c n T") #'my/show-all-org-roam-tags)
+
 ;;;;;;;;;;;;;;;;;
 ;;; Org-roam UI
 ;;;;;;;;;;;;;;;;;
@@ -502,25 +513,6 @@
         org-roam-ui-update-on-save t
         org-roam-ui-open-on-start t))
 
-
-
-;;;;;;;;;;;;;;;;;
-;;; Consult Org-roam
-;;;;;;;;;;;;;;;;;
-
-(use-package consult-org-roam
-  :straight t
-  :after org-roam
-  :init
-  (consult-org-roam-mode 1)
-  :config
-  ;; Configuración para que funcione bien con Ivy
-  (setq consult-org-roam-grep-func #'consult-ripgrep)
-  (setq consult-org-roam-buffer-narrow-key ?b) ;; Filtrar por buffers con 'b'
-  
-  :bind
-  ;; Este comando es el que te interesa para los tags
-  ("C-c n t" . consult-org-roam-node-find))
 
 ;;;;;;;;;;;;;;;;;
 ;;; Dashboard ;;;
