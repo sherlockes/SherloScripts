@@ -3,11 +3,11 @@
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
 (("org-capture-last-stored"
- (filename . "~/brain/org-files/20260505231253-intrubot_docker.org")
+ (filename . "~/org-files/intrubot_docker.org")
  (front-context-string . "\n** Info\nIntruBo")
- (rear-context-string . "5-05 mar 23:12]\n")
- (position . 181)
- (last-modified 27130 24536 142064 253000))
+ (rear-context-string . "s: apps, docker\n")
+ (position . 157)
+ (last-modified 27131 6486 587351 655000))
 ("Blog"
  (filename . "~/sherlockes.github.io/content/"))
 ("Brain (Org-Roam)"
