@@ -484,7 +484,7 @@
          :target
          (file+head
           "${slug}.org"
-          "#+title: ${title}\n#+STARTUP: overview\n#+date: %<%Y-%m-%d>\n#+filetags: apps\n\n")
+          "#+title: ${title}\n#+STARTUP: overview\n#+date: %<%Y-%m-%d>\n#+filetags: :tag1:tag2:\n\n")
          :unnarrowed t)))
 
 ;;;;;;;;;;;;;;;;;
