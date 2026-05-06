@@ -502,6 +502,26 @@
         org-roam-ui-update-on-save t
         org-roam-ui-open-on-start t))
 
+
+
+;;;;;;;;;;;;;;;;;
+;;; Consult Org-roam
+;;;;;;;;;;;;;;;;;
+
+(use-package consult-org-roam
+  :straight t
+  :after org-roam
+  :init
+  (consult-org-roam-mode 1)
+  :config
+  ;; Configuración para que funcione bien con Ivy
+  (setq consult-org-roam-grep-func #'consult-ripgrep)
+  (setq consult-org-roam-buffer-narrow-key ?b) ;; Filtrar por buffers con 'b'
+  
+  :bind
+  ;; Este comando es el que te interesa para los tags
+  ("C-c n t" . consult-org-roam-node-find))
+
 ;;;;;;;;;;;;;;;;;
 ;;; Dashboard ;;;
 ;;;;;;;;;;;;;;;;;
