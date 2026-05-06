@@ -457,6 +457,8 @@
    ("C-c n i" . org-roam-node-insert)
    ("C-c n c" . org-roam-capture))
   :config
+  (setq org-roam-node-display-template
+      (concat "${title:*} " (propertize "${tags:10}" 'face 'org-tag)))
   (org-roam-db-autosync-mode 1)
   (message "Org-roam cargado correctamente desde %s" org-roam-directory))
 
