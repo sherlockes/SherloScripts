@@ -588,7 +588,8 @@ RipGrep(C-c s) Nodo OrgRoam(C-c n f) Mostrar ocultos(M-o) Truncate(C-x x t)"
     (with-current-buffer "*dashboard*"
       (dashboard-refresh-buffer))
     (set-window-buffer right-window "*Messages*")
-    (select-window left-window)))
+    (select-window left-window)
+    (select-frame-set-input-focus (selected-frame))))
 
 (add-hook 'emacs-startup-hook #'my/startup-dashboard-and-messages)
 
