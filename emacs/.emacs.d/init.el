@@ -97,7 +97,7 @@
   "Directorio principal del brain.")
 
 (defvar my/brain-roam-dir
-  (expand-file-name "org-files")
+  (expand-file-name "org-files" my/brain-dir)
   "Directorio de notas org-roam.")
 
 (defvar my/emacs-config-dir
