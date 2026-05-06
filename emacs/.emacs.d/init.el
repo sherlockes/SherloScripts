@@ -488,16 +488,18 @@
           "#+title: ${title}\n#+STARTUP: overview\n#+date: <%<%Y-%m-%d>>\n#+filetags: %^g\n\n")
          :unnarrowed t)))
 
-(defun my/show-all-org-roam-tags ()
-  "Muestra una lista de todos los tags en la DB de Roam usando Ivy."
+(defun my/org-roam-tag-add-hybrid ()
+  "Añade un tag a la nota actual seleccionando de los existentes en la DB."
   (interactive)
-  (let* ((tags (mapcar #'car (org-roam-db-query [:select :distinct [tag] :from tags])))
-         (selected-tag (ivy-read "Tags existentes: " tags)))
-    (when selected-tag
-      (insert ":" selected-tag ":")
-      (message "Tag insertado: %s" selected-tag))))
+  (let* ((tags-data (org-roam-db-query [:select :distinct [tag] :from tags]))
+         (tags-list (mapcar #'car tags-data)))
+    (if tags-list
+        (let ((tag-seleccionado (ivy-read "Añadir etiqueta existente: " tags-list)))
+          (org-roam-tag-add (list tag-seleccionado)))
+      ;; Si no hay tags en la DB, avisamos o usamos el método estándar
+      (call-interactively #'org-roam-tag-add))))
 
-(global-set-key (kbd "C-c n T") #'my/show-all-org-roam-tags)
+(global-set-key (kbd "C-c n t") #'my/org-roam-tag-add-hybrid)
 
 ;;;;;;;;;;;;;;;;;
 ;;; Org-roam UI
