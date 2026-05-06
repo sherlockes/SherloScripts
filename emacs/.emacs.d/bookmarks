@@ -4,10 +4,10 @@
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
 (("org-capture-last-stored"
  (filename . "~/brain/org-files/intrubot_docker.org")
- (front-context-string . "\n\n** Info\nIntruB")
- (rear-context-string . "s: :apps:docker:")
- (position . 159)
- (last-modified 27131 7105 769905 17000))
+ (front-context-string . "\n:PROPERTIES:\n:I")
+ (rear-context-string . ": :apps:docker:\n")
+ (position . 160)
+ (last-modified 27131 8120 643346 797000))
 ("Blog"
  (filename . "~/sherlockes.github.io/content/"))
 ("Brain (Org-Roam)"
