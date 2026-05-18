@@ -1,0 +1,12 @@
+# Excluir entornos virtuales de Python
+**/lib/
+**/bin/
+**/include/
+**/share/
+.venv/
+env/
+
+# Excluir archivos temporales y multimedia en la carpeta de bash
+bash/*.mp3
+bash/*.webm
+bash/*.part
