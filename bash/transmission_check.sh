@@ -82,11 +82,28 @@ escape_html() {
     echo "$1" | sed 's/&/\&amp;/g; s/</\&lt;/g; s/>/\&gt;/g'
 }
 
-# Obtener los torrents no registrados únicos
-# 1. Filtramos las líneas que coinciden con el patrón de error (insensible a mayúsculas/minúsculas)
-# 2. Extraemos el nombre del torrent (lo que está después de la marca de tiempo y antes de ' Tracker error:')
-# 3. Ordenamos y eliminamos duplicados
-unregistered_torrents=$(grep -iE "$SEARCH_PATTERN" "$LOG_PATH" | sed -nE 's/^\[[^]]*\][[:space:]]+(.*)[[:space:]]+Tracker error:[[:space:]]*".*"[[:space:]]+\(.*\)[[:space:]]*$/\1/p' | sort -u)
+# Obtener los torrents no registrados con su última hora de fallo (sin milisegundos)
+# Usamos awk para agrupar por archivo, quedarnos con la última marca de tiempo y devolver la lista ordenada.
+unregistered_torrents=$(awk -v pat="$SEARCH_PATTERN" '
+tolower($0) ~ tolower(pat) {
+    idx = index($0, "]")
+    if (idx > 2) {
+        ts = substr($0, 2, idx - 2)
+        sub(/\.[0-9]{3}$/, "", ts)
+        rest = substr($0, idx + 2)
+        idx_err = index(rest, " Tracker error:")
+        if (idx_err > 0) {
+            file = substr(rest, 1, idx_err - 1)
+            gsub(/^[ \t]+|[ \t]+$/, "", file)
+            latest[file] = ts
+        }
+    }
+}
+END {
+    for (f in latest) {
+        print latest[f] "|" f
+    }
+}' "$LOG_PATH" | sort)
 
 # Si no hay torrents no registrados, salimos sin enviar mensaje
 if [ -z "$unregistered_torrents" ]; then
@@ -98,14 +115,24 @@ fi
 # Envío de Mensaje a Telegram
 # =================================================================
 
-# Construir el cuerpo del mensaje en formato HTML
-mensaje="⚠️ <b>Torrents no registrados detectados:</b>"$'\n'$'\n'
+# Construir el cuerpo del mensaje en formato HTML con título solicitado
+mensaje="⚠️ <b>Torrents no registrados en DS920</b>"$'\n'$'\n'
 
-# Leer línea por línea para escapar caracteres HTML de los nombres y añadirlos al mensaje
-while IFS= read -r torrent; do
+# Leer línea por línea para construir el cuerpo del mensaje
+first_item=true
+while IFS="|" read -r ts torrent; do
     if [ -n "$torrent" ]; then
         escaped_torrent=$(escape_html "$torrent")
-        mensaje+="• <code>$escaped_torrent</code>"$'\n'
+        
+        # Introducir una línea en blanco entre archivo y archivo (evitando antes del primer elemento)
+        if [ "$first_item" = true ]; then
+            first_item=false
+        else
+            mensaje+=$'\n'
+        fi
+        
+        mensaje+="• <b>Hora:</b> $ts"$'\n'
+        mensaje+="$escaped_torrent"$'\n'
     fi
 done <<< "$unregistered_torrents"
 
