@@ -23,7 +23,7 @@ ENV_PATH="/home/sherlockes/.env"
 SEARCH_PATTERN="unregistered|not registered|rejected"
 
 # Horas máximas desde la última modificación del log para procesarlo
-MAX_AGE_HOURS=24
+MAX_AGE_HOURS=2
 
 # =================================================================
 # Validaciones e Inicialización
