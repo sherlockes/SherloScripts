@@ -14,10 +14,10 @@
 # =================================================================
 
 # Ruta al archivo de log de transmissiond
-LOG_PATH="/home/sherlockes/SherloScripts/bash/transmissiond.log"
+LOG_PATH="/home/sherlockes/logs/transmissiond.log"
 
 # Ruta al archivo de variables de entorno (.env)
-ENV_PATH="/home/sherlockes/SherloScripts/bash/.env"
+ENV_PATH="/home/sherlockes/.env"
 
 # Patrón de búsqueda para errores de torrents no registrados
 SEARCH_PATTERN="unregistered|not registered|rejected"
@@ -45,8 +45,8 @@ set +a
 
 # Comprobar que las variables de Telegram estén configuradas
 # Soporta tanto TELEGRAM_BOT_TOKEN/TELEGRAM_CHAT_ID como TOKEN/CHAT_ID
-BOT_TOKEN="${TELEGRAM_BOT_TOKEN:-$TOKEN}"
-CHAT_ID="${TELEGRAM_CHAT_ID:-$CHAT_ID}"
+BOT_TOKEN="${TG_TEJELONSOS_BOT_TOKEN:-$TOKEN}"
+CHAT_ID="${TG_NOTIF_ID:-$CHAT_ID}"
 
 if [ -z "$BOT_TOKEN" ]; then
     echo "Error: La variable TELEGRAM_BOT_TOKEN (o TOKEN) no está configurada en el archivo .env." >&2
