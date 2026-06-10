@@ -22,6 +22,9 @@ ENV_PATH="/home/sherlockes/.env"
 # Patrón de búsqueda para errores de torrents no registrados
 SEARCH_PATTERN="unregistered|not registered|rejected"
 
+# Horas máximas desde la última modificación del log para procesarlo
+MAX_AGE_HOURS=24
+
 # =================================================================
 # Validaciones e Inicialización
 # =================================================================
@@ -43,18 +46,30 @@ set -a
 source "$ENV_PATH"
 set +a
 
+# Comprobar si el archivo de log ha sido modificado en las últimas n horas
+if [ -n "$MAX_AGE_HOURS" ]; then
+    current_time=$(date +%s)
+    mtime=$(stat -c %Y "$LOG_PATH")
+    age_seconds=$((current_time - mtime))
+    max_age_seconds=$((MAX_AGE_HOURS * 3600))
+    
+    if [ "$age_seconds" -gt "$max_age_seconds" ]; then
+        exit 0
+    fi
+fi
+
 # Comprobar que las variables de Telegram estén configuradas
 # Soporta tanto TELEGRAM_BOT_TOKEN/TELEGRAM_CHAT_ID como TOKEN/CHAT_ID
 BOT_TOKEN="${TG_TEJELONSOS_BOT_TOKEN:-$TOKEN}"
 CHAT_ID="${TG_NOTIF_ID:-$CHAT_ID}"
 
 if [ -z "$BOT_TOKEN" ]; then
-    echo "Error: La variable TELEGRAM_BOT_TOKEN (o TOKEN) no está configurada en el archivo .env." >&2
+    echo "Error: La variable TG_TEJELONSOS_BOT_TOKEN (o TOKEN) no está configurada en el archivo .env." >&2
     exit 1
 fi
 
 if [ -z "$CHAT_ID" ]; then
-    echo "Error: La variable TELEGRAM_CHAT_ID (o CHAT_ID) no está configurada en el archivo .env." >&2
+    echo "Error: La variable TG_NOTIF_ID (o CHAT_ID) no está configurada en el archivo .env." >&2
     exit 1
 fi
 
