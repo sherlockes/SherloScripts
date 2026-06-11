@@ -2,24 +2,15 @@
 
 ###################################################################
 #Script Name: restic-backup.sh
-#Description: Copia de seguridad genérica con Restic (Multi-config)
+#Description: Copia de seguridad 100% modular con Restic
 #Args: [Ruta al archivo de configuración] (Opcional)
 #Creation/Update: 20260518/20260611
 #Author: www.sherblog.es                                             
 #Email: sherlockes@gmail.com                               
 ###################################################################
 
-# 1. Cargar variables de entorno globales desde el archivo .env
-ENV_FILE="/home/sherlockes/.env"
-if [ -f "$ENV_FILE" ]; then
-    source "$ENV_FILE"
-else
-    echo "❌ Error: No se encuentra el archivo de entorno en $ENV_FILE"
-    exit 1
-fi
-
-# 2. Cargar archivo de configuración del backup (Por argumento o por defecto)
-CONFIG_FILE="${1:-/home/sherlockes/.restic-backup}"
+# 1. Cargar archivo de configuración del backup (Portabilidad total con $HOME)
+CONFIG_FILE="${1:-$HOME/.restic-backup}"
 
 if [ -f "$CONFIG_FILE" ]; then
     source "$CONFIG_FILE"
@@ -28,17 +19,20 @@ else
     exit 1
 fi
 
-# Configuración fija de Rclone e inyección de contraseña para Restic
-export RCLONE_CONFIG="/home/sherlockes/.config/rclone/rclone.conf"
+# 2. Inyección de variables de entorno para Rclone y Restic
+export RCLONE_CONFIG="$RCLONE_CONFIG_PATH"
 export RESTIC_PASSWORD="$RESTIC_PASSWORD"
 
 # Función para enviar notificaciones a Telegram
 enviar_telegram() {
     local mensaje="$1"
-    curl -s -X POST "https://api.telegram.org/bot${TG_TEJELONSOS_BOT_TOKEN}/sendMessage" \
-        -d "chat_id=${TG_NOTIF_ID}" \
-        -d "parse_mode=Markdown" \
-        -d "text=${mensaje}" > /dev/null
+    # Solo envía si las variables de Telegram están configuradas en este archivo
+    if [ ! -z "$TG_BOT_TOKEN" ] && [ ! -z "$TG_CHAT_ID" ]; then
+        curl -s -X POST "https://api.telegram.org/bot${TG_BOT_TOKEN}/sendMessage" \
+            -d "chat_id=${TG_CHAT_ID}" \
+            -d "parse_mode=Markdown" \
+            -d "text=${mensaje}" > /dev/null
+    fi
 }
 
 # ==========================================
@@ -100,4 +94,4 @@ fi
 # NOTIFICACIÓN DE ÉXITO GENERAL
 # ==========================================
 echo "Todos los backups completados con éxito: $(date)"
-enviar_telegram "🟢 *Backup Completado ($(hostname))*: Las copias de [$BACKUP_SOURCE] en LOCAL y REMOTO se han realizado correctamente."
+enviar_telegram "🟢 *Backup Completado ($(hostname))*: Las copias de [$BACKUP_SOURCE] en LOCAL y REMOTO se han realizado y purgado correctamente."
