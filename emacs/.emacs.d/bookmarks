@@ -3,11 +3,11 @@
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
 (("org-capture-last-stored"
- (filename . "~/brain/org-files/vps_config.org")
+ (filename . "~/brain/org-files/antigravity.org")
  (front-context-string)
- (rear-context-string . "letags: :linux:\n")
- (position . 149)
- (last-modified 27170 42215 546356 895000))
+ (rear-context-string . "+filetags: :ia:\n")
+ (position . 147)
+ (last-modified 27186 36166 249589 42000))
 ("Blog"
  (filename . "~/sherlockes.github.io/content/"))
 ("Brain (Org-Roam)"
