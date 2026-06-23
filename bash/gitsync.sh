@@ -4,7 +4,7 @@
 # Script Name: GITSYNC.SH
 # Description: Actualiza un repo de github
 # Args: N/A
-# Creation/Update: 20260609/20260609
+# Creation/Update: 20260609/20260623
 # Author: www.sherblog.es
 # Email: sherlockes@gmail.com
 ###################################################################
@@ -18,6 +18,13 @@ REPO_DIR="${1:-.}"
 
 # Convertir a ruta absoluta para que los mensajes sean claros
 REPO_DIR=$(cd "$REPO_DIR" 2>/dev/null && pwd)
+
+# Si el script no se ejecuta desde una terminal interactiva (ej. Cron),
+# espera 30 segundos a que la red esté completamente lista.
+if [ ! -t 0 ]; then
+    echo "⏳ Ejecución no interactiva detectada (Cron). Esperando 30s a que la red estabilice..."
+    sleep 30
+fi
 
 # Verificar si el directorio existe
 if [ -z "$REPO_DIR" ]; then
