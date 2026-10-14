@@ -11,13 +11,11 @@
 /(^|\.)yt3\.ggpht\.com$/
 /(^|\.)youtube-nocookie\.com$/
 /(^|\.)yt\d\.ggpht\.com$/
-
 /(^|\.)tiktok\.com$/
 /(^|\.)tiktokcdn\.com$/
 /(^|\.)tiktokv\.com$/
 /(^|\.)byteoversea\.com$/
 /(^|\.)ibytedtos\.com$/
-
 /(^|\.)instagram\.com$/
 /(^|\.)cdninstagram\.com$/
 /(^|\.)threads\.net$/
